@@ -40,7 +40,7 @@ public class CreateCommentActivityUITest extends
     public void testIsTopLevelComment() {
 	runTestOnUiThread(new Runnable() {
 		public void run() {
-		    ListView listView = (ListView)activity.findViewById((ca.ualberta.cs.project301.R.id.oldTopLevelComments););
+		    ListView listView = (ListView)activity.findViewById((ca.ualberta.cs.project301.R.id.oldTopLevelComments);
 		    Adapter adapter = listView.getAdapter();
 		    Comment new_comment = new Comment("Let's make a new top-level comment");
 		    CreateTopLevelComment(new_comment);
@@ -65,7 +65,7 @@ public class BrowseCommentsActivityTests extend
 	intent.putExtra(BrowseCommentsActivity.TEXT_KEY, text);
 	setActivityIntent(intent);
 	BrowseCommentsActivity activity = getActivity();
-	TextView textView = (TextView)activity.findViewById(ca.ualberta.cs.project301.R.id.intentText);
+	TextView textView = (TextView)activity.findViewById(ca.ualberta.cs.project301.R.id.comment_item);
 	assertEquals("text should be displayed", text, textView.getText().toString());
     }
     
@@ -75,7 +75,7 @@ public class BrowseCommentsActivityTests extend
 	Intent intent = new Intent();
 	setActivityIntent(intent);
 	BrowseCommentsActivity activity = getActivity();
-	TextView textView = (TextView)activity.findViewById(ca.ualberta.cs.project301.R.id.intentText);
+	TextView textView = (TextView)activity.findViewById(ca.ualberta.cs.project301.R.id.comment_item);
 	assertEquals("text should not be displayed", default_text, textView.getText().toString());
     }
 
@@ -86,7 +86,7 @@ public class BrowseCommentsActivityTests extend
 	intent.putExtra(BrowseCommentsActivity.TEXT_KEY, text);
 	setActivityIntent(intent);
 	BrowseCommentsActivity activity = getActivity();
-	TextView textView = (TextView)activity.findViewById(ca.ualberta.cs.project301.R.id.intentText);
+	TextView textView = (TextView)activity.findViewById(ca.ualberta.cs.project301.R.id.comment_item);
 	ViewAsserts.assertOnScreen(activity.getWindow().getDecorView(), textView);
     }
 }
@@ -106,7 +106,7 @@ public class BrowseRepliesActivityTests extend
         intent.putExtra(BrowseRepliesActivity.TEXT_KEY, text);
         setActivityIntent(intent);
         BrowseRepliesActivity activity = getActivity();
-        TextView textView = (TextView)activity.findViewById(ca.ualberta.cs.project301.R.id.intentText);
+        TextView textView = (TextView)activity.findViewById(ca.ualberta.cs.project301.R.id.comment_item);
         assertEquals("text should be displayed", text, textView.getText().toString());
     }
 
@@ -116,7 +116,7 @@ public class BrowseRepliesActivityTests extend
         Intent intent = new Intent();
         setActivityIntent(intent);
         BrowseRepliesActivity activity = getActivity();
-        TextView textView = (TextView)activity.findViewById(ca.ualberta.cs.project301.R.id.intentText);
+        TextView textView = (TextView)activity.findViewById(ca.ualberta.cs.project301.R.id.comment_item);
         assertEquals("text should not be displayed", default_text, textView.getText().toString());
     }
 
@@ -127,7 +127,7 @@ public class BrowseRepliesActivityTests extend
         intent.putExtra(BrowseRepliesActivity.TEXT_KEY, text);
         setActivityIntent(intent);
         BrowseRepliesActivity activity = getActivity();
-        TextView textView = (TextView)activity.findViewById(ca.ualberta.cs.project301.R.id.intentText);
+        TextView textView = (TextView)activity.findViewById(ca.ualberta.cs.project301.R.id.comment_item);
         ViewAsserts.assertOnScreen(activity.getWindow().getDecorView(), textView);
     }
 }
