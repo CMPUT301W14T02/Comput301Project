@@ -30,8 +30,8 @@ public class LoadRelevantCommentsTests extend
 	location3.setLatitude(lat3);
 	location3.setLongitude(long3);
 	TopLevelCommentModel topComment1 = new TopLevelCommentModel("name1", location1, System.currentTimeMillis());
-	TopLevelCommentModel topComment2 = new TopLevelCommentModel("name2", location1, System.currentTimeMillis());
 	TopLevelCommentModel topComment3 = new TopLevelCommentModel("name3", location2, System.currentTimeMillis());
+	TopLevelCommentModel topComment2 = new TopLevelCommentModel("name2", location1, System.currentTimeMillis());
 	TopLevelCommentModel topComment4 = new TopLevelCommentModel("name4", location2, System.currentTimeMillis());
 	TopLevelCommentModel topComment5 = new TopLevelCommentModel("name5", location3, System.currentTimeMillis());
 	ArrayList<TopLevelCommentModel> arrayList1 = new ArrayList<TopLevelCommentModel>;
