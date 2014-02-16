@@ -53,7 +53,7 @@ public class LoadRelevantCommentsTests extend
     //Test that location is updated after internet connection loss
     public void testChangeLocation() {
 	Location initial_loc = new Location(LOCATION_PROVIDER);
-	// Tester should disconnect from internet and move locations
+	// Tester should disconnect from internet and move locations, then reconnect to internet
 	Location final_loc = new Location(LOCATION_PROVIDER);
 	boolean latEquals = FALSE;
 	boolean longEquals = FALSE;
