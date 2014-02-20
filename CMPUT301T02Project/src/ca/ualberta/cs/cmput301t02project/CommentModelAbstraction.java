@@ -24,7 +24,7 @@ public abstract class CommentModelAbstraction {
     }
 
     public Date getDate() {
-	return date;
+    	return date;
     }
 
     public LocationModel getLocation() {

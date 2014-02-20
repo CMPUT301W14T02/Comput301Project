@@ -22,6 +22,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name="ca.ualberta.cs.cmput301t02project.TopLevelListActivity"
+            android:label="@string/title_activity_top_level_list" >
+        </activity>
+        <activity
+            android:name="ca.ualberta.cs.cmput301t02project.CreateCommentActivity"
+            android:label="@string/title_activity_create_comment" >
+        </activity>
     </application>
 
 </manifest>
