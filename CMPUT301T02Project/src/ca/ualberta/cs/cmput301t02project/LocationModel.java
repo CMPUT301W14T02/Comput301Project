@@ -34,6 +34,7 @@ public class LocationModel extends Application {
       //  locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
     //}
 	}
+
 	// Retrieve location updates through LocationListener interface
 	private final LocationListener locationListener = new LocationListener(){
 	// TODO: override the four methods.
