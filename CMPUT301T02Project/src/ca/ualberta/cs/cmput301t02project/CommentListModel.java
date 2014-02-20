@@ -1,7 +1,17 @@
 package ca.ualberta.cs.cmput301t02project;
 
+import java.util.ArrayList;
+
 public class CommentListModel {
 
 	private ArrayList<CommentModelAbstraction> commentList;
+
+	public ArrayList<CommentModelAbstraction> getCommentList() {
+		return commentList;
+	}
+
+	public void setCommentList(ArrayList<CommentModelAbstraction> commentList) {
+		this.commentList = commentList;
+	}
 	
 }
