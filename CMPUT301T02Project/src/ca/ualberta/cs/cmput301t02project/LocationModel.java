@@ -30,16 +30,13 @@ public class LocationModel extends Application {
 	private final LocationListener locationListener = new LocationListener(){
 	// TODO: override the four methods.
 		public void onLocationChanged (Location location) {
-			//TODO
-			TextView tv = (TextView) findViewById(R.id.myLocationText);
 			if (location != null) {
 				double lat = location.getLatitude();
 				double lng = location.getLongitude();
+
 				
-				tv.setText("Latitude: " + lat
-						+ "\nLongitude: " + lng);
 			} else {
-				tv.setText("NO LOCATION INFO");
+				//do something later here
 			}
 		}
 		
@@ -57,7 +54,7 @@ public class LocationModel extends Application {
 		
 	};
 	
-	
 	locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
+	//locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);
 	//Stores in location object
 }
