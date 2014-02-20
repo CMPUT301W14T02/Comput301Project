@@ -31,7 +31,7 @@ public abstract class CommentModelAbstraction {
 		return location;
 	}
 	
-	public void setLocation(LocationModel location, double lat, double lng){
+	public void setLocation(double lat, double lng){
 		// this will need to change, depending on how we decide to store the location, in lat or long and how we want to be able to access them
 		this.location.setLatitude(lat);
 		this.location.setLongitude(lng);
