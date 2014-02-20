@@ -21,9 +21,9 @@ public class LocationModel extends Application {
 	//Retrieve location manager
 	LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);	
 	//Requests location from provider
-	Looper looper;
-	String provider = LocationManager.GPS_PROVIDER;
-	locationManager.requestSingleUpdate(provider, locationListener, looper);
+	//String provider = LocationManager.GPS_PROVIDER;
+	
+	//locationManager.requestSingleUpdate(provider, locationListener, looper);
 	
 	
 	// Retrieve location updates through LocationListener interface
@@ -55,7 +55,9 @@ public class LocationModel extends Application {
 			//TODO
 		}
 		
-	};	
+	};
 	
+	
+	locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
 	//Stores in location object
 }
