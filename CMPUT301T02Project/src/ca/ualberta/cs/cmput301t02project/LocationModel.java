@@ -21,7 +21,6 @@ public class LocationModel extends Application {
 	String provider = LocationManager.GPS_PROVIDER;
 	locationManager.requestSingleUpdate(provider, locationListener, looper);
 	
-	
 	// Retrieve location updates through LocationListener interface
 	private final LocationListener locationListener = new LocationListener(){
 	// TODO: override the four methods.
