@@ -2,14 +2,14 @@ package ca.ualberta.cs.cmput301t02project;
 
 public class UserModel {
 	private String name;
-	private ArrayList<FavoritesListModel> favoritesList;
-	private ArrayList<MyCommentsModel> myComments;
+//	private ArrayList<FavoritesListModel> favoritesList;
+//	private ArrayList<MyCommentsModel> myComments;
 	
 	public UserModel(String name) {
 		super();
 		this.name = name;
-		this.favoritesList = new ArrayList<FavoritesListModel>;
-		this.myComments = new ArrayList<MyCommentsModel>;
+//		this.favoritesList = new ArrayList<FavoritesListModel>;
+//		this.myComments = new ArrayList<MyCommentsModel>;
 	}
 	
 	public String getName() {
@@ -20,6 +20,7 @@ public class UserModel {
 		this.name = name;
 	}
 	
+	/*
 	public ArrayList<FavoritesListModel> getFavoritesList() {
 		return favoritesList;
 	}
@@ -35,5 +36,5 @@ public class UserModel {
 	public void setMyComments(ArrayList<MyCommentsModel> myComments) {
 		this.myComments = myComments;
 	}
-	
+	*/
 }
