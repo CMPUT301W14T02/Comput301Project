@@ -5,13 +5,13 @@ import java.util.Date;
 
 public abstract class CommentModelAbstraction {
 
-	private Date date = new Date(); 
-	private LocationModel location;
-	private String text;
-	private String image;
-	private int rating;
-	private ArrayList <ReplyCommentModel> replies;
-	private String username;
+	protected Date date = new Date(); 
+	protected LocationModel location;
+	protected String text;
+	protected String image;
+	protected int rating;
+	protected ArrayList <ReplyCommentModel> replies;
+	protected String username;
 	
 	public Date getDate(){
 		return date;

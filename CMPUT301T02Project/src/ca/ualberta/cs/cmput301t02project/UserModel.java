@@ -1,9 +1,16 @@
 package ca.ualberta.cs.cmput301t02project;
 
 public class UserModel {
-	String name;
-	ArrayList<FavoritesListModel> favoritesList;
-	ArrayList<MyCommentsModel> myComments;
+	private String name;
+	private ArrayList<FavoritesListModel> favoritesList;
+	private ArrayList<MyCommentsModel> myComments;
+	
+	public UserModel(String name) {
+		super();
+		this.name = name;
+		this.favoritesList = new ArrayList<FavoritesListModel>;
+		this.myComments = new ArrayList<MyCommentsModel>;
+	}
 	
 	public String getName() {
 		return name;
