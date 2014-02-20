@@ -11,6 +11,10 @@ import android.widget.TextView;
 
 public class LocationModel extends Application {
 	
+	double lat;
+	double lng;
+	Location location; 
+	
 	//LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 	//lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 0, locationListener);
 	
