@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public abstract class CommentModelAbstraction {
-
     private Date date;
     private LocationModel location;
     private String text;
