@@ -11,30 +11,31 @@ import android.widget.TextView;
 
 public class LocationModel extends Application {
 	
+	double lat;
+	double lng;
+	Location location; 
+	
 	//LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 	//lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 0, locationListener);
 	
 	//Retrieve location manager
 	LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);	
 	//Requests location from provider
-	Looper looper;
-	String provider = LocationManager.GPS_PROVIDER;
-	locationManager.requestSingleUpdate(provider, locationListener, looper);
+	//String provider = LocationManager.GPS_PROVIDER;
+	
+	//locationManager.requestSingleUpdate(provider, locationListener, looper);
 	
 	// Retrieve location updates through LocationListener interface
 	private final LocationListener locationListener = new LocationListener(){
 	// TODO: override the four methods.
 		public void onLocationChanged (Location location) {
-			//TODO
-			TextView tv = (TextView) findViewById(R.id.myLocationText);
 			if (location != null) {
 				double lat = location.getLatitude();
 				double lng = location.getLongitude();
+
 				
-				tv.setText("Latitude: " + lat
-						+ "\nLongitude: " + lng);
 			} else {
-				tv.setText("NO LOCATION INFO");
+				//do something later here
 			}
 		}
 		
@@ -50,7 +51,9 @@ public class LocationModel extends Application {
 			//TODO
 		}
 		
-	};	
+	};
 	
+	locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
+	//locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);
 	//Stores in location object
 }
