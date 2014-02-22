@@ -22,4 +22,8 @@ public class CommentListModel {
 		commentList.add(comment);
 	}
 	
+	public int size() {
+	    return commentList.size();
+	}
+	
 }
