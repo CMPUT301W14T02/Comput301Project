@@ -4,14 +4,14 @@ import android.app.Application;
 
 public class ProjectApplication extends Application {
 
-	// Singleton
-	private static CommentListModel commentList;
+    // Singleton
+    private static CommentListModel commentList;
 
-	public static CommentListModel getCommentList() {
-		if(commentList == null) {
-			commentList = new CommentListModel();
-		}
-		return commentList;
+    public static CommentListModel getCommentList() {
+	if (commentList == null) {
+	    commentList = new CommentListModel();
 	}
-	
+	return commentList;
+    }
+
 }

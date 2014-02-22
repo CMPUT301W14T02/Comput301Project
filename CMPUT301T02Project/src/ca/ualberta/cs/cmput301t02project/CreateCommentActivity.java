@@ -9,33 +9,35 @@ import android.widget.EditText;
 
 public class CreateCommentActivity extends Activity {
 
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_create_comment);
-		
-		final EditText inputComment = (EditText) findViewById(R.id.create_text);
-		
-		Button post = (Button) findViewById(R.id.create_post);
-		
-		post.setOnClickListener(new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				TopLevelCommentModel comment = new TopLevelCommentModel(inputComment.getText().toString(), null, null, null);
-				CommentListModel commentList = ProjectApplication.getCommentList();
-				// Refactor into MVC?
-				commentList.add(comment);
-				finish();
-			}
-		});
-	}
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+	super.onCreate(savedInstanceState);
+	setContentView(R.layout.activity_create_comment);
 
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.create_comment, menu);
-		return true;
-	}
+	final EditText inputComment = (EditText) findViewById(R.id.create_text);
+
+	Button post = (Button) findViewById(R.id.create_post);
+
+	post.setOnClickListener(new View.OnClickListener() {
+
+	    @Override
+	    public void onClick(View v) {
+		TopLevelCommentModel comment = new TopLevelCommentModel(
+			inputComment.getText().toString(), null, null, null);
+		CommentListModel commentList = ProjectApplication
+			.getCommentList();
+		// Refactor into MVC?
+		commentList.add(comment);
+		finish();
+	    }
+	});
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+	// Inflate the menu; this adds items to the action bar if it is present.
+	getMenuInflater().inflate(R.menu.create_comment, menu);
+	return true;
+    }
 
 }
