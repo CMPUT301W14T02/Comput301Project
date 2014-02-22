@@ -54,7 +54,7 @@ public class TopLevelListActivity extends Activity implements
 		this, R.layout.list_item, topLevelCommentList);
 	// Display comments in adapter
 	topLevelCommentListView.setAdapter(adapter);
-
+	ProjectApplication.setCurrentCommentList(ProjectApplication.getCommentList());
 	topLevelCommentListView
 		.setOnItemClickListener(new OnItemClickListener() {
 		    @Override
@@ -74,17 +74,18 @@ public class TopLevelListActivity extends Activity implements
     }
 
     @Override
+    public void onResume() {
+	super.onResume();
+	ProjectApplication.setCurrentCommentList(ProjectApplication.getCommentList());
+    }
+    
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 	// Inflate the menu; this adds items to the action bar if it is present.
 	getMenuInflater().inflate(R.menu.top_level_list, menu);
 	return true;
     }
- 
-    /*
-    public void onResume() {
-	ProjectApplication.setCurrentCommentList(ProjectApplication.getCommentList());
-    }
-*/
+
     @Override
     public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2,
 	    long arg3) {
