@@ -10,7 +10,7 @@ public class ProjectApplication extends Application {
 	public static CommentListModel getCommentList() {
 		if(commentList == null) {
 			commentList = new CommentListModel();
-		}	
+		}
 		return commentList;
 	}
 	

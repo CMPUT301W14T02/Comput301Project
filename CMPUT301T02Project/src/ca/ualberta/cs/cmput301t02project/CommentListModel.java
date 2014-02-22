@@ -18,6 +18,8 @@ public class CommentListModel {
 		this.commentList = commentList;
 	}
 	
-	
+	public void add(CommentModelAbstraction comment) {
+		commentList.add(comment);
+	}
 	
 }
