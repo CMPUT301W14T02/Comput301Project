@@ -29,14 +29,13 @@ public class TopLevelListActivity extends Activity {
 
     public void onStart() {
 	super.onStart();
-	CommentListModel commentListModel = ProjectApplication
+	CommentListModel commentListModel = ProjectApplication.getCommentList();
+	ArrayList<CommentModelAbstraction> topLevelCommentList = commentListModel
 		.getCommentList();
-	ArrayList<CommentModelAbstraction> topLevelCommentList = commentListModel.getCommentList();
-	ArrayAdapter<CommentModelAbstraction> adapter = new ArrayAdapter<CommentModelAbstraction>(this,
-		R.layout.list_item);
-	//Add comments to adapter
-	//Display comments in adapter
+	ArrayAdapter<CommentModelAbstraction> adapter = new ArrayAdapter<CommentModelAbstraction>(
+		this, R.layout.list_item);
+	// Add comments to adapter
+	// Display comments in adapter
     }
-    
 
 }
