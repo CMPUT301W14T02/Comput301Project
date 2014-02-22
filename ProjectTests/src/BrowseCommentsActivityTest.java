@@ -95,5 +95,18 @@ public class BrowseCommentsActivityTest extends
     }
     
     // Tests for Use Case 5 end here
+    
+    /* Use Case 11
+     * How the controller will be accessed from the activity isn't specified yet. */
+    
+  	public void test addFavorite() {
+  		TopLevelCommentModel comment = new TopLevelCommentModel("Some text");
+  		favoritesListController.addFavorite(comment);
+  		
+  		assertTrue("favorites List should contain the just added comment",
+  				favoritesListController.getList().contains(comment));
+  	}
+  	
+      // End of Use Case 11 Test
 
 }
