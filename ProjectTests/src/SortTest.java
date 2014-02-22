@@ -1,18 +1,19 @@
-
 import java.util.ArrayList;
 
 import ca.ualberta.cs.cmput301t02project.LocationModel;
 import ca.ualberta.cs.cmput301t02project.TopLevelCommentModel;
 import android.test.ActivityInstrumentationTestCase2;
-
+import android.widget.Adapter;
+import android.widget.ListView;
 
 public class SortTest extends ActivityInstrumentationTestCase2<Sort> {
-    //Sort class doesn't currently exist. If name changes, this will need to be modified to account for it
+    // Sort class doesn't currently exist. If name changes, this will need to be
+    // modified to account for it
     public SortTest() {
 	super(Sort.class);
 
     }
-    
+
     // Use Case 1
     public void testSortByMyLocation(ArrayList<LocationModel> locationList) {
 	/*I wasn't sure it the ArrayList was supposed to compose of the default android Location or the LocationModel
@@ -37,7 +38,7 @@ public class SortTest extends ActivityInstrumentationTestCase2<Sort> {
 	    Sort.sortByMyLocation(arrayList1, locationList.get(0));
 	    assertTrue("The arraylists should be the same after the sort", (arrayList1 == arrayList2));
 	}
-    
+
     // Use Case 2
     public void testSortByAlternateLocation(ArrayList<LocationModel> locationList) {
 	/* Same change made as commented for SortByMyLocation */ 
@@ -61,6 +62,27 @@ public class SortTest extends ActivityInstrumentationTestCase2<Sort> {
 	    Sort.sortByAlternateLocation(arrayList1, locationList.get(0));
 	    assertTrue("The arraylists should be the same after the sort", (arrayList1 == arrayList2));
 	}
+
     
-    
+    // Use Case 8: View Comments by Pictures
+    public void testSortedByPictures(CommentListModel picComments)
+    // is CommentListModel correct?
+	    throws Throwable {
+	runTestOnUiThread(new Runnable() {
+
+	    @Override
+	    public void run() {
+		ListView listView = (ListView) activity
+			.findViewById(ca.ualberta.cs.project301.R.id.oldComment);
+		Adapter adapter = listView.getAdapter();
+		CommentListModel unsorted = picComments;
+		CommentListModel picSorted = sortByPictures(picComments);
+		assertFalse("The text should not be equal to the old text",
+			(unsorted == picSorted));
+
+	    }
+	});
+
+    }
+
 }

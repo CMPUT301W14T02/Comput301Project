@@ -9,7 +9,8 @@ public class EditCommentActivityTest extends
     }
     
   //Use Case 7: Attach Picture to Comment
-    public void testAddedPicture(CommentModelAbstraction comment) throws Throwable {
+    public void testAddedPicture(CommentModel comment) throws Throwable {
+	//which comment model to use?
 	String pic = comment.getPicture();
 	assertFalse("The picture string should no longer be null", null == pic);
     }
