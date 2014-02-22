@@ -1,5 +1,7 @@
 package ca.ualberta.cs.cmput301t02project;
 
+import java.util.ArrayList;
+
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -21,12 +23,12 @@ public class CreateCommentActivity extends Activity {
 	post.setOnClickListener(new View.OnClickListener() {
 	    @Override
 	    public void onClick(View v) {
-		TopLevelCommentModel comment = new TopLevelCommentModel(
-			inputComment.getText().toString(), null, null);
-		CommentListModel commentList = ProjectApplication
-			.getCommentList();
 		// Refactor into MVC?
-		commentList.add(comment);
+		CommentModel comment = new CommentModel(
+			inputComment.getText().toString(), null, null);
+		ArrayList<CommentModel> commentList = ProjectApplication
+			.getCommentList();
+		commentList.add(comment);		
 		finish();
 	    }
 	});

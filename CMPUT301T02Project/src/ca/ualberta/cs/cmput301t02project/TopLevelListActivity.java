@@ -17,7 +17,8 @@ import android.widget.Spinner;
 public class TopLevelListActivity extends Activity implements
 	OnItemSelectedListener {
 
-    public ListView topLevelCommentListView;
+    private ListView topLevelCommentListView;
+    private ArrayAdapter<CommentModel> adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,9 +52,15 @@ public class TopLevelListActivity extends Activity implements
 		    @Override
 		    public void onItemClick(AdapterView<?> l, View v,
 			    int position, long id) {
-			    Intent goToReplyListActivity = new Intent(getApplicationContext(), ReplyListActivity.class);
-			    goToReplyListActivity.putExtra("index", position);
-			    startActivity(goToReplyListActivity);
+			//Refactor into MVC?
+			CommentModel nestedComment = (CommentModel) adapter.getItem(position);
+			ArrayList<CommentModel> nestedCommentList = nestedComment.getReplies();
+			ProjectApplication.setCurrentCommentList(nestedCommentList);
+			
+			Intent goToReplyListActivity = new Intent(
+				getApplicationContext(),
+				ReplyListActivity.class);
+			startActivity(goToReplyListActivity);
 		    }
 		});
     }
@@ -67,11 +74,10 @@ public class TopLevelListActivity extends Activity implements
 
     public void onStart() {
 	super.onStart();
-	CommentListModel commentListModel = ProjectApplication.getCommentList();
-	ArrayList<CommentModelAbstraction> topLevelCommentList = commentListModel
+	ArrayList<CommentModel> topLevelCommentList = ProjectApplication
 		.getCommentList();
 	// Add comments to adapter
-	ArrayAdapter<CommentModelAbstraction> adapter = new ArrayAdapter<CommentModelAbstraction>(
+	adapter = new ArrayAdapter<CommentModel>(
 		this, R.layout.list_item, topLevelCommentList);
 	// Display comments in adapter
 	topLevelCommentListView.setAdapter(adapter);
