@@ -75,12 +75,16 @@ public class TopLevelListActivity extends Activity implements
     public void onStart() {
 	super.onStart();
 	ArrayList<CommentModel> topLevelCommentList = ProjectApplication
-		.getCommentList();
+		.getCurrentCommentList();
 	// Add comments to adapter
 	adapter = new ArrayAdapter<CommentModel>(
 		this, R.layout.list_item, topLevelCommentList);
 	// Display comments in adapter
 	topLevelCommentListView.setAdapter(adapter);
+    }
+    
+    public void onResume() {
+	ProjectApplication.setCurrentCommentList(ProjectApplication.getCommentList());
     }
 
     @Override

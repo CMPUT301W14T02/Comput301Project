@@ -27,8 +27,8 @@ public class CreateCommentActivity extends Activity {
 		CommentModel comment = new CommentModel(
 			inputComment.getText().toString(), null, null);
 		ArrayList<CommentModel> commentList = ProjectApplication
-			.getCommentList();
-		commentList.add(comment);		
+			.getCurrentCommentList();
+		commentList.add(comment);
 		finish();
 	    }
 	});
