@@ -5,6 +5,10 @@ import java.util.ArrayList;
 public class CommentListModel {
 
 	private ArrayList<CommentModelAbstraction> commentList;
+	
+	public CommentListModel() {
+		commentList = new ArrayList<CommentModelAbstraction>();
+	}
 
 	public ArrayList<CommentModelAbstraction> getCommentList() {
 		return commentList;
@@ -13,5 +17,7 @@ public class CommentListModel {
 	public void setCommentList(ArrayList<CommentModelAbstraction> commentList) {
 		this.commentList = commentList;
 	}
+	
+	
 	
 }

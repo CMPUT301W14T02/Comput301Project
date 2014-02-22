@@ -14,7 +14,7 @@ public class CreateCommentActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_create_comment);
 		
-		EditText inputComment = (EditText) findViewById(R.id.create_text);
+		final EditText inputComment = (EditText) findViewById(R.id.create_text);
 		
 		Button post = (Button) findViewById(R.id.create_post);
 		
@@ -22,7 +22,11 @@ public class CreateCommentActivity extends Activity {
 			
 			@Override
 			public void onClick(View v) {
-				//String comment = inputComment.getText().toString();
+				TopLevelCommentModel comment = new TopLevelCommentModel(inputComment.getText().toString(), null, null, null);
+				CommentListModel commentList = ProjectApplication.getCommentList();
+				// Refactor into MVC
+				commentList.getCommentList().add(comment);
+				finish();
 			}
 		});
 	}
