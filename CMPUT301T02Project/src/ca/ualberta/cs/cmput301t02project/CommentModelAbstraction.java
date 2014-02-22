@@ -71,4 +71,9 @@ public abstract class CommentModelAbstraction {
 	this.username = username;
     }
 
+    @Override
+    public String toString() {
+	return text;
+    }
+
 }
