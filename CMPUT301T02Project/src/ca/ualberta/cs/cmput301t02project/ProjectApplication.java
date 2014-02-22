@@ -22,6 +22,9 @@ public class ProjectApplication extends Application {
     }
     
     public static ArrayList<CommentModel> getCurrentCommentList() {
+	if (currentCommentList == null) {
+	    currentCommentList = commentList;
+	}
 	return currentCommentList;
     }
 

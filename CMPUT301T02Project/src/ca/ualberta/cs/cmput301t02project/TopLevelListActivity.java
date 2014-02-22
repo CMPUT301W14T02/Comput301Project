@@ -48,7 +48,7 @@ public class TopLevelListActivity extends Activity implements
 	spinner.setAdapter(spinner_adapter);
 	
 	ArrayList<CommentModel> topLevelCommentList = ProjectApplication
-		.getCurrentCommentList();
+		.getCommentList();
 	// Add comments to adapter
 	adapter = new ArrayAdapter<CommentModel>(
 		this, R.layout.list_item, topLevelCommentList);
@@ -79,11 +79,12 @@ public class TopLevelListActivity extends Activity implements
 	getMenuInflater().inflate(R.menu.top_level_list, menu);
 	return true;
     }
-    
+ 
+    /*
     public void onResume() {
 	ProjectApplication.setCurrentCommentList(ProjectApplication.getCommentList());
     }
-
+*/
     @Override
     public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2,
 	    long arg3) {
