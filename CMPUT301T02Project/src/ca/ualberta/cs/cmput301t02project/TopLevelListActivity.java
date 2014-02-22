@@ -38,6 +38,5 @@ public class TopLevelListActivity extends Activity {
 	//Display comments in adapter
 	topLevelCommentListView.setAdapter(adapter);
     }
-    
 
 }
