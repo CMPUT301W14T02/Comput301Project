@@ -46,6 +46,14 @@ public class TopLevelListActivity extends Activity implements
 		.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 	// attach adapter to spinner
 	spinner.setAdapter(spinner_adapter);
+	
+	ArrayList<CommentModel> topLevelCommentList = ProjectApplication
+		.getCurrentCommentList();
+	// Add comments to adapter
+	adapter = new ArrayAdapter<CommentModel>(
+		this, R.layout.list_item, topLevelCommentList);
+	// Display comments in adapter
+	topLevelCommentListView.setAdapter(adapter);
 
 	topLevelCommentListView
 		.setOnItemClickListener(new OnItemClickListener() {
@@ -70,17 +78,6 @@ public class TopLevelListActivity extends Activity implements
 	// Inflate the menu; this adds items to the action bar if it is present.
 	getMenuInflater().inflate(R.menu.top_level_list, menu);
 	return true;
-    }
-
-    public void onStart() {
-	super.onStart();
-	ArrayList<CommentModel> topLevelCommentList = ProjectApplication
-		.getCurrentCommentList();
-	// Add comments to adapter
-	adapter = new ArrayAdapter<CommentModel>(
-		this, R.layout.list_item, topLevelCommentList);
-	// Display comments in adapter
-	topLevelCommentListView.setAdapter(adapter);
     }
     
     public void onResume() {
