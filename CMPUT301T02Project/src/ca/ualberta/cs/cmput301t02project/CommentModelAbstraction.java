@@ -3,19 +3,34 @@ package ca.ualberta.cs.cmput301t02project;
 import java.util.ArrayList;
 import java.util.Date;
 
+import android.graphics.Picture;
+
 public abstract class CommentModelAbstraction {
     private Date date;
     private LocationModel location;
     private String text;
-    private String image;
+    private Picture image;
     private int rating;
     private ArrayList<ReplyCommentModel> replies;
     private String username;
 
-    public CommentModelAbstraction(String text, String image,
-	    LocationModel location, String username) {
+    //Post with picture
+    public CommentModelAbstraction(String text, Picture image,
+	LocationModel location, String username) {
 	this.text = text;
 	this.image = image;
+	this.location = location;
+	this.username = username;
+	this.rating = 0;
+	this.replies = new ArrayList<ReplyCommentModel>();
+	this.date = new Date();
+    }
+    
+    //Post without picture
+    public CommentModelAbstraction(String text,
+	LocationModel location, String username) {
+	this.text = text;
+	this.image = null;
 	this.location = location;
 	this.username = username;
 	this.rating = 0;
@@ -39,11 +54,11 @@ public abstract class CommentModelAbstraction {
 	this.text = text;
     }
 
-    public String getImage() {
+    public Picture getImage() {
 	return image;
     }
 
-    public void setImage(String image) {
+    public void setImage(Picture image) {
 	this.image = image;
     }
 
