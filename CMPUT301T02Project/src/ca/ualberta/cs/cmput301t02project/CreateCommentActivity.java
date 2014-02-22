@@ -24,8 +24,8 @@ public class CreateCommentActivity extends Activity {
 			public void onClick(View v) {
 				TopLevelCommentModel comment = new TopLevelCommentModel(inputComment.getText().toString(), null, null, null);
 				CommentListModel commentList = ProjectApplication.getCommentList();
-				// Refactor into MVC
-				commentList.getCommentList().add(comment);
+				// Refactor into MVC?
+				commentList.add(comment);
 				finish();
 			}
 		});
