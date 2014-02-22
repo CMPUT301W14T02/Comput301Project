@@ -19,11 +19,10 @@ public class CreateCommentActivity extends Activity {
 	Button post = (Button) findViewById(R.id.create_post);
 
 	post.setOnClickListener(new View.OnClickListener() {
-
 	    @Override
 	    public void onClick(View v) {
 		TopLevelCommentModel comment = new TopLevelCommentModel(
-			inputComment.getText().toString(), null, null, null);
+			inputComment.getText().toString(), null, null);
 		CommentListModel commentList = ProjectApplication
 			.getCommentList();
 		// Refactor into MVC?

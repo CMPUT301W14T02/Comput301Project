@@ -31,7 +31,6 @@ public class MainActivity extends Activity {
 			TopLevelListActivity.class));
 	    }
 	});
-
     }
 
     @Override
