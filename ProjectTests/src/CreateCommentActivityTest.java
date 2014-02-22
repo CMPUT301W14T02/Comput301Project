@@ -1,15 +1,19 @@
-// 3) Use Case: CreateTopLevelComment
-public class CreateCommentActivityUITest extends
-		ActivityInstrumentationTestCase2<CreateCommentActivity> {
+import android.app.Activity;
+import android.app.Instrumentation;
+import android.test.ActivityInstrumentationTestCase2;
+import android.widget.EditText;
 
+
+public class CreateCommentActivityTest extends ActivityInstrumentationTestCase2<CreateCommentActivity> {
     Instrumentation instrumentation;
     Activity activity;
     EditText textInput;
 
-    public CreateCommentActivityUITest() {
+    public CreateCommentActivityTest() {
 	super(CreateCommentActivity.class);
     }
-
+    
+    // Code written to test Use Case 3 starts here ****
     public void setUp() throws Exception {
 	super.setUp();
 	instrumentation = getInstrumentation();
@@ -45,4 +49,8 @@ public class CreateCommentActivityUITest extends
 		}
 	    });
     }
+    // Code for Use Case 3 ends here ****
+    
+    
+    
 }
