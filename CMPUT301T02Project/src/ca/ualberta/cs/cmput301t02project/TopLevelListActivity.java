@@ -1,5 +1,7 @@
 package ca.ualberta.cs.cmput301t02project;
 
+import java.util.ArrayList;
+
 import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
@@ -27,13 +29,14 @@ public class TopLevelListActivity extends Activity {
 
     public void onStart() {
 	super.onStart();
-	CommentListModel topLevelCommentList = ProjectApplication
+	CommentListModel commentListModel = ProjectApplication
 		.getCommentList();
-	ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+	ArrayList<CommentModelAbstraction> topLevelCommentList = commentListModel.getCommentList();
+	ArrayAdapter<CommentModelAbstraction> adapter = new ArrayAdapter<CommentModelAbstraction>(this,
 		R.layout.list_item);
-	for (int i = 0; i < topLevelCommentList.size(); i++) {
-	    //adapter.add();
-	}
+	//Add comments to adapter
+	//Display comments in adapter
     }
+    
 
 }
