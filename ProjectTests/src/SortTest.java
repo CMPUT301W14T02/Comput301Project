@@ -139,5 +139,16 @@ public class SortTest extends ActivityInstrumentationTestCase2<Sort> {
 	    Sort.sortByRank(arrayList1, locationList.get(0));
 	    assertTrue("The arraylists should be the same after the sort", (arrayList1 == arrayList2));
 	}
-    //End of test for Use Case 15
+
+    // End of test for Use Case 15
+
+    // Use Case 16
+    public void testDefaultSort(BrowseCommentsActivity activity) {
+	    ArrayList<TopLevelCommentModel> arrayList1 = new ArrayList<TopLeveLCommentModel>;
+	    for(TopLevelCommentModel comment : activity.arrayList){
+	        arrayList1.add((TopLevelCommentModel) comment.copy());
+	    }
+	    Sort.sortByDate(arrayList1);
+	    assertTrue("The arraylists should be the same to ensure default sort.", (arrayList1 == activity.arraylist);
+	}
 }

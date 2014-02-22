@@ -60,12 +60,14 @@ public class CreateCommentActivityTest extends
 	    });
     }
 
-    // Code for Use Case 3 ends here 
+    // Code for Use Case 3 ends here
 
-    /* Code for Use Case 6 ReplyToComment starts here 
+    /*
+     * Code for Use Case 6 ReplyToComment starts here
      * 
-       Test to see if creating a new reply increases the size of the adapter
-       storing replies */
+     * Test to see if creating a new reply increases the size of the adapter
+     * storing replies
+     */
     public void testCreateReplyComment() {
 	runTestOnUiThread(new Runnable() {
 	    public void run() {
@@ -98,13 +100,28 @@ public class CreateCommentActivityTest extends
             }
 	    });
     }
-    // Code for Use Case 6 ends here 
-    
-    //Use Case 7: Attach Picture to Comment
+
+    // Code for Use Case 6 ends here
+
+    // Use Case 7: Attach Picture to Comment
     public void testAddedPicture(CommentModel comment) throws Throwable {
 	// which comment model to use?
 	String pic = comment.getPicture();
 	assertFalse("The picture string should no longer be null", null == pic);
+    }
+
+    /*
+     * Use Case 17 
+     * How the controller will be accessed from the activity isn't specified yet.
+     */
+    public void testDefaultLocation() {
+	TopLevelCommentModel comment = new TopLevelCommentModel();
+	topLevelListController.addTopLevelComment(comment);
+	int newCommentIndex = topLevelListController.getList().size - 1;
+	assertEquals("New added comment should have the user location",
+		user.getLocation(),
+		topLevelListController.getList().get(newCommentIndex)
+			.getLocation());
     }
 
 }
