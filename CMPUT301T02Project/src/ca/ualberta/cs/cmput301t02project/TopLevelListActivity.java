@@ -51,16 +51,9 @@ public class TopLevelListActivity extends Activity implements
 		    @Override
 		    public void onItemClick(AdapterView<?> l, View v,
 			    int position, long id) {
-			try {
-			    Class ourClass = Class
-				    .forName("ca.ualberta.cs.cmput301t02project.ReplyListActivity");
-			    Intent goToReplyListActivity = new Intent(getApplicationContext(), ourClass);
+			    Intent goToReplyListActivity = new Intent(getApplicationContext(), ReplyListActivity.class);
 			    goToReplyListActivity.putExtra("index", position);
 			    startActivity(goToReplyListActivity);
-			} catch (ClassNotFoundException e) {
-			    e.printStackTrace();
-			}
-
 		    }
 		});
     }
