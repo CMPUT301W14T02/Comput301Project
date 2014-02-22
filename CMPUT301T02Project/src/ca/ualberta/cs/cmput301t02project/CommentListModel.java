@@ -4,23 +4,22 @@ import java.util.ArrayList;
 
 public class CommentListModel {
 
-	private ArrayList<CommentModelAbstraction> commentList;
-	
-	public CommentListModel() {
-		commentList = new ArrayList<CommentModelAbstraction>();
-	}
+    private ArrayList<CommentModelAbstraction> commentList;
 
-	public ArrayList<CommentModelAbstraction> getCommentList() {
-		return commentList;
-	}
+    public CommentListModel() {
+	commentList = new ArrayList<CommentModelAbstraction>();
+    }
 
-	public void setCommentList(ArrayList<CommentModelAbstraction> commentList) {
-		this.commentList = commentList;
-	}
-	
-	public void add(CommentModelAbstraction comment) {
-		commentList.add(comment);
-	}
-	
-	
+    public ArrayList<CommentModelAbstraction> getCommentList() {
+	return commentList;
+    }
+
+    public void setCommentList(ArrayList<CommentModelAbstraction> commentList) {
+	this.commentList = commentList;
+    }
+
+    public void add(CommentModelAbstraction comment) {
+	commentList.add(comment);
+    }
+
 }

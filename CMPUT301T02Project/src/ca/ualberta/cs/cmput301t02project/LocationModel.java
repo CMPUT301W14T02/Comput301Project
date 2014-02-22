@@ -9,73 +9,73 @@ import android.os.Bundle;
 
 public class LocationModel extends Application {
 
-	private Location location;
+    private Location location;
 
-	public LocationModel() {
+    public LocationModel() {
 
-		super();
-		// Retrieve location manager
-		LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-		// Requests location from provider
-		if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
-			locationManager.requestLocationUpdates(
-					LocationManager.GPS_PROVIDER, 0, 0, locationListener);
-		} else {
-			// How are we going to handle no location available
-		}
+	super();
+	// Retrieve location manager
+	LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+	// Requests location from provider
+	if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+	    locationManager.requestLocationUpdates(
+		    LocationManager.GPS_PROVIDER, 0, 0, locationListener);
+	} else {
+	    // How are we going to handle no location available
+	}
+    }
+
+    // Retrieve location updates through LocationListener interface
+    private final LocationListener locationListener = new LocationListener() {
+
+	// TODO: override the four methods.
+	@Override
+	public void onLocationChanged(Location location) {
+
+	    if (location != null) {
+		setLocation(location);
+	    } else {
+		// do something later here
+	    }
 	}
 
-	// Retrieve location updates through LocationListener interface
-	private final LocationListener locationListener = new LocationListener() {
+	@Override
+	public void onProviderDisabled(String provider) {
 
-		// TODO: override the four methods.
-		@Override
-		public void onLocationChanged(Location location) {
-
-			if (location != null) {
-				setLocation(location);
-			} else {
-				// do something later here
-			}
-		}
-
-		@Override
-		public void onProviderDisabled(String provider) {
-
-			// TODO
-		}
-
-		@Override
-		public void onProviderEnabled(String provider) {
-
-			// TODO
-		}
-
-		@Override
-		public void onStatusChanged(String provider, int status, Bundle extras) {
-
-			// TODO
-		}
-	};
-
-	// May be required to get location, not sure yet
-	public Location getLocation() {
-
-		return location;
+	    // TODO
 	}
 
-	// Set location in locationListener, using GPS coordinates
-	public void setLocation(Location location) {
+	@Override
+	public void onProviderEnabled(String provider) {
 
-		this.location = location;
+	    // TODO
 	}
 
-	// If user wants to manually enter coordinates to set location
-	public void setLocation(double lat, double lng) {
+	@Override
+	public void onStatusChanged(String provider, int status, Bundle extras) {
 
-		location.setLatitude(lat);
-		location.setLongitude(lng);
+	    // TODO
 	}
+    };
 
-	// Stores in location object
+    // May be required to get location, not sure yet
+    public Location getLocation() {
+
+	return location;
+    }
+
+    // Set location in locationListener, using GPS coordinates
+    public void setLocation(Location location) {
+
+	this.location = location;
+    }
+
+    // If user wants to manually enter coordinates to set location
+    public void setLocation(double lat, double lng) {
+
+	location.setLatitude(lat);
+	location.setLongitude(lng);
+    }
+
+    // Stores in location object
 }
