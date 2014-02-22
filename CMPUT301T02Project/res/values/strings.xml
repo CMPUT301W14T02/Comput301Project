@@ -11,5 +11,6 @@
     <string name="post">Post</string>
     <string name="write_comment">Write your comment here</string>
     <string name="spinner_title">Select Category</string>
+    <string name="title_activity_reply_list">ReplyListActivity</string>
 
 </resources>

@@ -4,10 +4,12 @@ import java.util.ArrayList;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Intent;
 import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Spinner;
@@ -43,6 +45,24 @@ public class TopLevelListActivity extends Activity implements
 		.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 	// attach adapter to spinner
 	spinner.setAdapter(spinner_adapter);
+
+	topLevelCommentListView
+		.setOnItemClickListener(new OnItemClickListener() {
+		    @Override
+		    public void onItemClick(AdapterView<?> l, View v,
+			    int position, long id) {
+			try {
+			    Class ourClass = Class
+				    .forName("ca.ualberta.cs.cmput301t02project.ReplyListActivity");
+			    Intent goToReplyListActivity = new Intent(getApplicationContext(), ourClass);
+			    goToReplyListActivity.putExtra("index", position);
+			    startActivity(goToReplyListActivity);
+			} catch (ClassNotFoundException e) {
+			    e.printStackTrace();
+			}
+
+		    }
+		});
     }
 
     @Override

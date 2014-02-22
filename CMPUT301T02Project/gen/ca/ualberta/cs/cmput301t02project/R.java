@@ -53,6 +53,7 @@ public final class R {
         public static final int post=0x7f050007;
         public static final int spinner_title=0x7f050009;
         public static final int title_activity_create_comment=0x7f050006;
+        public static final int title_activity_reply_list=0x7f05000a;
         public static final int title_activity_top_level_list=0x7f050003;
         public static final int write_comment=0x7f050008;
     }
