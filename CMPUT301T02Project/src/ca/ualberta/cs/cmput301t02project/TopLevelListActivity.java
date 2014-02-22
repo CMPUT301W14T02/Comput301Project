@@ -23,7 +23,7 @@ public class TopLevelListActivity extends Activity implements
 	setContentView(R.layout.activity_top_level_list);
 	topLevelCommentListView = (ListView) findViewById(R.id.commentListView);
 
-	// Basedon://www.androidhive.info/2012/04/android-spinner-dropdown-example/
+	// Based on://www.androidhive.info/2012/04/android-spinner-dropdown-example/
 
 	// Spinner element
 	Spinner spinner = (Spinner) findViewById(R.id.spinner);
