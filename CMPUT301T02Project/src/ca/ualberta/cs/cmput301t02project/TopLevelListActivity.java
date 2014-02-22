@@ -31,6 +31,9 @@ public class TopLevelListActivity extends Activity {
 		.getCommentList();
 	ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
 		R.layout.list_item);
+	for (int i = 0; i < topLevelCommentList.size(); i++) {
+	    //adapter.add();
+	}
     }
 
 }
