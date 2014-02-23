@@ -16,14 +16,17 @@ public class ProjectApplication extends Application {
 	}
 	return commentList;
     }
-    
-    public static void setCurrentCommentList(ArrayList<CommentModel> currentCommentList) {
+
+    public static void setCurrentCommentList(
+	    ArrayList<CommentModel> currentCommentList) {
 	ProjectApplication.currentCommentList = currentCommentList;
     }
-    
+
     public static ArrayList<CommentModel> getCurrentCommentList() {
 	if (currentCommentList == null) {
-	    currentCommentList = commentList;
+	    if (commentList == null) {
+		currentCommentList = ProjectApplication.getCommentList();
+	    }
 	}
 	return currentCommentList;
     }
