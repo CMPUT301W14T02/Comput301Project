@@ -54,7 +54,6 @@ public class TopLevelListActivity extends Activity implements
 		this, R.layout.list_item, topLevelCommentList);
 	// Display comments in adapter
 	topLevelCommentListView.setAdapter(adapter);
-	ProjectApplication.setCurrentCommentList(ProjectApplication.getCommentList());
 	topLevelCommentListView
 		.setOnItemClickListener(new OnItemClickListener() {
 		    @Override

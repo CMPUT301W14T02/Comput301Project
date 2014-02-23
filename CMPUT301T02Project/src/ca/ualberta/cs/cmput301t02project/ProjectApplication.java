@@ -22,8 +22,8 @@ public class ProjectApplication extends Application {
     }
     
     public static ArrayList<CommentModel> getCurrentCommentList() {
-	if (currentCommentList == null) {
-	    currentCommentList = commentList;
+	if (currentCommentList == null) { //Creating before browsing comments.
+	    currentCommentList = ProjectApplication.getCommentList();
 	}
 	return currentCommentList;
     }
