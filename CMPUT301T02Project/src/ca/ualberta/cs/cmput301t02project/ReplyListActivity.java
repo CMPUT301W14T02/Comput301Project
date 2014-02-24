@@ -9,15 +9,21 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.AdapterView.OnItemSelectedListener;
 
 public class ReplyListActivity extends Activity implements
 	OnItemSelectedListener {
+    
+    private ListView replyCommentListView;
+    private ArrayAdapter<CommentModel> adapter;
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 	super.onCreate(savedInstanceState);
 	setContentView(R.layout.activity_reply_list);
+	replyCommentListView = (ListView) findViewById(R.id.replyListView);
 	// Based on:
 	// //www.androidhive.info/2012/04/android-spinner-dropdown-example/
 	// Spinner element
@@ -39,6 +45,14 @@ public class ReplyListActivity extends Activity implements
 		.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 	// attach adapter to spinner
 	spinner.setAdapter(spinner_adapter);
+	
+	ArrayList<CommentModel> replyCommentList = ProjectApplication
+		.getCurrentCommentList();
+	// Add comments to adapter
+	adapter = new ArrayAdapter<CommentModel>(
+		this, R.layout.list_item, replyCommentList);
+	// Display comments in adapter
+	replyCommentListView.setAdapter(adapter);
 	
 	Button replyComment = (Button) findViewById(R.id.reply_button);
 	replyComment.setOnClickListener(new View.OnClickListener() {
