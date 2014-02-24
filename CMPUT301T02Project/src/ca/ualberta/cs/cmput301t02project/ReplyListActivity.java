@@ -11,6 +11,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.TextView;
 
@@ -69,6 +70,24 @@ public class ReplyListActivity extends Activity implements
 	    public void onClick(View v) {
 		startActivity(new Intent(ReplyListActivity.this,
 			CreateCommentActivity.class));
+	    }
+	});
+
+	replyCommentListView.setOnItemClickListener(new OnItemClickListener() {
+	    @Override
+	    public void onItemClick(AdapterView<?> l, View v, int position,
+		    long id) {
+		// Refactor into MVC?
+		CommentModel nestedComment = (CommentModel) adapter
+			.getItem(position);
+		ProjectApplication.setCurrentComment(nestedComment);
+		ArrayList<CommentModel> nestedCommentList = nestedComment
+			.getReplies();
+		ProjectApplication.setCurrentCommentList(nestedCommentList);
+
+		Intent goToReplyListActivity = new Intent(
+			getApplicationContext(), ReplyListActivity.class);
+		startActivity(goToReplyListActivity);
 	    }
 	});
     }
