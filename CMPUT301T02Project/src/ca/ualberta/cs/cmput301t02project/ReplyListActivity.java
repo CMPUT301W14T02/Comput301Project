@@ -46,6 +46,7 @@ public class ReplyListActivity extends Activity implements
 	// attach adapter to spinner
 	spinner.setAdapter(spinner_adapter);
 	
+	// Get the comment list of replies to selected comment
 	ArrayList<CommentModel> replyCommentList = ProjectApplication
 		.getCurrentCommentList();
 	// Add comments to adapter
@@ -64,6 +65,19 @@ public class ReplyListActivity extends Activity implements
 	});
     }
 
+    @Override
+    public void onResume() {
+	super.onResume();
+	// Get the comment list of replies to selected comment
+	ArrayList<CommentModel> replyCommentList = ProjectApplication
+		.getCurrentCommentList();
+	// Add comments to adapter
+	adapter = new ArrayAdapter<CommentModel>(
+		this, R.layout.list_item, replyCommentList);
+	// Display comments in adapter
+	replyCommentListView.setAdapter(adapter);
+    }
+    
     @Override
     public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2,
 	    long arg3) {
