@@ -9,6 +9,7 @@ public class ProjectApplication extends Application {
     // Singleton
     private static ArrayList<CommentModel> commentList;
     private static ArrayList<CommentModel> currentCommentList;
+    private static CommentModel currentComment;
 
     public static ArrayList<CommentModel> getCommentList() {
 	if (commentList == null) {
@@ -30,6 +31,14 @@ public class ProjectApplication extends Application {
 
 	}
 	return currentCommentList;
+    }
+
+    public static CommentModel getCurrentComment() {
+	return currentComment;
+    }
+
+    public static void setCurrentComment(CommentModel currentComment) {
+	ProjectApplication.currentComment = currentComment;
     }
 
 }

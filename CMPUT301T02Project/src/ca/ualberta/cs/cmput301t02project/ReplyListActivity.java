@@ -12,18 +12,26 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.AdapterView.OnItemSelectedListener;
+import android.widget.TextView;
 
 public class ReplyListActivity extends Activity implements
 	OnItemSelectedListener {
-    
+
     private ListView replyCommentListView;
+    private TextView selectedComment;
     private ArrayAdapter<CommentModel> adapter;
-    
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 	super.onCreate(savedInstanceState);
 	setContentView(R.layout.activity_reply_list);
 	replyCommentListView = (ListView) findViewById(R.id.replyListView);
+	selectedComment = (TextView) findViewById(R.id.selected_comment);
+
+	// Display selected comment
+	selectedComment.setText(ProjectApplication.getCurrentComment()
+		.getText());
+
 	// Based on:
 	// //www.androidhive.info/2012/04/android-spinner-dropdown-example/
 	// Spinner element
@@ -45,16 +53,16 @@ public class ReplyListActivity extends Activity implements
 		.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 	// attach adapter to spinner
 	spinner.setAdapter(spinner_adapter);
-	
+
 	// Get the comment list of replies to selected comment
 	ArrayList<CommentModel> replyCommentList = ProjectApplication
 		.getCurrentCommentList();
 	// Add comments to adapter
-	adapter = new ArrayAdapter<CommentModel>(
-		this, R.layout.list_item, replyCommentList);
+	adapter = new ArrayAdapter<CommentModel>(this, R.layout.list_item,
+		replyCommentList);
 	// Display comments in adapter
 	replyCommentListView.setAdapter(adapter);
-	
+
 	Button replyComment = (Button) findViewById(R.id.reply_button);
 	replyComment.setOnClickListener(new View.OnClickListener() {
 	    @Override
@@ -72,22 +80,22 @@ public class ReplyListActivity extends Activity implements
 	ArrayList<CommentModel> replyCommentList = ProjectApplication
 		.getCurrentCommentList();
 	// Add comments to adapter
-	adapter = new ArrayAdapter<CommentModel>(
-		this, R.layout.list_item, replyCommentList);
+	adapter = new ArrayAdapter<CommentModel>(this, R.layout.list_item,
+		replyCommentList);
 	// Display comments in adapter
 	replyCommentListView.setAdapter(adapter);
     }
-    
+
     @Override
     public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2,
 	    long arg3) {
 	// TODO Auto-generated method stub
-	
+
     }
 
     @Override
     public void onNothingSelected(AdapterView<?> arg0) {
 	// TODO Auto-generated method stub
-	
+
     }
 }

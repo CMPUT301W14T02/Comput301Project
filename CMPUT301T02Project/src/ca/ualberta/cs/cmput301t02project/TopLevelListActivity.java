@@ -61,6 +61,7 @@ public class TopLevelListActivity extends Activity implements
 			    int position, long id) {
 			//Refactor into MVC?
 			CommentModel nestedComment = (CommentModel) adapter.getItem(position);
+			ProjectApplication.setCurrentComment(nestedComment);
 			ArrayList<CommentModel> nestedCommentList = nestedComment.getReplies();
 			ProjectApplication.setCurrentCommentList(nestedCommentList);
 			
