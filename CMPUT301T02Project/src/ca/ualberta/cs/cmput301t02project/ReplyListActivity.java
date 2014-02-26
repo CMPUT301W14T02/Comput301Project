@@ -21,6 +21,7 @@ public class ReplyListActivity extends Activity implements
     private ListView replyCommentListView;
     private TextView selectedComment;
     private ArrayAdapter<CommentModel> adapter;
+    private ArrayList<CommentModel> replyCommentList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,7 +57,7 @@ public class ReplyListActivity extends Activity implements
 	spinner.setAdapter(spinner_adapter);
 
 	// Get the comment list of replies to selected comment
-	ArrayList<CommentModel> replyCommentList = ProjectApplication
+	replyCommentList = ProjectApplication
 		.getCurrentCommentList();
 	// Add comments to adapter
 	adapter = new ArrayAdapter<CommentModel>(this, R.layout.list_item,
@@ -70,6 +71,7 @@ public class ReplyListActivity extends Activity implements
 	    public void onClick(View v) {
 		startActivity(new Intent(ReplyListActivity.this,
 			CreateCommentActivity.class));
+		
 	    }
 	});
 
@@ -96,9 +98,10 @@ public class ReplyListActivity extends Activity implements
     public void onResume() {
 	super.onResume();
 	// Get the comment list of replies to selected comment
-	ArrayList<CommentModel> replyCommentList = ProjectApplication
-		.getCurrentCommentList();
+	//ArrayList<CommentModel> replyCommentList = ProjectApplication
+	//	.getCurrentCommentList();
 	// Add comments to adapter
+	ProjectApplication.setCurrentCommentList(replyCommentList);
 	adapter = new ArrayAdapter<CommentModel>(this, R.layout.list_item,
 		replyCommentList);
 	// Display comments in adapter
