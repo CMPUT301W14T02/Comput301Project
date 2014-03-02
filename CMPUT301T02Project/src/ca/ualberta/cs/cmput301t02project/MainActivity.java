@@ -11,15 +11,15 @@ public class MainActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-	super.onCreate(savedInstanceState);
-	setContentView(R.layout.activity_main);
+    	super.onCreate(savedInstanceState);
+    	setContentView(R.layout.activity_main);
 
-	Button createComment = (Button) findViewById(R.id.create);
-	createComment.setOnClickListener(new View.OnClickListener() {
+    	Button createComment = (Button) findViewById(R.id.create);
+    	createComment.setOnClickListener(new View.OnClickListener() {
 	    @Override
 	    public void onClick(View v) {
-		startActivity(new Intent(MainActivity.this,
-			CreateCommentActivity.class));
+	    	startActivity(new Intent(MainActivity.this,
+	    		CreateCommentActivity.class));
 	    }
 	});
 
@@ -27,17 +27,17 @@ public class MainActivity extends Activity {
 	browseComment.setOnClickListener(new View.OnClickListener() {
 	    @Override
 	    public void onClick(View v) {
-		startActivity(new Intent(MainActivity.this,
-			TopLevelListActivity.class));
+	    	startActivity(new Intent(MainActivity.this,
+	    			TopLevelListActivity.class));
 	    }
 	});
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-	// Inflate the menu; this adds items to the action bar if it is present.
-	getMenuInflater().inflate(R.menu.main, menu);
-	return true;
+    	// Inflate the menu; this adds items to the action bar if it is present.
+    	getMenuInflater().inflate(R.menu.main, menu);
+    	return true;
     }
 
 }

@@ -1,11 +1,13 @@
 package ca.ualberta.cs.cmput301t02project;
 
+
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 
 public class LoginActivity extends Activity {
 
@@ -19,8 +21,12 @@ public class LoginActivity extends Activity {
 		login.setOnClickListener(new View.OnClickListener() {
 		    @Override
 		    public void onClick(View v) {
-			startActivity(new Intent(LoginActivity.this,
-				MainActivity.class));
+		    	
+		    	EditText newName = (EditText) findViewById(R.id.login_username);
+				UserModel.setName(newName.getText().toString());
+				
+				startActivity(new Intent(LoginActivity.this,
+						MainActivity.class));
 		    }
 		});
 	}
