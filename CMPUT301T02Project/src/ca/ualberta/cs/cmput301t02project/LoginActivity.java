@@ -16,14 +16,15 @@ public class LoginActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_login);
 		
-		// When user presses the login button goto MainActivity
+		// when user presses the login button goto MainActivity
 		Button login = (Button) findViewById(R.id.login_button);
 		login.setOnClickListener(new View.OnClickListener() {
 		    @Override
 		    public void onClick(View v) {
 		    	
-		    	EditText newName = (EditText) findViewById(R.id.login_username);
-				UserModel.setName(newName.getText().toString());
+		    	// set username 
+		    	EditText userName = (EditText) findViewById(R.id.login_username);
+				UserModel.setName(userName.getText().toString());
 				
 				startActivity(new Intent(LoginActivity.this,
 						MainActivity.class));

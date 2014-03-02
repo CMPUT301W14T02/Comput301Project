@@ -16,29 +16,30 @@ public class CreateCommentActivity extends Activity {
 	super.onCreate(savedInstanceState);
 	setContentView(R.layout.activity_create_comment);
 
-	final EditText inputComment = (EditText) findViewById(R.id.create_text);
-
 	Button post = (Button) findViewById(R.id.create_post);
 
 	post.setOnClickListener(new View.OnClickListener() {
 	    @Override
 	    public void onClick(View v) {
-		// Refactor into MVC?
-		CommentModel comment = new CommentModel(
-			inputComment.getText().toString(), null, null);
-		ArrayList<CommentModel> commentList = ProjectApplication
-			.getCurrentCommentList();
-		commentList.add(comment);
-		finish();
+	    	
+	    	EditText inputComment = (EditText) findViewById(R.id.create_text);
+	    	
+	    	// Refactor into MVC?
+	    	// Username is temporarily in front of the comment. Can redesign later -SB
+	    	CommentModel comment = new CommentModel(UserModel.getName().toString()
+	    			+ ": " + inputComment.getText().toString(), null, null);
+	    	ArrayList<CommentModel> commentList = ProjectApplication.getCurrentCommentList();
+	    	commentList.add(comment);
+	    	finish();
 	    }
 	});
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-	// Inflate the menu; this adds items to the action bar if it is present.
-	getMenuInflater().inflate(R.menu.create_comment, menu);
-	return true;
+    	// Inflate the menu; this adds items to the action bar if it is present.
+    	getMenuInflater().inflate(R.menu.create_comment, menu);
+    	return true;
     }
 
 }
