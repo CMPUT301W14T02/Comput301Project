@@ -2,18 +2,18 @@ package ca.ualberta.cs.cmput301t02project;
 
 public class CurrentUser{
 
-    private static String currentName = "";
+	private static User currentUser = new User("");
 	
 	public CurrentUser(String name) {
 		// TODO Auto-generated constructor stub
 	}
 
     public static String getName(){
-    	return currentName;
+    	return currentUser.getName();
     }
 
     public static void setName(String name) {
-    	CurrentUser.currentName = name;
+    	currentUser.setName(name);
     }
     
 
