@@ -24,7 +24,10 @@ public class LoginActivity extends Activity {
 		    	
 		    	// set username 
 		    	EditText userName = (EditText) findViewById(R.id.login_username);
-				UserModel.setName(userName.getText().toString());
+		    	
+		    	if (UserList.findUser(userName.getText().toString()) == null){
+		    		UserList.createUser(userName.getText().toString());
+		    	}
 				
 				startActivity(new Intent(LoginActivity.this,
 						MainActivity.class));

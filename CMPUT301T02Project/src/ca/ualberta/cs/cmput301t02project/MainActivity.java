@@ -16,7 +16,7 @@ public class MainActivity extends Activity {
     	setContentView(R.layout.activity_main);
 
     	TextView welcomeMessage = (TextView) findViewById(R.id.welcome_message);
-    	welcomeMessage.setText("Welcome " + UserModel.getName().toString() + "!");
+    	welcomeMessage.setText("Welcome " + User.getCurrentName().toString() + "!");
     	
     	Button createComment = (Button) findViewById(R.id.create);
     	createComment.setOnClickListener(new View.OnClickListener() {

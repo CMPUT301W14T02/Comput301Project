@@ -1,25 +1,36 @@
 package ca.ualberta.cs.cmput301t02project;
 
-public class UserModel {
-    private static String name = "";
+public class User {
+    private static String currentName = "";
+    
+    private String name;
 
     // private ArrayList<FavoritesListModel> favoritesList;
     // private ArrayList<MyCommentsModel> myComments;
 
-    public UserModel(String name) {
+    public User(String name) {
     	super();
-    	UserModel.name = name;
-    	// this.favoritesList = new ArrayList<FavoritesListModel>;
-    	// this.myComments = new ArrayList<MyCommentsModel>;
+    	this.name = name;
     }
-
-    public static String getName() {
+    
+    public String getName(){
     	return name;
     }
-
-    public static void setName(String name) {
-    	UserModel.name = name;
+    
+    public void setName(String name) {
+    	this.name = name;
     }
+    
+
+    public static String getCurrentName(){
+    	return currentName;
+    }
+
+    public static void setCurrentName(String name) {
+    	User.currentName = name;
+    }
+    
+    
 
     /*
      * public ArrayList<FavoritesListModel> getFavoritesList() { return
@@ -33,4 +44,5 @@ public class UserModel {
      * public void setMyComments(ArrayList<MyCommentsModel> myComments) {
      * this.myComments = myComments; }
      */
+
 }
