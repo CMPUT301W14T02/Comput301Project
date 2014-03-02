@@ -5,26 +5,28 @@ import java.util.ArrayList;
 public class UserList {
 
 	// there should only be one userList
-	static ArrayList<User> userList;
+	static ArrayList<User> userList = new ArrayList<User>();
 	
 	public UserList() {
+		
 		// TODO Auto-generated constructor stub
 	}
 	
-	// returns user if one with that username exists, else returns null
-	public static User findUser (String username){
-		
-		for(int i=0; i<userList.size()-1; i++){
+	// sets current user if one with that username exists, else returns false
+	public static boolean findUser (String username){
+
+		for(int i=0; i<userList.size(); i++){
 			if(userList.get(i).getName() == username){
-				return userList.get(i);
+				CurrentUser.setName(userList.get(i).getName());
+				return true;
 			}
 		}
 		
-		return null;
+		return false;
 	}
 	
 	public static void createUser (String username){
-		User.setCurrentName(username);
+		CurrentUser.setName(username);
 	}
 
 }

@@ -1,7 +1,6 @@
 package ca.ualberta.cs.cmput301t02project;
 
 public class User {
-    private static String currentName = "";
     
     private String name;
 
@@ -22,15 +21,6 @@ public class User {
     }
     
 
-    public static String getCurrentName(){
-    	return currentName;
-    }
-
-    public static void setCurrentName(String name) {
-    	User.currentName = name;
-    }
-    
-    
 
     /*
      * public ArrayList<FavoritesListModel> getFavoritesList() { return

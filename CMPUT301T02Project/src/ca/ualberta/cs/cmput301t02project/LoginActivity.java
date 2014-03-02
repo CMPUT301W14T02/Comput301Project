@@ -25,7 +25,7 @@ public class LoginActivity extends Activity {
 		    	// set username 
 		    	EditText userName = (EditText) findViewById(R.id.login_username);
 		    	
-		    	if (UserList.findUser(userName.getText().toString()) == null){
+		    	if (! UserList.findUser(userName.getText().toString())){
 		    		UserList.createUser(userName.getText().toString());
 		    	}
 				

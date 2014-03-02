@@ -26,7 +26,7 @@ public class CreateCommentActivity extends Activity {
 	    	
 	    	// Refactor into MVC?
 	    	// Username is temporarily in front of the comment. Can redesign later -SB
-	    	CommentModel comment = new CommentModel(User.getCurrentName().toString()
+	    	CommentModel comment = new CommentModel(CurrentUser.getName().toString()
 	    			+ ": " + inputComment.getText().toString(), null, null);
 	    	ArrayList<CommentModel> commentList = ProjectApplication.getCurrentCommentList();
 	    	commentList.add(comment);
