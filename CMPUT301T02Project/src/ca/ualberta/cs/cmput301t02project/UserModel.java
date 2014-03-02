@@ -1,7 +1,7 @@
 package ca.ualberta.cs.cmput301t02project;
 
 public class UserModel {
-    private static String name;
+    private static String name = "";
 
     // private ArrayList<FavoritesListModel> favoritesList;
     // private ArrayList<MyCommentsModel> myComments;

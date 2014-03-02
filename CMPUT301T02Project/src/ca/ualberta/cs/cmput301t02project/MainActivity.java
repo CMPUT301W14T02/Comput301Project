@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 public class MainActivity extends Activity {
 
@@ -14,6 +15,9 @@ public class MainActivity extends Activity {
     	super.onCreate(savedInstanceState);
     	setContentView(R.layout.activity_main);
 
+    	TextView welcomeMessage = (TextView) findViewById(R.id.welcome_message);
+    	welcomeMessage.setText("Welcome " + UserModel.getName().toString() + "!");
+    	
     	Button createComment = (Button) findViewById(R.id.create);
     	createComment.setOnClickListener(new View.OnClickListener() {
 	    @Override

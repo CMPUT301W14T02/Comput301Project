@@ -16,6 +16,7 @@
     <string name="login_message">Login Page</string>
     <string name="login_hint">Enter Username</string>
     <string name="login_button">Login</string>
+    <string name="welcome_message">Welcome!</string>
      
 
 </resources>
