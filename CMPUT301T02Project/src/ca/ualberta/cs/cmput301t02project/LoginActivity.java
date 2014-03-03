@@ -16,19 +16,19 @@ public class LoginActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_login);
 		
-		// when user presses the login button goto MainActivity
+		// when user presses the login button goto MainActivity -SB
 		Button login = (Button) findViewById(R.id.login_button);
 		login.setOnClickListener(new View.OnClickListener() {
 		    @Override
 		    public void onClick(View v) {
 		    	
-		    	// set username 
+		    	// set username -SB 
 		    	EditText userName = (EditText) findViewById(R.id.login_username);
 		    	
-		    	// find if user exists
+		    	// find if user exists -SB
 		    	if (! UserList.findUser(userName.getText().toString())){
 		    		
-		    		// if user doesn't exist, create a user with that name
+		    		// if user doesn't exist, create a user with that name -SB
 		    		UserList.createUser(userName.getText().toString());
 		    	}
 				
