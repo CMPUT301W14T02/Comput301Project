@@ -8,24 +8,6 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".MainActivity" >
 
-    <Button
-        android:id="@+id/browse"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignRight="@+id/create"
-        android:layout_marginBottom="137dp"
-        android:text="@string/browse" />
-
-    <Button
-        android:id="@+id/create"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/browse"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="31dp"
-        android:text="@string/create" />
-
     <TextView
         android:id="@+id/welcome_message"
         android:layout_width="wrap_content"
@@ -35,5 +17,45 @@
         android:layout_marginTop="70dp"
         android:text="@string/welcome_message"
         android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <Button
+        android:id="@+id/create"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/welcome_message"
+        android:layout_marginTop="26dp"
+        android:text="@string/create" />
+
+     <Button
+        android:id="@+id/browse"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/create"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="26dp"
+        android:text="@string/browse" />
+     
+    <Button
+        android:id="@+id/favorites"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+  		android:layout_below="@+id/browse"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="26dp"
+        android:text="@string/favorites" />
+
+   <Button
+       android:id="@+id/my_comments"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:layout_alignLeft="@+id/favorites"
+       android:layout_alignParentRight="true"
+       android:layout_below="@+id/favorites"
+       android:layout_marginTop="26dp"
+       android:text="@string/my_comments" />
 
 </RelativeLayout>
