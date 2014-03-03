@@ -25,12 +25,14 @@ public class LoginActivity extends Activity {
 		    	// set username 
 		    	EditText userName = (EditText) findViewById(R.id.login_username);
 		    	
+		    	// find if user exists
 		    	if (! UserList.findUser(userName.getText().toString())){
+		    		
+		    		// if user doesn't exist, create a user with that name
 		    		UserList.createUser(userName.getText().toString());
 		    	}
 				
-				startActivity(new Intent(LoginActivity.this,
-						MainActivity.class));
+				startActivity(new Intent(LoginActivity.this, MainActivity.class));
 		    }
 		});
 	}
