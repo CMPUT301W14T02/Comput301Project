@@ -24,11 +24,23 @@ public class CreateCommentActivity extends Activity {
 	    	
 	    	EditText inputComment = (EditText) findViewById(R.id.create_text);
 	    	
+	    	/*I'm don't think that this is supposed to go here (I think we said CommentListController), 
+	    	but since the new CommentModel creation is happening here, I'm gonna put it here for now
+	    	and move it into the correct file later on -KW
+	    	*/ 
+	    	
+	    	LocationModel loc = new LocationModel();
+	    	double lat = loc.getLocation().getLatitude();
+	    	String strLat = String.valueOf(lat);
+	    	double lon = loc.getLocation().getLongitude();
+	    	String strLon = String.valueOf(lon);
+	    	
+	    	
 	    	// Refactor into MVC?
 	    	// Username is temporarily in front of the comment. Can redesign later -SB
 	    	CommentModel comment = new CommentModel(CurrentUser.getName().toString() +
 	    			": " + inputComment.getText().toString(), null, 
-	    			CurrentUser.getName().toString());
+	    			CurrentUser.getName().toString() + "\nLocation: "+strLat+", "+strLon);
 	    	ArrayList<CommentModel> commentList = ProjectApplication.getCurrentCommentList();
 	    	commentList.add(comment);
 	    	finish();
