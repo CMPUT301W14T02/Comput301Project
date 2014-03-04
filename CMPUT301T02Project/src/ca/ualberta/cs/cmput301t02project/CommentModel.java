@@ -86,7 +86,14 @@ public class CommentModel {
 
     @Override
     public String toString() {
-    	return text + " (by "+ username + ", " + replies.size() + " replies)";
+    	
+    	// If statement to fix grammar issue of a singular reply vs replies plural -SB
+    	if (replies.size() == 1){
+    		return text + " (by "+ username + ", 1 reply)";
+    	}
+    	else{
+    		return text + " (by "+ username + ", " + replies.size() + " replies)";
+    	}
     }
 
 }
