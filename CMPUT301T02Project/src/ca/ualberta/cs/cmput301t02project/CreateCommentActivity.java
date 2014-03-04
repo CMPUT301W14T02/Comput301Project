@@ -44,8 +44,7 @@ public class CreateCommentActivity extends Activity {
 	    	
 	    	// Refactor into MVC?
 	    	// Username is temporarily in front of the comment. Can redesign later -SB
-	    	CommentModel comment = new CommentModel(CurrentUser.getName().toString() +
-	    			": " + inputComment.getText().toString(), null, 
+	    	CommentModel comment = new CommentModel(inputComment.getText().toString(), null, 
 	    			CurrentUser.getName().toString() );//+ "\nLocation: "+strLat+", "+strLon);
 	    	ArrayList<CommentModel> commentList = ProjectApplication.getCurrentCommentList();
 	    	commentList.add(comment);
