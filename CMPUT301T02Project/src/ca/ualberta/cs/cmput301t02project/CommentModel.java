@@ -15,55 +15,53 @@ public class CommentModel {
     private String username;
 
     //Post with picture
-    public CommentModel(String text, Picture image,
-	LocationModel location, String username) {
-	this.text = text;
-	this.image = image;
-	this.location = location;
-	this.username = username;
-	this.rating = 0;
-	this.replies = new ArrayList<CommentModel>();
-	this.date = new Date();
+    public CommentModel(String text, Picture image, LocationModel location, String username) {
+    	this.text = text;
+    	this.image = image;
+    	this.location = location;
+    	this.username = username;
+    	this.rating = 0;
+    	this.replies = new ArrayList<CommentModel>();
+    	this.date = new Date();
     }
     
     //Post without picture
-    public CommentModel(String text,
-	LocationModel location, String username) {
-	this.text = text;
-	this.image = null;
-	this.location = location;
-	this.username = username;
-	this.rating = 0;
-	this.replies = new ArrayList<CommentModel>();
-	this.date = new Date();
+    public CommentModel(String text, LocationModel location, String username) {
+    	this.text = text;
+    	this.image = null;
+    	this.location = location;
+    	this.username = username;
+    	this.rating = 0;
+    	this.replies = new ArrayList<CommentModel>();
+    	this.date = new Date();
     }
 
     public Date getDate() {
-	return date;
+    	return date;
     }
 
     public LocationModel getLocation() {
-	return location;
+    	return location;
     }
 
     public String getText() {
-	return text;
+    	return text;
     }
 
     public void setText(String text) {
-	this.text = text;
+    	this.text = text;
     }
 
     public Picture getImage() {
-	return image;
+    	return image;
     }
 
     public void setImage(Picture image) {
-	this.image = image;
+    	this.image = image;
     }
 
     public int getRating() {
-	return rating;
+    	return rating;
     }
 
     public void setRating(int rating) {
@@ -71,24 +69,24 @@ public class CommentModel {
     }
 
     public ArrayList<CommentModel> getReplies() {
-	return replies;
+    	return replies;
     }
 
     public void setReplies(ArrayList<CommentModel> replies) {
-	this.replies = replies;
+    	this.replies = replies;
     }
 
     public String getUsername() {
-	return username;
+    	return username;
     }
 
     public void setUsername(String username) {
-	this.username = username;
+    	this.username = username;
     }
 
     @Override
     public String toString() {
-	return text;
+    	return text + " (by "+ username + ", " + replies.size() + " replies)";
     }
 
 }
