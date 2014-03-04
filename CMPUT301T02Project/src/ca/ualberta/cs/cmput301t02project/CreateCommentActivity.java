@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import android.app.Activity;
 import android.content.Context;
+import android.location.Location;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
@@ -32,12 +33,14 @@ public class CreateCommentActivity extends Activity {
 	    	and move it into the correct file later on -KW
 	    	*/ 
 	    	
-	    	LocationModel loc = new LocationModel(context);
-	    	/*double lat = loc.getLocation().getLatitude();
+	    	LocationModel locMod = new LocationModel(context);
+	    	Location loc = locMod.getLocation(); // Value of loc here is null. Is onLocationChanged not being called? -KW
+	    	
+	    	/*double lat = loc.getLatitude();
 	    	String strLat = String.valueOf(lat);
-	    	double lon = loc.getLocation().getLongitude();
-	    	String strLon = String.valueOf(lon);
-	    	*/
+	    	double lon = loc.getLongitude();
+	    	String strLon = String.valueOf(lon); */
+	    	
 	    	
 	    	// Refactor into MVC?
 	    	// Username is temporarily in front of the comment. Can redesign later -SB
