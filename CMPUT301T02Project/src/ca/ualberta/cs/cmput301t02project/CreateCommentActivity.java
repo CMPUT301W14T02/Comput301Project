@@ -36,17 +36,22 @@ public class CreateCommentActivity extends Activity {
 	    	LocationModel locMod = new LocationModel(context);
 	    	Location loc = locMod.getLocation(); // Value of loc here is null. Is onLocationChanged not being called? -KW
 	    	
-	    	/*double lat = loc.getLatitude();
-	    	String strLat = String.valueOf(lat);
-	    	double lon = loc.getLongitude();
-	    	String strLon = String.valueOf(lon); */
 	    	
+	    	String receivedCoor = "Location is null";
+	    	if (loc!=null) {  // for testing only, since we don't have to display lat/long -KW
+	    	    double lat = loc.getLatitude();
+	    	    String strLat = String.valueOf(lat);
+	    	    double lon = loc.getLongitude();
+	    	    String strLon = String.valueOf(lon); 
+	    	    receivedCoor = "Recieved Location";
+	    	    
+	    	}
 	    	
 	    	// Refactor into MVC?
 	    	// Username is temporarily in front of the comment. Can redesign later -SB
 	    	CommentModel comment = new CommentModel(CurrentUser.getName().toString() +
-	    			": " + inputComment.getText().toString(), null, 
-	    			CurrentUser.getName().toString() );//+ "\nLocation: "+strLat+", "+strLon);
+	    			": "+ receivedCoor+": "+ inputComment.getText().toString(), null, 
+	    			CurrentUser.getName().toString() ); //added a testVariable(receivedCoor) here, delete after -KW
 	    	ArrayList<CommentModel> commentList = ProjectApplication.getCurrentCommentList();
 	    	commentList.add(comment);
 	    	finish();
