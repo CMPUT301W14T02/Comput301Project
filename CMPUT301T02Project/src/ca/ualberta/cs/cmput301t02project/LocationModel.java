@@ -10,12 +10,19 @@ import android.os.Bundle;
 public class LocationModel extends Application {
 
     private Location location;
-
-    public LocationModel() {
+    /*this is used to get the context, if we add this to the singleton, passing it here
+     * may be unnecessary -KW
+     */
+    private Context currContext; 
+   
+    public LocationModel(Context c) {
 
 	super();
+	
+	this.currContext = c; // Context passed to constructor -KW
+	
 	// Retrieve location manager
-	LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+	LocationManager locationManager = (LocationManager) currContext.getSystemService(Context.LOCATION_SERVICE);
 	// Requests location from provider
 	if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
 	    locationManager.requestLocationUpdates(

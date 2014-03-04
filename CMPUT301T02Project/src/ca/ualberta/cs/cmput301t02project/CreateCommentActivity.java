@@ -3,6 +3,7 @@ package ca.ualberta.cs.cmput301t02project;
 import java.util.ArrayList;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
@@ -17,6 +18,8 @@ public class CreateCommentActivity extends Activity {
 	setContentView(R.layout.activity_create_comment);
 
 	Button post = (Button) findViewById(R.id.create_post);
+	
+	final Context context = this;  //used to pass to LocationModel -KW
 
 	post.setOnClickListener(new View.OnClickListener() {
 	    @Override
@@ -29,18 +32,18 @@ public class CreateCommentActivity extends Activity {
 	    	and move it into the correct file later on -KW
 	    	*/ 
 	    	
-	    	LocationModel loc = new LocationModel();
-	    	double lat = loc.getLocation().getLatitude();
+	    	LocationModel loc = new LocationModel(context);
+	    	/*double lat = loc.getLocation().getLatitude();
 	    	String strLat = String.valueOf(lat);
 	    	double lon = loc.getLocation().getLongitude();
 	    	String strLon = String.valueOf(lon);
-	    	
+	    	*/
 	    	
 	    	// Refactor into MVC?
 	    	// Username is temporarily in front of the comment. Can redesign later -SB
 	    	CommentModel comment = new CommentModel(CurrentUser.getName().toString() +
 	    			": " + inputComment.getText().toString(), null, 
-	    			CurrentUser.getName().toString() + "\nLocation: "+strLat+", "+strLon);
+	    			CurrentUser.getName().toString() );//+ "\nLocation: "+strLat+", "+strLon);
 	    	ArrayList<CommentModel> commentList = ProjectApplication.getCurrentCommentList();
 	    	commentList.add(comment);
 	    	finish();
