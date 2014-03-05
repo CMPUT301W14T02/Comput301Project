@@ -8,7 +8,10 @@
         android:minSdkVersion="15"
         android:targetSdkVersion="17" />
     
+    <uses-permission android:name="android.permission.ACCESS_GPS" />
 	<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+	<uses-permission android:name="android.permission.INTERNET"/>
+
     
     <application
         android:name="ca.ualberta.cs.cmput301t02project.ProjectApplication"

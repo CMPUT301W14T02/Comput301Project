@@ -31,6 +31,7 @@ public class LocationModel extends Application {
 	    // How are we going to handle no location available
 	}
     }
+    
 
     // Retrieve location updates through LocationListener interface
     private final LocationListener locationListener = new LocationListener() {
@@ -40,6 +41,8 @@ public class LocationModel extends Application {
 	public void onLocationChanged(Location location) {
 
 	    if (location != null) {
+		double lat = location.getLatitude(); //added for testing -KW
+		double lng = location.getLongitude();
 		setLocation(location);
 	    } else {
 		// do something later here
@@ -64,6 +67,8 @@ public class LocationModel extends Application {
 	    // TODO
 	}
     };
+    
+    
 
     // May be required to get location, not sure yet
     public Location getLocation() {
