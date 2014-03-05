@@ -32,7 +32,7 @@ public class LoginActivity extends Activity {
 		    		UserList.createUser(userName.getText().toString());
 		    	}
 				
-				startActivity(new Intent(LoginActivity.this, MainActivity.class));
+				startActivity(new Intent(LoginActivity.this, MainMenuActivity.class));
 		    }
 		});
 	}
