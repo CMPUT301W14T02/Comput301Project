@@ -15,8 +15,12 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.TextView;
 
-public class ReplyListActivity extends Activity implements OnItemSelectedListener {
+public class BrowseReplyCommentsActivity extends Activity implements OnItemSelectedListener {
 
+	//TODO: Refactor using new classes
+	//private CommentListModel replyList;
+	//private CommentListAdapter replyListAdapter;
+	
     private ListView replyCommentListView;
     private TextView selectedComment;
     private ArrayAdapter<CommentModel> adapter;
@@ -71,7 +75,7 @@ public class ReplyListActivity extends Activity implements OnItemSelectedListene
     	replyComment.setOnClickListener(new View.OnClickListener() {
     		@Override
     		public void onClick(View v) {
-    			startActivity(new Intent(ReplyListActivity.this, CreateCommentActivity.class));
+    			startActivity(new Intent(BrowseReplyCommentsActivity.this, CreateCommentActivity.class));
     		}
     	});
 
@@ -85,7 +89,7 @@ public class ReplyListActivity extends Activity implements OnItemSelectedListene
 	    		ArrayList<CommentModel> nestedCommentList = nestedComment.getReplies();
 	    		ProjectApplication.setCurrentCommentList(nestedCommentList);
 
-	    		Intent goToReplyListActivity = new Intent(getApplicationContext(), ReplyListActivity.class);
+	    		Intent goToReplyListActivity = new Intent(getApplicationContext(), BrowseReplyCommentsActivity.class);
 	    		startActivity(goToReplyListActivity);
 	    	}
 	    });

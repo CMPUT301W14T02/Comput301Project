@@ -37,7 +37,7 @@
             android:label="@string/title_activity_top_level_list" >
         </activity>
         <activity
-            android:name="ca.ualberta.cs.cmput301t02project.ReplyListActivity"
+            android:name="ca.ualberta.cs.cmput301t02project.BrowseReplyCommentsActivity"
             android:label="@string/title_activity_reply_list" >
         </activity>
         <activity

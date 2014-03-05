@@ -18,9 +18,8 @@ public class BrowseTopLevelCommentsActivity extends Activity implements
 
 	OnItemSelectedListener {
 	//TODO: Refactor code to use new classes
-	//CommentListModel commentList;
-	//CommentListAdapter commentListAdapter;
-	//CommentListController commentListController;
+	//private CommentListModel commentList;
+	//private CommentListAdapter commentListAdapter;
 
     private ListView topLevelCommentListView;
     private ArrayAdapter<CommentModel> adapter;
@@ -76,7 +75,7 @@ public class BrowseTopLevelCommentsActivity extends Activity implements
 		    	ArrayList<CommentModel> nestedCommentList = nestedComment.getReplies();
 		    	ProjectApplication.setCurrentCommentList(nestedCommentList);
 			
-		    	Intent goToReplyListActivity = new Intent(getApplicationContext(), ReplyListActivity.class);
+		    	Intent goToReplyListActivity = new Intent(getApplicationContext(), BrowseReplyCommentsActivity.class);
 		    	startActivity(goToReplyListActivity);
 		    }
 		});
