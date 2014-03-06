@@ -3,21 +3,21 @@ package ca.ualberta.cs.cmput301t02project;
 import java.util.ArrayList;
 import java.util.Date;
 
-import android.graphics.Picture;
+import android.graphics.Bitmap;
 
 public class CommentModel {
     private Date date;
     private LocationModel location;
     private String text;
-    private Picture image;
+    private Bitmap picture;
     private int rating;
     private ArrayList<CommentModel> replies;
     private String username;
 
     //Post with picture
-    public CommentModel(String text, Picture image, LocationModel location, String username) {
+    public CommentModel(String text, Bitmap picture, LocationModel location, String username) {
     	this.text = text;
-    	this.image = image;
+    	this.picture = picture;
     	this.location = location;
     	this.username = username;
     	this.rating = 0;
@@ -28,7 +28,7 @@ public class CommentModel {
     //Post without picture
     public CommentModel(String text, LocationModel location, String username) {
     	this.text = text;
-    	this.image = null;
+    	this.picture = null;
     	this.location = location;
     	this.username = username;
     	this.rating = 0;
@@ -52,12 +52,12 @@ public class CommentModel {
     	this.text = text;
     }
 
-    public Picture getImage() {
-    	return image;
+    public Bitmap getImage() {
+    	return picture;
     }
 
-    public void setImage(Picture image) {
-    	this.image = image;
+    public void setImage(Bitmap image) {
+    	this.picture = image;
     }
 
     public int getRating() {

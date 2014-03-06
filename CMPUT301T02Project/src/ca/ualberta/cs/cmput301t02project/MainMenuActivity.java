@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import android.location.Location;
 public class MainMenuActivity extends Activity {
 
     @Override
