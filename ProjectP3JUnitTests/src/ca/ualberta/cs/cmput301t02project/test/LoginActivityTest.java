@@ -11,11 +11,17 @@ public class LoginActivityTest extends ActivityInstrumentationTestCase2<LoginAct
 	}
 	
 	// Use Case 20
+	public void testGetName() {
+		
+		User user = new User("desiredName");
+		assertEquals("Username should be saved in the User class", user.getName(), "desiredName");
+	}
+	
 	public void testSetUsername() {
 		
 		User user = new User("desiredName");
 		CurrentUser.setName(user.getName());
 		
-		assertEquals("Username should have been set", user.getName(), "desiredName");
+		assertEquals("CurrentUser name should match current user's username", CurrentUser.getName(), user.getName());
 	}
 }
