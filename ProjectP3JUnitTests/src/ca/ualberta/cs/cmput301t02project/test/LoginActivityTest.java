@@ -1,8 +1,11 @@
 package ca.ualberta.cs.cmput301t02project.test;
 import ca.ualberta.cs.cmput301t02project.CurrentUser;
 import ca.ualberta.cs.cmput301t02project.LoginActivity;
+import ca.ualberta.cs.cmput301t02project.R;
 import ca.ualberta.cs.cmput301t02project.User;
 import android.test.ActivityInstrumentationTestCase2;
+import android.widget.EditText;
+
 
 public class LoginActivityTest extends ActivityInstrumentationTestCase2<LoginActivity> {
 
@@ -30,8 +33,11 @@ public class LoginActivityTest extends ActivityInstrumentationTestCase2<LoginAct
 		
 		// blank username is invalid based on our use case -SB
 		User user = new User("");
-		CurrentUser.setName(user.getName());
 		
+		// start the loginActivity and input blank name
+		LoginActivity l = new LoginActivity();
+		l.checkIfValid("");
+
 		assertFalse("Blank usernames should not be set", CurrentUser.getName().equals(user.getName()) );
 	}
 }

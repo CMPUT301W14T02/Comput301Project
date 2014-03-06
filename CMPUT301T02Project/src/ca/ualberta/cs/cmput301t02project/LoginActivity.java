@@ -24,20 +24,26 @@ public class LoginActivity extends Activity {
 		return true;
 	}
 	
-	// checks if a name is valid once login_button is pressed -SB
-	public void checkIfValid (View v) {
-    	
-		// message on screen -SB
-		TextView message = (TextView) findViewById(R.id.login_message);
-		
+	// accessed when login_button is pressed -SB
+	public void submitName (View v) {
+    
 		// read user input -SB 
     	EditText enteredName = (EditText) findViewById(R.id.login_username);
-    	String username = enteredName.getText().toString();
+    	
+    	// test if the input is allowed -SB
+    	checkIfValid(enteredName.getText().toString());	
+	}
+	
+	// checks if a name passed in is valid -SB
+	public void checkIfValid (String username) {
+
+		// message on screen -SB
+		TextView message = (TextView) findViewById(R.id.login_message);
 		
     	// if blank username is provided ask user to try again -SB
     	if (username.equals("")){
     		
-    		message.setText("Enter valid username");
+    		message.setText("Please enter a valid username");
     	}
     	else {
     		
@@ -47,10 +53,9 @@ public class LoginActivity extends Activity {
     		
     		// go to the main menu once user is set -SB
     		startActivity(new Intent(LoginActivity.this, MainMenuActivity.class));
-
     	}
 	}
-	
+
 	// set the username for the user -SB
 	public void setUsername (String username) {
 		

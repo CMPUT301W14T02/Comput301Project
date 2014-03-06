@@ -15,7 +15,7 @@
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
         android:layout_marginRight="20dp"
-        android:onClick="checkIfValid"
+        android:onClick="submitName"
         android:text="@string/login_button" />
 
     <EditText
