@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import android.app.Application;
 
-public class ProjectApplication extends Application {
+public class ProjectApplication {
 
     // Singleton
     private static ArrayList<CommentModel> commentList;
