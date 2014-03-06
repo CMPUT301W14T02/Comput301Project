@@ -1,12 +1,8 @@
 package ca.ualberta.cs.cmput301t02project.test;
 import ca.ualberta.cs.cmput301t02project.CurrentUser;
 import ca.ualberta.cs.cmput301t02project.LoginActivity;
-import ca.ualberta.cs.cmput301t02project.R;
 import ca.ualberta.cs.cmput301t02project.User;
 import android.test.ActivityInstrumentationTestCase2;
-import android.widget.EditText;
-import android.widget.TextView;
-
 
 public class LoginActivityTest extends ActivityInstrumentationTestCase2<LoginActivity> {
 
@@ -14,7 +10,7 @@ public class LoginActivityTest extends ActivityInstrumentationTestCase2<LoginAct
 		super(LoginActivity.class);
 	}
 	
-	// Use Case 20
+	// Use Case 20 - part 1 -SB
 	public void testGetName() {
 		
 		User user = new User("desiredName");
@@ -22,6 +18,7 @@ public class LoginActivityTest extends ActivityInstrumentationTestCase2<LoginAct
 		assertEquals("Username should be saved in the User class", user.getName(), "desiredName");
 	}
 	
+	// Use Case 20 - part 2 -SB
 	public void testSetUsername() {
 		
 		User user = new User("desiredName");
@@ -30,13 +27,14 @@ public class LoginActivityTest extends ActivityInstrumentationTestCase2<LoginAct
 		assertEquals("CurrentUser name should match current user's username", CurrentUser.getName(), user.getName());
 	}
 	
+	// Use Case 20 - part 3 -SB
 	public void testInvalidUsername() {
 
 		// start the loginActivity and input blank name
 		LoginActivity login = new LoginActivity();
 		
 		// blank username is invalid based on our use case -SB
-		assertFalse("Blank usernames should not be set", login.checkIfValid(""));
-		assertTrue("Non-blank username is set", login.checkIfValid("u"));
+		assertFalse("Empty usernames should not be set", login.checkIfValid(""));
+		assertTrue("Non-empty username should be set", login.checkIfValid("u"));
 	}
 }

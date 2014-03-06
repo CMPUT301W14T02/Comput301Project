@@ -34,12 +34,14 @@ public class LoginActivity extends Activity {
     	setUsername(enteredName.getText().toString());	
 	}
 	
+	// return false for invalid usernames, true for valid ones -SB
 	public boolean checkIfValid (String username){
-		if (username.equals("")){
+		if (username.equals("")) {
 			return false;
 		}
-
-		return true;
+		else {
+			return true;
+		}
 	}
 	
 	// checks if a name passed in is valid -SB
