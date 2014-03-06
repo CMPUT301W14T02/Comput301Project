@@ -1,4 +1,4 @@
-package ca.ualberta.cs.cmput301t02project;
+package model;
 
 import java.util.ArrayList;
 import java.util.Date;

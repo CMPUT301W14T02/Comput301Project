@@ -1,4 +1,4 @@
-package ca.ualberta.cs.cmput301t02project;
+package model;
 
 import android.app.Application;
 import android.content.Context;

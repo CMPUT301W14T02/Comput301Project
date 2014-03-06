@@ -2,6 +2,8 @@ package ca.ualberta.cs.cmput301t02project;
 
 import java.util.ArrayList;
 
+import model.CommentModel;
+
 import android.app.Application;
 
 public class ProjectApplication {
