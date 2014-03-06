@@ -14,6 +14,7 @@ public class LoginActivityTest extends ActivityInstrumentationTestCase2<LoginAct
 	public void testGetName() {
 		
 		User user = new User("desiredName");
+		
 		assertEquals("Username should be saved in the User class", user.getName(), "desiredName");
 	}
 	
@@ -23,5 +24,15 @@ public class LoginActivityTest extends ActivityInstrumentationTestCase2<LoginAct
 		CurrentUser.setName(user.getName());
 		
 		assertEquals("CurrentUser name should match current user's username", CurrentUser.getName(), user.getName());
+	}
+	
+	public void testInvalidUsername() {
+		
+		// blank username is invalid based on our use case -SB
+		User user = new User("");
+		CurrentUser.setName(user.getName());
+		
+		// Fail
+		assertFalse("Blank usernames should not be set", CurrentUser.getName().equals(user.getName()) );
 	}
 }
