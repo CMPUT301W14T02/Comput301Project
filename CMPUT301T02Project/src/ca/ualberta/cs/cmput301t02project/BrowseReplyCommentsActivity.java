@@ -20,6 +20,7 @@ public class BrowseReplyCommentsActivity extends Activity implements OnItemSelec
 	//TODO: Refactor using new classes
 	//private CommentListModel replyList;
 	//private CommentListAdapter replyListAdapter;
+	//private CommentModel selectedComment;
 	
     private ListView replyCommentListView;
     private TextView selectedComment;
