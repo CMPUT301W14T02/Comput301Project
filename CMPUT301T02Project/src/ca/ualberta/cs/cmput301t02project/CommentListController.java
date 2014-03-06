@@ -2,10 +2,8 @@ package ca.ualberta.cs.cmput301t02project;
 
 import android.graphics.Bitmap;
 
-public class CommentListController {
+public class CommentListController extends CommentListControllerAbstraction {
 
-    private CommentListModel model;
-    
     public CommentListController(CommentListModel model) {
 	this.model = model;
     }
