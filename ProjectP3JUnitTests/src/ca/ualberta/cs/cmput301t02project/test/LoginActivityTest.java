@@ -32,7 +32,6 @@ public class LoginActivityTest extends ActivityInstrumentationTestCase2<LoginAct
 		User user = new User("");
 		CurrentUser.setName(user.getName());
 		
-		// Fail
 		assertFalse("Blank usernames should not be set", CurrentUser.getName().equals(user.getName()) );
 	}
 }

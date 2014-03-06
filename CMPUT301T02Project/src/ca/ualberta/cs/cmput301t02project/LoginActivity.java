@@ -6,8 +6,8 @@ import android.app.Activity;
 import android.content.Intent;
 import android.view.Menu;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 public class LoginActivity extends Activity {
 
@@ -15,26 +15,6 @@ public class LoginActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_login);
-		
-		// when user presses the login button goto MainActivity -SB
-		Button login = (Button) findViewById(R.id.login_button);
-		login.setOnClickListener(new View.OnClickListener() {
-		    @Override
-		    public void onClick(View v) {
-		    	
-		    	// set username -SB 
-		    	EditText userName = (EditText) findViewById(R.id.login_username);
-		    	
-		    	// find if user exists -SB
-		    	if (! UserList.findUser(userName.getText().toString())){
-		    		
-		    		// if user doesn't exist, create a user with that name -SB
-		    		UserList.createUser(userName.getText().toString());
-		    	}
-				
-				startActivity(new Intent(LoginActivity.this, MainMenuActivity.class));
-		    }
-		});
 	}
 
 	@Override
@@ -43,5 +23,41 @@ public class LoginActivity extends Activity {
 		getMenuInflater().inflate(R.menu.login, menu);
 		return true;
 	}
+	
+	// checks if a name is valid once login_button is pressed -SB
+	public void checkIfValid (View v) {
+    	
+		// message on screen -SB
+		TextView message = (TextView) findViewById(R.id.login_message);
+		
+		// read user input -SB 
+    	EditText enteredName = (EditText) findViewById(R.id.login_username);
+    	String username = enteredName.getText().toString();
+		
+    	// if blank username is provided ask user to try again -SB
+    	if (username.equals("")){
+    		
+    		message.setText("Enter valid username");
+    	}
+    	else {
+    		
+    		// reset message -SB
+    		message.setText("Login Page");
+    		setUsername(username);
+    		
+    		// go to the main menu once user is set -SB
+    		startActivity(new Intent(LoginActivity.this, MainMenuActivity.class));
 
+    	}
+	}
+	
+	// set the username for the user -SB
+	public void setUsername (String username) {
+		
+		if (! UserList.findUser(username)){
+    		
+    		// if user doesn't exist, create a user with that name -SB
+    		UserList.createUser(username);
+    	}
+	}
 }
