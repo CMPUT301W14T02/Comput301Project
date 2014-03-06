@@ -1,7 +1,7 @@
-package controller;
+package ca.ualberta.cs.cmput301t02project.controller;
 
-import model.CommentListModel;
-import model.LocationModel;
+import ca.ualberta.cs.cmput301t02project.model.CommentListModel;
+import ca.ualberta.cs.cmput301t02project.model.LocationModel;
 import android.graphics.Bitmap;
 
 public class CommentListController extends CommentListControllerAbstraction {

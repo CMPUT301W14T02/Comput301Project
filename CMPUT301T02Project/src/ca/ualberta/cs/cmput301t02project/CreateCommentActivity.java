@@ -2,8 +2,9 @@ package ca.ualberta.cs.cmput301t02project;
 
 import java.util.ArrayList;
 
-import model.CommentModel;
-import model.LocationModel;
+import ca.ualberta.cs.cmput301t02project.model.CommentModel;
+import ca.ualberta.cs.cmput301t02project.model.LocationModel;
+
 
 import android.app.Activity;
 import android.content.Context;

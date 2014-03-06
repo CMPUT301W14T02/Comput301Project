@@ -1,8 +1,9 @@
-package view;
+package ca.ualberta.cs.cmput301t02project.view;
 
 import java.util.ArrayList;
 
-import model.CommentModel;
+import ca.ualberta.cs.cmput301t02project.model.CommentModel;
+
 import android.content.Context;
 import android.widget.ArrayAdapter;
 
