@@ -22,7 +22,7 @@ public class CreateCommentActivity extends Activity {
     // private CommentsListController commentsListController;
     // private MyCommentsController myCommentsListController;
     
-    Location currentLocation;
+    private Location currentLocation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +30,8 @@ public class CreateCommentActivity extends Activity {
 	setContentView(R.layout.activity_create_comment);
 
 	Button post = (Button) findViewById(R.id.create_post);
+	String loc = "No location yet";
+	currentLocation = new Location(loc);
 	
 	// Retrieve location manager
 	LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
@@ -44,21 +46,14 @@ public class CreateCommentActivity extends Activity {
 
 		EditText inputComment = (EditText) findViewById(R.id.create_text);
 
-		/*
-		 * I'm don't think that this is supposed to go here (I think we
-		 * said CommentListController), but since the new CommentModel
-		 * creation is happening here, I'm gonna put it here for now and
-		 * move it into the correct file later on -KW
-		 */
-
-		String receivedCoor = "Location is null";
-		if (currentLocation != null) { // for testing only, since we don't have to
-				   // display lat/long -KW
+		String receivedCoor = "No Location Avaliable"; 
+		if (currentLocation != null) { // for testing only, remove later -KW
+				
 		    double lat = currentLocation.getLatitude();
 		    String strLat = String.valueOf(lat);
 		    double lon = currentLocation.getLongitude();
 		    String strLon = String.valueOf(lon);
-		    receivedCoor = "Recieved Location";
+		    receivedCoor = strLat.toString()+strLon.toString();
 
 		}
 
