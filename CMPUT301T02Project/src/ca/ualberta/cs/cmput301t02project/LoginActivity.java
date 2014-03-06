@@ -31,38 +31,42 @@ public class LoginActivity extends Activity {
     	EditText enteredName = (EditText) findViewById(R.id.login_username);
     	
     	// test if the input is allowed -SB
-    	checkIfValid(enteredName.getText().toString());	
+    	setUsername(enteredName.getText().toString());	
+	}
+	
+	public boolean checkIfValid (String username){
+		if (username.equals("")){
+			return false;
+		}
+
+		return true;
 	}
 	
 	// checks if a name passed in is valid -SB
-	public void checkIfValid (String username) {
+	public void setUsername (String username) {
 
 		// message on screen -SB
 		TextView message = (TextView) findViewById(R.id.login_message);
 		
-    	// if blank username is provided ask user to try again -SB
-    	if (username.equals("")){
-    		
-    		message.setText("Please enter a valid username");
-    	}
-    	else {
-    		
+    	// if valid username set it -SB
+    	if (checkIfValid(username)){
+
     		// reset message -SB
     		message.setText("Login Page");
-    		setUsername(username);
+    		
+    		if (! UserList.findUser(username)){
+        		
+        		// if user doesn't exist, create a user with that name -SB
+        		UserList.createUser(username);
+        	}
     		
     		// go to the main menu once user is set -SB
     		startActivity(new Intent(LoginActivity.this, MainMenuActivity.class));
     	}
-	}
-
-	// set the username for the user -SB
-	public void setUsername (String username) {
-		
-		if (! UserList.findUser(username)){
-    		
-    		// if user doesn't exist, create a user with that name -SB
-    		UserList.createUser(username);
+    	
+    	// if invalid username is provided ask user to try again -SB
+    	else {
+    		message.setText("Please enter a valid username");
     	}
 	}
 }

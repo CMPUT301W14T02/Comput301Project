@@ -2,7 +2,7 @@ package ca.ualberta.cs.cmput301t02project;
 
 public class CurrentUser{
 
-	private static User currentUser = new User("");
+	private static User currentUser = new User("default");
 	
 	public CurrentUser(String name) {
 		// TODO Auto-generated constructor stub
