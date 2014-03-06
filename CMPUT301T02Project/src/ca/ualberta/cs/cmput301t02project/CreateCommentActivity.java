@@ -13,6 +13,10 @@ import android.widget.EditText;
 
 public class CreateCommentActivity extends Activity {
 
+	//TODO: Refactor with new classes
+	//private CommentsListController commentsListController;
+	//private MyCommentsController myCommentsListController;
+	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 	super.onCreate(savedInstanceState);

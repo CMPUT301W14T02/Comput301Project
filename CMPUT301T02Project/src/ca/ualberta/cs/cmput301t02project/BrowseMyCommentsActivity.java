@@ -8,8 +8,8 @@ import android.widget.AdapterView.OnItemSelectedListener;
 public class BrowseMyCommentsActivity extends Activity implements
 		OnItemSelectedListener {
 
-	//private CommentListModel myCommentList;
-	//private MyCommentsAdapter myCommentListAdapter;
+	//private CommentListModel myCommentsList;
+	//private MyCommentsAdapter myCommentsListAdapter;
 	
 	@Override
 	public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2,
