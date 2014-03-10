@@ -13,4 +13,11 @@ public class CommentListAdapter extends ArrayAdapter<CommentModel> {
 			ArrayList<CommentModel> model) {
 		super(context, resource, model);
 	}
+
+	public void sortByLocation() {
+		//CreateCommentActivity.onCreate(Bundle);
+		//CreateCommentActivity.getCurrentLocation();
+
+	}
+
 }

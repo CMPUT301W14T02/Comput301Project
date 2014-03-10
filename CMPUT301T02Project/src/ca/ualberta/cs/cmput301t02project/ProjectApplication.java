@@ -1,5 +1,6 @@
 package ca.ualberta.cs.cmput301t02project;
 
+import android.location.Location;
 import ca.ualberta.cs.cmput301t02project.model.CommentListModel;
 import ca.ualberta.cs.cmput301t02project.model.CommentModel;
 
@@ -9,6 +10,7 @@ public class ProjectApplication {
 	private static CommentListModel commentList;
 	private static CommentListModel currentCommentList;
 	private static CommentModel currentComment;
+	private static Location currentLocation;
 
 	public static CommentListModel getCommentList() {
 		if (commentList == null) {
@@ -38,6 +40,14 @@ public class ProjectApplication {
 
 	public static void setCurrentComment(CommentModel currentComment) {
 		ProjectApplication.currentComment = currentComment;
+	}
+
+	public static Location getCurrentLocation() {
+		return currentLocation;
+	}
+
+	public static void setCurrentLocation(Location currentLocation) {
+		ProjectApplication.currentLocation = currentLocation;
 	}
 
 }

@@ -1,11 +1,13 @@
 package ca.ualberta.cs.cmput301t02project.view;
 
 import ca.ualberta.cs.cmput301t02project.CurrentUser;
+import ca.ualberta.cs.cmput301t02project.ProjectApplication;
 import ca.ualberta.cs.cmput301t02project.R;
 import ca.ualberta.cs.cmput301t02project.R.id;
 import ca.ualberta.cs.cmput301t02project.R.layout;
 import ca.ualberta.cs.cmput301t02project.R.menu;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -14,9 +16,11 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 
 public class MainMenuActivity extends Activity {
-
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -43,7 +47,56 @@ public class MainMenuActivity extends Activity {
 						BrowseTopLevelCommentsActivity.class));
 			}
 		});
+		
+		
+		
+		String loc = "No location yet";
+		currentLocation = new Location(loc);
+
+		// Retrieve location manager
+		LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+
+		// Requests location from provider
+		locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0,
+				0, locationListener);
+
+		
 	}
+		
+		// Retrieve location updates through LocationListener interface
+		private final LocationListener locationListener = new LocationListener() {
+
+			// TODO: override the four methods.
+			@Override
+			public void onLocationChanged(Location location) {
+
+				if (location != null) {
+					ProjectApplication.setCurrentLocation(location);
+
+				} else {
+					// do something later here
+				}
+			}
+
+			@Override
+			public void onProviderDisabled(String provider) {
+
+				// TODO
+			}
+
+			@Override
+			public void onProviderEnabled(String provider) {
+
+				// TODO
+			}
+
+			@Override
+			public void onStatusChanged(String provider, int status, Bundle extras) {
+
+				// TODO
+			}
+		};
+	
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {

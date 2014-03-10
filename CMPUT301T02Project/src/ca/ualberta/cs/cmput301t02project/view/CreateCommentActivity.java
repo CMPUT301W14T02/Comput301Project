@@ -23,15 +23,16 @@ public class CreateCommentActivity extends Activity {
 
 	private Location currentLocation;
 
-	public Location getCurrentLocation() {
-		return currentLocation;
-	}
-
-	public void setCurrentLocation(double lat, double lon) {
+	public void setCustomCurrentLocation(double lat, double lon) {
 		currentLocation.setLatitude(lat);
 		currentLocation.setLongitude(lon);
 	}
+	
+	public void setActualCurrentLocation(Location location) {
+		currentLocation = location;
+	}
 
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
