@@ -21,6 +21,27 @@ public class CommentListAdapter extends ArrayAdapter<CommentModel> {
 		String loc = "Location Initialization";
 		Location currentLocation = new Location(loc);
 		currentLocation = ProjectApplication.getCurrentLocation();
+		Context context = this.getContext();
+		
+		//initialize a new array to use for sorting 
+		ArrayList<CommentModel> copyList = new ArrayList();
+		//initialize an empty array to put sorted i
+		ArrayList<CommentModel> partialList;
+		
+		int adapterLen = this.getCount();
+		//clear original array, since will be replacing with sorted array
+		this.clear(); 
+		
+		
+		 for(int i=0; i<adapterLen; i++){
+			 CommentModel item = this.getItem(i);
+             copyList.add(item);
+        }
+		
+		
+		
+		
+		
 
 	}
 	
