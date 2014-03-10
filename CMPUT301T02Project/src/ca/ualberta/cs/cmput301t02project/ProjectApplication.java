@@ -43,6 +43,10 @@ public class ProjectApplication {
 	}
 
 	public static Location getCurrentLocation() {
+		if (currentLocation==null) {
+			String loc = "No location yet";
+			currentLocation = new Location(loc);
+		}
 		return currentLocation;
 	}
 
@@ -52,7 +56,7 @@ public class ProjectApplication {
 			currentLocation = new Location(loc);
 		}
 		
-		double d = currentLocation.getLongitude();
+		double d = location.getLongitude();
 		ProjectApplication.currentLocation = location;
 	}
 

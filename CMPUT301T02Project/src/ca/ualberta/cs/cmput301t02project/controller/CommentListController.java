@@ -18,8 +18,8 @@ public class CommentListController extends CommentListControllerAbstraction {
 		String loc = "Initialize location";
 		Location cLocation = new Location(loc);
 		cLocation = ProjectApplication.getCurrentLocation();
-		//double lon = cLocation.getLongitude();
-		//String test =  String.valueOf(lon);;
+		double lon = cLocation.getLongitude();
+		String test =  String.valueOf(lon);
 		model.add(new CommentModel(text, picture, location, username));
 	}
 }

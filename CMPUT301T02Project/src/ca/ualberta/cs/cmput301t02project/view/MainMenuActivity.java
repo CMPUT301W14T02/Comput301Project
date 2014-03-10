@@ -74,7 +74,6 @@ public class MainMenuActivity extends Activity {
 
 				if (location != null) {
 					currentLocation = location;
-					double d = currentLocation.getLongitude();
 					ProjectApplication.setCurrentLocation(currentLocation);
 
 				} else {

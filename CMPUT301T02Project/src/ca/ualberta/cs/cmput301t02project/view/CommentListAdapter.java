@@ -23,6 +23,8 @@ public class CommentListAdapter extends ArrayAdapter<CommentModel> {
 		currentLocation = ProjectApplication.getCurrentLocation();
 
 	}
+	
+	
 	//Adapted from http://stackoverflow.com/a/8424557 and 
 	public void sortByDate() {
 	
