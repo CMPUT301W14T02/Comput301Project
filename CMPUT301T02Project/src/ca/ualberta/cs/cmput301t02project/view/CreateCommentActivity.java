@@ -24,7 +24,12 @@ public class CreateCommentActivity extends Activity {
 	private Location currentLocation;
 
 	public Location getCurrentLocation() {
-	    return currentLocation;
+		return currentLocation;
+	}
+
+	public void setCurrentLocation(double lat, double lon) {
+		currentLocation.setLatitude(lat);
+		currentLocation.setLongitude(lon);
 	}
 
 	@Override
@@ -50,13 +55,14 @@ public class CreateCommentActivity extends Activity {
 			public void onClick(View v) {
 
 				EditText inputComment = (EditText) findViewById(R.id.create_text);
-				
+
 				// Refactor into MVC?
 				// Username is temporarily in front of the comment. Can redesign
 				// later -SB
-				
-				commentListController.addNewComment(inputComment.getText().toString(), null, null,
-						CurrentUser.getName().toString());
+
+				commentListController.addNewComment(inputComment.getText()
+						.toString(), null, null, CurrentUser.getName()
+						.toString());
 				finish();
 			}
 		});
