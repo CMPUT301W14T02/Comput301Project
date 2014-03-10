@@ -1,46 +1,43 @@
 package ca.ualberta.cs.cmput301t02project;
 
-import java.util.ArrayList;
-
+import ca.ualberta.cs.cmput301t02project.model.CommentListModel;
 import ca.ualberta.cs.cmput301t02project.model.CommentModel;
-
-
-import android.app.Application;
 
 public class ProjectApplication {
 
-    // Singleton
-    private static ArrayList<CommentModel> commentList;
-    private static ArrayList<CommentModel> currentCommentList;
-    private static CommentModel currentComment;
+	// Singleton
+	private static CommentListModel commentList;
+	private static CommentListModel currentCommentList;
+	private static CommentModel currentComment;
 
-    public static ArrayList<CommentModel> getCommentList() {
-    	if (commentList == null) {
-    		commentList = new ArrayList<CommentModel>();
-    	}
-    	return commentList;
-    }
+	public static CommentListModel getCommentList() {
+		if (commentList == null) {
+			commentList = new CommentListModel();
+		}
+		return commentList;
+	}
 
-    public static void setCurrentCommentList(ArrayList<CommentModel> currentCommentList) {
-    	ProjectApplication.currentCommentList = currentCommentList;
-    }
+	public static void setCurrentCommentList(
+			CommentListModel currentCommentList) {
+		ProjectApplication.currentCommentList = currentCommentList;
+	}
 
-    public static ArrayList<CommentModel> getCurrentCommentList() {
+	public static CommentListModel getCurrentCommentList() {
 
-    	if (currentCommentList == null) { 
-		
-    		//Creating before browsing comments.
-    		currentCommentList = ProjectApplication.getCommentList();
-    	}
+		if (currentCommentList == null) {
+
+			// Creating before browsing comments.
+			currentCommentList = ProjectApplication.getCommentList();
+		}
 		return currentCommentList;
-    }
+	}
 
-    public static CommentModel getCurrentComment() {
-    	return currentComment;
-    }
+	public static CommentModel getCurrentComment() {
+		return currentComment;
+	}
 
-    public static void setCurrentComment(CommentModel currentComment) {
-    	ProjectApplication.currentComment = currentComment;
-    }
+	public static void setCurrentComment(CommentModel currentComment) {
+		ProjectApplication.currentComment = currentComment;
+	}
 
 }

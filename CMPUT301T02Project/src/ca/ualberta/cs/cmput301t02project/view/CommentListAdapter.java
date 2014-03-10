@@ -9,7 +9,8 @@ import android.widget.ArrayAdapter;
 
 public class CommentListAdapter extends ArrayAdapter<CommentModel> {
 
-    public CommentListAdapter(Context context, int resource, ArrayList<CommentModel> model) {
-	super(context, resource, model);
-    }
+	public CommentListAdapter(Context context, int resource,
+			ArrayList<CommentModel> model) {
+		super(context, resource, model);
+	}
 }
