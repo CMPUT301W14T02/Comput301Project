@@ -1,6 +1,7 @@
 package ca.ualberta.cs.cmput301t02project.view;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 
 import ca.ualberta.cs.cmput301t02project.ProjectApplication;
 import ca.ualberta.cs.cmput301t02project.model.CommentModel;
@@ -22,5 +23,21 @@ public class CommentListAdapter extends ArrayAdapter<CommentModel> {
 		currentLocation = ProjectApplication.getCurrentLocation();
 
 	}
+	//Adapted from http://stackoverflow.com/a/8424557 and 
+	public void sortByDate() {
+	
+		this.sort(new Comparator<CommentModel>() {
+			public int compare(CommentModel a, CommentModel b) {
+				if (a.getDate().before(b.getDate())) {
+					return -1;
+				} else if (a.getDate().after(b.getDate())) {
+					return 1;
+				} else {
+					return 0;
+				}
+			}
+		});
+	}
+	
 
 }
