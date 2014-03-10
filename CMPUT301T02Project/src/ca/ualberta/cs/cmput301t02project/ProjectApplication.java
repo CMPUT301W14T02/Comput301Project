@@ -52,6 +52,7 @@ public class ProjectApplication {
 			currentLocation = new Location(loc);
 		}
 		
+		double d = currentLocation.getLongitude();
 		ProjectApplication.currentLocation = location;
 	}
 
