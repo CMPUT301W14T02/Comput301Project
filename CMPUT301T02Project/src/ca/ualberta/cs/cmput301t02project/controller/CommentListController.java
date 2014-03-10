@@ -15,11 +15,14 @@ public class CommentListController extends CommentListControllerAbstraction {
 
 	public void addNewComment(String text, Bitmap picture,
 			LocationModel location, String username) {
+		
 		String loc = "Initialize location";
-		Location cLocation = new Location(loc);
-		cLocation = ProjectApplication.getCurrentLocation();
-		double lon = cLocation.getLongitude();
-		String test =  String.valueOf(lon);
+		Location currentLocation = new Location(loc);
+		currentLocation = ProjectApplication.getCurrentLocation();
+		double lon = currentLocation.getLongitude();
+		double lat = currentLocation.getLatitude();
+		String test =  String.valueOf(lat) + String.valueOf(lon);
+		
 		model.add(new CommentModel(text, picture, location, username));
 	}
 }

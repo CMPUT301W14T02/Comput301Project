@@ -18,7 +18,7 @@ public class CommentListAdapter extends ArrayAdapter<CommentModel> {
 	}
 
 	public void sortByLocation() {
-		String loc = "Initializing location";
+		String loc = "Location Initialization";
 		Location currentLocation = new Location(loc);
 		currentLocation = ProjectApplication.getCurrentLocation();
 
