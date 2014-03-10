@@ -23,6 +23,10 @@ public class CreateCommentActivity extends Activity {
 
 	private Location currentLocation;
 
+	public Location getCurrentLocation() {
+	    return currentLocation;
+	}
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -46,25 +50,12 @@ public class CreateCommentActivity extends Activity {
 			public void onClick(View v) {
 
 				EditText inputComment = (EditText) findViewById(R.id.create_text);
-
-				String receivedCoor = "No Location Avaliable";
-				if (currentLocation != null) { // for testing only, remove later
-												// -KW
-
-					double lat = currentLocation.getLatitude();
-					String strLat = String.valueOf(lat);
-					double lon = currentLocation.getLongitude();
-					String strLon = String.valueOf(lon);
-					receivedCoor = strLat.toString() + strLon.toString();
-
-				}
-
+				
 				// Refactor into MVC?
 				// Username is temporarily in front of the comment. Can redesign
 				// later -SB
 				
-				commentListController.addNewComment(receivedCoor + ": "
-						+ inputComment.getText().toString(), null, null,
+				commentListController.addNewComment(inputComment.getText().toString(), null, null,
 						CurrentUser.getName().toString());
 				finish();
 			}
