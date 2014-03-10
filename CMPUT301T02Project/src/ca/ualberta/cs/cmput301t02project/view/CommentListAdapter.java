@@ -17,25 +17,36 @@ public class CommentListAdapter extends ArrayAdapter<CommentModel> {
 		super(context, resource, model);
 	}
 
-	public void sortByLocation() {
+	public void sortByLocation() throws CloneNotSupportedException {
 		String loc = "Location Initialization";
 		Location currentLocation = new Location(loc);
 		currentLocation = ProjectApplication.getCurrentLocation();
-		Context context = this.getContext();
 		
-		//initialize a new array to use for sorting 
-		ArrayList<CommentModel> copyList = new ArrayList();
-		//initialize an empty array to put sorted i
-		ArrayList<CommentModel> partialList;
+		// will hold the remaining unsorted CommentModels
+		ArrayAdapter<CommentModel> copyAdapter = (CommentListAdapter) this.clone();
+		// holds the sorted CommentModels to be passed to sortByLocation
+		Object partialAdapter = (CommentListAdapter) this.clone();
 		
 		int adapterLen = this.getCount();
 		//clear original array, since will be replacing with sorted array
 		this.clear(); 
 		
+		double currentLon = currentLocation.getLongitude();
+		double currentLat = currentLocation.getLatitude(); 
+		double commentLon, commentLat;
+		float[] results;
+		String ini = "Initialize Location";
+        Location commentLocation = new Location(ini);
 		
 		 for(int i=0; i<adapterLen; i++){
-			 CommentModel item = this.getItem(i);
-             copyList.add(item);
+			 CommentModel item = copyAdapter.getItem(i);
+			 /*
+			 commentLocation = item.getLocation(); // if change from LocationModel to Location, this will work -KW
+			 commentLat = commentLocation.getLatitude();
+			 commentLon = commentLocation.getLongitude();
+			 Location.distanceBetween(commentLat, commentLon, currentLat, currentLon, results);
+			 */
+			 
         }
 		
 		
