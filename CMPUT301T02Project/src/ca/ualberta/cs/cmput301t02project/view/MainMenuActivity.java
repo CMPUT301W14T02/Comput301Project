@@ -21,6 +21,8 @@ import android.location.LocationManager;
 
 public class MainMenuActivity extends Activity {
 	
+	private Location currentLocation;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -71,7 +73,8 @@ public class MainMenuActivity extends Activity {
 			public void onLocationChanged(Location location) {
 
 				if (location != null) {
-					ProjectApplication.setCurrentLocation(location);
+					currentLocation = location;
+					ProjectApplication.setCurrentLocation(currentLocation);
 
 				} else {
 					// do something later here

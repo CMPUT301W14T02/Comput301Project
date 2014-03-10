@@ -46,8 +46,13 @@ public class ProjectApplication {
 		return currentLocation;
 	}
 
-	public static void setCurrentLocation(Location currentLocation) {
-		ProjectApplication.currentLocation = currentLocation;
+	public static void setCurrentLocation(Location location) {
+		if (currentLocation==null) {
+			String loc = "No location yet";
+			currentLocation = new Location(loc);
+		}
+		
+		ProjectApplication.currentLocation = location;
 	}
 
 }

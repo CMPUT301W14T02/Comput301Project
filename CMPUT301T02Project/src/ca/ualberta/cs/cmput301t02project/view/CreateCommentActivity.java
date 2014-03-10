@@ -21,18 +21,15 @@ public class CreateCommentActivity extends Activity {
 	private CommentListController commentListController;
 	// private MyCommentsController myCommentsListController;
 
+	
+	//Likely will not need this attribute. Will know when write code for custom location. -KW
 	private Location currentLocation;
 
 	public void setCustomCurrentLocation(double lat, double lon) {
 		currentLocation.setLatitude(lat);
 		currentLocation.setLongitude(lon);
 	}
-	
-	public void setActualCurrentLocation(Location location) {
-		currentLocation = location;
-	}
-
-	
+		
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -43,13 +40,6 @@ public class CreateCommentActivity extends Activity {
 		Button post = (Button) findViewById(R.id.create_post);
 		String loc = "No location yet";
 		currentLocation = new Location(loc);
-
-		// Retrieve location manager
-		LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-
-		// Requests location from provider
-		locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0,
-				0, locationListener);
 
 		post.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -69,40 +59,6 @@ public class CreateCommentActivity extends Activity {
 		});
 
 	}
-
-	// Retrieve location updates through LocationListener interface
-	private final LocationListener locationListener = new LocationListener() {
-
-		// TODO: override the four methods.
-		@Override
-		public void onLocationChanged(Location location) {
-
-			if (location != null) {
-				currentLocation = location;
-
-			} else {
-				// do something later here
-			}
-		}
-
-		@Override
-		public void onProviderDisabled(String provider) {
-
-			// TODO
-		}
-
-		@Override
-		public void onProviderEnabled(String provider) {
-
-			// TODO
-		}
-
-		@Override
-		public void onStatusChanged(String provider, int status, Bundle extras) {
-
-			// TODO
-		}
-	};
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {

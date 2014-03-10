@@ -2,9 +2,11 @@ package ca.ualberta.cs.cmput301t02project.view;
 
 import java.util.ArrayList;
 
+import ca.ualberta.cs.cmput301t02project.ProjectApplication;
 import ca.ualberta.cs.cmput301t02project.model.CommentModel;
 
 import android.content.Context;
+import android.location.Location;
 import android.widget.ArrayAdapter;
 
 public class CommentListAdapter extends ArrayAdapter<CommentModel> {
@@ -15,8 +17,9 @@ public class CommentListAdapter extends ArrayAdapter<CommentModel> {
 	}
 
 	public void sortByLocation() {
-		//CreateCommentActivity.onCreate(Bundle);
-		//CreateCommentActivity.getCurrentLocation();
+		String loc = "Initializing location";
+		Location currentLocation = new Location(loc);
+		currentLocation = ProjectApplication.getCurrentLocation();
 
 	}
 
