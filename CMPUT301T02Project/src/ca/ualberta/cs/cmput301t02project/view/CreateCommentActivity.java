@@ -13,13 +13,12 @@ import android.widget.EditText;
 import ca.ualberta.cs.cmput301t02project.CurrentUser;
 import ca.ualberta.cs.cmput301t02project.ProjectApplication;
 import ca.ualberta.cs.cmput301t02project.R;
-import ca.ualberta.cs.cmput301t02project.model.CommentListModel;
-import ca.ualberta.cs.cmput301t02project.model.CommentModel;
+import ca.ualberta.cs.cmput301t02project.controller.CommentListController;
 
 public class CreateCommentActivity extends Activity {
 
 	// TODO: Refactor with new classes
-	// private CommentsListController commentsListController;
+	private CommentListController commentListController;
 	// private MyCommentsController myCommentsListController;
 
 	private Location currentLocation;
@@ -27,6 +26,8 @@ public class CreateCommentActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		commentListController = new CommentListController(
+				ProjectApplication.getCurrentCommentList());
 		setContentView(R.layout.activity_create_comment);
 
 		Button post = (Button) findViewById(R.id.create_post);
@@ -61,11 +62,10 @@ public class CreateCommentActivity extends Activity {
 				// Refactor into MVC?
 				// Username is temporarily in front of the comment. Can redesign
 				// later -SB
-
-				CommentListModel commentList = ProjectApplication
-						.getCurrentCommentList();
-				commentList.addNewComment(receivedCoor + ": " + inputComment.getText().toString(), CurrentUser
-						.getName().toString(), null, null);
+				
+				commentListController.addNewComment(receivedCoor + ": "
+						+ inputComment.getText().toString(), null, null,
+						CurrentUser.getName().toString());
 				finish();
 			}
 		});

@@ -2,11 +2,10 @@ package ca.ualberta.cs.cmput301t02project.model;
 
 import java.util.ArrayList;
 
-import android.graphics.Bitmap;
-
 public class CommentListModel {
 
 	private ArrayList<CommentModel> commentList;
+	//private CommentListAdapter adapter;
 
 	public CommentListModel() {
 		commentList = new ArrayList<CommentModel>();
@@ -20,12 +19,11 @@ public class CommentListModel {
 		this.commentList = commentList;
 	}
 
-	public void addNewComment(String text, String username,
-			LocationModel location, Bitmap picture) {
-		CommentModel comment = new CommentModel(text, picture, location,
-				username);
+	public void add(CommentModel comment) {
 		commentList.add(comment);
-		// push to server
+		//adapter.notifyDataSetChanged();
+		// TODO push comment to server
+
 	}
 
 }

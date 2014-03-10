@@ -1,8 +1,9 @@
 package ca.ualberta.cs.cmput301t02project.controller;
 
-import ca.ualberta.cs.cmput301t02project.model.CommentListModel;
-import ca.ualberta.cs.cmput301t02project.model.LocationModel;
 import android.graphics.Bitmap;
+import ca.ualberta.cs.cmput301t02project.model.CommentListModel;
+import ca.ualberta.cs.cmput301t02project.model.CommentModel;
+import ca.ualberta.cs.cmput301t02project.model.LocationModel;
 
 public class CommentListController extends CommentListControllerAbstraction {
 
@@ -10,8 +11,8 @@ public class CommentListController extends CommentListControllerAbstraction {
 		this.model = model;
 	}
 
-	public void addNewComment(String text, String username,
-			LocationModel location, Bitmap picture) {
-		model.addNewComment(text, username, location, picture);
+	public void addNewComment(String text, Bitmap picture,
+			LocationModel location, String username) {
+		model.add(new CommentModel(text, picture, location, username));
 	}
 }
