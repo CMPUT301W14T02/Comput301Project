@@ -18,9 +18,7 @@ import ca.ualberta.cs.cmput301t02project.R;
 import ca.ualberta.cs.cmput301t02project.model.CommentListModel;
 import ca.ualberta.cs.cmput301t02project.model.CommentModel;
 
-public class BrowseTopLevelCommentsActivity extends Activity implements
-
-OnItemSelectedListener {
+public class BrowseTopLevelCommentsActivity extends Activity implements OnItemSelectedListener {
 	// TODO: Refactor code to use new classes
 	// private CommentListModel commentList;
 	// private CommentListAdapter commentListAdapter;
@@ -52,60 +50,47 @@ OnItemSelectedListener {
 		sortBy.add("Ranking");
 
 		// Create adapter for spinner
-		ArrayAdapter<String> spinner_adapter = new ArrayAdapter<String>(this,
-				R.layout.list_item, sortBy);
+		ArrayAdapter<String> spinner_adapter = new ArrayAdapter<String>(this, R.layout.list_item, sortBy);
 
 		// Drop down layout style - list view with radio button
-		spinner_adapter
-				.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		spinner_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
 		// attach adapter to spinner
 		spinner.setAdapter(spinner_adapter);
 
-		CommentListModel topLevelCommentList = ProjectApplication
-				.getCommentList();
+		CommentListModel topLevelCommentList = ProjectApplication.getCommentList();
 
 		// Add comments to adapter
-		adapter = new ArrayAdapter<CommentModel>(this, R.layout.list_item,
-				topLevelCommentList.getCommentList());
+		adapter = new ArrayAdapter<CommentModel>(this, R.layout.list_item, topLevelCommentList.getCommentList());
 
 		// Display comments in adapter
 		topLevelCommentListView.setAdapter(adapter);
 
-		topLevelCommentListView
-				.setOnItemClickListener(new OnItemClickListener() {
-					@Override
-					public void onItemClick(AdapterView<?> l, View v,
-							int position, long id) {
-
-						// Refactor into MVC?
-						CommentModel nestedComment = (CommentModel) adapter
-								.getItem(position);
-						ProjectApplication.setCurrentComment(nestedComment);
-						CommentListModel nestedCommentList = nestedComment
-								.getReplies();
-						ProjectApplication
-								.setCurrentCommentList(nestedCommentList);
-						Intent goToReplyListActivity = new Intent(
-								getApplicationContext(),
-								BrowseReplyCommentsActivity.class);
-						startActivity(goToReplyListActivity);
-					}
-				});
+		topLevelCommentListView.setOnItemClickListener(new OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> l, View v, int position, long id) {
+				// Refactor into MVC?	
+				CommentModel nestedComment = (CommentModel) adapter.getItem(position);
+				ProjectApplication.setCurrentComment(nestedComment);
+				CommentListModel nestedCommentList = nestedComment.getReplies();
+				
+				ProjectApplication.setCurrentCommentList(nestedCommentList);
+				
+				Intent goToReplyListActivity = new Intent(getApplicationContext(),BrowseReplyCommentsActivity.class);
+				startActivity(goToReplyListActivity);
+			}
+		});
 	}
 
 	@Override
 	public void onResume() {
 		super.onResume();
-		ProjectApplication.setCurrentCommentList(ProjectApplication
-				.getCommentList());
+		ProjectApplication.setCurrentCommentList(ProjectApplication.getCommentList());
 
-		CommentListModel topLevelCommentList = ProjectApplication
-				.getCommentList();
+		CommentListModel topLevelCommentList = ProjectApplication.getCommentList();
 
 		// Add comments to adapter
-		adapter = new ArrayAdapter<CommentModel>(this, R.layout.list_item,
-				topLevelCommentList.getCommentList());
+		adapter = new ArrayAdapter<CommentModel>(this, R.layout.list_item, topLevelCommentList.getCommentList());
 
 		// Display comments in adapter
 		topLevelCommentListView.setAdapter(adapter);
