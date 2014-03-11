@@ -35,9 +35,15 @@ public class CommentModel {
 		this.replies = new CommentListModel();
 		this.date = new Date();
 	}
-
+	
+	
 	public Date getDate() {
 		return date;
+	}
+	
+	// Added for testing- TH
+	public void setDate(Date date) {
+		this.date = date;
 	}
 
 	public LocationModel getLocation() {

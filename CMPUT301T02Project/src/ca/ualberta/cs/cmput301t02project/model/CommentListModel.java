@@ -3,6 +3,8 @@ package ca.ualberta.cs.cmput301t02project.model;
 import java.util.ArrayList;
 
 public class CommentListModel {
+	
+	private StorageModel store = new StorageModel();
 
 	private ArrayList<CommentModel> commentList;
 	//private CommentListAdapter adapter;
@@ -19,7 +21,7 @@ public class CommentListModel {
 		this.commentList = commentList;
 	}
 
-	public void add(CommentModel comment) {
+	public void add(CommentModel comment) {		
 		commentList.add(comment);
 		//adapter.notifyDataSetChanged();
 		// TODO push comment to server
