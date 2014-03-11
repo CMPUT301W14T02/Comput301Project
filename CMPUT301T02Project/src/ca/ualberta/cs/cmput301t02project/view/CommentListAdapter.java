@@ -55,7 +55,21 @@ public class CommentListAdapter extends ArrayAdapter<CommentModel> {
 		
 
 	}
-	
+	/* Check this implementation of location sort.
+	//Adapted from http://stackoverflow.com/a/6927640
+	public void sortByLocation() {
+		String loc = "Location Initialization";
+		Location myLocation = new Location(loc);
+		myLocation = ProjectApplication.getCurrentLocation();
+		this.sort(new Comparator<CommentModel>() {
+			public int compare(CommentModel a, CommentModel b) {
+				Float dist1 = a.getLocation().distanceTo(myLocation);
+				Float dist2 = a.getLocation().distanceTo(myLocation);
+				return dist1.compareTo(dist2);
+			}
+		}
+	}
+	*/
 	
 	//Adapted from http://stackoverflow.com/a/8424557 and 
 	public void sortByDate() {
