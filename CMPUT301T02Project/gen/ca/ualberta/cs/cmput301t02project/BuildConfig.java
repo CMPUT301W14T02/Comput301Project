@@ -2,5 +2,5 @@
 package ca.ualberta.cs.cmput301t02project;
 
 public final class BuildConfig {
-	public final static boolean DEBUG = true;
+    public final static boolean DEBUG = true;
 }
