@@ -3,6 +3,7 @@ package ca.ualberta.cs.cmput301t02project.view;
 import ca.ualberta.cs.cmput301t02project.CurrentUser;
 import ca.ualberta.cs.cmput301t02project.ProjectApplication;
 import ca.ualberta.cs.cmput301t02project.R;
+import ca.ualberta.cs.cmput301t02project.controller.CommentListController;
 import ca.ualberta.cs.cmput301t02project.controller.MyCommentListController;
 import android.app.Activity;
 import android.location.Location;
@@ -15,6 +16,7 @@ import android.widget.EditText;
 public class EditCommentActivity extends Activity {
 
 		private MyCommentListController myCommentsListController;
+		private CommentListController commentListController;
 
 		
 		//Likely will not need this attribute. Will know when write code for custom location. -KW
@@ -28,9 +30,11 @@ public class EditCommentActivity extends Activity {
 		@Override
 		protected void onCreate(Bundle savedInstanceState) {
 			super.onCreate(savedInstanceState);
-			myCommentsListController = new MyCommentListController(
-					ProjectApplication.getMyCommentList());
+			myCommentsListController = new MyCommentListController(ProjectApplication.getMyCommentList());
+			commentListController = new CommentListController(ProjectApplication.getCommentList());
 			setContentView(R.layout.activity_edit_comment);
+			EditText inputComment = (EditText) findViewById(R.id.edit_text);
+			inputComment.setText(ProjectApplication.getCurrentComment().getText());
 
 			Button post = (Button) findViewById(R.id.edit_post);
 			String loc = "No location yet";
@@ -39,16 +43,14 @@ public class EditCommentActivity extends Activity {
 			post.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-
 					EditText inputComment = (EditText) findViewById(R.id.edit_text);
-					inputComment.setText(ProjectApplication.getCurrentComment().getText());
-
 					// Refactor into MVC?
 					// Username is temporarily in front of the comment. Can redesign
 					// later -SB
 
 					myCommentsListController.changeText(ProjectApplication.getCurrentComment(), inputComment.getText()
 							.toString());
+					
 					finish();
 				}
 			});
