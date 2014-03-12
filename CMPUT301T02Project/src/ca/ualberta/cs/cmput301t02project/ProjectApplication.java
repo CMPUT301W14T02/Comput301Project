@@ -11,12 +11,20 @@ public class ProjectApplication {
 	private static CommentListModel currentCommentList;
 	private static CommentModel currentComment;
 	private static Location currentLocation;
+	private static CommentListModel myCommentList;
 
 	public static CommentListModel getCommentList() {
 		if (commentList == null) {
 			commentList = new CommentListModel();
 		}
 		return commentList;
+	}
+	
+	public static CommentListModel getMyCommentList() {
+		if (myCommentList == null) {
+			myCommentList = new CommentListModel();
+		}
+		return myCommentList;
 	}
 
 	public static void setCurrentCommentList(

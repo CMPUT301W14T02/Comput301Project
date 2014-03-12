@@ -14,12 +14,13 @@ import ca.ualberta.cs.cmput301t02project.CurrentUser;
 import ca.ualberta.cs.cmput301t02project.ProjectApplication;
 import ca.ualberta.cs.cmput301t02project.R;
 import ca.ualberta.cs.cmput301t02project.controller.CommentListController;
+import ca.ualberta.cs.cmput301t02project.controller.MyCommentListController;
 
 public class CreateCommentActivity extends Activity {
 
 	// TODO: Refactor with new classes
 	private CommentListController commentListController;
-	// private MyCommentsController myCommentsListController;
+	private MyCommentListController myCommentsListController;
 
 	
 	//Likely will not need this attribute. Will know when write code for custom location. -KW
@@ -35,6 +36,8 @@ public class CreateCommentActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		commentListController = new CommentListController(
 				ProjectApplication.getCurrentCommentList());
+		myCommentsListController = new MyCommentListController(
+				ProjectApplication.getMyCommentList());
 		setContentView(R.layout.activity_create_comment);
 
 		Button post = (Button) findViewById(R.id.create_post);
@@ -52,6 +55,9 @@ public class CreateCommentActivity extends Activity {
 				// later -SB
 
 				commentListController.addNewComment(inputComment.getText()
+						.toString(), null, null, CurrentUser.getName()
+						.toString());
+				myCommentsListController.addNewComment(inputComment.getText()
 						.toString(), null, null, CurrentUser.getName()
 						.toString());
 				finish();

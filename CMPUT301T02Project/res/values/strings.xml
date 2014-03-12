@@ -19,6 +19,7 @@
     <string name="welcome_message">Welcome!</string>
     <string name="favorites">Favorites</string>
     <string name="my_comments">My Comments</string>
+    <string name="edit_comment">Edit Comment</string>
      
 
 </resources>
