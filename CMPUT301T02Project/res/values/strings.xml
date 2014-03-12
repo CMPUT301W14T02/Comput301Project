@@ -20,6 +20,8 @@
     <string name="favorites">Favorites</string>
     <string name="my_comments">My Comments</string>
     <string name="edit_comment">Edit Comment</string>
+    <string name="title_activity_my_comments_list">MyCommentsActivity</string>
+    <string name="title_activity_edit_comment">EditCommentActivity</string>
      
 
 </resources>

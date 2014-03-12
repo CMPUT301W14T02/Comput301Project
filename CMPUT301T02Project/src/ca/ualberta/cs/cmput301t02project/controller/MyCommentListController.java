@@ -25,4 +25,8 @@ public class MyCommentListController extends CommentListControllerAbstraction {
 		
 		model.add(new CommentModel(text, picture, location, username));
 	}
+	
+	public void changeText(CommentModel model, String text) {
+		model.setText(text);
+	}
 }

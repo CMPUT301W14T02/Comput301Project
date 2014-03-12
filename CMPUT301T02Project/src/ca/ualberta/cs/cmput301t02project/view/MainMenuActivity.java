@@ -50,6 +50,15 @@ public class MainMenuActivity extends Activity {
 			}
 		});
 		
+		Button browseMyComments = (Button) findViewById(R.id.my_comments);
+		browseMyComments.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				startActivity(new Intent(MainMenuActivity.this,
+						BrowseMyCommentsActivity.class));
+			}
+		});
+		
 		
 		
 		String loc = "Location Intialization";

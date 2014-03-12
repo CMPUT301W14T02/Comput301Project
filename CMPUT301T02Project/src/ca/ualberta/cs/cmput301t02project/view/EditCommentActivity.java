@@ -3,7 +3,6 @@ package ca.ualberta.cs.cmput301t02project.view;
 import ca.ualberta.cs.cmput301t02project.CurrentUser;
 import ca.ualberta.cs.cmput301t02project.ProjectApplication;
 import ca.ualberta.cs.cmput301t02project.R;
-import ca.ualberta.cs.cmput301t02project.controller.CommentListController;
 import ca.ualberta.cs.cmput301t02project.controller.MyCommentListController;
 import android.app.Activity;
 import android.location.Location;
@@ -42,13 +41,13 @@ public class EditCommentActivity extends Activity {
 				public void onClick(View v) {
 
 					EditText inputComment = (EditText) findViewById(R.id.edit_text);
+					inputComment.setText(ProjectApplication.getCurrentComment().getText());
 
 					// Refactor into MVC?
 					// Username is temporarily in front of the comment. Can redesign
 					// later -SB
 
-					myCommentsListController.addNewComment(inputComment.getText()
-							.toString(), null, null, CurrentUser.getName()
+					myCommentsListController.changeText(ProjectApplication.getCurrentComment(), inputComment.getText()
 							.toString());
 					finish();
 				}

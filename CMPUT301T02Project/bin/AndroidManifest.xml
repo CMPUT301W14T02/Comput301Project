@@ -43,6 +43,14 @@
             android:name="ca.ualberta.cs.cmput301t02project.view.CreateCommentActivity"
             android:label="@string/title_activity_create_comment" >
         </activity>
+        <activity
+            android:name="ca.ualberta.cs.cmput301t02project.view.BrowseMyCommentsActivity"
+            android:label="@string/title_activity_my_comments_list" >
+        </activity>
+        <activity
+            android:name="ca.ualberta.cs.cmput301t02project.view.EditCommentActivity"
+            android:label="@string/title_activity_edit_comment" >
+        </activity>
     </application>
 
 </manifest>
