@@ -52,7 +52,7 @@ public class CreateCommentActivity extends Activity {
 				// later -SB
 				CommentModel comment;
 				comment = commentListController.addNewComment(inputComment.getText().toString(), 
-						null, null, ProjectApplication.getName().toString());
+						null, ProjectApplication.getName().toString());
 				myCommentsListController.addNewComment(comment);
 				finish();
 			}
