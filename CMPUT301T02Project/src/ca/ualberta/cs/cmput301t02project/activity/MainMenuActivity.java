@@ -59,9 +59,6 @@ public class MainMenuActivity extends Activity {
 		});
 		
 		
-		
-		
-		
 
 		// Retrieve location manager
 		LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
@@ -71,8 +68,7 @@ public class MainMenuActivity extends Activity {
 		ProjectApplication.setCurrentLocation(currentLocation);
 
 		// Requests location from provider
-		locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1,
-				0, locationListener);
+		locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0,0, locationListener);
 		
 
 		
