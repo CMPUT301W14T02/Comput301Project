@@ -7,12 +7,26 @@ import ca.ualberta.cs.cmput301t02project.model.CommentModel;
 public class ProjectApplication {
 
 	// Singleton
+	private static ProjectApplication instance = null;
 	private static CommentListModel commentList;
 	private static CommentListModel currentCommentList;
 	private static CommentModel currentComment;
 	private static Location currentLocation;
 	private static CommentListModel myCommentList;
 
+	// Singleton code adapted from http://www.javaworld.com/article/2073352/core-java/simply-singleton.html
+	protected ProjectApplication() {
+		// Exists only to defeat instantiation.
+	}
+	
+	public static ProjectApplication getInstance() {
+		if (instance == null) {
+			instance = new ProjectApplication();
+		}
+		return instance;
+	}
+	
+	
 	public static CommentListModel getCommentList() {
 		if (commentList == null) {
 			commentList = new CommentListModel();
