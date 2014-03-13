@@ -21,7 +21,7 @@ public class CommentListController extends CommentListControllerAbstraction {
 		double lon = currentLocation.getLongitude();
 		double lat = currentLocation.getLatitude();
 		String test =  String.valueOf(lat) + String.valueOf(lon);
-		comment = new CommentModel(test+text, picture, location, username);
+		comment = new CommentModel(test+text, picture, currentLocation, username);
 		model.add(comment);
 		return comment;
 	}
