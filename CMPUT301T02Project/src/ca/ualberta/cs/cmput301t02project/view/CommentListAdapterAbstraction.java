@@ -72,49 +72,59 @@ public abstract class CommentListAdapterAbstraction extends ArrayAdapter<Comment
 		Location currentLocation = new Location(loc);
 		currentLocation = ProjectApplication.getCurrentLocation();
 		
+		
 		// will hold the remaining unsorted CommentModels
-		ArrayAdapter<CommentModel> copyAdapter = (CommentListAdapter) this.clone();
+		ArrayList<CommentModel> list = (ArrayList<CommentModel>) model.getCommentList().clone();
 		// holds the sorted CommentModels to be passed to sortByLocation
-		Object partialAdapter = (CommentListAdapter) this.clone();
+		ArrayList<CommentModel> list2 = new ArrayList<CommentModel>();
+		// contains the final list
+		ArrayList<CommentModel> finalList = new ArrayList<CommentModel>();
 		
-		int adapterLen = this.getCount();
-		//clear original array, since will be replacing with sorted array
-		this.clear(); 
+		int i;
 		
-		double currentLon = currentLocation.getLongitude();
-		double currentLat = currentLocation.getLatitude(); 
-		double commentLon, commentLat;
-		float[] results;
-		String ini = "Initialize Location";
-        Location commentLocation = new Location(ini);
-		
-		 for(int i=0; i<adapterLen; i++){
-			 CommentModel item = copyAdapter.getItem(i);
-			 /*
-			 commentLocation = item.getLocation(); // if change from LocationModel to Location, this will work -KW
-			 commentLat = commentLocation.getLatitude();
-			 commentLon = commentLocation.getLongitude();
-			 Location.distanceBetween(commentLat, commentLon, currentLat, currentLon, results);
-			 */
-			 
-        }
-		
-	}
-	/* Check this implementation of location sort.
-	//Adapted from http://stackoverflow.com/a/6927640
-	public void sortByLocation() {
-		String loc = "Location Initialization";
-		Location myLocation = new Location(loc);
-		myLocation = ProjectApplication.getCurrentLocation();
-		this.sort(new Comparator<CommentModel>() {
-			public int compare(CommentModel a, CommentModel b) {
-				Float dist1 = a.getLocation().distanceTo(myLocation);
-				Float dist2 = a.getLocation().distanceTo(myLocation);
-				return dist1.compareTo(dist2);
+		for (i = 0; i<list.size(); i++) {
+			if (list.get(i).getLocation().distanceTo(myLocation) < 5000) {
+				list2.add(list.remove(i));
 			}
 		}
+		
+		Collections.sort(list2, sortByDate);
+		finalList.addAll(list2);
+		list2 = new ArrayList<CommentModel>();
+		for (i = 0; i<list.size(); i++) {
+			if (list.get(i).getLocation().distanceTo(myLocation) < 100000) {
+				list2.add(list.remove(i));
+			}
+		}
+		
+		Collections.sort(list2, sortByDate);
+		finalList.addAll(list2);
+		list2 = new ArrayList<CommentModel>();
+		
+		for (i = 0; i<list.size(); i++) {
+			if (list.get(i).getLocation().distanceTo(myLocation) < 5000000) {
+				list2.add(list.remove(i));
+			}
+		}
+		
+		Collections.sort(list2, sortByDate);
+		finalList.addAll(list2);
+		list2 = new ArrayList<CommentModel>();
+		
+		// rest of list
+		for (i = 0; i<list.size(); i++) {
+				list2.add(list.remove(i));
+			
+		}
+		
+		Collections.sort(list2, sortByDate);
+		finalList.addAll(list2);
+		
+		model.setCommentList(finalList);
+
+		
 	}
-	*/
+	
 	
 	//Adapted from http://stackoverflow.com/a/8424557 and 
 	public void sortByDate() {
