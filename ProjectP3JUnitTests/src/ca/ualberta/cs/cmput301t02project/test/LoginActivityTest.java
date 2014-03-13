@@ -1,5 +1,5 @@
 package ca.ualberta.cs.cmput301t02project.test;
-import ca.ualberta.cs.cmput301t02project.CurrentUser;
+import ca.ualberta.cs.cmput301t02project.ProjectApplication;
 import ca.ualberta.cs.cmput301t02project.activity.LoginActivity;
 import ca.ualberta.cs.cmput301t02project.User;
 import android.test.ActivityInstrumentationTestCase2;
@@ -22,9 +22,9 @@ public class LoginActivityTest extends ActivityInstrumentationTestCase2<LoginAct
 	public void testSetUsername() {
 		
 		User user = new User("desiredName");
-		CurrentUser.setName(user.getName());
+		ProjectApplication.setName(user.getName());
 		
-		assertEquals("CurrentUser name should match current user's username", CurrentUser.getName(), user.getName());
+		assertEquals("CurrentUser name should match current user's username", ProjectApplication.getName(), user.getName());
 	}
 	
 	// Use Case 20 - part 3 -SB
