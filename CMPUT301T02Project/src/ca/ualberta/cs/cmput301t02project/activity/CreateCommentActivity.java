@@ -10,7 +10,6 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import ca.ualberta.cs.cmput301t02project.CurrentUser;
 import ca.ualberta.cs.cmput301t02project.ProjectApplication;
 import ca.ualberta.cs.cmput301t02project.R;
 import ca.ualberta.cs.cmput301t02project.controller.CommentListController;
@@ -54,12 +53,10 @@ public class CreateCommentActivity extends Activity {
 				// Username is temporarily in front of the comment. Can redesign
 				// later -SB
 
-				commentListController.addNewComment(inputComment.getText()
-						.toString(), null, null, CurrentUser.getName()
-						.toString());
-				myCommentsListController.addNewComment(inputComment.getText()
-						.toString(), null, null, CurrentUser.getName()
-						.toString());
+				commentListController.addNewComment(inputComment.getText().toString(), 
+						null, null, ProjectApplication.getName().toString());
+				myCommentsListController.addNewComment(inputComment.getText().toString(), 
+						null, null, ProjectApplication.getName().toString());
 				finish();
 			}
 		});

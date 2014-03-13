@@ -13,10 +13,19 @@ public class ProjectApplication {
 	private static CommentModel currentComment;
 	private static Location currentLocation;
 	private static CommentListModel myCommentList;
+	private static User currentUser = new User("default");
 
 	// Singleton code adapted from http://www.javaworld.com/article/2073352/core-java/simply-singleton.html
 	protected ProjectApplication() {
 		// Exists only to defeat instantiation.
+	}
+
+	public static String getName() {
+		return currentUser.getName();
+	}
+
+	public static void setName(String name) {
+		currentUser.setName(name);
 	}
 	
 	public static ProjectApplication getInstance() {

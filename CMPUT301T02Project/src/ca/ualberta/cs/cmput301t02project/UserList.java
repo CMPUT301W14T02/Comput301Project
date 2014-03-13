@@ -17,7 +17,7 @@ public class UserList {
 
 		for (int i = 0; i < userList.size(); i++) {
 			if (userList.get(i).getName().equals(username)) {
-				CurrentUser.setName(userList.get(i).getName());
+				ProjectApplication.setName(userList.get(i).getName());
 				return true;
 			}
 		}
@@ -25,7 +25,7 @@ public class UserList {
 	}
 
 	public static void createUser(String username) {
-		CurrentUser.setName(username);
+		ProjectApplication.setName(username);
 	}
 
 }

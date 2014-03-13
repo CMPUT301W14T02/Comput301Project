@@ -1,6 +1,5 @@
 package ca.ualberta.cs.cmput301t02project.activity;
 
-import ca.ualberta.cs.cmput301t02project.CurrentUser;
 import ca.ualberta.cs.cmput301t02project.ProjectApplication;
 import ca.ualberta.cs.cmput301t02project.R;
 import ca.ualberta.cs.cmput301t02project.controller.CommentListController;

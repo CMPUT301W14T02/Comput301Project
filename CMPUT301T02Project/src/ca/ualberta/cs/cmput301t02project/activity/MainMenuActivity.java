@@ -1,6 +1,5 @@
 package ca.ualberta.cs.cmput301t02project.activity;
 
-import ca.ualberta.cs.cmput301t02project.CurrentUser;
 import ca.ualberta.cs.cmput301t02project.ProjectApplication;
 import ca.ualberta.cs.cmput301t02project.R;
 import ca.ualberta.cs.cmput301t02project.R.id;
@@ -29,7 +28,7 @@ public class MainMenuActivity extends Activity {
 		setContentView(R.layout.activity_main);
 
 		TextView welcomeMessage = (TextView) findViewById(R.id.welcome_message);
-		welcomeMessage.setText("Welcome " + CurrentUser.getName().toString()
+		welcomeMessage.setText("Welcome " + ProjectApplication.getName().toString()
 				+ "!");
 
 		Button createComment = (Button) findViewById(R.id.create);
