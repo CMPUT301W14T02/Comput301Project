@@ -77,9 +77,9 @@ public class CommentListAdapter extends CommentListAdapterAbstraction {
 		this.sort(new Comparator<CommentModel>() {
 			public int compare(CommentModel a, CommentModel b) {
 				if (a.getDate().before(b.getDate())) {
-					return -1;
-				} else if (a.getDate().after(b.getDate())) {
 					return 1;
+				} else if (a.getDate().after(b.getDate())) {
+					return -1;
 				} else {
 					return 0;
 				}

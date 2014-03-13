@@ -22,10 +22,8 @@ public class BrowseTopLevelCommentsActivity extends Activity implements OnItemSe
 	// TODO: Refactor code to use new classes
 	
 	private CommentListModel topLevelCommentList;
-	// private CommentListAdapter commentListAdapter;
-
 	private ListView topLevelCommentListView;
-	private ArrayAdapter<CommentModel> adapter;
+	private CommentListAdapter adapter;
 
 	/**
 	 * Sets up the on click listener for the listview
@@ -81,7 +79,7 @@ public class BrowseTopLevelCommentsActivity extends Activity implements OnItemSe
 		topLevelCommentList = ProjectApplication.getCommentList();
 
 		// Add comments to adapter
-		adapter = new ArrayAdapter<CommentModel>(this, R.layout.list_item, topLevelCommentList.getCommentList());
+		adapter = new CommentListAdapter(this, R.layout.list_item, topLevelCommentList.getCommentList());
 
 		// Display comments in adapter
 		topLevelCommentListView.setAdapter(adapter);
@@ -126,9 +124,21 @@ public class BrowseTopLevelCommentsActivity extends Activity implements OnItemSe
 	}
 
 	@Override
-	public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2,
-			long arg3) {
-		// TODO Auto-generated method stub
+	public void onItemSelected(AdapterView<?> parent, View view, int position,
+			long id) {
+		String selected = parent.getItemAtPosition(position).toString();
+		if (selected.equals("Date")) {
+			adapter.sortByDate();
+			updateAdapter();
+		} else if (selected.equals("Picture")) {
+			
+		} else if (selected.equals("My Location")) {
+			
+		} else if (selected.equals("Other Location")) {
+			
+		} else if (selected.equals("Ranking")) {
+			
+		}
 
 	}
 
