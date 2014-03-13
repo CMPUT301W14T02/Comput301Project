@@ -100,6 +100,7 @@ public class BrowseTopLevelCommentsActivity extends Activity implements OnItemSe
 
 		// Spinner Drop down elements
 		ArrayList<String> sortBy = new ArrayList<String>();
+		sortBy.add("Default");
 		sortBy.add("Date");
 		sortBy.add("Picture");
 		sortBy.add("My Location");

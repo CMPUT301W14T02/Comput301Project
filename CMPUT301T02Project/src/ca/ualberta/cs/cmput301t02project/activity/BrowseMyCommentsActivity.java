@@ -80,6 +80,7 @@ public class BrowseMyCommentsActivity extends Activity implements OnItemSelected
 
 		// Spinner Drop down elements
 		ArrayList<String> sortBy = new ArrayList<String>();
+		sortBy.add("Default");
 		sortBy.add("Date");
 		sortBy.add("Picture");
 		sortBy.add("My Location");
@@ -109,15 +110,16 @@ public class BrowseMyCommentsActivity extends Activity implements OnItemSelected
 		String selected = parent.getItemAtPosition(position).toString();
 		if (selected.equals("Date")) {
 			adapter.sortByDate();
-			adapter.notifyDataSetChanged();
 		} else if (selected.equals("Picture")) {
-			
+			adapter.sortByPicture();
 		} else if (selected.equals("My Location")) {
-			
+			adapter.sortByLocation();
 		} else if (selected.equals("Other Location")) {
-			
+			adapter.sortByOtherLocation();
 		} else if (selected.equals("Ranking")) {
-			
+			adapter.sortByRanking();
+		} else if (selected.equals("Default")) {
+
 		}
 
 	}

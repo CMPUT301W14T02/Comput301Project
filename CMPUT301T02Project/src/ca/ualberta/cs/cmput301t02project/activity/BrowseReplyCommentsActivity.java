@@ -51,12 +51,12 @@ public class BrowseReplyCommentsActivity extends Activity implements
 
 		// Spinner Drop down elements
 		ArrayList<String> sortBy = new ArrayList<String>();
+		sortBy.add("Default");
 		sortBy.add("Date");
 		sortBy.add("Picture");
 		sortBy.add("My Location");
 		sortBy.add("Other Location");
 		sortBy.add("Ranking");
-		sortBy.add("Default");
 
 		// Create adapter for spinner
 		ArrayAdapter<String> spinner_adapter = new ArrayAdapter<String>(this,

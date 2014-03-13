@@ -67,10 +67,10 @@ public abstract class CommentListAdapterAbstraction extends ArrayAdapter<Comment
 		return model;
 	}
 	
-	public void sortByDefault() throws CloneNotSupportedException {
+	public void sortByDefaultMethod() {
 		String loc = "Location Initialization";
-		Location currentLocation = new Location(loc);
-		currentLocation = ProjectApplication.getCurrentLocation();
+		myLocation = new Location(loc);
+		myLocation = ProjectApplication.getCurrentLocation();
 		
 		
 		// will hold the remaining unsorted CommentModels
@@ -126,7 +126,10 @@ public abstract class CommentListAdapterAbstraction extends ArrayAdapter<Comment
 	}
 	
 	
-	//Adapted from http://stackoverflow.com/a/8424557 and 
+	public void sortByDefautl() {
+		sortMethod = "Default";
+		sortList();
+	}
 	public void sortByDate() {
 		sortMethod = "Date";
 		sortList();
@@ -156,7 +159,8 @@ public abstract class CommentListAdapterAbstraction extends ArrayAdapter<Comment
 		if (model != null) {
 			ArrayList<CommentModel> list = model.getCommentList();
 			if (sortMethod.equals("Default")) {
- 
+				sortByDefaultMethod();
+				notifyDataSetChanged();
 			} else if (sortMethod.equals("Date")) {
 				Collections.sort(list, sortByDate);
 				notifyDataSetChanged();
