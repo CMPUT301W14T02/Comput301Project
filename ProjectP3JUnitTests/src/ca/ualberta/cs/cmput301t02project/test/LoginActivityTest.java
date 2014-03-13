@@ -1,6 +1,6 @@
 package ca.ualberta.cs.cmput301t02project.test;
 import ca.ualberta.cs.cmput301t02project.CurrentUser;
-import ca.ualberta.cs.cmput301t02project.view.LoginActivity;
+import ca.ualberta.cs.cmput301t02project.activity.LoginActivity;
 import ca.ualberta.cs.cmput301t02project.User;
 import android.test.ActivityInstrumentationTestCase2;
 
