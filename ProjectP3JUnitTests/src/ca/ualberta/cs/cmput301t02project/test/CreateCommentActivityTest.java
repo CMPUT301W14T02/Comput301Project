@@ -1,6 +1,6 @@
 package ca.ualberta.cs.cmput301t02project.test;
 
-import ca.ualberta.cs.cmput301t02project.view.CreateCommentActivity;
+import ca.ualberta.cs.cmput301t02project.activity.CreateCommentActivity;
 import android.test.ActivityInstrumentationTestCase2;
 
 public class CreateCommentActivityTest extends ActivityInstrumentationTestCase2<CreateCommentActivity> {

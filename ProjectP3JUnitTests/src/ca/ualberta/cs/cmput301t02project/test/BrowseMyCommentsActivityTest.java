@@ -1,6 +1,6 @@
 package ca.ualberta.cs.cmput301t02project.test;
 
-import ca.ualberta.cs.cmput301t02project.view.BrowseMyCommentsActivity;
+import ca.ualberta.cs.cmput301t02project.activity.BrowseMyCommentsActivity;
 import android.test.ActivityInstrumentationTestCase2;
 
 public class BrowseMyCommentsActivityTest extends

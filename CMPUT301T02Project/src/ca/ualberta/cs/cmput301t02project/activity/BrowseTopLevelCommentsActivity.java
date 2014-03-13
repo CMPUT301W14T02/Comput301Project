@@ -1,4 +1,4 @@
-package ca.ualberta.cs.cmput301t02project.view;
+package ca.ualberta.cs.cmput301t02project.activity;
 
 import java.util.ArrayList;
 
@@ -17,6 +17,7 @@ import ca.ualberta.cs.cmput301t02project.ProjectApplication;
 import ca.ualberta.cs.cmput301t02project.R;
 import ca.ualberta.cs.cmput301t02project.model.CommentListModel;
 import ca.ualberta.cs.cmput301t02project.model.CommentModel;
+import ca.ualberta.cs.cmput301t02project.view.CommentListAdapter;
 
 public class BrowseTopLevelCommentsActivity extends Activity implements OnItemSelectedListener {
 	// TODO: Refactor code to use new classes

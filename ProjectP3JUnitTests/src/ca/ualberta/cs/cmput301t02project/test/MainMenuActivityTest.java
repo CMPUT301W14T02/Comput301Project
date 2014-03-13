@@ -1,6 +1,6 @@
 package ca.ualberta.cs.cmput301t02project.test;
 
-import ca.ualberta.cs.cmput301t02project.view.MainMenuActivity;
+import ca.ualberta.cs.cmput301t02project.activity.MainMenuActivity;
 import android.test.ActivityInstrumentationTestCase2;
 
 public class MainMenuActivityTest extends ActivityInstrumentationTestCase2<MainMenuActivity> {

@@ -1,6 +1,6 @@
 package ca.ualberta.cs.cmput301t02project.test;
 
-import ca.ualberta.cs.cmput301t02project.view.BrowseTopLevelCommentsActivity;
+import ca.ualberta.cs.cmput301t02project.activity.BrowseTopLevelCommentsActivity;
 import android.app.Activity;
 import android.app.Instrumentation;
 import android.content.Intent;

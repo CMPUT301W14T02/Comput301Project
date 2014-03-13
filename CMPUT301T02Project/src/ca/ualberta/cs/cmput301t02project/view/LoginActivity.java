@@ -5,6 +5,7 @@ import ca.ualberta.cs.cmput301t02project.UserList;
 import ca.ualberta.cs.cmput301t02project.R.id;
 import ca.ualberta.cs.cmput301t02project.R.layout;
 import ca.ualberta.cs.cmput301t02project.R.menu;
+import ca.ualberta.cs.cmput301t02project.activity.MainMenuActivity;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;

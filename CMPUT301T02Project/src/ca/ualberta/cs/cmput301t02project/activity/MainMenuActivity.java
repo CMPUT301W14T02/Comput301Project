@@ -1,4 +1,4 @@
-package ca.ualberta.cs.cmput301t02project.view;
+package ca.ualberta.cs.cmput301t02project.activity;
 
 import ca.ualberta.cs.cmput301t02project.CurrentUser;
 import ca.ualberta.cs.cmput301t02project.ProjectApplication;

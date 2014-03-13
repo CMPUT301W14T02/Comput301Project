@@ -1,4 +1,4 @@
-package ca.ualberta.cs.cmput301t02project.view;
+package ca.ualberta.cs.cmput301t02project.activity;
 
 import android.app.Activity;
 import android.content.Context;
