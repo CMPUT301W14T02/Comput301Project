@@ -54,7 +54,7 @@ public class BrowseMyCommentsActivity extends Activity implements OnItemSelected
 	public void onResume() {
 		super.onResume();
 		
-		myCommentsList = ProjectApplication.getUser().getMyComments();
+		adapter.notifyDataSetChanged();
 	}
 	
 	private void initializeAdapter(){
