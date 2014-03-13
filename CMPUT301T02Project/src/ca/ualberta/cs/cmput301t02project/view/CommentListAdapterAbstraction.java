@@ -35,8 +35,8 @@ public abstract class CommentListAdapterAbstraction extends ArrayAdapter<Comment
 		};
 		sortByLocation = new Comparator<CommentModel>() {
 			public int compare(CommentModel a, CommentModel b) {
-				Float dist1 = a.getLocation().getLocation().distanceTo(myLocation);
-				Float dist2 = a.getLocation().getLocation().distanceTo(myLocation);
+				Float dist1 = a.getLocation().distanceTo(myLocation);
+				Float dist2 = a.getLocation().distanceTo(myLocation);
 				return dist1.compareTo(dist2);
 			}
 		};
