@@ -60,13 +60,15 @@ public class MainMenuActivity extends Activity {
 		
 		
 		
-		String loc = "Location Intialization";
-		currentLocation = new Location(loc);
-		ProjectApplication.setCurrentLocation(currentLocation);
+		
 		
 
 		// Retrieve location manager
 		LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+		
+		String loc = "Location Intialization";
+		currentLocation = new Location(loc);
+		ProjectApplication.setCurrentLocation(currentLocation);
 
 		// Requests location from provider
 		locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0,

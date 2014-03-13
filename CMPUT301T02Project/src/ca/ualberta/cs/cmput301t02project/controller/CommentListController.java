@@ -5,7 +5,7 @@ import android.location.Location;
 import ca.ualberta.cs.cmput301t02project.ProjectApplication;
 import ca.ualberta.cs.cmput301t02project.model.CommentListModel;
 import ca.ualberta.cs.cmput301t02project.model.CommentModel;
-import ca.ualberta.cs.cmput301t02project.model.LocationModel;
+
 
 public class CommentListController extends CommentListControllerAbstraction {
 
@@ -14,7 +14,7 @@ public class CommentListController extends CommentListControllerAbstraction {
 	}
 
 	public CommentModel addNewComment(String text, Bitmap picture,
-			LocationModel location, String username) {
+			Location location, String username) {
 		CommentModel comment;
 		String loc = "Initialize location";
 		Location currentLocation = new Location(loc);
@@ -22,7 +22,7 @@ public class CommentListController extends CommentListControllerAbstraction {
 		double lon = currentLocation.getLongitude();
 		double lat = currentLocation.getLatitude();
 		String test =  String.valueOf(lat) + String.valueOf(lon);
-		comment = new CommentModel(text, picture, location, username);
+		comment = new CommentModel(test+text, picture, location, username);
 		model.add(comment);
 		return comment;
 	}
