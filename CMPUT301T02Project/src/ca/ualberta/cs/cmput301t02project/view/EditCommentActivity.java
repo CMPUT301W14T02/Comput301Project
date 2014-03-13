@@ -4,7 +4,7 @@ import ca.ualberta.cs.cmput301t02project.CurrentUser;
 import ca.ualberta.cs.cmput301t02project.ProjectApplication;
 import ca.ualberta.cs.cmput301t02project.R;
 import ca.ualberta.cs.cmput301t02project.controller.CommentListController;
-import ca.ualberta.cs.cmput301t02project.controller.MyCommentListController;
+import ca.ualberta.cs.cmput301t02project.controller.MyCommentsController;
 import android.app.Activity;
 import android.location.Location;
 import android.os.Bundle;
@@ -15,7 +15,7 @@ import android.widget.EditText;
 
 public class EditCommentActivity extends Activity {
 
-		private MyCommentListController myCommentsListController;
+		private MyCommentsController myCommentsListController;
 		private CommentListController commentListController;
 
 		
@@ -30,7 +30,7 @@ public class EditCommentActivity extends Activity {
 		@Override
 		protected void onCreate(Bundle savedInstanceState) {
 			super.onCreate(savedInstanceState);
-			myCommentsListController = new MyCommentListController(ProjectApplication.getMyCommentList());
+			myCommentsListController = new MyCommentsController(ProjectApplication.getMyCommentList());
 			commentListController = new CommentListController(ProjectApplication.getCommentList());
 			setContentView(R.layout.activity_edit_comment);
 			EditText inputComment = (EditText) findViewById(R.id.edit_text);

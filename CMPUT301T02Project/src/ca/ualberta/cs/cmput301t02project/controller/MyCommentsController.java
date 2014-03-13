@@ -7,9 +7,9 @@ import ca.ualberta.cs.cmput301t02project.model.CommentListModel;
 import ca.ualberta.cs.cmput301t02project.model.CommentModel;
 import ca.ualberta.cs.cmput301t02project.model.LocationModel;
 
-public class MyCommentListController extends CommentListControllerAbstraction {
+public class MyCommentsController extends CommentListControllerAbstraction {
 
-	public MyCommentListController(CommentListModel model) {
+	public MyCommentsController(CommentListModel model) {
 		this.model = model;
 	}
 

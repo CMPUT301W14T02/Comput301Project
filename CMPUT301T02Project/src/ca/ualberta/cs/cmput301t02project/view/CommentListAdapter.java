@@ -10,7 +10,7 @@ import android.content.Context;
 import android.location.Location;
 import android.widget.ArrayAdapter;
 
-public class CommentListAdapter extends ArrayAdapter<CommentModel> {
+public class CommentListAdapter extends CommentListAdapterAbstraction {
 
 	public CommentListAdapter(Context context, int resource,
 			ArrayList<CommentModel> model) {
