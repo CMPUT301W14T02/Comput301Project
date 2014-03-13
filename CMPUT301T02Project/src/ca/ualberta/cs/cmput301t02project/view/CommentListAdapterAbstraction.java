@@ -17,7 +17,7 @@ public abstract class CommentListAdapterAbstraction extends ArrayAdapter<Comment
 	private String sortMethod = "Date"; //SHOULD BE DEFAULT ONCE DEFAULT WORKS
 	private Comparator<CommentModel> sortByDate;
 	private Comparator<CommentModel> sortByLocation;
-	private Location myLocation;
+	private Location myLocation = null;
 	
 	public CommentListAdapterAbstraction(Context context, int resource, ArrayList<CommentModel> model) {
 		super(context, resource, model);
@@ -35,9 +35,18 @@ public abstract class CommentListAdapterAbstraction extends ArrayAdapter<Comment
 		};
 		sortByLocation = new Comparator<CommentModel>() {
 			public int compare(CommentModel a, CommentModel b) {
+				String loc = "Location Initialization";
+				myLocation = new Location(loc);
+				myLocation = ProjectApplication.getCurrentLocation();
 				Float dist1 = a.getLocation().distanceTo(myLocation);
-				Float dist2 = a.getLocation().distanceTo(myLocation);
-				return dist1.compareTo(dist2);
+				Float dist2 = b.getLocation().distanceTo(myLocation);
+				if (dist1 < dist2) {
+					return -1;
+				} else if (dist1 > dist2) {
+					return 1;
+				} else {
+					return 0;
+				}
 			}
 		};
 	}
