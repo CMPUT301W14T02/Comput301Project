@@ -13,8 +13,7 @@ public class CommentListController extends CommentListControllerAbstraction {
 		this.model = model;
 	}
 
-	public CommentModel addNewComment(String text, Bitmap picture,
-			Location location, String username) {
+	public CommentModel addNewComment(String text, Bitmap picture, String username) {
 		CommentModel comment;
 		String loc = "Initialize location";
 		Location currentLocation = new Location(loc);
@@ -22,7 +21,7 @@ public class CommentListController extends CommentListControllerAbstraction {
 		double lon = currentLocation.getLongitude();
 		double lat = currentLocation.getLatitude();
 		String test =  String.valueOf(lat) + String.valueOf(lon);
-		comment = new CommentModel(test+text, picture, location, username);
+		comment = new CommentModel(test+text, picture, currentLocation, username);
 		model.add(comment);
 		return comment;
 	}
