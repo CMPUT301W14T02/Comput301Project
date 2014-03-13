@@ -11,8 +11,7 @@ public class UserList {
 		// TODO Auto-generated constructor stub
 	}
 
-	// sets current user if one with that username exists, else returns false
-	// -SB
+	// sets current user if one with that username exists, else returns false -SB
 	public static boolean findUser(String username) {
 
 		for (int i = 0; i < userList.size(); i++) {
@@ -26,6 +25,9 @@ public class UserList {
 
 	public static void createUser(String username) {
 		ProjectApplication.setName(username);
+		
+		// Add new user to the userlist -SB
+		userList.add(new User(username));
 	}
 
 }
