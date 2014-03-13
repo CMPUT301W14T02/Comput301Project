@@ -3,10 +3,11 @@ package ca.ualberta.cs.cmput301t02project.model;
 import java.util.Date;
 
 import android.graphics.Bitmap;
+import android.location.Location;
 
 public class CommentModel {
 	private Date date;
-	private LocationModel location;
+	private Location location;
 	private String text;
 	private Bitmap picture;
 	private int rating;
@@ -14,7 +15,7 @@ public class CommentModel {
 	private String username;
 
 	// Post with picture
-	public CommentModel(String text, Bitmap picture, LocationModel location,
+	public CommentModel(String text, Bitmap picture, Location location,
 			String username) {
 		this.text = text;
 		this.picture = picture;
@@ -26,7 +27,7 @@ public class CommentModel {
 	}
 
 	// Post without picture
-	public CommentModel(String text, LocationModel location, String username) {
+	public CommentModel(String text, Location location, String username) {
 		this.text = text;
 		this.picture = null;
 		this.location = location;
@@ -46,7 +47,7 @@ public class CommentModel {
 		this.date = date;
 	}
 
-	public LocationModel getLocation() {
+	public Location getLocation() {
 		return location;
 	}
 

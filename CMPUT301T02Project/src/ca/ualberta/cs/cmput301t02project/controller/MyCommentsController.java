@@ -5,7 +5,7 @@ import android.location.Location;
 import ca.ualberta.cs.cmput301t02project.ProjectApplication;
 import ca.ualberta.cs.cmput301t02project.model.CommentListModel;
 import ca.ualberta.cs.cmput301t02project.model.CommentModel;
-import ca.ualberta.cs.cmput301t02project.model.LocationModel;
+
 
 public class MyCommentsController extends CommentListControllerAbstraction {
 
