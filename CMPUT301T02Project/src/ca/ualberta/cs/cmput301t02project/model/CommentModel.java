@@ -102,5 +102,13 @@ public class CommentModel {
 					+ " replies)";
 		}
 	}
+	
+
+	@Override
+	public boolean equals(Object commentModel) {
+		CommentModel comment = (CommentModel) commentModel;
+		
+		return comment.getText().equals(this.getText()) && comment.getUsername().equals(this.getUsername());
+	}
 
 }
