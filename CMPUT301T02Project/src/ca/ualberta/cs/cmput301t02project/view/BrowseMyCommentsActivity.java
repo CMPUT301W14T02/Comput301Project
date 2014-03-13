@@ -18,11 +18,10 @@ import android.widget.Spinner;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemSelectedListener;
 
-public class BrowseMyCommentsActivity extends Activity implements
-		OnItemSelectedListener {
+public class BrowseMyCommentsActivity extends Activity implements OnItemSelectedListener {
 
-	// private CommentListModel myCommentsList;
-	// private MyCommentsAdapter myCommentsListAdapter;
+	private CommentListModel myCommentsList;
+	//private MyCommentsAdapter myCommentsListAdapter;
 	private ListView myCommentListView;
 	private ArrayAdapter<CommentModel> adapter;
 
@@ -33,11 +32,49 @@ public class BrowseMyCommentsActivity extends Activity implements
 		setContentView(R.layout.activity_my_comments_list);
 		myCommentListView = (ListView) findViewById(R.id.commentListView);
 
+		// Create the sortBy menu -SB
+		createSpinner();
+
+		updateAdapter();
+		
+		myCommentListView.setOnItemClickListener(new OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> l, View v, int position, long id) {
+				// Refactor into MVC?	
+				CommentModel nestedComment = (CommentModel) adapter.getItem(position);
+				ProjectApplication.setCurrentComment(nestedComment);
+				
+				Intent goToEditCommentActivity = new Intent(getApplicationContext(),EditCommentActivity.class);
+				startActivity(goToEditCommentActivity);
+			}
+		});
+	}
+
+	@Override
+	public void onResume() {
+		super.onResume();
+		
+		updateAdapter();
+	}
+	
+	private void updateAdapter(){
+		
+		// Retrieve the current comments list -SB
+		myCommentsList = ProjectApplication.getMyCommentList();
+
+		// Add comments to adapter
+		adapter = new ArrayAdapter<CommentModel>(this, R.layout.list_item, myCommentsList.getCommentList());
+
+		// Display comments in adapter
+		myCommentListView.setAdapter(adapter);
+	}
+	
+	private void createSpinner(){
 		// Based on:
 		// //www.androidhive.info/2012/04/android-spinner-dropdown-example/
 		// Spinner element
 		Spinner spinner = (Spinner) findViewById(R.id.spinner);
-
+		
 		// Spinner click listener
 		spinner.setOnItemSelectedListener(this);
 
@@ -56,39 +93,7 @@ public class BrowseMyCommentsActivity extends Activity implements
 		spinner_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
 		// attach adapter to spinner
-		spinner.setAdapter(spinner_adapter);
-
-		CommentListModel myCommentsList = ProjectApplication.getMyCommentList();
-
-		// Add comments to adapter
-		adapter = new ArrayAdapter<CommentModel>(this, R.layout.list_item, myCommentsList.getCommentList());
-
-		// Display comments in adapter
-		myCommentListView.setAdapter(adapter);
-
-		myCommentListView.setOnItemClickListener(new OnItemClickListener() {
-			@Override
-			public void onItemClick(AdapterView<?> l, View v, int position, long id) {
-				// Refactor into MVC?	
-				CommentModel nestedComment = (CommentModel) adapter.getItem(position);
-				ProjectApplication.setCurrentComment(nestedComment);
-				
-				Intent goToEditCommentActivity = new Intent(getApplicationContext(),EditCommentActivity.class);
-				startActivity(goToEditCommentActivity);
-			}
-		});
-	}
-
-	@Override
-	public void onResume() {
-		super.onResume();
-		CommentListModel myCommentsList = ProjectApplication.getMyCommentList();
-
-		// Add comments to adapter
-		adapter = new ArrayAdapter<CommentModel>(this, R.layout.list_item, myCommentsList.getCommentList());
-
-		// Display comments in adapter
-		myCommentListView.setAdapter(adapter);
+		spinner.setAdapter(spinner_adapter);		
 	}
 
 	@Override
