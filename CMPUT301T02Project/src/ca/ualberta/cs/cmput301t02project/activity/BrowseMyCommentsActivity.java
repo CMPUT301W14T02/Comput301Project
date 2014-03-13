@@ -35,7 +35,7 @@ public class BrowseMyCommentsActivity extends Activity implements OnItemSelected
 		// Create the sortBy menu -SB
 		createSpinner();
 
-		updateAdapter();
+		initializeAdapter();
 		
 		myCommentListView.setOnItemClickListener(new OnItemClickListener() {
 			@Override
@@ -54,17 +54,17 @@ public class BrowseMyCommentsActivity extends Activity implements OnItemSelected
 	public void onResume() {
 		super.onResume();
 		
-		updateAdapter();
+		myCommentsList = ProjectApplication.getUser().getMyComments();
 	}
 	
-	private void updateAdapter(){
+	private void initializeAdapter(){
 		
 		// Retrieve the current comments list -SB
 		myCommentsList = ProjectApplication.getUser().getMyComments();
 
 		// Add comments to adapter
 		adapter = new MyCommentsAdapter(this, R.layout.list_item, myCommentsList.getCommentList());
-
+		adapter.setModel(myCommentsList);
 		// Display comments in adapter
 		myCommentListView.setAdapter(adapter);
 	}
