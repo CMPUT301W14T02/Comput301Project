@@ -71,8 +71,9 @@ public class MainMenuActivity extends Activity {
 		ProjectApplication.setCurrentLocation(currentLocation);
 
 		// Requests location from provider
-		locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0,
+		locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1,
 				0, locationListener);
+		
 
 		
 	}
