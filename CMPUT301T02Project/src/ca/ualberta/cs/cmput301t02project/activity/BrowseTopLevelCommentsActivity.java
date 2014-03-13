@@ -67,8 +67,7 @@ public class BrowseTopLevelCommentsActivity extends Activity implements OnItemSe
 		
 		// Update in case comments are edited created -SB
 		ProjectApplication.setCurrentCommentList(ProjectApplication.getCommentList());
-		
-		updateAdapter();
+		adapter.notifyDataSetChanged();
 	}
 	
 	/**
@@ -130,7 +129,7 @@ public class BrowseTopLevelCommentsActivity extends Activity implements OnItemSe
 		String selected = parent.getItemAtPosition(position).toString();
 		if (selected.equals("Date")) {
 			adapter.sortByDate();
-			updateAdapter();
+			adapter.notifyDataSetChanged();
 		} else if (selected.equals("Picture")) {
 			
 		} else if (selected.equals("My Location")) {

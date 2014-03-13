@@ -13,17 +13,9 @@ public class MyCommentsController extends CommentListControllerAbstraction {
 		this.model = model;
 	}
 
-	public void addNewComment(String text, Bitmap picture,
-			LocationModel location, String username) {
+	public void addNewComment(CommentModel comment) {
 		
-		String loc = "Initialize location";
-		Location currentLocation = new Location(loc);
-		currentLocation = ProjectApplication.getCurrentLocation();
-		double lon = currentLocation.getLongitude();
-		double lat = currentLocation.getLatitude();
-		String test =  String.valueOf(lat) + String.valueOf(lon);
-		
-		model.add(new CommentModel(text, picture, location, username));
+		model.add(comment);
 	}
 	
 	public void changeText(CommentModel model, String text) {

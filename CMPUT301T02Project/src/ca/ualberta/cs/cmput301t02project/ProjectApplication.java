@@ -12,7 +12,6 @@ public class ProjectApplication {
 	private static CommentListModel currentCommentList;
 	private static CommentModel currentComment;
 	private static Location currentLocation;
-	private static CommentListModel myCommentList;
 	private static User currentUser = new User("default");
 
 	// Singleton code adapted from http://www.javaworld.com/article/2073352/core-java/simply-singleton.html
@@ -43,12 +42,6 @@ public class ProjectApplication {
 		return commentList;
 	}
 	
-	public static CommentListModel getMyCommentList() {
-		if (myCommentList == null) {
-			myCommentList = new CommentListModel();
-		}
-		return myCommentList;
-	}
 
 	public static void setCurrentCommentList(
 			CommentListModel currentCommentList) {
@@ -84,6 +77,10 @@ public class ProjectApplication {
 		}
 		
 		ProjectApplication.currentLocation = location;
+	}
+	
+	public static User getUser() {
+		return currentUser;
 	}
 
 }

@@ -14,6 +14,7 @@ import ca.ualberta.cs.cmput301t02project.ProjectApplication;
 import ca.ualberta.cs.cmput301t02project.R;
 import ca.ualberta.cs.cmput301t02project.controller.CommentListController;
 import ca.ualberta.cs.cmput301t02project.controller.MyCommentsController;
+import ca.ualberta.cs.cmput301t02project.model.CommentModel;
 
 public class CreateCommentActivity extends Activity {
 
@@ -36,7 +37,7 @@ public class CreateCommentActivity extends Activity {
 		commentListController = new CommentListController(
 				ProjectApplication.getCurrentCommentList());
 		myCommentsListController = new MyCommentsController(
-				ProjectApplication.getMyCommentList());
+				ProjectApplication.getUser().getMyComments());
 		setContentView(R.layout.activity_create_comment);
 
 		Button post = (Button) findViewById(R.id.create_post);
@@ -52,11 +53,10 @@ public class CreateCommentActivity extends Activity {
 				// Refactor into MVC?
 				// Username is temporarily in front of the comment. Can redesign
 				// later -SB
-
-				commentListController.addNewComment(inputComment.getText().toString(), 
+				CommentModel comment;
+				comment = commentListController.addNewComment(inputComment.getText().toString(), 
 						null, null, ProjectApplication.getName().toString());
-				myCommentsListController.addNewComment(inputComment.getText().toString(), 
-						null, null, ProjectApplication.getName().toString());
+				myCommentsListController.addNewComment(comment);
 				finish();
 			}
 		});

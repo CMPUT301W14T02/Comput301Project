@@ -6,6 +6,7 @@ import ca.ualberta.cs.cmput301t02project.ProjectApplication;
 import ca.ualberta.cs.cmput301t02project.R;
 import ca.ualberta.cs.cmput301t02project.model.CommentListModel;
 import ca.ualberta.cs.cmput301t02project.model.CommentModel;
+import ca.ualberta.cs.cmput301t02project.view.MyCommentsAdapter;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -21,9 +22,8 @@ import android.widget.AdapterView.OnItemSelectedListener;
 public class BrowseMyCommentsActivity extends Activity implements OnItemSelectedListener {
 
 	private CommentListModel myCommentsList;
-	//private MyCommentsAdapter myCommentsListAdapter;
 	private ListView myCommentListView;
-	private ArrayAdapter<CommentModel> adapter;
+	private MyCommentsAdapter adapter;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -60,10 +60,10 @@ public class BrowseMyCommentsActivity extends Activity implements OnItemSelected
 	private void updateAdapter(){
 		
 		// Retrieve the current comments list -SB
-		myCommentsList = ProjectApplication.getMyCommentList();
+		myCommentsList = ProjectApplication.getUser().getMyComments();
 
 		// Add comments to adapter
-		adapter = new ArrayAdapter<CommentModel>(this, R.layout.list_item, myCommentsList.getCommentList());
+		adapter = new MyCommentsAdapter(this, R.layout.list_item, myCommentsList.getCommentList());
 
 		// Display comments in adapter
 		myCommentListView.setAdapter(adapter);
@@ -104,9 +104,21 @@ public class BrowseMyCommentsActivity extends Activity implements OnItemSelected
 		return true;
 	}
 	@Override
-	public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2,
-			long arg3) {
-		// TODO Auto-generated method stub
+	public void onItemSelected(AdapterView<?> parent, View view, int position,
+			long id) {
+		String selected = parent.getItemAtPosition(position).toString();
+		if (selected.equals("Date")) {
+			adapter.sortByDate();
+			adapter.notifyDataSetChanged();
+		} else if (selected.equals("Picture")) {
+			
+		} else if (selected.equals("My Location")) {
+			
+		} else if (selected.equals("Other Location")) {
+			
+		} else if (selected.equals("Ranking")) {
+			
+		}
 
 	}
 

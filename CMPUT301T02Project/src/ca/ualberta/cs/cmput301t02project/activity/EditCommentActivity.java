@@ -15,7 +15,6 @@ import android.widget.EditText;
 public class EditCommentActivity extends Activity {
 
 		private MyCommentsController myCommentsListController;
-		private CommentListController commentListController;
 
 		
 		//Likely will not need this attribute. Will know when write code for custom location. -KW
@@ -29,8 +28,7 @@ public class EditCommentActivity extends Activity {
 		@Override
 		protected void onCreate(Bundle savedInstanceState) {
 			super.onCreate(savedInstanceState);
-			myCommentsListController = new MyCommentsController(ProjectApplication.getMyCommentList());
-			commentListController = new CommentListController(ProjectApplication.getCommentList());
+			myCommentsListController = new MyCommentsController(ProjectApplication.getUser().getMyComments());
 			setContentView(R.layout.activity_edit_comment);
 			EditText inputComment = (EditText) findViewById(R.id.edit_text);
 			inputComment.setText(ProjectApplication.getCurrentComment().getText());

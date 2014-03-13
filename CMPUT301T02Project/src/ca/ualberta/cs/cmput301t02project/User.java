@@ -1,15 +1,18 @@
 package ca.ualberta.cs.cmput301t02project;
 
+import ca.ualberta.cs.cmput301t02project.model.CommentListModel;
+
 public class User {
 
 	private String name;
 
 	// private ArrayList<FavoritesListModel> favoritesList;
-	// private ArrayList<MyCommentsModel> myComments;
+	private CommentListModel myComments;
 
 	public User(String name) {
 		super();
 		this.name = name;
+		myComments = new CommentListModel();
 	}
 
 	public String getName() {
@@ -18,6 +21,14 @@ public class User {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+	
+	public void setMyComments(CommentListModel myComments) {
+		this.myComments = myComments;
+	}
+	
+	public CommentListModel getMyComments() {
+		return this.myComments;
 	}
 
 	/*
