@@ -40,7 +40,7 @@ public class BrowseTopLevelCommentsActivity extends Activity implements OnItemSe
 		createSpinner();
 		
 		// Populate the listview & set adapter -SB
-		updateAdapter();
+		initializeAdapter();
 		
 		topLevelCommentListView.setOnItemClickListener(new OnItemClickListener() {
 			@Override
@@ -67,19 +67,20 @@ public class BrowseTopLevelCommentsActivity extends Activity implements OnItemSe
 		
 		// Update in case comments are edited created -SB
 		ProjectApplication.setCurrentCommentList(ProjectApplication.getCommentList());
-		adapter.notifyDataSetChanged();
 	}
 	
 	/**
 	 * Retrieves comments to display and set the adapter
 	 */
-	private void updateAdapter(){
+	private void initializeAdapter(){
 		
 		// Retrieve the current comments list -SB
 		topLevelCommentList = ProjectApplication.getCommentList();
 
 		// Add comments to adapter
 		adapter = new CommentListAdapter(this, R.layout.list_item, topLevelCommentList.getCommentList());
+		topLevelCommentList.setAdapter(adapter);
+		adapter.setModel(topLevelCommentList);
 
 		// Display comments in adapter
 		topLevelCommentListView.setAdapter(adapter);
@@ -129,15 +130,16 @@ public class BrowseTopLevelCommentsActivity extends Activity implements OnItemSe
 		String selected = parent.getItemAtPosition(position).toString();
 		if (selected.equals("Date")) {
 			adapter.sortByDate();
-			adapter.notifyDataSetChanged();
 		} else if (selected.equals("Picture")) {
-			
+			adapter.sortByPicture();
 		} else if (selected.equals("My Location")) {
-			
+			adapter.sortByLocation();
 		} else if (selected.equals("Other Location")) {
-			
+			adapter.sortByOtherLocation();
 		} else if (selected.equals("Ranking")) {
-			
+			adapter.sortByRanking();
+		} else if (selected.equals("Default")) {
+
 		}
 
 	}

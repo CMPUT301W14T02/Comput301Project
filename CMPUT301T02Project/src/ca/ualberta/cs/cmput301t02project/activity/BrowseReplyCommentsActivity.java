@@ -18,18 +18,16 @@ import ca.ualberta.cs.cmput301t02project.ProjectApplication;
 import ca.ualberta.cs.cmput301t02project.R;
 import ca.ualberta.cs.cmput301t02project.model.CommentListModel;
 import ca.ualberta.cs.cmput301t02project.model.CommentModel;
+import ca.ualberta.cs.cmput301t02project.view.CommentListAdapter;
 
 public class BrowseReplyCommentsActivity extends Activity implements
 		OnItemSelectedListener {
 
 	// TODO: Refactor using new classes
-	// private CommentListModel replyList;
-	// private CommentListAdapter replyListAdapter;
-	// private CommentModel selectedComment;
 
 	private ListView replyCommentListView;
 	private TextView selectedComment;
-	private ArrayAdapter<CommentModel> adapter;
+	private CommentListAdapter adapter;
 	private CommentListModel replyCommentList;
 
 	@Override
@@ -58,6 +56,7 @@ public class BrowseReplyCommentsActivity extends Activity implements
 		sortBy.add("My Location");
 		sortBy.add("Other Location");
 		sortBy.add("Ranking");
+		sortBy.add("Default");
 
 		// Create adapter for spinner
 		ArrayAdapter<String> spinner_adapter = new ArrayAdapter<String>(this,
@@ -74,8 +73,10 @@ public class BrowseReplyCommentsActivity extends Activity implements
 		replyCommentList = ProjectApplication.getCurrentCommentList();
 
 		// Add comments to adapter
-		adapter = new ArrayAdapter<CommentModel>(this, R.layout.list_item,
+		adapter = new CommentListAdapter(this, R.layout.list_item,
 				replyCommentList.getCommentList());
+		replyCommentList.setAdapter(adapter);
+		adapter.setModel(replyCommentList);
 
 		// Display comments in adapter
 		replyCommentListView.setAdapter(adapter);
@@ -120,17 +121,27 @@ public class BrowseReplyCommentsActivity extends Activity implements
 
 		// Add comments to adapter
 		ProjectApplication.setCurrentCommentList(replyCommentList);
-		adapter = new ArrayAdapter<CommentModel>(this, R.layout.list_item,
-				replyCommentList.getCommentList());
 
-		// Display comments in adapter
-		replyCommentListView.setAdapter(adapter);
 	}
 
 	@Override
-	public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2,
-			long arg3) {
-		// TODO Auto-generated method stub
+	public void onItemSelected(AdapterView<?> parent, View view, int position,
+			long id) {
+		String selected = parent.getItemAtPosition(position).toString();
+		if (selected.equals("Date")) {
+			adapter.sortByDate();
+		} else if (selected.equals("Picture")) {
+			adapter.sortByPicture();
+		} else if (selected.equals("My Location")) {
+			adapter.sortByLocation();
+		} else if (selected.equals("Other Location")) {
+			adapter.sortByOtherLocation();
+		} else if (selected.equals("Ranking")) {
+			adapter.sortByRanking();
+		} else if (selected.equals("Default")) {
+
+		}
+		
 	}
 
 	@Override
