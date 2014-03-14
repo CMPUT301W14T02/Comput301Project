@@ -39,7 +39,7 @@ public class ProjectApplication {
 	/**
 	 * Sets the current username.
 	 * <p>
-	 * A user can set their own username from the login page.
+	 * A user can set their own username from the login page (LoginActivity).
 	 * The list of "MyComments" is determined by the user with that username.
 	 * Example of a username: the string "Bob".
 	 * <p>
@@ -96,16 +96,30 @@ public class ProjectApplication {
 	}
 	
 	/**
-	 * 
-	 * @param currentCommentList	the up-to-date comment list of interest
+	 * Sets the current list of comments of interest.
+	 * <p> 
+	 * The list of comments of interest is updated when a comment is selected in order to see its replies in
+	 * BrowseTopLevelCommentsActivity and BrowseReplyCommentsActivity. 
+	 * The list of comments to be displayed in the future is determined by which CommentListModel is set. 
+	 * The list of comments of interest is a sub-set of the comments list that contains all comments in the app.
+	 * <p>
+	 * @param currentCommentList	The up-to-date comment list of interest
+	 * @see CommentListModel	Example of a CommentListModel
 	 */
 	public static void setCurrentCommentList(CommentListModel currentCommentList) {
 		ProjectApplication.currentCommentList = currentCommentList;
 	}
 
 	/**
-	 * 
-	 * @return list of current comments of interest
+	 * Returns the current list of comments of interest.
+	 * <p>
+	 * The list of current comments of interest is used to determine which comments to display in 
+	 * BrowseTopLevelCommentsActivity and BrowseReplyCommentsActivity. 
+	 * The list of comments to be displayed is determined by which CommentListModel is returned. 
+	 * The list of comments of interest is a sub-set of the comments list that contains all comments in the app.
+	 * <p>
+	 * @return List of current comments of interest
+	 * @see CommentListModel	Example of a CommentListModel
 	 */
 	public static CommentListModel getCurrentCommentList() {
 
@@ -118,16 +132,27 @@ public class ProjectApplication {
 	}
 
 	/**
-	 * 
-	 * @return current comment of interest
+	 * Returns the current comment being viewed.
+	 * <p>
+	 * The current comment is used to be displayed at the top of the screen in
+	 * BrowseTopLevelCommentsActivity and BroweReplyCommentsActivity.
+	 * The replies to the comment can also be obtained from the returned CommentModel so that they can be displayed.
+	 * @return Current comment of interest
+	 * @see CommentModel	Example of a CommentModel
 	 */
 	public static CommentModel getCurrentComment() {
 		return currentComment;
 	}
 
 	/**
-	 * 
-	 * @param currentComment	current comment of interest
+	 * Sets the current comment to be viewed.
+	 * <p>
+	 * The current comment is set when a comment is clicked on in 
+	 * BrowseTopLevelCommentsActivity and BroweReplyCommentsActivity.
+	 * This keeps track of which comment is currently being viewed by the user.
+	 * <p>
+	 * @param currentComment	Current comment of interest
+	 * @see CommentModel	Example of a CommentModel
 	 */
 	public static void setCurrentComment(CommentModel currentComment) {
 		ProjectApplication.currentComment = currentComment;
