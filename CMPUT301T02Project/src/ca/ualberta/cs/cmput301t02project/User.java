@@ -2,25 +2,37 @@ package ca.ualberta.cs.cmput301t02project;
 
 import ca.ualberta.cs.cmput301t02project.model.CommentListModel;
 
+/**
+ * The User class stores information about a user. 
+ * The information stored includes 
+ * the username of the user, a list of their comments, and a list of their favorite comments.
+ */
 public class User {
 
-	private String name;
-
-	// private ArrayList<FavoritesListModel> favoritesList;
+	private String username;
+	private CommentListModel myFavorites;
 	private CommentListModel myComments;
 
-	public User(String name) {
+	public User(String username) {
 		super();
-		this.name = name;
+		this.username = username;
 		myComments = new CommentListModel();
 	}
 
+	public void setName(String username) {
+		this.username = username;
+	}
+	
 	public String getName() {
-		return name;
+		return username;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setMyFavoriteComments(CommentListModel myFavorites) {
+		this.myFavorites = myFavorites;
+	}
+	
+	public CommentListModel getMyFavoritesComments() {
+		return this.myFavorites;
 	}
 	
 	public void setMyComments(CommentListModel myComments) {
@@ -30,18 +42,4 @@ public class User {
 	public CommentListModel getMyComments() {
 		return this.myComments;
 	}
-
-	/*
-	 * public ArrayList<FavoritesListModel> getFavoritesList() { return
-	 * favoritesList; }
-	 * 
-	 * public void setFavoritesList(ArrayList<FavoritesListModel> favoritesList)
-	 * { this.favoritesList = favoritesList; }
-	 * 
-	 * public ArrayList<MyCommentsModel> getMyComments() { return myComments; }
-	 * 
-	 * public void setMyComments(ArrayList<MyCommentsModel> myComments) {
-	 * this.myComments = myComments; }
-	 */
-
 }
