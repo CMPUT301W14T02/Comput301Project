@@ -59,7 +59,10 @@ public class User {
 	}
 
 	/**
-	 * 
+	 * Sets the list of comments composed by a User. 
+	 * <p>
+	 * The user's comments are in the form of a CommentModel and are stored in a CommentListModel.
+	 * <p>
 	 * @param myComments	List of comments that the User posted
 	 */
 	public void setMyComments(CommentListModel myComments) {
