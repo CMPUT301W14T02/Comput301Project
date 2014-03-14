@@ -159,7 +159,11 @@ public class ProjectApplication {
 	}
 
 	/**
-	 * 
+	 * Returns the current location of the user.
+	 * <p>
+	 * The current location of the user is retrieved when posting a comment through
+	 * CreateCommentActivity and EditCommentActiviy. 
+	 * <p>
 	 * @return current user's location
 	 */
 	public static Location getCurrentLocation() {
@@ -167,8 +171,14 @@ public class ProjectApplication {
 	}
 
 	/**
-	 * 
-	 * @param location	location to record
+	 * Sets the current location of the user.
+	 * <p>
+	 * The current location of the user is set in 
+	 * MainMenuActivity. 
+	 * It is updated when the user moves. 
+	 * The location is originally initialized to a default string.
+	 * <p>
+	 * @param location	Location to record
 	 */
 	public static void setCurrentLocation(Location location) {
 		if (currentLocation==null) {
