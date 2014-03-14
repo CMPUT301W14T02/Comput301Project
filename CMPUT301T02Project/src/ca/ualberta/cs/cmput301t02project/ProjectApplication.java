@@ -30,7 +30,7 @@ public class ProjectApplication {
 	 * Username is displayed next to a user's comment. 
 	 * Example of a username: the string "Bob".
 	 * <p>
-	 * @return current user's username
+	 * @return Current user's username
 	 */
 	public static String getName() {
 		return currentUser.getName();
@@ -43,7 +43,7 @@ public class ProjectApplication {
 	 * The list of "MyComments" is determined by the user with that username.
 	 * Example of a username: the string "Bob".
 	 * <p>
-	 * @param name	username of the current user
+	 * @param name	Current user's username
 	 */
 	public static void setName(String name) {
 		currentUser.setName(name);
@@ -58,7 +58,7 @@ public class ProjectApplication {
 	 * BrowseMyCommentsActivity, EditCommentActivity, and BrowseFavoritesActivity.
 	 * <p>
 	 * @see User	Example of a User
-	 * @return current user information
+	 * @return Current user information
 	 *
 	 */
 	public static User getUser() {
@@ -66,8 +66,8 @@ public class ProjectApplication {
 	}
 	
 	/**
-	 * 
-	 * @return instance of ProjectApplication
+	 * Creates an instance of ProjectApplication.
+	 * @return Instance of ProjectApplication
 	 */
 	public static ProjectApplication getInstance() {
 		if (instance == null) {
@@ -77,8 +77,16 @@ public class ProjectApplication {
 	}
 	
 	/**
-	 * Returns the complete list of all comments
-	 * @return list of all top level comments
+	 * Returns the complete list of all comments.
+	 * <p>
+	 * A list of all comments in the app is stored in a CommentListModel.
+	 * The list of all comments can be retrieved to display comments in BrowseTopLevelCommentsActivity.
+	 * Comments in the CommentListModel include information about the text of comments, 
+	 * the username of the comment author, the location of the comment, pictures attached to
+	 * the comment, and a list of replies to that comment. 
+	 * <p>
+	 * @return List of all top level comments
+	 * @see CommentListModel	Example of a CommentListModel
 	 */
 	public static CommentListModel getCommentList() {
 		if (commentList == null) {
