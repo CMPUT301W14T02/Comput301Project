@@ -24,11 +24,12 @@ public class ProjectApplication {
 
 	/**
 	 * Returns the current username. 
-	 * 
-	 * 
-	 * Username is also stored in a list of all users which is used to check if a user already exists. 
+	 * <p>
+	 * Username can be checked against a list of all users (UserList) to see if the user already exists. 
+	 * If the username already exists, the user's previous data can be retrieved.
+	 * Username is displayed next to a user's comment. 
 	 * Example of a username: the string "Bob".
-	 * 
+	 * <p>
 	 * @return current user's username
 	 */
 	public static String getName() {
@@ -37,11 +38,11 @@ public class ProjectApplication {
 	
 	/**
 	 * Sets the current username.
-	 * 
-	 * Username is used when comment is displayed.
+	 * <p>
+	 * A user can set their own username from the login page.
+	 * The list of "MyComments" is determined by the user with that username.
 	 * Example of a username: the string "Bob".
-	 * User can set their own username from the login page.
-	 * 
+	 * <p>
 	 * @param name	username of the current user
 	 */
 	public static void setName(String name) {
@@ -49,8 +50,16 @@ public class ProjectApplication {
 	}
 	
 	/**
-	 * 
+	 * Returns the current User.
+	 * <p>
+	 * The current user information is stored in a User. 
+	 * This includes the current user's username, a list of their own comments and their favorite comments.
+	 * The user information can be retrieved for determining which comments to display in
+	 * BrowseMyCommentsActivity, EditCommentActivity, and BrowseFavoritesActivity.
+	 * <p>
+	 * @see User	Example of a User
 	 * @return current user information
+	 *
 	 */
 	public static User getUser() {
 		return currentUser;
