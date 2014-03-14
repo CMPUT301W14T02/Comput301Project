@@ -1,6 +1,8 @@
 package ca.ualberta.cs.cmput301t02project.controller;
 
 import android.graphics.Bitmap;
+import android.location.Location;
+import ca.ualberta.cs.cmput301t02project.ProjectApplication;
 import ca.ualberta.cs.cmput301t02project.model.CommentListModel;
 import ca.ualberta.cs.cmput301t02project.model.CommentModel;
 
@@ -13,13 +15,13 @@ public class CommentListController extends CommentListControllerAbstraction {
 
 	public CommentModel addNewComment(String text, Bitmap picture, String username) {
 		CommentModel comment;
-		/*String loc = "Initialize location";
+		String loc = "Initialize location";
 		Location currentLocation = new Location(loc);
 		currentLocation = ProjectApplication.getCurrentLocation();
 		double lon = currentLocation.getLongitude();
 		double lat = currentLocation.getLatitude();
-		String test =  String.valueOf(lat) + String.valueOf(lon);*/
-		comment = new CommentModel(text, picture, null, username);
+		String test =  String.valueOf(lat) + String.valueOf(lon);
+		comment = new CommentModel(test+text, picture, currentLocation, username);
 		model.add(comment);
 		return comment;
 	}

@@ -33,6 +33,7 @@ public abstract class CommentListAdapterAbstraction extends ArrayAdapter<Comment
 				}
 			}
 		};
+		
 		sortByLocation = new Comparator<CommentModel>() {
 			public int compare(CommentModel a, CommentModel b) {
 				String loc = "Location Initialization";
@@ -119,14 +120,14 @@ public abstract class CommentListAdapterAbstraction extends ArrayAdapter<Comment
 		
 		Collections.sort(list2, sortByDate);
 		finalList.addAll(list2);
-		
-		model.setCommentList(finalList);
+		list = model.getCommentList();
+		list = finalList;
 
 		
 	}
 	
 	
-	public void sortByDefautl() {
+	public void sortByDefault() {
 		sortMethod = "Default";
 		sortList();
 	}

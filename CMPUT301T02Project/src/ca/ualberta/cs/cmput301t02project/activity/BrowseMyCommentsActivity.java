@@ -119,7 +119,7 @@ public class BrowseMyCommentsActivity extends Activity implements OnItemSelected
 		} else if (selected.equals("Ranking")) {
 			adapter.sortByRanking();
 		} else if (selected.equals("Default")) {
-
+			adapter.sortByDefault();
 		}
 
 	}

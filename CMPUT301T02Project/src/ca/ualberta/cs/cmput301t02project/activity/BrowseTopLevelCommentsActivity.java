@@ -140,7 +140,7 @@ public class BrowseTopLevelCommentsActivity extends Activity implements OnItemSe
 		} else if (selected.equals("Ranking")) {
 			adapter.sortByRanking();
 		} else if (selected.equals("Default")) {
-
+			adapter.sortByDefault();
 		}
 
 	}

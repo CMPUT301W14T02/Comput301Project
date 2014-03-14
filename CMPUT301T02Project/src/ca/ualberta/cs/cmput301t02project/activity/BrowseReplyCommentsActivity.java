@@ -139,7 +139,7 @@ public class BrowseReplyCommentsActivity extends Activity implements
 		} else if (selected.equals("Ranking")) {
 			adapter.sortByRanking();
 		} else if (selected.equals("Default")) {
-
+			adapter.sortByDefault();
 		}
 		
 	}
