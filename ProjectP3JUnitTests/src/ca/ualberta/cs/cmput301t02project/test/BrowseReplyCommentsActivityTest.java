@@ -25,8 +25,12 @@ public class BrowseReplyCommentsActivityTest extends ActivityInstrumentationTest
 		myLocation = new Location(loc);
 
 		CommentModel comment = new CommentModel("comment", currentLocation, "username");
+		
+		CommentListModel comments = new CommentListModel();
+		comments.add(comment);
 
 		ProjectApplication.setCurrentComment(comment);
+		ProjectApplication.setCurrentCommentList(comments);
 		ProjectApplication.setCurrentLocation(myLocation);
 
 		return comment;
@@ -50,9 +54,6 @@ public class BrowseReplyCommentsActivityTest extends ActivityInstrumentationTest
 	/* Test for use case 5 */
 	public void testDisplayReplies() {
 		CommentModel comment = initializeComment();
-		CommentListModel comments = new CommentListModel();
-		comments.add(comment);
-		ProjectApplication.setCurrentCommentList(comments);
 
 		ListView view = (ListView) getActivity().findViewById(R.id.replyListView);
 		assertEquals("text should be displayed", comment.toString(), view.getAdapter().getItem(0).toString());
@@ -64,6 +65,15 @@ public class BrowseReplyCommentsActivityTest extends ActivityInstrumentationTest
 		ListView view = (ListView) getActivity().findViewById(R.id.replyListView);
 		BrowseReplyCommentsActivity activity = getActivity();
 		ViewAsserts.assertOnScreen(activity.getWindow().getDecorView(), view);
+
+	}
+
+	/* Test for use case 21 */
+	public void testDisplayUsername() {
+		CommentModel comment = initializeComment();
+
+		ListView view = (ListView) getActivity().findViewById(R.id.replyListView);
+		assertTrue("username should be displayed", view.getAdapter().getItem(0).toString().contains(comment.getUsername()));
 
 	}
 
