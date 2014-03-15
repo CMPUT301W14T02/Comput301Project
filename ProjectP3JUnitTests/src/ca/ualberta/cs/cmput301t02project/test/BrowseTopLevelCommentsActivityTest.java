@@ -55,7 +55,7 @@ public class BrowseTopLevelCommentsActivityTest extends ActivityInstrumentationT
 		CommentModel comment = initializeComment();
 
 		ListView view = (ListView) getActivity().findViewById(R.id.commentListView);
-		BrowseTopLevelCommentsActivity activity = getActivity();
+		assertTrue("username should be displayed", view.getAdapter().getItem(0).toString().contains(comment.getUsername()));
 
 	}
 }
