@@ -80,62 +80,50 @@ public abstract class CommentListAdapterAbstraction extends ArrayAdapter<Comment
 		ArrayList<CommentModel> list2 = new ArrayList<CommentModel>();
 		// contains the final list
 		ArrayList<CommentModel> finalList = new ArrayList<CommentModel>();
+		Integer i;
+		int l = list.size();
 		
-		int i;
-		
-		for (i = 0; i<list.size(); i++) {
-			if (list.get(i).getLocation().distanceTo(myLocation) < 5000) {
+		for (i = 0; i<l; i++) {
+			if ((list.get(i).getLocation().distanceTo(myLocation) < 5000) && (!finalList.contains(list.get(i)))) {
 				list2.add(list.get(i));
-				list.remove(i);
 			}
 		}
 		
 		Collections.sort(list2, sortByDate);
-		for (i = 0; i<list2.size(); i++) {
-			finalList.add(list2.get(i));
+		finalList.addAll(list2);
+		list2 = new ArrayList<CommentModel>();
+			
+		for (i = 0; i<l; i++) {
+			if ((list.get(i).getLocation().distanceTo(myLocation) < 100000) && (!finalList.contains(list.get(i)))) {
+				list2.add(list.get(i));
+			}
 		}
+		
+		Collections.sort(list2, sortByDate);
+		finalList.addAll(list2);
 		list2 = new ArrayList<CommentModel>();
 		
-		for (i = 0; i<list.size(); i++) {
-			if (list.get(i).getLocation().distanceTo(myLocation) < 100000) {
+		for (i = 0; i<l; i++) {
+			if ((list.get(i).getLocation().distanceTo(myLocation) < 5000000) && (!finalList.contains(list.get(i)))) {
 				list2.add(list.get(i));
-				list.remove(i);
 			}
 		}
-		
+
 		Collections.sort(list2, sortByDate);
-		for (i = 0; i<list2.size(); i++) {
-			finalList.add(list2.get(i));
-		}
-		list2 = new ArrayList<CommentModel>();
-		
-		for (i = 0; i<list.size(); i++) {
-			if (list.get(i).getLocation().distanceTo(myLocation) < 5000000) {
-				list2.add(list.get(i));
-				list.remove(i);
-			}
-		}
-		
-		Collections.sort(list2, sortByDate);
-		for (i = 0; i<list2.size(); i++) {
-			finalList.add(list2.get(i));
-		}
+		finalList.addAll(list2);
 		list2 = new ArrayList<CommentModel>();
 		
 		// rest of list
-		for (i = 0; i<list.size(); i++) {
-			list2.add(list.get(i));
-			list.remove(i);
-			
+		for (i = 0; i<l; i++) {
+			if (!finalList.contains(list.get(i))) {
+				list2.add(list.get(i));
+			}
 		}
-		
+
+		list.clear();
 		Collections.sort(list2, sortByDate);
-		for (i = 0; i<list2.size(); i++) {
-			finalList.add(list2.get(i));
-		}
-		for (i = 0; i<finalList.size(); i++) {
-			list.add(finalList.get(i));
-		}
+		finalList.addAll(list2);
+		list.addAll(finalList);
 
 		
 	}
