@@ -1,5 +1,6 @@
 package ca.ualberta.cs.cmput301t02project.test;
 
+import ca.ualberta.cs.cmput301t02project.ProjectApplication;
 import ca.ualberta.cs.cmput301t02project.R;
 import ca.ualberta.cs.cmput301t02project.activity.BrowseTopLevelCommentsActivity;
 import ca.ualberta.cs.cmput301t02project.model.CommentListModel;
@@ -14,28 +15,30 @@ public class BrowseTopLevelCommentsActivityTest extends ActivityInstrumentationT
 	public BrowseTopLevelCommentsActivityTest() {
 		super(BrowseTopLevelCommentsActivity.class);
 	}
-	
+
 	public CommentModel initializeComment() {
 		String loc = "Location Intialization";
 		Location currentLocation;
+		Location myLocation;
 		currentLocation = new Location(loc);
+		myLocation = new Location(loc);
 
 		CommentModel comment = new CommentModel("comment", currentLocation, "username");
+
+		ProjectApplication.setCurrentLocation(myLocation);
 
 		return comment;
 	}
 
-
 	/* Test for use case 4 */
-	public void testBrowseTopLevelComments() {
-		CommentListModel comments = new CommentListModel();
-
+	public void testDisplayTopLevelComments() {
 		CommentModel comment = initializeComment();
+		CommentListModel comments = new CommentListModel();
+		comments = ProjectApplication.getCommentList();
 		comments.add(comment);
 
 		ListView view = (ListView) getActivity().findViewById(R.id.commentListView);
-		BrowseTopLevelCommentsActivity activity = getActivity();
-		ViewAsserts.assertOnScreen(activity.getWindow().getDecorView(), view);
+		assertEquals("text should be displayed", comment.toString(), view.getAdapter().getItem(0).toString());
 
 	}
 
@@ -44,6 +47,15 @@ public class BrowseTopLevelCommentsActivityTest extends ActivityInstrumentationT
 		ListView view = (ListView) getActivity().findViewById(R.id.commentListView);
 		BrowseTopLevelCommentsActivity activity = getActivity();
 		ViewAsserts.assertOnScreen(activity.getWindow().getDecorView(), view);
+
+	}
+
+	/* Test for use case 21 */
+	public void testDisplayUsername() {
+		CommentModel comment = initializeComment();
+
+		ListView view = (ListView) getActivity().findViewById(R.id.commentListView);
+		BrowseTopLevelCommentsActivity activity = getActivity();
 
 	}
 }
