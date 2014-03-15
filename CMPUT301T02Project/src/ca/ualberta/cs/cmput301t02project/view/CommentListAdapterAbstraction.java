@@ -14,7 +14,7 @@ import android.widget.ArrayAdapter;
 public abstract class CommentListAdapterAbstraction extends ArrayAdapter<CommentModel> {
 
 	private CommentListModel model = null;
-	private String sortMethod = "Date"; //SHOULD BE DEFAULT ONCE DEFAULT WORKS
+	private String sortMethod = "Default";
 	private Comparator<CommentModel> sortByDate;
 	private Comparator<CommentModel> sortByLocation;
 	private Location myLocation = null;
@@ -75,7 +75,7 @@ public abstract class CommentListAdapterAbstraction extends ArrayAdapter<Comment
 		
 		
 		// will hold the remaining unsorted CommentModels
-		ArrayList<CommentModel> list = (ArrayList<CommentModel>) model.getCommentList().clone();
+		ArrayList<CommentModel> list = (ArrayList<CommentModel>) model.getCommentList();
 		// holds the sorted CommentModels to be passed to sortByLocation
 		ArrayList<CommentModel> list2 = new ArrayList<CommentModel>();
 		// contains the final list
@@ -85,43 +85,57 @@ public abstract class CommentListAdapterAbstraction extends ArrayAdapter<Comment
 		
 		for (i = 0; i<list.size(); i++) {
 			if (list.get(i).getLocation().distanceTo(myLocation) < 5000) {
-				list2.add(list.remove(i));
+				list2.add(list.get(i));
+				list.remove(i);
 			}
 		}
 		
 		Collections.sort(list2, sortByDate);
-		finalList.addAll(list2);
+		for (i = 0; i<list2.size(); i++) {
+			finalList.add(list2.get(i));
+		}
 		list2 = new ArrayList<CommentModel>();
+		
 		for (i = 0; i<list.size(); i++) {
 			if (list.get(i).getLocation().distanceTo(myLocation) < 100000) {
-				list2.add(list.remove(i));
+				list2.add(list.get(i));
+				list.remove(i);
 			}
 		}
 		
 		Collections.sort(list2, sortByDate);
-		finalList.addAll(list2);
+		for (i = 0; i<list2.size(); i++) {
+			finalList.add(list2.get(i));
+		}
 		list2 = new ArrayList<CommentModel>();
 		
 		for (i = 0; i<list.size(); i++) {
 			if (list.get(i).getLocation().distanceTo(myLocation) < 5000000) {
-				list2.add(list.remove(i));
+				list2.add(list.get(i));
+				list.remove(i);
 			}
 		}
 		
 		Collections.sort(list2, sortByDate);
-		finalList.addAll(list2);
+		for (i = 0; i<list2.size(); i++) {
+			finalList.add(list2.get(i));
+		}
 		list2 = new ArrayList<CommentModel>();
 		
 		// rest of list
 		for (i = 0; i<list.size(); i++) {
-				list2.add(list.remove(i));
+			list2.add(list.get(i));
+			list.remove(i);
 			
 		}
 		
 		Collections.sort(list2, sortByDate);
-		finalList.addAll(list2);
-		list = model.getCommentList();
-		list = finalList;
+		for (i = 0; i<list2.size(); i++) {
+			finalList.add(list2.get(i));
+		}
+		for (i = 0; i<finalList.size(); i++) {
+			list.add(finalList.get(i));
+		}
 
 		
 	}
