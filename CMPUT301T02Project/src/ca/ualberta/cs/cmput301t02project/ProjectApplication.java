@@ -160,6 +160,7 @@ public class ProjectApplication {
 	 */
 	public static void setCurrentComment(CommentModel currentComment) {
 		ProjectApplication.currentComment = currentComment;
+		currentCommentList = currentComment.getReplies();
 	}
 
 	/**

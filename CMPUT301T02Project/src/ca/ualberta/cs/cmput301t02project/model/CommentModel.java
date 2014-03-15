@@ -21,8 +21,6 @@ public class CommentModel {
 			String username) {
 		this.text = text;
 		this.picture = picture;
-		String loc = "Initialize location";
-		this.location = new Location(loc);
 		this.location = location;
 		this.username = username;
 		this.rating = 0;
@@ -34,8 +32,6 @@ public class CommentModel {
 	public CommentModel(String text, Location location, String username) {
 		this.text = text;
 		this.picture = null;
-		String loc = "Initialize location";
-		this.location = new Location(loc);
 		this.location = location;
 		this.username = username;
 		this.rating = 0;

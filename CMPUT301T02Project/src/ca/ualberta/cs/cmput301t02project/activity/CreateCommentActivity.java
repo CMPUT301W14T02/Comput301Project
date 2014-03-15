@@ -38,8 +38,6 @@ public class CreateCommentActivity extends Activity {
 		setContentView(R.layout.activity_create_comment);
 
 		Button post = (Button) findViewById(R.id.create_post);
-		String loc = "No location yet";
-		currentLocation = new Location(loc);
 
 		post.setOnClickListener(new View.OnClickListener() {
 			@Override

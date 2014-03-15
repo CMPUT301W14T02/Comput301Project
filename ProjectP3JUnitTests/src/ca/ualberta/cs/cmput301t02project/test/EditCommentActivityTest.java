@@ -23,6 +23,7 @@ public class EditCommentActivityTest extends ActivityInstrumentationTestCase2<Ed
 		activity = getActivity();
 	}
 
+	
 	public void testEditComment() throws Throwable {
 		runTestOnUiThread(new Runnable() {
 
@@ -36,8 +37,8 @@ public class EditCommentActivityTest extends ActivityInstrumentationTestCase2<Ed
 				edit.setText(text);
 				button.performClick();
 				CommentModel expectedComment = new CommentModel(text, null, username);
-				assertTrue("The comment should be equal to the edited one",
-						ProjectApplication.getCurrentComment().equals(expectedComment));
+				assertEquals("The comment should be equal to the edited one",
+						ProjectApplication.getCurrentComment(), expectedComment);
 			}
 		});
 
