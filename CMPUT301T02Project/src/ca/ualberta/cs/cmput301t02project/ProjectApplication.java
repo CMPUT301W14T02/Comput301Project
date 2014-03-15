@@ -1,6 +1,10 @@
 package ca.ualberta.cs.cmput301t02project;
 
+import android.content.Context;
 import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
+import android.os.Bundle;
 import ca.ualberta.cs.cmput301t02project.model.CommentListModel;
 import ca.ualberta.cs.cmput301t02project.model.CommentModel;
 
@@ -14,7 +18,7 @@ public class ProjectApplication {
 	private static CommentListModel commentList;
 	private static CommentListModel currentCommentList;
 	private static CommentModel currentComment;
-	private static Location currentLocation;
+	private static Location currentLocation = null;
 	private static User currentUser = new User("default");
 
 	// Singleton code adapted from http://www.javaworld.com/article/2073352/core-java/simply-singleton.html
@@ -173,19 +177,60 @@ public class ProjectApplication {
 	/**
 	 * Sets the current location of the user.
 	 * <p>
-	 * The current location of the user is set in 
-	 * MainMenuActivity. 
-	 * It is updated when the user moves. 
-	 * The location is originally initialized to a default string.
+	 * Sets the location directly.
+	 * This could be used for overriding the normal behavior,
+	 * i.e.: the location being constantly updated by the LocationManager
 	 * <p>
 	 * @param location	Location to record
 	 */
-	public static void setCurrentLocation(Location location) {
-		if (currentLocation==null) {
-			String loc = "Location Intialization";
-			currentLocation = new Location(loc);
-		}
-		
+	public static void setCurrentLocation(Location location) {		
 		ProjectApplication.currentLocation = location;
 	}
+	
+	/**
+	 * Initializes the LocationManager.
+	 * <p>
+	 * Must be called before requesting the user's location.
+	 * The location is automatically updated as the GPS updates.
+	 * <p>
+	 * @param context	A context is required to get a System Service
+	 */
+	public static void InitializeLocationManager(Context context) {
+		LocationManager locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
+		currentLocation = new Location("");
+		
+		locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, 
+				new LocationListener() {
+					// TODO: override the four methods.
+					@Override
+					public void onLocationChanged(Location location) {
+
+						if (location != null) {
+							ProjectApplication.setCurrentLocation(location);
+
+						} else {
+							// do something later here
+						}
+					}
+
+					@Override
+					public void onProviderDisabled(String provider) {
+
+						// TODO
+					}
+
+					@Override
+					public void onProviderEnabled(String provider) {
+
+						// TODO
+					}
+
+					@Override
+					public void onStatusChanged(String provider, int status, Bundle extras) {
+
+						// TODO
+					}
+				});
+	}
+	
 }
