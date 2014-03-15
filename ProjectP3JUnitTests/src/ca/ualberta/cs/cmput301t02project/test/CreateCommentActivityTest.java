@@ -8,7 +8,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import ca.ualberta.cs.cmput301t02project.ProjectApplication;
 import ca.ualberta.cs.cmput301t02project.activity.CreateCommentActivity;
-import ca.ualberta.cs.cmput301t02project.model.CommentListModel;
 import ca.ualberta.cs.cmput301t02project.model.CommentModel;
 
 public class CreateCommentActivityTest extends ActivityInstrumentationTestCase2<CreateCommentActivity> {
@@ -40,7 +39,11 @@ public class CreateCommentActivityTest extends ActivityInstrumentationTestCase2<
 				edit.setText(text);
 				button.performClick();
 				ArrayList<CommentModel> list = ProjectApplication.getCommentList().getCommentList();
-				assertTrue("List should contain the just created comment", list.contains(new CommentModel(text, null, username)));
+				CommentModel expected = new CommentModel(text, null, username);
+				assertTrue("List should contain the just created comment", list.contains(expected));
+				ArrayList<CommentModel> myComments = ProjectApplication.getUser().getMyComments().getCommentList();
+				assertTrue("myList should contain the just created comment", myComments.contains(expected));
+				
 			}
 		});
 	}

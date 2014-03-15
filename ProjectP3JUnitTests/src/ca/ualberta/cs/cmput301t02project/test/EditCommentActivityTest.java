@@ -23,7 +23,6 @@ public class EditCommentActivityTest extends ActivityInstrumentationTestCase2<Ed
 		activity = getActivity();
 	}
 
-	
 	public void testEditComment() throws Throwable {
 		runTestOnUiThread(new Runnable() {
 
