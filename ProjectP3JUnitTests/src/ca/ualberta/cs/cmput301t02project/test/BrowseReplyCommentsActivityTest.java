@@ -5,7 +5,6 @@ import ca.ualberta.cs.cmput301t02project.R;
 import ca.ualberta.cs.cmput301t02project.activity.BrowseReplyCommentsActivity;
 import ca.ualberta.cs.cmput301t02project.model.CommentListModel;
 import ca.ualberta.cs.cmput301t02project.model.CommentModel;
-import ca.ualberta.cs.cmput301t02project.view.CommentListAdapterAbstraction;
 import android.location.Location;
 import android.test.ActivityInstrumentationTestCase2;
 import android.test.ViewAsserts;
