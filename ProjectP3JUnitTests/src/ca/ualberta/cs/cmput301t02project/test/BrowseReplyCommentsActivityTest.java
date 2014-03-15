@@ -5,7 +5,6 @@ import ca.ualberta.cs.cmput301t02project.R;
 import ca.ualberta.cs.cmput301t02project.activity.BrowseReplyCommentsActivity;
 import ca.ualberta.cs.cmput301t02project.model.CommentListModel;
 import ca.ualberta.cs.cmput301t02project.model.CommentModel;
-import ca.ualberta.cs.cmput301t02project.view.CommentListAdapterAbstraction;
 import android.location.Location;
 import android.test.ActivityInstrumentationTestCase2;
 import android.test.ViewAsserts;
@@ -26,21 +25,21 @@ public class BrowseReplyCommentsActivityTest extends ActivityInstrumentationTest
 		myLocation = new Location(loc);
 
 		CommentModel comment = new CommentModel("comment", currentLocation, "username");
-		
+
 		ProjectApplication.setCurrentComment(comment);
 		ProjectApplication.setCurrentLocation(myLocation);
-		
+
 		return comment;
 	}
 
-	/* Test for use case 4 */
-	public void testDisplayComment() {
+	/* Test for use case 5 */
+	public void testDisplaySelectedComment() {
 		CommentModel comment = initializeComment();
 		TextView view = (TextView) getActivity().findViewById(R.id.selected_comment);
 		assertEquals("text should be displayed", comment.getText(), view.getText().toString());
 	}
 
-	/* Test for use case 4 */
+	/* Test for use case 5 */
 	public void testVisibleTextView() {
 		TextView view = (TextView) getActivity().findViewById(R.id.selected_comment);
 		BrowseReplyCommentsActivity activity = getActivity();
@@ -48,7 +47,7 @@ public class BrowseReplyCommentsActivityTest extends ActivityInstrumentationTest
 
 	}
 
-	/* Test for use case 4 */
+	/* Test for use case 5 */
 	public void testDisplayReplies() {
 		CommentModel comment = initializeComment();
 		CommentListModel comments = new CommentListModel();
@@ -60,7 +59,7 @@ public class BrowseReplyCommentsActivityTest extends ActivityInstrumentationTest
 
 	}
 
-	/* Test for use case 4 */
+	/* Test for use case 5 */
 	public void testVisibleListView() {
 		ListView view = (ListView) getActivity().findViewById(R.id.replyListView);
 		BrowseReplyCommentsActivity activity = getActivity();
