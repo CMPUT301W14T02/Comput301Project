@@ -234,4 +234,12 @@ public class ProjectApplication {
 				});
 	}
 	
+	/**
+	 * Pushes the currentUser to server
+	 * @param currentUser
+	 */
+	public void pushUser(User currentUser){
+		
+	}
+	
 }

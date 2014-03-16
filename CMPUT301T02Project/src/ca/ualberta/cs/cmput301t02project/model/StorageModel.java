@@ -1,6 +1,5 @@
 package ca.ualberta.cs.cmput301t02project.model;
 
-import java.lang.reflect.Type;
 import java.util.Date;
 
 import com.google.gson.Gson;
@@ -9,13 +8,13 @@ public class StorageModel {
 
 	private static Gson gson = new Gson();
 
-	public CommentModel storeComment(CommentModel comment) {
+	public void pushComment(CommentModel comment) {
 
+		/* Some test code for when we work on this method */
 		String text = comment.getText();
 		String username = comment.getUsername();
 		int rating = comment.getRating();
 		Date date = comment.getDate();
-
 		/* Note: Can convert type Location to Json *
 		 * Can we remove LocationModel? -TH
 		 */
@@ -34,8 +33,9 @@ public class StorageModel {
 		comment1.setRating(rating1);
 		comment1.setReplies(comment.getReplies());
 
-
-		return comment1;
-
+	}
+	
+	public void cacheComment(CommentModel comment) {
+		
 	}
 }
