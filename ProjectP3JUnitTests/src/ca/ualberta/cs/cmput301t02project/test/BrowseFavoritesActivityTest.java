@@ -37,7 +37,6 @@ public class BrowseFavoritesActivityTest extends ActivityInstrumentationTestCase
 	public void testDisplayUsername() {
 		//Currently throws an error -KW
 		CommentModel comment = initializeComment();
-
 		ListView view = (ListView) getActivity().findViewById(R.id.commentListView);
 		assertTrue("username should be displayed", view.getAdapter().getItem(0).toString().contains(comment.getUsername()));
 
@@ -46,6 +45,7 @@ public class BrowseFavoritesActivityTest extends ActivityInstrumentationTestCase
 	}
 
 	public void testVisibleListView() {
+		//Throwing an error, not failure -KW
 		BrowseFavoritesActivity activity = getActivity();
 		ListView view = (ListView) activity.findViewById(R.id.commentListView);
 		ViewAsserts.assertOnScreen(activity.getWindow().getDecorView(), view);
