@@ -264,17 +264,22 @@ public abstract class CommentListAdapterAbstraction extends ArrayAdapter<Comment
 			if (sortMethod.equals("Default")) {
 				sortByDefaultMethod();
 				notifyDataSetChanged();
-			} else if (sortMethod.equals("Date")) {
+			} 
+			else if (sortMethod.equals("Date")) {
 				Collections.sort(list, sortByDate);
 				notifyDataSetChanged();
-			} else if (sortMethod.equals("Picture")) {
+			} 
+			else if (sortMethod.equals("Picture")) {
 
-			} else if (sortMethod.equals("Location")) {
+			} 
+			else if (sortMethod.equals("Location")) {
 				Collections.sort(list, sortByLocation);
 				notifyDataSetChanged();
-			} else if (sortMethod.equals("Other Location")) {
+			} 
+			else if (sortMethod.equals("Other Location")) {
 			
-			} else if (sortMethod.equals("Ranking")) {
+			} 
+			else if (sortMethod.equals("Ranking")) {
 			
 			}
 		}

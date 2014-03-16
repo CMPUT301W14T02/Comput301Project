@@ -18,13 +18,13 @@ public class CommentListAdapterAbstractionTest extends ActivityInstrumentationTe
 	
 	public void testSortByDate() throws InterruptedException{
 		CommentModel comment1 = new  CommentModel("post 1", null, "schmoop");
-		comment1.setDate(new Date(100));
+		comment1.setDate(new Date(1));
 		
 		CommentModel comment2 = new  CommentModel("post 2", null, "schmoop");
-		comment2.setDate(new Date(200));
+		comment2.setDate(new Date(20000));
 		
 		CommentModel comment3 = new  CommentModel("post 3", null, "schmoop");
-		comment3.setDate(new Date(300));
+		comment3.setDate(new Date(300000000));
 		
 		ArrayList<CommentModel> outOfOrderComments = new ArrayList<CommentModel>();
 		outOfOrderComments.add(comment3);
@@ -42,10 +42,10 @@ public class CommentListAdapterAbstractionTest extends ActivityInstrumentationTe
 		
 		adapter1 = new CommentListAdapter(getActivity(), R.layout.list_item, outOfOrderComments);
 		adapter2 = new CommentListAdapter(getActivity(), R.layout.list_item, inOrderComments);
-		adapter1.sortByDate();
-		adapter2.sortByDate();
+		adapter1.sortByDefault();
+		adapter2.sortByDefault();
 		
-		assertEquals("First items should be in same place", adapter1.getItem(0), adapter2.getItem(0));
+		assertEquals("First items should be in same place", adapter1.getItem(0).getDate(), adapter2.getItem(0).getDate());
 		assertEquals("Second items should be in same place", adapter1.getItem(1), adapter2.getItem(1));
 		assertEquals("Third items should be in same place", adapter1.getItem(2), adapter2.getItem(2));
 		
