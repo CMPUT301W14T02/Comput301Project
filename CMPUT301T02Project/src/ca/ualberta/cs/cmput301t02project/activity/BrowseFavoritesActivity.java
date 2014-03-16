@@ -13,6 +13,7 @@ import android.widget.AdapterView.OnItemSelectedListener;
 
 /**
  * Displays the favorited comments of the current user.
+ * Current user information including their favorites list is stored in ProjectApplication.
  */
 public class BrowseFavoritesActivity extends Activity implements OnItemSelectedListener {
 
@@ -42,7 +43,9 @@ public class BrowseFavoritesActivity extends Activity implements OnItemSelectedL
 	
 	/**
 	 * Creates an adapter for displaying the list of favorites on the screen.
+	 * <p>
 	 * Called from onCreate().
+	 * <p>
 	 */
 	private void initializeAdapter(){
 		

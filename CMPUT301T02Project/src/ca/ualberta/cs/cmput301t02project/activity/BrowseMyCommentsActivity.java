@@ -19,6 +19,10 @@ import android.widget.Spinner;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemSelectedListener;
 
+/**
+ * Displays comments that the current user authored. 
+ * Current user infromation including a list of their comments is stored in ProjectApplication
+ */
 public class BrowseMyCommentsActivity extends Activity implements OnItemSelectedListener {
 
 	private CommentListModel myCommentsList;
@@ -57,6 +61,13 @@ public class BrowseMyCommentsActivity extends Activity implements OnItemSelected
 		adapter.notifyDataSetChanged();
 	}
 	
+	/**
+	 * Creates an adapter for displaying the list of the current user's comments on the screen.
+	 * <p>
+	 * Called from onCreate().
+	 * Comments from the current user are able to be edited when the user clicks on one. 
+	 * <p>
+	 */
 	private void initializeAdapter(){
 		
 		// Retrieve the current comments list -SB
@@ -65,10 +76,17 @@ public class BrowseMyCommentsActivity extends Activity implements OnItemSelected
 		// Add comments to adapter
 		adapter = new MyCommentsAdapter(this, R.layout.list_item, myCommentsList.getCommentList());
 		adapter.setModel(myCommentsList);
+		
 		// Display comments in adapter
 		myCommentListView.setAdapter(adapter);
 	}
 	
+	/**
+	 * Creates a drop-down menu of sorting options.
+	 * <p>
+	 * Called from onCreate().
+	 * <p>
+	 */
 	private void createSpinner(){
 		// Based on:
 		// //www.androidhive.info/2012/04/android-spinner-dropdown-example/
@@ -104,24 +122,29 @@ public class BrowseMyCommentsActivity extends Activity implements OnItemSelected
 		getMenuInflater().inflate(R.menu.top_level_list, menu);
 		return true;
 	}
+	
 	@Override
 	public void onItemSelected(AdapterView<?> parent, View view, int position,
 			long id) {
 		String selected = parent.getItemAtPosition(position).toString();
 		if (selected.equals("Date")) {
 			adapter.sortByDate();
-		} else if (selected.equals("Picture")) {
+		} 
+		else if (selected.equals("Picture")) {
 			adapter.sortByPicture();
-		} else if (selected.equals("My Location")) {
+		} 
+		else if (selected.equals("My Location")) {
 			adapter.sortByLocation();
-		} else if (selected.equals("Other Location")) {
+		} 
+		else if (selected.equals("Other Location")) {
 			adapter.sortByOtherLocation();
-		} else if (selected.equals("Ranking")) {
+		} 
+		else if (selected.equals("Ranking")) {
 			adapter.sortByRanking();
-		} else if (selected.equals("Default")) {
+		} 
+		else if (selected.equals("Default")) {
 			adapter.sortByDefault();
 		}
-
 	}
 
 	@Override
