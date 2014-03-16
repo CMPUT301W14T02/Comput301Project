@@ -18,8 +18,7 @@ public class CommentListController extends CommentListControllerAbstraction {
 	/**
 	 * Adds a new CommentModel to a CommentListModel.
 	 * <p>
-	 * Creates a new CommentModel using its the parameters.
-	 * 
+	 * Creates a new CommentModel using its parameters.
 	 * <p>
 	 * @param text	The comment text (Eg. "This is a comment")
 	 * @param picture	A photo to attach to the comment (in bitmap form)
