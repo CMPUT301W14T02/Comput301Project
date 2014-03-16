@@ -1,6 +1,7 @@
 package ca.ualberta.cs.cmput301t02project.test;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 import android.test.ActivityInstrumentationTestCase2;
 import ca.ualberta.cs.cmput301t02project.R;
@@ -15,32 +16,38 @@ public class CommentListAdapterAbstractionTest extends ActivityInstrumentationTe
 		super(BrowseTopLevelCommentsActivity.class);
 	}
 	
-	public void testSortByDate(){
+	public void testSortByDate() throws InterruptedException{
+		CommentModel comment1 = new  CommentModel("post 1", null, "schmoop");
+		comment1.setDate(new Date(100));
+		
+		CommentModel comment2 = new  CommentModel("post 2", null, "schmoop");
+		comment2.setDate(new Date(200));
+		
+		CommentModel comment3 = new  CommentModel("post 3", null, "schmoop");
+		comment3.setDate(new Date(300));
 		
 		ArrayList<CommentModel> outOfOrderComments = new ArrayList<CommentModel>();
-		outOfOrderComments.add(new CommentModel("post 1", null, "schmoop"));
-		outOfOrderComments.add(new CommentModel("post 2", null, "schmoop"));
-		outOfOrderComments.add(new CommentModel("post 3", null, "schmoop"));
-		
-		outOfOrderComments.set(0, new CommentModel("later comment", null, "schmoop"));
+		outOfOrderComments.add(comment3);
+		outOfOrderComments.add(comment2);
+		outOfOrderComments.add(comment1);
 
 		
 		ArrayList<CommentModel> inOrderComments = new ArrayList<CommentModel>();
-		inOrderComments.add(new CommentModel("post 2", null, "schmoop"));
-		inOrderComments.add(new CommentModel("post 3", null, "schmoop"));
-		inOrderComments.add(new CommentModel("later comment", null, "schmoop"));
+		inOrderComments.add(comment1);
+		inOrderComments.add(comment2);
+		inOrderComments.add(comment3);
 	
-		
 		CommentListAdapter adapter1;
 		CommentListAdapter adapter2;
 		
 		adapter1 = new CommentListAdapter(getActivity(), R.layout.list_item, outOfOrderComments);
 		adapter2 = new CommentListAdapter(getActivity(), R.layout.list_item, inOrderComments);
 		adapter1.sortByDate();
+		adapter2.sortByDate();
 		
-		assertEquals("", adapter1.getItem(0), adapter2.getItem(0));
-		assertEquals("", adapter1.getItem(1), adapter2.getItem(1));
-		assertEquals("", adapter1.getItem(2), adapter2.getItem(2));
+		assertEquals("First items should be in same place", adapter1.getItem(0), adapter2.getItem(0));
+		assertEquals("Second items should be in same place", adapter1.getItem(1), adapter2.getItem(1));
+		assertEquals("Third items should be in same place", adapter1.getItem(2), adapter2.getItem(2));
 		
 	}
 }
