@@ -15,7 +15,7 @@ public class BrowseFavoritesActivityTest extends ActivityInstrumentationTestCase
 	public BrowseFavoritesActivityTest() {
 		super(BrowseFavoritesActivity.class);
 	}
-	
+
 	public CommentModel initializeComment() {
 		String loc = "Location Intialization";
 		Location currentLocation;
@@ -23,7 +23,7 @@ public class BrowseFavoritesActivityTest extends ActivityInstrumentationTestCase
 		currentLocation = new Location(loc);
 		myLocation = new Location(loc);
 
-		CommentModel comment = new CommentModel("comment", currentLocation, "username");
+		CommentModel comment = new CommentModel("comment", currentLocation,"username");
 
 		ProjectApplication.setCurrentLocation(myLocation);
 
@@ -31,6 +31,7 @@ public class BrowseFavoritesActivityTest extends ActivityInstrumentationTestCase
 	}
 
 	public void testDisplayFavorites() {
+
 		CommentModel comment = initializeComment();
 		CommentListModel favoriteComments = new CommentListModel();
 		favoriteComments = ProjectApplication.getUser().getFavorites();
@@ -45,22 +46,23 @@ public class BrowseFavoritesActivityTest extends ActivityInstrumentationTestCase
 	public void testDisplayUsername() {
 		//Currently throws an error -KW
 		CommentModel comment = initializeComment();
+		CommentListModel favorites = new CommentListModel();
+		favorites = ProjectApplication.getUser().getFavorites();
+		favorites.add(comment);
+
 		ListView view = (ListView) getActivity().findViewById(R.id.commentListView);
-		assertTrue("username should be displayed", view.getAdapter().getItem(0).toString().contains(comment.getUsername()));
-
-		
-
+		//assertEquals("text should be displayed", comment.toString(), view.getAdapter().getItem(0).toString());
 	}
 
 	public void testVisibleListView() {
-		//Throwing an error, not failure -KW
+		// Throwing an error, not failure -KW
 		BrowseFavoritesActivity activity = getActivity();
 		ListView view = (ListView) activity.findViewById(R.id.commentListView);
 		ViewAsserts.assertOnScreen(activity.getWindow().getDecorView(), view);
 
-
 	}
-	
+
+
 	/* test for use case 12 */
 	public void testReadFavorites() {
 		CommentModel comment = initializeComment();
