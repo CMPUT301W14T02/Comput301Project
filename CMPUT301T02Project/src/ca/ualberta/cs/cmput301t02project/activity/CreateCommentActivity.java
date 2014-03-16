@@ -13,6 +13,9 @@ import ca.ualberta.cs.cmput301t02project.controller.CommentListController;
 import ca.ualberta.cs.cmput301t02project.controller.MyCommentsController;
 import ca.ualberta.cs.cmput301t02project.model.CommentModel;
 
+/**
+ * Allows a user to create their own comment. 
+ */
 public class CreateCommentActivity extends Activity {
 
 	// TODO: Refactor with new classes
@@ -31,26 +34,26 @@ public class CreateCommentActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		commentListController = new CommentListController(
-				ProjectApplication.getCurrentCommentList());
-		myCommentsListController = new MyCommentsController(
-				ProjectApplication.getUser().getMyComments());
+		
+		commentListController = new CommentListController(ProjectApplication.getCurrentCommentList());
+		myCommentsListController = new MyCommentsController(ProjectApplication.getUser().getMyComments());
+		
 		setContentView(R.layout.activity_create_comment);
 
 		Button post = (Button) findViewById(R.id.create_post);
 
 		post.setOnClickListener(new View.OnClickListener() {
+			
 			@Override
 			public void onClick(View v) {
 
 				EditText inputComment = (EditText) findViewById(R.id.create_text);
 
 				// Refactor into MVC?
-				// Username is temporarily in front of the comment. Can redesign
-				// later -SB
 				CommentModel comment;
 				comment = commentListController.addNewComment(inputComment.getText().toString(), 
 						null, ProjectApplication.getName().toString());
+				
 				myCommentsListController.addNewComment(comment);
 				finish();
 			}

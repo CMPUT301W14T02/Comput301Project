@@ -84,7 +84,6 @@ public class BrowseReplyCommentsActivity extends Activity implements OnItemSelec
 	 * Creates an adapter for displaying the replies to the current selected comment.
 	 * <p>
 	 * Called from onCreate().
-	 * Comments from the current user are able to be edited when the user clicks on one. 
 	 * <p>
 	 */
 	private void initializeAdapter(){
