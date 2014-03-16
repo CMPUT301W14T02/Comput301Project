@@ -11,7 +11,9 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.AdapterView.OnItemSelectedListener;
 
-
+/**
+ * Displays the favorited comments of the current user.
+ */
 public class BrowseFavoritesActivity extends Activity implements OnItemSelectedListener {
 
 	private CommentListModel favoritesList;
@@ -38,6 +40,10 @@ public class BrowseFavoritesActivity extends Activity implements OnItemSelectedL
 		adapter.notifyDataSetChanged();
 	}
 	
+	/**
+	 * Creates an adapter for displaying the list of favorites on the screen.
+	 * Called from onCreate().
+	 */
 	private void initializeAdapter(){
 		
 		// Retrieve the current comments list -TH
@@ -46,6 +52,7 @@ public class BrowseFavoritesActivity extends Activity implements OnItemSelectedL
 		// Add comments to adapter
 		adapter = new FavoritesAdapter(this, R.layout.list_item, favoritesList.getCommentList());
 		adapter.setModel(favoritesList);
+		
 		// Display comments in adapter
 		favoritesListView.setAdapter(adapter);
 	}
