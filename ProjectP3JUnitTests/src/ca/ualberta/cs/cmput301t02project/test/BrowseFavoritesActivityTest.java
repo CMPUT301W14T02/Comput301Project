@@ -48,7 +48,6 @@ public class BrowseFavoritesActivityTest extends ActivityInstrumentationTestCase
 		BrowseFavoritesActivity activity = getActivity();
 		ListView view = (ListView) activity.findViewById(R.id.commentListView);
 		ViewAsserts.assertOnScreen(activity.getWindow().getDecorView(), view);
-
 	}
 
 	/* Test for use case 21 */
