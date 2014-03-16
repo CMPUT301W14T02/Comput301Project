@@ -61,17 +61,27 @@ public class User {
 	/**
 	 * Sets the list of comments composed by a User. 
 	 * <p>
-	 * The user's comments are in the form of a CommentModel and are stored in a CommentListModel.
+	 * The user's comments (CommentModels) are stored in a CommentListModel.
+	 * The user's comments are not set using this method in the app. 
+	 * Instead, new comments are added to the CommentListModel (initialized in the constructor)
+	 * in the MyCommentsController.
 	 * <p>
 	 * @param myComments	List of comments that the User posted
+	 * @see CommentListModel	Example of a CommentListModel
 	 */
 	public void setMyComments(CommentListModel myComments) {
 		this.myComments = myComments;
 	}
 	
 	/**
-	 * 
+	 * Returns a list of comments composed by a User. 
+	 * <p>
+	 * The user's comments (CommentModels) are stored in a CommentListModel.
+	 * The user's comments are retrieved in the 
+	 * EditCommentActivity (in order to be edited) and MyCommentsActivity (in order to be displayed).
+	 * <p>
 	 * @return	List of comments that the User posted
+	 * @see CommentListModel	Example of a CommentListModel
 	 */
 	public CommentListModel getMyComments() {
 		return this.myComments;
