@@ -42,23 +42,20 @@ public class BrowseFavoritesActivityTest extends ActivityInstrumentationTestCase
 
 	}
 
-	/* Test for use case 21 */
-	public void testDisplayUsername() {
-		//Currently throws an error -KW
-		CommentModel comment = initializeComment();
-		CommentListModel favorites = new CommentListModel();
-		favorites = ProjectApplication.getUser().getFavorites();
-		favorites.add(comment);
-
-		ListView view = (ListView) getActivity().findViewById(R.id.commentListView);
-		//assertEquals("text should be displayed", comment.toString(), view.getAdapter().getItem(0).toString());
-	}
-
 	public void testVisibleListView() {
+
 		// Throwing an error, not failure -KW
 		BrowseFavoritesActivity activity = getActivity();
 		ListView view = (ListView) activity.findViewById(R.id.commentListView);
 		ViewAsserts.assertOnScreen(activity.getWindow().getDecorView(), view);
+
+	}
+
+	/* Test for use case 21 */
+	public void testDisplayUsername() {
+		CommentModel comment = initializeComment();
+		ListView view = (ListView) getActivity().findViewById(R.id.commentListView);
+		assertTrue("username should be displayed", view.getAdapter().getItem(0).toString().contains(comment.getUsername()));
 
 	}
 
