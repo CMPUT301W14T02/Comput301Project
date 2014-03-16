@@ -109,7 +109,7 @@ public class CommentModel {
 		CommentModel comment = (CommentModel) commentModel;
 		
 		return comment.getText().equals(this.getText()) && comment.getUsername().equals(this.getUsername())
-				&& ((comment.getImage() == null && this.picture == null) || comment.getImage().equals(this.picture));
+				&& ((comment.getImage() == null && this.picture == null) || comment.getImage().equals(this.picture))
+				&& ((comment.getLocation() == null && this.location == null) || comment.getLocation().equals(this.location));
 	}
-
 }
