@@ -64,7 +64,7 @@ public class User {
 	 * The user's comments (CommentModels) are stored in a CommentListModel.
 	 * The user's comments are not set using this method in the app. 
 	 * Instead, new comments are added to the CommentListModel (initialized in the constructor)
-	 * in the MyCommentsController.
+	 * in the BrowseMyCommentsController.
 	 * <p>
 	 * @param myComments	List of comments that the User posted
 	 * @see CommentListModel	Example of a CommentListModel
@@ -78,7 +78,7 @@ public class User {
 	 * <p>
 	 * The user's comments (CommentModels) are stored in a CommentListModel.
 	 * The user's comments are retrieved in the 
-	 * EditCommentActivity (in order to be edited) and MyCommentsActivity (in order to be displayed).
+	 * EditCommentActivity (in order to be edited) and BrowseMyCommentsActivity (in order to be displayed).
 	 * <p>
 	 * @return	List of comments that the User posted
 	 * @see CommentListModel	Example of a CommentListModel
@@ -88,16 +88,29 @@ public class User {
 	}
 	
 	/**
-	 * 
+	 * Sets the list of comments favorited by a User. 
+	 * <p>
+	 * The user's favorite comments (CommentModels) are stored in a CommentListModel.
+	 * The user's favorite comments are not set using this method in the app. 
+	 * Instead, new favorite comments are added to the CommentListModel (initialized in the constructor)
+	 * in the FavoritesController.
+	 * <p>
 	 * @param myFavorites	List of the User's favorite comments
+	 * @see CommentListModel	Example of a CommentListModel
 	 */
 	public void setFavorites(CommentListModel myFavorites) {
 		this.myFavorites = myFavorites;
 	}
 	
 	/**
-	 * 
+	 * Returns a list of comments favorited by a User. 
+	 * <p>
+	 * The user's favorite comments (CommentModels) are stored in a CommentListModel.
+	 * The user's favorite comments are retrieved in the 
+	 * BrowseFavoritesActivity (in order to be displayed).
+	 * <p>
 	 * @return List of the User's favorite comments
+	 * @see CommentListModel	Example of a CommentListModel
 	 */
 	public CommentListModel getFavorites() {
 		return this.myFavorites;
