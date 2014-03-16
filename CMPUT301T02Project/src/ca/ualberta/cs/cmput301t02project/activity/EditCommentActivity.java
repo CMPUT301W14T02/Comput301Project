@@ -12,53 +12,56 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+/**
+ * Allows a user to edit the comment they selected.
+ */
 public class EditCommentActivity extends Activity {
 
-		private MyCommentsController myCommentsListController;
-
+	private MyCommentsController myCommentsListController;
 		
-		//Likely will not need this attribute. Will know when write code for custom location. -KW
-		private Location currentLocation;
+	//Likely will not need this attribute. Will know when write code for custom location. -KW
+	private Location currentLocation;
 
-		public void setCustomCurrentLocation(double lat, double lon) {
-			currentLocation.setLatitude(lat);
-			currentLocation.setLongitude(lon);
-		}
+	public void setCustomCurrentLocation(double lat, double lon) {
+		currentLocation.setLatitude(lat);
+		currentLocation.setLongitude(lon);
+	}
 			
-		@Override
-		protected void onCreate(Bundle savedInstanceState) {
-			super.onCreate(savedInstanceState);
-			myCommentsListController = new MyCommentsController(ProjectApplication.getUser().getMyComments());
-			setContentView(R.layout.activity_edit_comment);
-			EditText inputComment = (EditText) findViewById(R.id.edit_text);
-			inputComment.setText(ProjectApplication.getCurrentComment().getText());
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+			
+		myCommentsListController = new MyCommentsController(ProjectApplication.getUser().getMyComments());
+			
+		setContentView(R.layout.activity_edit_comment);
+		
+		EditText inputComment = (EditText) findViewById(R.id.edit_text);
+		inputComment.setText(ProjectApplication.getCurrentComment().getText());
 
-			Button post = (Button) findViewById(R.id.edit_post);
-			String loc = "No location yet";
-			currentLocation = new Location(loc);
+		Button post = (Button) findViewById(R.id.edit_post);
+		
+		String loc = "No location yet";
+			
+		currentLocation = new Location(loc);
+		
+		post.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				EditText inputComment = (EditText) findViewById(R.id.edit_text);
+				// Refactor into MVC?
 
-			post.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					EditText inputComment = (EditText) findViewById(R.id.edit_text);
-					// Refactor into MVC?
-					// Username is temporarily in front of the comment. Can redesign
-					// later -SB
-
-					myCommentsListController.changeText(ProjectApplication.getCurrentComment(), inputComment.getText()
-							.toString());
+				myCommentsListController.changeText(ProjectApplication.getCurrentComment(), 
+						inputComment.getText().toString());
 					
-					finish();
-				}
-			});
+				finish();
+			}
+		});
+	}
 
-		}
-
-		@Override
-		public boolean onCreateOptionsMenu(Menu menu) {
-			// Inflate the menu; this adds items to the action bar if it is present.
-			getMenuInflater().inflate(R.menu.create_comment, menu);
-			return true;
-		}
-
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.create_comment, menu);
+		return true;
+	}
 }
