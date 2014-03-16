@@ -15,8 +15,7 @@ public class CommentModel {
 	private String username;
 
 	// Post with picture
-	public CommentModel(String text, Bitmap picture, Location location,
-			String username) {
+	public CommentModel(String text, Bitmap picture, Location location, String username) {
 		this.text = text;
 		this.picture = picture;
 		this.location = location;
@@ -98,9 +97,9 @@ public class CommentModel {
 		// plural -SB
 		if (replies.getCommentList().size() == 1) {
 			return text + " (by " + username + ", 1 reply)";
-		} else {
-			return text + " (by " + username + ", " + replies.getCommentList().size()
-					+ " replies)";
+		} 
+		else {
+			return text + " (by " + username + ", " + replies.getCommentList().size() + " replies)";
 		}
 	}
 	

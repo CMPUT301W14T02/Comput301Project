@@ -46,9 +46,11 @@ public abstract class CommentListAdapterAbstraction extends ArrayAdapter<Comment
 			public int compare(CommentModel a, CommentModel b) {
 				if (a.getDate().before(b.getDate())) {
 					return 1;
-				} else if (a.getDate().after(b.getDate())) {
+				} 
+				else if (a.getDate().after(b.getDate())) {
 					return -1;
-				} else {
+				} 
+				else {
 					return 0;
 				}
 			}
@@ -63,9 +65,11 @@ public abstract class CommentListAdapterAbstraction extends ArrayAdapter<Comment
 				Float dist2 = b.getLocation().distanceTo(myLocation);
 				if (dist1 < dist2) {
 					return -1;
-				} else if (dist1 > dist2) {
+				} 
+				else if (dist1 > dist2) {
 					return 1;
-				} else {
+				} 
+				else {
 					return 0;
 				}
 			}
