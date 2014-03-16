@@ -58,4 +58,17 @@ public class BrowseTopLevelCommentsActivityTest extends ActivityInstrumentationT
 		assertTrue("username should be displayed", view.getAdapter().getItem(0).toString().contains(comment.getUsername()));
 
 	}
+
+	/* Test for use case 19 */
+	public void testChangeLocation() {
+		assertTrue(false);
+
+	}
+
+	/* Test for use case 19 */
+	public void testNewAndNear() {
+		assertTrue(false);
+
+	}
+
 }

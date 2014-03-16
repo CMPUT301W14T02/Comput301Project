@@ -83,6 +83,7 @@ public class BrowseReplyCommentsActivityTest extends ActivityInstrumentationTest
 
 	}
 
+	/* Test for use case 19 */
 	public void testNewAndNear() {
 		assertTrue(false);
 
