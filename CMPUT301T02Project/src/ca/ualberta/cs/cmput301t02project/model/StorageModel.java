@@ -2,6 +2,8 @@ package ca.ualberta.cs.cmput301t02project.model;
 
 import java.util.Date;
 
+import android.location.Location;
+
 import com.google.gson.Gson;
 
 public class StorageModel {
@@ -37,5 +39,18 @@ public class StorageModel {
 	
 	public void cacheComment(CommentModel comment) {
 		
+	}
+	
+	// added for the test -KW
+	public CommentModel getLatest()
+	{
+		String loc = "Location Intialization";
+		Location currentLocation;
+		Location myLocation;
+		currentLocation = new Location(loc);
+		myLocation = new Location(loc);
+
+		CommentModel comment = new CommentModel("comment", currentLocation, "username");
+		return comment;
 	}
 }
