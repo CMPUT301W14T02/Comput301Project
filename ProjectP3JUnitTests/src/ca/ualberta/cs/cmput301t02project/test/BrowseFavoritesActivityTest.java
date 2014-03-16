@@ -6,6 +6,7 @@ import ca.ualberta.cs.cmput301t02project.activity.BrowseFavoritesActivity;
 import ca.ualberta.cs.cmput301t02project.model.CommentModel;
 import android.location.Location;
 import android.test.ActivityInstrumentationTestCase2;
+import android.test.ViewAsserts;
 import android.widget.ListView;
 
 public class BrowseFavoritesActivityTest extends ActivityInstrumentationTestCase2<BrowseFavoritesActivity> {
@@ -45,7 +46,10 @@ public class BrowseFavoritesActivityTest extends ActivityInstrumentationTestCase
 	}
 
 	public void testVisibleListView() {
-		assertTrue(false);
+		BrowseFavoritesActivity activity = getActivity();
+		ListView view = (ListView) activity.findViewById(R.id.commentListView);
+		ViewAsserts.assertOnScreen(activity.getWindow().getDecorView(), view);
+
 
 	}
 	
