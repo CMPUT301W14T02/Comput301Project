@@ -144,7 +144,7 @@ public abstract class CommentListAdapterAbstraction extends ArrayAdapter<Comment
 		
 		Collections.sort(list2, sortByDate);
 		finalList.addAll(list2);
-		list2 = new ArrayList<CommentModel>();
+		list2.clear();
 			
 		for (i = 0; i<l; i++) {
 			if ((list.get(i).getLocation().distanceTo(myLocation) < 100000) && (!finalList.contains(list.get(i)))) {
@@ -154,7 +154,7 @@ public abstract class CommentListAdapterAbstraction extends ArrayAdapter<Comment
 		
 		Collections.sort(list2, sortByDate);
 		finalList.addAll(list2);
-		list2 = new ArrayList<CommentModel>();
+		list2.clear();
 		
 		for (i = 0; i<l; i++) {
 			if ((list.get(i).getLocation().distanceTo(myLocation) < 5000000) && (!finalList.contains(list.get(i)))) {
@@ -164,7 +164,7 @@ public abstract class CommentListAdapterAbstraction extends ArrayAdapter<Comment
 
 		Collections.sort(list2, sortByDate);
 		finalList.addAll(list2);
-		list2 = new ArrayList<CommentModel>();
+		list2.clear();
 		
 		// rest of list
 		for (i = 0; i<l; i++) {
@@ -176,6 +176,7 @@ public abstract class CommentListAdapterAbstraction extends ArrayAdapter<Comment
 		list.clear();
 		Collections.sort(list2, sortByDate);
 		finalList.addAll(list2);
+		list2.clear();
 		list.addAll(finalList);
 
 		
