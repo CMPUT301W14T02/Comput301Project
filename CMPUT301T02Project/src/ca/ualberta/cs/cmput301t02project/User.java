@@ -11,7 +11,7 @@ public class User {
 
 	private String username;
 	private CommentListModel myComments;
-	private CommentListModel myFavorites;
+	private CommentListModel favorites;
 
 	/**
 	 * Creates a new User.
@@ -29,7 +29,7 @@ public class User {
 		super();
 		this.username = username;
 		myComments = new CommentListModel();
-		myFavorites = new CommentListModel();
+		favorites = new CommentListModel();
 	}
 
 	/**
@@ -98,8 +98,8 @@ public class User {
 	 * @param myFavorites	List of the User's favorite comments
 	 * @see CommentListModel	Example of a CommentListModel
 	 */
-	public void setFavorites(CommentListModel myFavorites) {
-		this.myFavorites = myFavorites;
+	public void setFavorites(CommentListModel favorites) {
+		this.favorites = favorites;
 	}
 	
 	/**
@@ -113,6 +113,6 @@ public class User {
 	 * @see CommentListModel	Example of a CommentListModel
 	 */
 	public CommentListModel getFavorites() {
-		return this.myFavorites;
+		return this.favorites;
 	}
 }
