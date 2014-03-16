@@ -5,6 +5,7 @@ import ca.ualberta.cs.cmput301t02project.R;
 import ca.ualberta.cs.cmput301t02project.activity.BrowseTopLevelCommentsActivity;
 import ca.ualberta.cs.cmput301t02project.model.CommentListModel;
 import ca.ualberta.cs.cmput301t02project.model.CommentModel;
+import ca.ualberta.cs.cmput301t02project.model.StorageModel;
 import android.location.Location;
 import android.test.ActivityInstrumentationTestCase2;
 import android.test.ViewAsserts;
@@ -60,13 +61,25 @@ public class BrowseTopLevelCommentsActivityTest extends ActivityInstrumentationT
 	}
 	
 	/* Test for use case 10 */
-	public void testReadCache() {
-		assertTrue(false);
+	public void testWritingReadCache() {
+		StorageModel storage = new StorageModel();
+		Location l = new Location("Location Initialization");
+		l.setLatitude(0);
+		l.setLongitude(0);
+		CommentModel comment = new CommentModel("post",l,"user");
+		storage.cacheComment(comment);
+		CommentModel comment2 = storage.getCacheList().get(0);
+		assertEquals("Comments should be the same",comment,comment2);
 	}
 	
 	/* test for use case 10 */
-	public void wantToReadCache() {
-		assertTrue(false);
+	public void testWritingWantToReadCache() {
+		StorageModel storage = new StorageModel();
+		Location l = new Location("Location Initialization");
+		CommentModel comment = new CommentModel("post",l,"user");
+		storage.cacheComment(comment);
+		CommentModel comment2 = storage.getCacheList().get(0);
+		assertEquals("Comments should be the same",comment,comment2);
 	}
 
 	/* Test for use case 19 */

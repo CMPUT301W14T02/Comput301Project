@@ -37,6 +37,10 @@ public class LoginActivityTest extends ActivityInstrumentationTestCase2<LoginAct
 	
 	/* test to see if user is being pushed to server after update */
 	public void testPushUser() {
-		//assertTrue(false);
+		User user = new User("user");
+		ProjectApplication pa = ProjectApplication.getInstance();
+		pa.pushUser(user);
+		User user2 = pa.getPushedUser("user");
+		assertEquals("Users should be the same",user,user2);
 	}
 }

@@ -7,6 +7,7 @@ import android.test.ActivityInstrumentationTestCase2;
 import android.widget.Button;
 import android.widget.EditText;
 import ca.ualberta.cs.cmput301t02project.ProjectApplication;
+import ca.ualberta.cs.cmput301t02project.User;
 import ca.ualberta.cs.cmput301t02project.activity.CreateCommentActivity;
 import ca.ualberta.cs.cmput301t02project.model.CommentModel;
 
@@ -55,7 +56,11 @@ public class CreateCommentActivityTest extends ActivityInstrumentationTestCase2<
 	
 	/* test to see if user is being pushed to server after update */
 	public void testPushUser() {
-		assertTrue(false);
+		User user = new User("user");
+		ProjectApplication pa = ProjectApplication.getInstance();
+		pa.pushUser(user);
+		User user2 = pa.getPushedUser("user");
+		assertEquals("Users should be the same",user,user2);
 	}
 
 }
