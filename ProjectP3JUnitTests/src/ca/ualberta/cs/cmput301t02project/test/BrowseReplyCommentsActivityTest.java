@@ -25,7 +25,7 @@ public class BrowseReplyCommentsActivityTest extends ActivityInstrumentationTest
 		myLocation = new Location(loc);
 
 		CommentModel comment = new CommentModel("comment", currentLocation, "username");
-		
+
 		CommentListModel comments = new CommentListModel();
 		comments.add(comment);
 
@@ -97,4 +97,17 @@ public class BrowseReplyCommentsActivityTest extends ActivityInstrumentationTest
 		assertTrue(false);
 	}
 	
+
+	/* Test for use case 19 */
+	public void testChangeLocation() {
+		assertTrue(false);
+
+	}
+
+	/* Test for use case 19 */
+	public void testNewAndNear() {
+		assertTrue(false);
+
+	}
+
 }

@@ -68,5 +68,17 @@ public class BrowseTopLevelCommentsActivityTest extends ActivityInstrumentationT
 	public void wantToReadCache() {
 		assertTrue(false);
 	}
-	
+
+	/* Test for use case 19 */
+	public void testChangeLocation() {
+		assertTrue(false);
+
+	}
+
+	/* Test for use case 19 */
+	public void testNewAndNear() {
+		assertTrue(false);
+
+	}
+
 }
