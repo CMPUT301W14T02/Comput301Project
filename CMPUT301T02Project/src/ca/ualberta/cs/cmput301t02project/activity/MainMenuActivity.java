@@ -10,43 +10,59 @@ import android.widget.TextView;
 import ca.ualberta.cs.cmput301t02project.ProjectApplication;
 import ca.ualberta.cs.cmput301t02project.R;
 
+/**
+ * Displays menu options. 
+ * Clicking a menu option leads to a different activity. 
+ * Menu options include:
+ * Create, 
+ * Browse, 
+ * Favorites, 
+ * and My Comments.
+ */
 public class MainMenuActivity extends Activity {
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		
 		setContentView(R.layout.activity_main);
 
+		// Print welcome message on screen -SB
 		TextView welcomeMessage = (TextView) findViewById(R.id.welcome_message);
-		welcomeMessage.setText("Welcome " + ProjectApplication.getName().toString()
-				+ "!");
-
+		welcomeMessage.setText("Welcome " + ProjectApplication.getName().toString()	+ "!");
+		
+		// If "Create" is clicked -SB
 		Button createComment = (Button) findViewById(R.id.create);
 		createComment.setOnClickListener(new View.OnClickListener() {
+			
 			@Override
 			public void onClick(View v) {
-				startActivity(new Intent(MainMenuActivity.this,
-						CreateCommentActivity.class));
+				startActivity(new Intent(MainMenuActivity.this, CreateCommentActivity.class));
 			}
 		});
 
+		// If "Browse" is clicked -SB
 		Button browseComment = (Button) findViewById(R.id.browse);
 		browseComment.setOnClickListener(new View.OnClickListener() {
+			
 			@Override
 			public void onClick(View v) {
-				startActivity(new Intent(MainMenuActivity.this,
-						BrowseTopLevelCommentsActivity.class));
+				startActivity(new Intent(MainMenuActivity.this, BrowseTopLevelCommentsActivity.class));
 			}
 		});
 		
+		// FAVORITES ONCLICK LISTENER WILL GO HERE -SB
+		
+		// If "My Comments" is clicked -SB
 		Button browseMyComments = (Button) findViewById(R.id.my_comments);
 		browseMyComments.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				startActivity(new Intent(MainMenuActivity.this,
-						BrowseMyCommentsActivity.class));
+				startActivity(new Intent(MainMenuActivity.this, BrowseMyCommentsActivity.class));
 			}
 		});
+		
+		// Initialize location -SB
 		ProjectApplication.InitializeLocationManager(this.getApplicationContext());
 	}
 
@@ -56,5 +72,4 @@ public class MainMenuActivity extends Activity {
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}
-
 }
