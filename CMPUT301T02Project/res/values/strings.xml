@@ -22,6 +22,7 @@
     <string name="edit_comment">Edit Comment</string>
     <string name="title_activity_my_comments_list">MyCommentsActivity</string>
     <string name="title_activity_edit_comment">EditCommentActivity</string>
+     <string name="title_activity_browse_favorites">BrowseFavoritesActivity</string>
      
 
 </resources>

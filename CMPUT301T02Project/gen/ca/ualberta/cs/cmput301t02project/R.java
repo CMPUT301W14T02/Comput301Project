@@ -75,6 +75,7 @@ public final class R {
         public static final int my_comments=0x7f050011;
         public static final int post=0x7f050007;
         public static final int spinner_title=0x7f050009;
+        public static final int title_activity_browse_favorites=0x7f050015;
         public static final int title_activity_create_comment=0x7f050006;
         public static final int title_activity_edit_comment=0x7f050014;
         public static final int title_activity_login=0x7f05000b;

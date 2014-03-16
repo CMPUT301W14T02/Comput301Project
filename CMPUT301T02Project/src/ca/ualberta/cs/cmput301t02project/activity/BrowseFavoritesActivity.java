@@ -21,13 +21,13 @@ public class BrowseFavoritesActivity extends Activity implements OnItemSelectedL
 	private ListView favoritesListView;
 	private FavoritesAdapter adapter;
 	
+	/*
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_favorites_list);
 		
-		/****************************************************************/
 		favoritesListView = (ListView) findViewById(R.id.commentListView);
 
 		initializeAdapter();
@@ -47,6 +47,7 @@ public class BrowseFavoritesActivity extends Activity implements OnItemSelectedL
 	 * Called from onCreate().
 	 * <p>
 	 */
+	/*
 	private void initializeAdapter(){
 		
 		// Retrieve the current comments list -TH
@@ -59,7 +60,7 @@ public class BrowseFavoritesActivity extends Activity implements OnItemSelectedL
 		// Display comments in adapter
 		favoritesListView.setAdapter(adapter);
 	}
-
+*/
 	@Override
 	public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
 		// TODO Auto-generated method stub
@@ -71,5 +72,5 @@ public class BrowseFavoritesActivity extends Activity implements OnItemSelectedL
 		// TODO Auto-generated method stub
 
 	}
-
+	
 }
