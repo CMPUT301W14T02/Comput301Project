@@ -3,6 +3,7 @@ package ca.ualberta.cs.cmput301t02project.test;
 import ca.ualberta.cs.cmput301t02project.ProjectApplication;
 import ca.ualberta.cs.cmput301t02project.R;
 import ca.ualberta.cs.cmput301t02project.activity.BrowseFavoritesActivity;
+import ca.ualberta.cs.cmput301t02project.model.CommentListModel;
 import ca.ualberta.cs.cmput301t02project.model.CommentModel;
 import android.location.Location;
 import android.test.ActivityInstrumentationTestCase2;
@@ -30,7 +31,14 @@ public class BrowseFavoritesActivityTest extends ActivityInstrumentationTestCase
 	}
 
 	public void testDisplayFavorites() {
-		assertTrue(false);
+		CommentModel comment = initializeComment();
+		CommentListModel favoriteComments = new CommentListModel();
+		favoriteComments = ProjectApplication.getUser().getFavorites();
+		favoriteComments.add(comment);
+
+		ListView view = (ListView) getActivity().findViewById(R.id.commentListView);
+		assertEquals("text should be displayed", comment.toString(), view.getAdapter().getItem(0).toString());
+
 	}
 
 	/* Test for use case 21 */
@@ -55,7 +63,12 @@ public class BrowseFavoritesActivityTest extends ActivityInstrumentationTestCase
 	
 	/* test for use case 12 */
 	public void testReadFavorites() {
-		assertTrue(false);
+		CommentModel comment = initializeComment();
+		CommentListModel favoriteComments = new CommentListModel();
+		favoriteComments = ProjectApplication.getUser().getFavorites();
+		favoriteComments.add(comment);
+		
+		assertEquals("Comments should be the same",comment,ProjectApplication.getUser().getFavorites().getCommentList().get(0));
 	}
 
 }

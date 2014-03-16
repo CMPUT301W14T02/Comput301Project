@@ -71,7 +71,6 @@ public class CommentListAdapterAbstractionTest extends ActivityInstrumentationTe
 		adapter1.setModel(outOfOrderComments);
 		adapter2.setModel(inOrderComments);
 		adapter1.sortByLocation();
-		adapter2.sortByLocation();
 		
 		assertEquals("First items should be in same place", adapter1.getItem(0), adapter2.getItem(0));
 		assertEquals("Second items should be in same place", adapter1.getItem(1), adapter2.getItem(1));
@@ -133,7 +132,6 @@ public class CommentListAdapterAbstractionTest extends ActivityInstrumentationTe
 		adapter1.setModel(outOfOrderComments);
 		adapter2.setModel(inOrderComments);
 		adapter1.sortByOtherLocation();
-		//adapter2.sortByOtherLocation();
 		
 		assertEquals("First items should be in same place", adapter1.getItem(0), adapter2.getItem(0));
 		assertEquals("Second items should be in same place", adapter1.getItem(1), adapter2.getItem(1));
@@ -182,7 +180,6 @@ public class CommentListAdapterAbstractionTest extends ActivityInstrumentationTe
 		adapter2.setModel(inOrderComments);
 		
 		adapter1.sortByPicture();
-		//adapter2.sortByPicture();
 		
 		assertEquals("First items should be in same place", adapter1.getItem(0), adapter2.getItem(0));
 		assertEquals("Second items should be in same place", adapter1.getItem(1), adapter2.getItem(1));
@@ -224,7 +221,6 @@ public class CommentListAdapterAbstractionTest extends ActivityInstrumentationTe
 		adapter1.setModel(outOfOrderComments);
 		adapter2.setModel(inOrderComments);
 		adapter1.sortByDate();
-		//adapter2.sortByDate();
 		
 		assertEquals("First items should be in same place", adapter1.getItem(0), adapter2.getItem(0));
 		assertEquals("Second items should be in same place", adapter1.getItem(1), adapter2.getItem(1));
@@ -269,7 +265,6 @@ public class CommentListAdapterAbstractionTest extends ActivityInstrumentationTe
 		adapter1.setModel(outOfOrderComments);
 		adapter2.setModel(inOrderComments);
 		adapter1.sortByRanking();
-		//adapter2.sortByRanking();
 		
 		
 		assertEquals("First items should be in same place", adapter1.getItem(0), adapter2.getItem(0));
@@ -302,8 +297,6 @@ public class CommentListAdapterAbstractionTest extends ActivityInstrumentationTe
 		Location l3 = new Location("Location Initialization");
 		l3.setLatitude(120);
 		l3.setLongitude(0);
-		
-		Date curDate = new Date();
 		
 		ProjectApplication projectApplication = ProjectApplication.getInstance();
 		projectApplication.setCurrentLocation(currentLocation);
@@ -368,7 +361,6 @@ public class CommentListAdapterAbstractionTest extends ActivityInstrumentationTe
 		adapter1.setModel(outOfOrderComments);
 		adapter2.setModel(inOrderComments);
 		adapter1.sortByDefault();
-		//adapter2.sortByDefault();
 		
 		assertEquals("First items should be in same place", adapter1.getItem(0), adapter2.getItem(0));
 		assertEquals("Second items should be in same place", adapter1.getItem(1), adapter2.getItem(1));

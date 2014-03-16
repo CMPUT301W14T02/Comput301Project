@@ -1,5 +1,7 @@
 package ca.ualberta.cs.cmput301t02project.test;
 
+import java.util.Date;
+
 import ca.ualberta.cs.cmput301t02project.ProjectApplication;
 import ca.ualberta.cs.cmput301t02project.R;
 import ca.ualberta.cs.cmput301t02project.User;
@@ -8,6 +10,7 @@ import ca.ualberta.cs.cmput301t02project.controller.FavoritesController;
 import ca.ualberta.cs.cmput301t02project.model.CommentListModel;
 import ca.ualberta.cs.cmput301t02project.model.CommentModel;
 import ca.ualberta.cs.cmput301t02project.model.StorageModel;
+import ca.ualberta.cs.cmput301t02project.view.CommentListAdapter;
 import android.location.Location;
 import android.test.ActivityInstrumentationTestCase2;
 import android.test.ViewAsserts;
@@ -125,14 +128,163 @@ public class BrowseReplyCommentsActivityTest extends ActivityInstrumentationTest
 
 	/* Test for use case 19 */
 	public void testChangeLocation() {
-		assertTrue(false);
-
+	    Location initial_loc = new Location("Location Initialization");
+	    // Tester should disconnect from internet and move locations, then reconnect to internet
+	    Location final_loc = new Location("Location Initialization");
+	    boolean latEquals = false;
+	    boolean longEquals = false;
+	    if (initial_loc.getLatitude() == final_loc.getLatitude())
+	        latEquals = true;
+	    if (initial_loc.getLongitude()  == final_loc.getLongitude())
+	        longEquals = true;
+	    boolean CoordEquals = latEquals && longEquals;
+	    assertFalse(CoordEquals);
 	}
 
 	/* Test for use case 19 */
 	public void testNewAndNear() {
-		assertTrue(false);
+		Location currentLocation = new Location("Location Initialization");
+		currentLocation.setLatitude(0.02);
+		currentLocation.setLongitude(0);
+	
+		Location l1 = new Location("Location Initialization");
+		l1.setLatitude(0.01);
+		l1.setLongitude(0);
 
+		Location l2 = new Location("Location Initialization");
+		l2.setLatitude(0.5);
+		l2.setLongitude(0);
+
+		Location l3 = new Location("Location Initialization");
+		l3.setLatitude(20);
+		l3.setLongitude(0);
+		
+		Location l4 = new Location("Location Initialization");
+		l3.setLatitude(120);
+		l3.setLongitude(0);
+		
+		ProjectApplication projectApplication = ProjectApplication.getInstance();
+		projectApplication.setCurrentLocation(currentLocation);
+		
+		CommentModel comment1 = new  CommentModel("post 1", l1, "schmoop");
+		comment1.setDate(new Date(1));
+		
+		CommentModel comment2 = new  CommentModel("post 2", l1, "schmoop");
+		comment2.setDate(new Date(20000));
+		
+		CommentModel comment3 = new  CommentModel("post 3", l2, "schmoop");
+		comment3.setDate(new Date(1));
+		
+		CommentModel comment4 = new  CommentModel("post 4", l2, "schmoop");
+		comment4.setDate(new Date(20000));
+		
+		CommentModel comment5 = new  CommentModel("post 5", l3, "schmoop");
+		comment5.setDate(new Date(1));
+		
+		CommentModel comment6 = new  CommentModel("post 6", l3, "schmoop");
+		comment6.setDate(new Date(20000));
+		
+		CommentModel comment7 = new  CommentModel("post 7", l4, "schmoop");
+		comment7.setDate(new Date(1));
+		
+		CommentModel comment8 = new  CommentModel("post 8", l4, "schmoop");
+		comment8.setDate(new Date(20000));
+		
+		
+		CommentListModel outOfOrderComments = new CommentListModel();
+		outOfOrderComments.add(comment5);
+		outOfOrderComments.add(comment4);
+		outOfOrderComments.add(comment3);
+		outOfOrderComments.add(comment6);
+		outOfOrderComments.add(comment1);
+		outOfOrderComments.add(comment2);
+
+		CommentListModel inOrderComments = new CommentListModel();
+		inOrderComments.add(comment2);
+		inOrderComments.add(comment1);
+		inOrderComments.add(comment4);
+		inOrderComments.add(comment3);
+		inOrderComments.add(comment6);
+		inOrderComments.add(comment5);
+	
+		CommentListAdapter adapter1;
+		CommentListAdapter adapter2;
+		
+		adapter1 = new CommentListAdapter(getActivity(), R.layout.list_item, outOfOrderComments.getCommentList());
+		adapter2 = new CommentListAdapter(getActivity(), R.layout.list_item, inOrderComments.getCommentList());
+		outOfOrderComments.setAdapter(adapter1);
+		inOrderComments.setAdapter(adapter2);
+		adapter1.setModel(outOfOrderComments);
+		adapter2.setModel(inOrderComments);
+		adapter1.sortByDefault();
+		
+		assertEquals("First items should be in same place", adapter1.getItem(0), adapter2.getItem(0));
+		assertEquals("Second items should be in same place", adapter1.getItem(1), adapter2.getItem(1));
+		assertEquals("Third items should be in same place", adapter1.getItem(2), adapter2.getItem(2));
+		assertEquals("Fourth items should be in same place", adapter1.getItem(3), adapter2.getItem(3));
+		assertEquals("Fifth items should be in same place", adapter1.getItem(4), adapter2.getItem(4));
+		assertEquals("Sixth items should be in same place", adapter1.getItem(5), adapter2.getItem(5));
+
+
+		assertEquals("First items' dates should be equal", adapter1.getItem(0).getDate(), adapter2.getItem(0).getDate());
+		assertEquals("Second items' dates should be equal", adapter1.getItem(1).getDate(), adapter2.getItem(1).getDate());
+		assertEquals("Third items' dates should be equal", adapter1.getItem(2).getDate(), adapter2.getItem(2).getDate());
+		assertEquals("Fourth items' dates should be equal", adapter1.getItem(3).getDate(), adapter2.getItem(3).getDate());
+		assertEquals("Fifth items' dates should be equal", adapter1.getItem(4).getDate(), adapter2.getItem(4).getDate());
+		assertEquals("Sixth items' dates should be equal", adapter1.getItem(5).getDate(), adapter2.getItem(5).getDate());
+
+		
+		assertEquals("First items' locations should be equal", adapter1.getItem(0).getLocation(), adapter2.getItem(0).getLocation());
+		assertEquals("Second items' locations should be equal", adapter1.getItem(1).getLocation(), adapter2.getItem(1).getLocation());
+		assertEquals("Third items' locations should be equal", adapter1.getItem(2).getLocation(), adapter2.getItem(2).getLocation());
+		assertEquals("Fourth items' locations should be equal", adapter1.getItem(3).getLocation(), adapter2.getItem(3).getLocation());
+		assertEquals("Fifth items' locations should be equal", adapter1.getItem(4).getLocation(), adapter2.getItem(4).getLocation());
+		assertEquals("Sixth items' locations should be equal", adapter1.getItem(5).getLocation(), adapter2.getItem(5).getLocation());
+
+		outOfOrderComments.add(comment7);
+		outOfOrderComments.add(comment8);
+		
+		inOrderComments.getCommentList().clear();
+		inOrderComments.add(comment4);
+		inOrderComments.add(comment3);
+		inOrderComments.add(comment2);
+		inOrderComments.add(comment1);
+		inOrderComments.add(comment6);
+		inOrderComments.add(comment5);
+		inOrderComments.add(comment8);
+		inOrderComments.add(comment7);
+		
+		projectApplication.getCurrentLocation().setLatitude(0.5);
+		projectApplication.getCurrentLocation().setLongitude(0);
+		
+		assertEquals("First items should be in same place", adapter1.getItem(0), adapter2.getItem(0));
+		assertEquals("Second items should be in same place", adapter1.getItem(1), adapter2.getItem(1));
+		assertEquals("Third items should be in same place", adapter1.getItem(2), adapter2.getItem(2));
+		assertEquals("Fourth items should be in same place", adapter1.getItem(3), adapter2.getItem(3));
+		assertEquals("Fifth items should be in same place", adapter1.getItem(4), adapter2.getItem(4));
+		assertEquals("Sixth items should be in same place", adapter1.getItem(5), adapter2.getItem(5));
+		assertEquals("Seventh items should be in same place", adapter1.getItem(6), adapter2.getItem(6));
+		assertEquals("Eighth items should be in same place", adapter1.getItem(7), adapter2.getItem(7));
+
+		assertEquals("First items' dates should be equal", adapter1.getItem(0).getDate(), adapter2.getItem(0).getDate());
+		assertEquals("Second items' dates should be equal", adapter1.getItem(1).getDate(), adapter2.getItem(1).getDate());
+		assertEquals("Third items' dates should be equal", adapter1.getItem(2).getDate(), adapter2.getItem(2).getDate());
+		assertEquals("Fourth items' dates should be equal", adapter1.getItem(3).getDate(), adapter2.getItem(3).getDate());
+		assertEquals("Fifth items' dates should be equal", adapter1.getItem(4).getDate(), adapter2.getItem(4).getDate());
+		assertEquals("Sixth items' dates should be equal", adapter1.getItem(5).getDate(), adapter2.getItem(5).getDate());
+		assertEquals("Seventh items' dates should be equal", adapter1.getItem(6).getDate(), adapter2.getItem(6).getDate());
+		assertEquals("Eighth items' dates should be equal", adapter1.getItem(7).getDate(), adapter2.getItem(7).getDate());
+		
+		assertEquals("First items' locations should be equal", adapter1.getItem(0).getLocation(), adapter2.getItem(0).getLocation());
+		assertEquals("Second items' locations should be equal", adapter1.getItem(1).getLocation(), adapter2.getItem(1).getLocation());
+		assertEquals("Third items' locations should be equal", adapter1.getItem(2).getLocation(), adapter2.getItem(2).getLocation());
+		assertEquals("Fourth items' locations should be equal", adapter1.getItem(3).getLocation(), adapter2.getItem(3).getLocation());
+		assertEquals("Fifth items' locations should be equal", adapter1.getItem(4).getLocation(), adapter2.getItem(4).getLocation());
+		assertEquals("Sixth items' locations should be equal", adapter1.getItem(5).getLocation(), adapter2.getItem(5).getLocation());
+		assertEquals("Seventh items' locations should be equal", adapter1.getItem(6).getLocation(), adapter2.getItem(6).getLocation());
+		assertEquals("Eighth items' locations should be equal", adapter1.getItem(7).getLocation(), adapter2.getItem(7).getLocation());
+		
+		
 	}
 
 }
