@@ -8,7 +8,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import ca.ualberta.cs.cmput301t02project.ProjectApplication;
 import ca.ualberta.cs.cmput301t02project.activity.CreateCommentActivity;
-import ca.ualberta.cs.cmput301t02project.model.CommentListModel;
 import ca.ualberta.cs.cmput301t02project.model.CommentModel;
 
 public class CreateReplyTest extends ActivityInstrumentationTestCase2<CreateCommentActivity> {
@@ -44,7 +43,6 @@ public class CreateReplyTest extends ActivityInstrumentationTestCase2<CreateComm
 				String text = "the comment";
 				edit.setText(text);
 				button.performClick();
-				CommentListModel m = ProjectApplication.getCurrentComment().getReplies();
 				ArrayList<CommentModel> list = ProjectApplication.getCurrentComment().getReplies().getCommentList();
 				assertTrue("List should contain the just created comment", list.contains(new CommentModel(text, null, username)));
 			}

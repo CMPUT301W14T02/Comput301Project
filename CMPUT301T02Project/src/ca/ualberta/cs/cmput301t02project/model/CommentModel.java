@@ -2,8 +2,6 @@ package ca.ualberta.cs.cmput301t02project.model;
 
 import java.util.Date;
 
-import ca.ualberta.cs.cmput301t02project.ProjectApplication;
-
 import android.graphics.Bitmap;
 import android.location.Location;
 
@@ -111,7 +109,8 @@ public class CommentModel {
 	public boolean equals(Object commentModel) {
 		CommentModel comment = (CommentModel) commentModel;
 		
-		return comment.getText().equals(this.getText()) && comment.getUsername().equals(this.getUsername());
+		return comment.getText().equals(this.getText()) && comment.getUsername().equals(this.getUsername())
+				&& ((comment.getImage() == null && this.picture == null) || comment.getImage().equals(this.picture));
 	}
 
 }
