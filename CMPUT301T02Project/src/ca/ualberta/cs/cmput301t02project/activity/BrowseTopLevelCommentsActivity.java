@@ -19,6 +19,10 @@ import ca.ualberta.cs.cmput301t02project.model.CommentListModel;
 import ca.ualberta.cs.cmput301t02project.model.CommentModel;
 import ca.ualberta.cs.cmput301t02project.view.CommentListAdapter;
 
+/**
+ * Displays comments top level comments (aka. comments with no parents, comments that are not replies to anything). 
+ * A list of all top level comments is stored in ProjectApplication.
+ */
 public class BrowseTopLevelCommentsActivity extends Activity implements OnItemSelectedListener {
 	// TODO: Refactor code to use new classes
 	
@@ -26,9 +30,6 @@ public class BrowseTopLevelCommentsActivity extends Activity implements OnItemSe
 	private ListView topLevelCommentListView;
 	private CommentListAdapter adapter;
 
-	/**
-	 * Sets up the on click listener for the listview
-	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 
@@ -48,8 +49,8 @@ public class BrowseTopLevelCommentsActivity extends Activity implements OnItemSe
 				// Refactor into MVC?	
 				CommentModel nestedComment = (CommentModel) adapter.getItem(position);
 				ProjectApplication.setCurrentComment(nestedComment);
-				CommentListModel nestedCommentList = nestedComment.getReplies();
 				
+				CommentListModel nestedCommentList = nestedComment.getReplies();
 				ProjectApplication.setCurrentCommentList(nestedCommentList);
 				
 				Intent goToReplyListActivity = new Intent(getApplicationContext(),BrowseReplyCommentsActivity.class);
@@ -58,9 +59,6 @@ public class BrowseTopLevelCommentsActivity extends Activity implements OnItemSe
 		});
 	}
 
-	/**
-	 * Updates the displayed list in case top level comments have changed
-	 */
 	@Override
 	public void onResume() {
 		super.onResume();
@@ -69,7 +67,11 @@ public class BrowseTopLevelCommentsActivity extends Activity implements OnItemSe
 	}
 	
 	/**
-	 * Retrieves comments to display and set the adapter
+	 * Creates an adapter for displaying the top level comments.
+	 * <p>
+	 * Called from onCreate().
+	 * Replies to a comment can be viewed by clicking that comment. 
+	 * <p>
 	 */
 	private void initializeAdapter(){
 		
@@ -86,7 +88,10 @@ public class BrowseTopLevelCommentsActivity extends Activity implements OnItemSe
 	}
 	
 	/**
-	 * Creates the sortBy menu and displays it on the screen
+	 * Creates a drop-down menu of sorting options.
+	 * <p>
+	 * Called from onCreate().
+	 * <p>
 	 */
 	private void createSpinner(){
 		// Based on:
@@ -125,20 +130,25 @@ public class BrowseTopLevelCommentsActivity extends Activity implements OnItemSe
 	}
 
 	@Override
-	public void onItemSelected(AdapterView<?> parent, View view, int position,
-			long id) {
+	public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+		
 		String selected = parent.getItemAtPosition(position).toString();
 		if (selected.equals("Date")) {
 			adapter.sortByDate();
-		} else if (selected.equals("Picture")) {
+		} 
+		else if (selected.equals("Picture")) {
 			adapter.sortByPicture();
-		} else if (selected.equals("My Location")) {
+		} 
+		else if (selected.equals("My Location")) {
 			adapter.sortByLocation();
-		} else if (selected.equals("Other Location")) {
+		} 
+		else if (selected.equals("Other Location")) {
 			adapter.sortByOtherLocation();
-		} else if (selected.equals("Ranking")) {
+		} 
+		else if (selected.equals("Ranking")) {
 			adapter.sortByRanking();
-		} else if (selected.equals("Default")) {
+		} 
+		else if (selected.equals("Default")) {
 			adapter.sortByDefault();
 		}
 
@@ -149,5 +159,4 @@ public class BrowseTopLevelCommentsActivity extends Activity implements OnItemSe
 		// TODO Auto-generated method stub
 
 	}
-
 }

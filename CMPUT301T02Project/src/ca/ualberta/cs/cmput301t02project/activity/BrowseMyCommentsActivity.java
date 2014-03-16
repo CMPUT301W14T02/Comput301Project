@@ -124,8 +124,8 @@ public class BrowseMyCommentsActivity extends Activity implements OnItemSelected
 	}
 	
 	@Override
-	public void onItemSelected(AdapterView<?> parent, View view, int position,
-			long id) {
+	public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+		
 		String selected = parent.getItemAtPosition(position).toString();
 		if (selected.equals("Date")) {
 			adapter.sortByDate();

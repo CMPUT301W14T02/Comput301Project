@@ -45,9 +45,6 @@ public class BrowseReplyCommentsActivity extends Activity implements OnItemSelec
 		
 		createSpinner();
 
-		// Get the comment list of replies to selected comment
-		replyCommentList = ProjectApplication.getCurrentCommentList();
-
 		initializeAdapter();
 		
 		// If replying to comment -SB
@@ -92,6 +89,9 @@ public class BrowseReplyCommentsActivity extends Activity implements OnItemSelec
 	 */
 	private void initializeAdapter(){
 
+		// Get the comment list of replies to selected comment
+		replyCommentList = ProjectApplication.getCurrentCommentList();
+		
 		// Add comments to adapter
 		adapter = new CommentListAdapter(this, R.layout.list_item, replyCommentList.getCommentList());
 		replyCommentList.setAdapter(adapter);
@@ -138,8 +138,8 @@ public class BrowseReplyCommentsActivity extends Activity implements OnItemSelec
 	}
 
 	@Override
-	public void onItemSelected(AdapterView<?> parent, View view, int position,
-			long id) {
+	public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+		
 		String selected = parent.getItemAtPosition(position).toString();
 		if (selected.equals("Date")) {
 			adapter.sortByDate();
