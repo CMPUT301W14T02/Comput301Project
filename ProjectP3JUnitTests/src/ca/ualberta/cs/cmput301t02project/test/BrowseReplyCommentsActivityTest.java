@@ -2,9 +2,12 @@ package ca.ualberta.cs.cmput301t02project.test;
 
 import ca.ualberta.cs.cmput301t02project.ProjectApplication;
 import ca.ualberta.cs.cmput301t02project.R;
+import ca.ualberta.cs.cmput301t02project.User;
 import ca.ualberta.cs.cmput301t02project.activity.BrowseReplyCommentsActivity;
+import ca.ualberta.cs.cmput301t02project.controller.FavoritesController;
 import ca.ualberta.cs.cmput301t02project.model.CommentListModel;
 import ca.ualberta.cs.cmput301t02project.model.CommentModel;
+import ca.ualberta.cs.cmput301t02project.model.StorageModel;
 import android.location.Location;
 import android.test.ActivityInstrumentationTestCase2;
 import android.test.ViewAsserts;
@@ -79,22 +82,44 @@ public class BrowseReplyCommentsActivityTest extends ActivityInstrumentationTest
 
 	/* Test for use case 10 and 11 */
 	public void testAddFavorite () {
-		assertTrue(false);
+		CommentListModel model = new CommentListModel();
+		FavoritesController controller = new FavoritesController(model);
+		CommentModel comment = new CommentModel("original text", null ,"username");
+		int oldRating = comment.getRating();
+		controller.favoriteComment(comment);
+		int newRating = comment.getRating(); 
+		assertEquals((oldRating+1), newRating);
 	}
 	
 	/* Test for use case 10 */
-	public void testReadCache() {
-		assertTrue(false);
+	public void testWritingReadCache() {
+		StorageModel storage = new StorageModel();
+		Location l = new Location("Location Initialization");
+		l.setLatitude(0);
+		l.setLongitude(0);
+		CommentModel comment = new CommentModel("post",l,"user");
+		storage.cacheComment(comment);
+		CommentModel comment2 = storage.getCacheList().get(0);
+		assertEquals("Comments should be the same",comment,comment2);
 	}
 	
 	/* test for use case 10 */
-	public void wantToReadCache() {
-		assertTrue(false);
+	public void testWritingWantToReadCache() {
+		StorageModel storage = new StorageModel();
+		Location l = new Location("Location Initialization");
+		CommentModel comment = new CommentModel("post",l,"user");
+		storage.cacheComment(comment);
+		CommentModel comment2 = storage.getCacheList().get(0);
+		assertEquals("Comments should be the same",comment,comment2);
 	}
 	
 	/* test to see if user is being pushed to server after update */
 	public void testPushUser() {
-		assertTrue(false);
+		User user = new User("user");
+		ProjectApplication pa = ProjectApplication.getInstance();
+		pa.pushUser(user);
+		User user2 = pa.getPushedUser("user");
+		assertEquals("Users should be the same",user,user2);
 	}
 	
 

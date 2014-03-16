@@ -1,5 +1,6 @@
 package ca.ualberta.cs.cmput301t02project.model;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 import android.location.Location;
@@ -9,6 +10,7 @@ import com.google.gson.Gson;
 public class StorageModel {
 
 	private static Gson gson = new Gson();
+	private ArrayList<CommentModel> cacheList = new ArrayList<CommentModel>();
 
 	public void pushComment(CommentModel comment) {
 
@@ -38,7 +40,7 @@ public class StorageModel {
 	}
 	
 	public void cacheComment(CommentModel comment) {
-		
+		cacheList.add(comment);
 	}
 	
 	// added for the test -KW
@@ -52,5 +54,10 @@ public class StorageModel {
 
 		CommentModel comment = new CommentModel("comment", currentLocation, "username");
 		return comment;
+	}
+	
+	public ArrayList<CommentModel> getCacheList()
+	{
+		return cacheList;
 	}
 }

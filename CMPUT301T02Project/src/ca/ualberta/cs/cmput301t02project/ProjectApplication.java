@@ -242,4 +242,7 @@ public class ProjectApplication {
 		
 	}
 	
+	public User getPushedUser(String name) {
+		return null;
+	}
 }
