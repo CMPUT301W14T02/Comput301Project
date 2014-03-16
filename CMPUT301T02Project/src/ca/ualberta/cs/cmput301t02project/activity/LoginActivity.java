@@ -59,11 +59,8 @@ public class LoginActivity extends Activity {
 			// reset message -SB
 			message.setText("Login Page");
 
-			if (!UserList.findUser(username)) {
-
-				// if user doesn't exist, create a user with that name -SB
-				UserList.createUser(username);
-			}
+			// if user doesn't exist, create a user with that name -SB
+			UserList.findUser(username);
 
 			// go to the main menu once user is set -SB
 			startActivity(new Intent(LoginActivity.this, MainMenuActivity.class));
