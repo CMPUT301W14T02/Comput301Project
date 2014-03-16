@@ -77,4 +77,24 @@ public class BrowseReplyCommentsActivityTest extends ActivityInstrumentationTest
 
 	}
 
+	/* Test for use case 10 and 11 */
+	public void testAddFavorite () {
+		assertTrue(false);
+	}
+	
+	/* Test for use case 10 */
+	public void testReadCache() {
+		assertTrue(false);
+	}
+	
+	/* test for use case 10 */
+	public void wantToReadCache() {
+		assertTrue(false);
+	}
+	
+	/* test to see if user is being pushed to server after update */
+	public void testPushUser() {
+		assertTrue(false);
+	}
+	
 }

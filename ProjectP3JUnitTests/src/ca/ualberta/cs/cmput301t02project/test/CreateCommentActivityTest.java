@@ -48,5 +48,14 @@ public class CreateCommentActivityTest extends ActivityInstrumentationTestCase2<
 		});
 	}
 	
+	/* Test for use case 14 */
+	public void testShareComment() {
+		assertTrue(false);
+	}
+	
+	/* test to see if user is being pushed to server after update */
+	public void testPushUser() {
+		assertTrue(false);
+	}
 
 }

@@ -11,5 +11,10 @@ public class BrowseFavoritesActivityTest extends
 		super(activityClass);
 		// TODO Auto-generated constructor stub
 	}
+	
+	/* test for use case 12 */
+	public void testReadFavorites() {
+		assertTrue(false);
+	}
 
 }

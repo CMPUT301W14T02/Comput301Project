@@ -37,4 +37,9 @@ public class LoginActivityTest extends ActivityInstrumentationTestCase2<LoginAct
 		assertFalse("Empty usernames should not be set", login.checkIfValid(""));
 		assertTrue("Non-empty username should be set", login.checkIfValid("u"));
 	}
+	
+	/* test to see if user is being pushed to server after update */
+	public void testPushUser() {
+		assertTrue(false);
+	}
 }
