@@ -21,7 +21,7 @@ import android.widget.AdapterView.OnItemSelectedListener;
 
 /**
  * Displays comments that the current user authored. 
- * Current user infromation including a list of their comments is stored in ProjectApplication
+ * Current user information including a list of their comments is stored in ProjectApplication.
  */
 public class BrowseMyCommentsActivity extends Activity implements OnItemSelectedListener {
 

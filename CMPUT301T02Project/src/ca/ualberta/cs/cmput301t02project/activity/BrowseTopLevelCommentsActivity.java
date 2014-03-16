@@ -65,8 +65,7 @@ public class BrowseTopLevelCommentsActivity extends Activity implements OnItemSe
 	public void onResume() {
 		super.onResume();
 		
-		// Update in case comments are edited created -SB
-		ProjectApplication.setCurrentCommentList(ProjectApplication.getCommentList());
+		adapter.notifyDataSetChanged();
 	}
 	
 	/**

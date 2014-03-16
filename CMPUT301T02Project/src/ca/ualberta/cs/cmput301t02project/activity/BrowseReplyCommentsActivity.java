@@ -20,8 +20,11 @@ import ca.ualberta.cs.cmput301t02project.model.CommentListModel;
 import ca.ualberta.cs.cmput301t02project.model.CommentModel;
 import ca.ualberta.cs.cmput301t02project.view.CommentListAdapter;
 
-public class BrowseReplyCommentsActivity extends Activity implements
-		OnItemSelectedListener {
+/**
+ * Displays comments replies to the current selected comment.
+ * Current comment information including the current comment and a list of its replies is stored in ProjectApplication.
+ */
+public class BrowseReplyCommentsActivity extends Activity implements OnItemSelectedListener {
 
 	// TODO: Refactor using new classes
 
@@ -38,8 +41,74 @@ public class BrowseReplyCommentsActivity extends Activity implements
 		selectedComment = (TextView) findViewById(R.id.selected_comment);
 
 		// Display selected comment
-		selectedComment.setText(ProjectApplication.getCurrentComment()
-				.getText());
+		selectedComment.setText(ProjectApplication.getCurrentComment().getText());
+		
+		createSpinner();
+
+		// Get the comment list of replies to selected comment
+		replyCommentList = ProjectApplication.getCurrentCommentList();
+
+		initializeAdapter();
+		
+		// If replying to comment -SB
+		Button replyComment = (Button) findViewById(R.id.reply_button);
+		replyComment.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				startActivity(new Intent(BrowseReplyCommentsActivity.this, CreateCommentActivity.class));
+			}
+		});
+
+		// To view the replies of a reply -SB
+		replyCommentListView.setOnItemClickListener(new OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> l, View v, int position, long id) {
+				// Refactor into MVC?
+				CommentModel nestedComment = (CommentModel) adapter.getItem(position);
+				ProjectApplication.setCurrentComment(nestedComment);
+				
+				CommentListModel nestedCommentList = nestedComment.getReplies();
+				ProjectApplication.setCurrentCommentList(nestedCommentList);
+
+				Intent goToReplyListActivity = new Intent(getApplicationContext(), BrowseReplyCommentsActivity.class);
+				startActivity(goToReplyListActivity);
+			}
+		});
+	}
+
+	@Override
+	public void onResume() {
+		super.onResume();
+		
+		adapter.notifyDataSetChanged();
+	}
+	
+	/**
+	 * Creates an adapter for displaying the replies to the current selected comment.
+	 * <p>
+	 * Called from onCreate().
+	 * Comments from the current user are able to be edited when the user clicks on one. 
+	 * <p>
+	 */
+	private void initializeAdapter(){
+
+		// Add comments to adapter
+		adapter = new CommentListAdapter(this, R.layout.list_item, replyCommentList.getCommentList());
+		replyCommentList.setAdapter(adapter);
+		adapter.setModel(replyCommentList);
+
+		// Display comments in adapter
+		replyCommentListView.setAdapter(adapter);
+
+	}
+	
+	/**
+	 * Creates a drop-down menu of sorting options.
+	 * <p>
+	 * Called from onCreate().
+	 * <p>
+	 */
+	private void createSpinner(){
 
 		// Based on:
 		// //www.androidhive.info/2012/04/android-spinner-dropdown-example/
@@ -59,69 +128,13 @@ public class BrowseReplyCommentsActivity extends Activity implements
 		sortBy.add("Ranking");
 
 		// Create adapter for spinner
-		ArrayAdapter<String> spinner_adapter = new ArrayAdapter<String>(this,
-				R.layout.list_item, sortBy);
+		ArrayAdapter<String> spinner_adapter = new ArrayAdapter<String>(this, R.layout.list_item, sortBy);
 
 		// Drop down layout style - list view with radio button
-		spinner_adapter
-				.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		spinner_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
 		// attach adapter to spinner
 		spinner.setAdapter(spinner_adapter);
-
-		// Get the comment list of replies to selected comment
-		replyCommentList = ProjectApplication.getCurrentCommentList();
-
-		// Add comments to adapter
-		adapter = new CommentListAdapter(this, R.layout.list_item,
-				replyCommentList.getCommentList());
-		replyCommentList.setAdapter(adapter);
-		adapter.setModel(replyCommentList);
-
-		// Display comments in adapter
-		replyCommentListView.setAdapter(adapter);
-
-		// If replying to comment -SB
-		Button replyComment = (Button) findViewById(R.id.reply_button);
-		replyComment.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				startActivity(new Intent(BrowseReplyCommentsActivity.this,
-						CreateCommentActivity.class));
-			}
-		});
-
-		// To view the replies of a reply -SB
-		replyCommentListView.setOnItemClickListener(new OnItemClickListener() {
-			@Override
-			public void onItemClick(AdapterView<?> l, View v, int position,
-					long id) {
-				// Refactor into MVC?
-				CommentModel nestedComment = (CommentModel) adapter
-						.getItem(position);
-				ProjectApplication.setCurrentComment(nestedComment);
-				CommentListModel nestedCommentList = nestedComment
-						.getReplies();
-				ProjectApplication.setCurrentCommentList(nestedCommentList);
-
-				Intent goToReplyListActivity = new Intent(
-						getApplicationContext(),
-						BrowseReplyCommentsActivity.class);
-				startActivity(goToReplyListActivity);
-			}
-		});
-	}
-
-	@Override
-	public void onResume() {
-		super.onResume();
-		// Get the comment list of replies to selected comment
-		// ArrayList<CommentModel> replyCommentList = ProjectApplication
-		// .getCurrentCommentList();
-
-		// Add comments to adapter
-		ProjectApplication.setCurrentCommentList(replyCommentList);
-
 	}
 
 	@Override
@@ -130,18 +143,22 @@ public class BrowseReplyCommentsActivity extends Activity implements
 		String selected = parent.getItemAtPosition(position).toString();
 		if (selected.equals("Date")) {
 			adapter.sortByDate();
-		} else if (selected.equals("Picture")) {
+		} 
+		else if (selected.equals("Picture")) {
 			adapter.sortByPicture();
-		} else if (selected.equals("My Location")) {
+		} 
+		else if (selected.equals("My Location")) {
 			adapter.sortByLocation();
-		} else if (selected.equals("Other Location")) {
+		} 
+		else if (selected.equals("Other Location")) {
 			adapter.sortByOtherLocation();
-		} else if (selected.equals("Ranking")) {
+		} 
+		else if (selected.equals("Ranking")) {
 			adapter.sortByRanking();
-		} else if (selected.equals("Default")) {
+		} 
+		else if (selected.equals("Default")) {
 			adapter.sortByDefault();
 		}
-		
 	}
 
 	@Override
