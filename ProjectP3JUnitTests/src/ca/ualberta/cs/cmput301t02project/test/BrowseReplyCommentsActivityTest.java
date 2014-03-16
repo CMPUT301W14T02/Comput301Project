@@ -25,7 +25,7 @@ public class BrowseReplyCommentsActivityTest extends ActivityInstrumentationTest
 		myLocation = new Location(loc);
 
 		CommentModel comment = new CommentModel("comment", currentLocation, "username");
-		
+
 		CommentListModel comments = new CommentListModel();
 		comments.add(comment);
 
@@ -74,6 +74,17 @@ public class BrowseReplyCommentsActivityTest extends ActivityInstrumentationTest
 
 		ListView view = (ListView) getActivity().findViewById(R.id.replyListView);
 		assertTrue("username should be displayed", view.getAdapter().getItem(0).toString().contains(comment.getUsername()));
+
+	}
+
+	/* Test for use case 19 */
+	public void testChangeLocation() {
+		assertTrue(false);
+
+	}
+
+	public void testNewAndNear() {
+		assertTrue(false);
 
 	}
 

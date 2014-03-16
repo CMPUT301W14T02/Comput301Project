@@ -81,7 +81,7 @@ public class User {
 	 * 
 	 * @param myFavorites	List of the User's favorite comments
 	 */
-	public void setMyFavoriteComments(CommentListModel myFavorites) {
+	public void setFavorites(CommentListModel myFavorites) {
 		this.myFavorites = myFavorites;
 	}
 	
@@ -89,7 +89,7 @@ public class User {
 	 * 
 	 * @return List of the User's favorite comments
 	 */
-	public CommentListModel getMyFavoritesComments() {
+	public CommentListModel getFavorites() {
 		return this.myFavorites;
 	}
 }
