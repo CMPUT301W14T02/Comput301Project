@@ -21,10 +21,12 @@ public class FavoritesControllerTest extends TestCase {
 	}
 	
 	// Use Case 11 - KW 
-	public void favoriteCommentTest() {
+	public void testFavoriteComment() {
 		CommentModel comment = new CommentModel("original text", null ,"username");
+		int oldRating = comment.getRating();
 		controller.favoriteComment(comment);
-		assertTrue(model.getCommentList().contains(comment));
+		int newRating = comment.getRating(); 
+		assertEquals((oldRating+1), newRating);
 	}
 		
 		
