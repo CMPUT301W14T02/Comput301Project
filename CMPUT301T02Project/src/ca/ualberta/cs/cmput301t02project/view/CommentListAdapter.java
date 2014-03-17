@@ -7,7 +7,7 @@ import ca.ualberta.cs.cmput301t02project.model.CommentModel;
 import android.content.Context;
 
 /**
- * View for "regular" comment lists.
+ * View for comment lists.
  * Some examples:
  * List of top level comments, 
  * List of replies to a comment.
