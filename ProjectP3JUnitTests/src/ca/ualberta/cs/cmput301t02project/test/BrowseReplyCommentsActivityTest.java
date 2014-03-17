@@ -83,7 +83,6 @@ public class BrowseReplyCommentsActivityTest extends ActivityInstrumentationTest
 
 	}
 
-	/* Test for use case 10 and 11 */
 	public void testAddFavorite () {
 		CommentListModel model = new CommentListModel();
 		FavoritesController controller = new FavoritesController(model);
