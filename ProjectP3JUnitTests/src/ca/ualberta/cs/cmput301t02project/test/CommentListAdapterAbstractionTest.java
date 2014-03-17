@@ -15,7 +15,7 @@ import ca.ualberta.cs.cmput301t02project.view.CommentListAdapter;
 
 
 public class CommentListAdapterAbstractionTest extends ActivityInstrumentationTestCase2<BrowseTopLevelCommentsActivity> {
-	
+	// tests BrowseTopLevelCommentsActivity sorting only
 	public CommentListAdapterAbstractionTest(){
 		super(BrowseTopLevelCommentsActivity.class);
 	}
