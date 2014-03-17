@@ -44,7 +44,7 @@ public class CreateReplyTest extends ActivityInstrumentationTestCase2<CreateComm
 				edit.setText(text);
 				button.performClick();
 				ArrayList<CommentModel> list = ProjectApplication.getCurrentComment().getReplies().getCommentList();
-				assertTrue("List should contain the just created comment", list.contains(new CommentModel(text, null, username)));
+				assertTrue("List should contain the just created comment", list.contains(new CommentModel(text, ProjectApplication.getCurrentLocation(), username)));
 			}
 		});
 	}

@@ -3,13 +3,17 @@ package ca.ualberta.cs.cmput301t02project.view;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Locale;
 
+import android.content.Context;
+import android.location.Location;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.TextView;
 import ca.ualberta.cs.cmput301t02project.ProjectApplication;
 import ca.ualberta.cs.cmput301t02project.model.CommentListModel;
 import ca.ualberta.cs.cmput301t02project.model.CommentModel;
-import android.content.Context;
-import android.location.Location;
-import android.widget.ArrayAdapter;
 
 /**
  * CommentListAdapterAbstraction is a subclass of ArrayAdapter that is extended by
@@ -284,6 +288,36 @@ public abstract class CommentListAdapterAbstraction extends ArrayAdapter<Comment
 			
 			}
 		}
+
+	}
+	
+	/**
+	 * Builds the view shown in the ListView.
+	 * <p>
+	 * Inspired on
+	 * https://github.com/zjullion/PicPosterComplete/blob/master/src/ca/ualberta/cs/picposter/view/PicPostModelAdapter.java
+	 * @return The view
+	 * <p>
+	 */
+	@Override
+	public View getView(int position, View convertView, ViewGroup parent) {
+		if(convertView == null) {
+			convertView = new TextView(this.getContext());
+		}
+		CommentModel comment = this.getItem(position);
+		
+		String location = String.format(Locale.getDefault(), "%.4f,%.4f",
+				comment.getLocation().getLatitude(), comment.getLocation().getLongitude());
+		
+		int repliesCount = comment.getReplies().getCommentList().size();
+		String replies = Integer.toString(repliesCount) + ' ';
+		replies += repliesCount == 1 ? "reply" : "replies";
+		String text = comment.getText() + "\n(by " 
+				+ comment.getUsername() + " | " + location + " | " + replies + ')';
+		
+		((TextView)convertView).setText(text);
+		
+		return convertView;
 
 	}
 }

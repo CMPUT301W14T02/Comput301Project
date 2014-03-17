@@ -171,9 +171,6 @@ public class CommentModel {
 
 	/**
 	 * Returns a string that represents the comment.
-	 * <p>
-	 * Currently is being used to display the comment.
-	 * <p>
 	 * @return The string
 	 */
 	@Override
