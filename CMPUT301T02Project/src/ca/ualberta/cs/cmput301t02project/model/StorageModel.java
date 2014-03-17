@@ -7,11 +7,23 @@ import android.location.Location;
 
 import com.google.gson.Gson;
 
+/**
+ * Deals with storing data on the server and caching data locally.
+ */
 public class StorageModel {
 
 	private static Gson gson = new Gson();
 	private ArrayList<CommentModel> cacheList = new ArrayList<CommentModel>();
 
+	/**
+	 * Push a comment online.
+	 * <p>
+	 * Converts a specified CommentModel to JSON for for storing on the web. 
+	 * Pushes the specified CommentModel to the web.
+	 * Used when a comment is created in 
+	 * CreateCommentActivity.
+	 * @param comment	CommentModel to be pushed
+	 */
 	public void pushComment(CommentModel comment) {
 
 		/* Some test code for when we work on this method */
@@ -39,13 +51,24 @@ public class StorageModel {
 
 	}
 	
+	/**
+	 * Caches a comment locally.
+	 * <p>
+	 * Caches a specified CommentModel on the user's local device. 
+	 * Used when a comment is read or favorited in
+	 * BrowseTopLevelCommentsActivity and BrowseReplyCommentsActivity.
+	 * @param comment	CommentModel to cache
+	 */
 	public void cacheComment(CommentModel comment) {
 		cacheList.add(comment);
 	}
 	
+	/**
+	 * Not fully implemented - added for testing for this release only. 
+	 * @return	CommentModel containing the current location
+	 */
+	public CommentModel getLatest() {
 	// added for the test -KW
-	public CommentModel getLatest()
-	{
 		String loc = "Location Intialization";
 		Location currentLocation;
 		Location myLocation;
@@ -56,8 +79,11 @@ public class StorageModel {
 		return comment;
 	}
 	
-	public ArrayList<CommentModel> getCacheList()
-	{
+	/**
+	 * Returns a list of the cached comments.
+	 * @return	ArrayList of cached CommentModels
+	 */
+	public ArrayList<CommentModel> getCacheList() {
 		return cacheList;
 	}
 }
