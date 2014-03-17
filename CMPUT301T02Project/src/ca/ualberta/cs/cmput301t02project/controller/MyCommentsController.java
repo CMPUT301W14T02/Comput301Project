@@ -8,7 +8,7 @@ import ca.ualberta.cs.cmput301t02project.model.CommentModel;
  * For updating a CommentListModel of the current user's comments.
  */
 public class MyCommentsController extends CommentListControllerAbstraction {
-
+	
 	public MyCommentsController(CommentListModel model) {
 		this.model = model;
 	}

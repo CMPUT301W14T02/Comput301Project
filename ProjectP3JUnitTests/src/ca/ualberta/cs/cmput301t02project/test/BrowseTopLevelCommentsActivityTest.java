@@ -246,4 +246,7 @@ public class BrowseTopLevelCommentsActivityTest extends ActivityInstrumentationT
 		
 	}
 
+	/*
+	 * See CommentListAdapterActivityTest for sorting tests.
+	 */
 }
