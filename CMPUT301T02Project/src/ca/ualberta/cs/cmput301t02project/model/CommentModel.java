@@ -13,9 +13,9 @@ public class CommentModel {
 	private Date date;
 	private Location location;
 	private String text;
-	private Bitmap picture;
+	private transient Bitmap picture; //transient until convertible to Json
 	private int rating;
-	private CommentListModel replies;
+	private transient CommentListModel replies; //transient until convertible to Json
 	private String username;
 
 	/**
@@ -185,8 +185,6 @@ public class CommentModel {
 			return text + " (by " + username + ", " + replies.getCommentList().size() + " replies)";
 		}
 	}
-	
-
 
 	/**
 	 * Enables comparison for equality between Comments.
