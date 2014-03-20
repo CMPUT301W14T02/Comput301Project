@@ -1,5 +1,7 @@
 package ca.ualberta.cs.cmput301t02project.model;
 
+import io.searchbox.annotations.JestId;
+
 import java.util.Date;
 
 import android.graphics.Bitmap;
@@ -10,8 +12,11 @@ import android.location.Location;
  * Instances of this class are stored in the server, and in the cache.
  */
 public class CommentModel {
+	
+	@JestId
+	private String id;
 	private Date date;
-	private Location location;
+	private transient Location location; //transient until convertible to Json
 	private String text;
 	private transient Bitmap picture; //transient until convertible to Json
 	private int rating;
@@ -57,6 +62,22 @@ public class CommentModel {
 		this.date = new Date();
 	}
 	
+	/**
+	 * Gets the comment id
+	 * @return The id
+	 */
+	public String getId() {
+		return id;
+	}
+
+	/**
+	 * Sets the comment id
+	 * @param id The id
+	 */
+	public void setId(String id) {
+		this.id = id;
+	}
+
 	/**
 	 * Gets the comment date.
 	 * @return The date

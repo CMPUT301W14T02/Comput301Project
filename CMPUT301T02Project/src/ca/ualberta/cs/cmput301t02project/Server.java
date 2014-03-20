@@ -20,17 +20,23 @@ public class Server {
 		client = jestClientFactory.getObject();
 	}
 	
-	public void post(CommentModel comment) {
-		Index index = new Index.Builder(comment).id("111").build();
-		try {
-			JestResult result = client.execute(index);
-			if(!result.isSucceeded()) {
-				throw new NetworkErrorException();
+	public void post(final CommentModel comment) {
+		Thread thread = new Thread() {
+			@Override
+			public void run() {
+				Index index = new Index.Builder(comment).build();
+				try {
+					JestResult result = client.execute(index);
+					if(!result.isSucceeded()) {
+						throw new NetworkErrorException();
+					}
+				} catch (Exception e) {
+					e.printStackTrace();
+					throw new RuntimeException();
+				}
 			}
-		} catch (Exception e) {
-			e.printStackTrace();
-			throw new RuntimeException();
-		}
+		};
+		thread.start();
 	}
 	
 	public void shutdown() {

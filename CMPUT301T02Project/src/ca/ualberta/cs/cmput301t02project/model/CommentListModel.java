@@ -2,6 +2,7 @@ package ca.ualberta.cs.cmput301t02project.model;
 
 import java.util.ArrayList;
 
+import ca.ualberta.cs.cmput301t02project.Server;
 import ca.ualberta.cs.cmput301t02project.view.CommentListAdapterAbstraction;
 
 /**
@@ -64,14 +65,15 @@ public class CommentListModel {
 	 * <p>
 	 * @param comment	The new comment to add to the list
 	 */
-	public void add(CommentModel comment) {		
+	public void add(CommentModel comment) {
 		commentList.add(comment);
+		Server server = new Server();
+		server.post(comment);
+		server.shutdown();
 		if (adapter != null) {
 			adapter.sortList();
 			adapter.notifyDataSetChanged();
 		}
-		// TODO push comment to server
-
 	}
 	
 	/**

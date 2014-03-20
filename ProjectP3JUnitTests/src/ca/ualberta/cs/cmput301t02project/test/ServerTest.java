@@ -8,7 +8,7 @@ public class ServerTest extends TestCase {
 
 	public void testPostComment() {
 		Server server =  new Server();
-		CommentModel comment = new CommentModel("the text", null, "the author");
+		CommentModel comment = new CommentModel("text", null, "the author");
 		
 		server.post(comment);
 		
