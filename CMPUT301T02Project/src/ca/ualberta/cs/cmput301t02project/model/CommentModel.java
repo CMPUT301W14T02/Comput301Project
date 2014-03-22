@@ -20,8 +20,18 @@ public class CommentModel {
 	private String text;
 	private transient Bitmap picture; //transient until convertible to Json
 	private int rating;
-	private transient CommentListModel replies; //transient until convertible to Json
+	private CommentListModel replies; //to be changed to ArrayList<String> childrenIds
 	private String username;
+	
+	
+	/**
+	 * Creates a new Comment.
+	 * <p>
+	 * No args constructor, all fields are initialized to null.
+	 * <p>
+	 */
+	public CommentModel() {	
+	}
 
 	/**
 	 * Creates a new Comment.
@@ -39,7 +49,7 @@ public class CommentModel {
 		this.location = location;
 		this.username = username;
 		this.rating = 0;
-		this.replies = new CommentListModel();
+		this.replies = new CommentListModel(this);
 		this.date = new Date();
 	}
 
@@ -58,7 +68,7 @@ public class CommentModel {
 		this.location = location;
 		this.username = username;
 		this.rating = 0;
-		this.replies = new CommentListModel();
+		this.replies = new CommentListModel(this);
 		this.date = new Date();
 	}
 	

@@ -14,25 +14,34 @@ public class Server {
 	private JestClient client;
 	
 	public Server() {
-		DroidClientConfig clientConfig = new DroidClientConfig.Builder(serverUri).build();
+		//TODO Add custom Gson here to clientConfig.Builder
+		DroidClientConfig clientConfig = new DroidClientConfig.Builder(serverUri).multiThreaded(false).build();
+		
 		JestClientFactory jestClientFactory = new JestClientFactory();
 		jestClientFactory.setDroidClientConfig(clientConfig);
 		client = jestClientFactory.getObject();
+		
 	}
 	
 	public void post(final CommentModel comment) {
 		Thread thread = new Thread() {
 			@Override
 			public void run() {
-				Index index = new Index.Builder(comment).build();
+				
 				try {
+					Index index = new Index.Builder(comment).id(comment.getId()).build();
+					
 					JestResult result = client.execute(index);
+					String id = result.getJsonObject().get("_id").getAsString();
+					comment.setId(id);
 					if(!result.isSucceeded()) {
 						throw new NetworkErrorException();
 					}
 				} catch (Exception e) {
 					e.printStackTrace();
 					throw new RuntimeException();
+				} finally {
+					client.shutdownClient();
 				}
 			}
 			

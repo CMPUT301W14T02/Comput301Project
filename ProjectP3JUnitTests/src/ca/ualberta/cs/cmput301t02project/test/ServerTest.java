@@ -12,8 +12,6 @@ public class ServerTest extends TestCase {
 		
 		server.post(comment);
 		
-		server.shutdown();
-		
 		//Asserted by looking in browser
 	}
 	

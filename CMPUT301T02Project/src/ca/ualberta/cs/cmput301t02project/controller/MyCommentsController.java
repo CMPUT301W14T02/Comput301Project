@@ -23,7 +23,11 @@ public class MyCommentsController extends CommentListControllerAbstraction {
 	 * @param comment	CommentModel to add to myComments list
 	 */
 	public void addNewComment(CommentModel comment) {
-		model.add(comment);
+		//model.add(comment);
+		//TODO Can't add it normally, because it goes to the server
+		//temporary:
+		model.getCommentList().add(comment);
+		
 	}
 	
 	/**

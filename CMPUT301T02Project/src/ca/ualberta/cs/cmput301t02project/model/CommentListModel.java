@@ -2,6 +2,7 @@ package ca.ualberta.cs.cmput301t02project.model;
 
 import java.util.ArrayList;
 
+import android.util.Log;
 import ca.ualberta.cs.cmput301t02project.Server;
 import ca.ualberta.cs.cmput301t02project.view.CommentListAdapterAbstraction;
 
@@ -16,13 +17,20 @@ import com.google.gson.Gson;
  */
 public class CommentListModel {
 	
-	private StorageModel store = new StorageModel();
-	private CommentListAdapterAbstraction adapter = null;
+	private transient StorageModel store = new StorageModel();
+	private transient CommentListAdapterAbstraction adapter = null;
 	private ArrayList<CommentModel> commentList;
+	private transient CommentModel parent;
 	//private CommentListAdapter adapter;
 
 	public CommentListModel() {
 		commentList = new ArrayList<CommentModel>();
+		this.parent = null;
+	}
+
+	public CommentListModel(CommentModel parent) {
+		commentList = new ArrayList<CommentModel>();
+		this.parent=parent;
 	}
 
 	/**
@@ -71,6 +79,10 @@ public class CommentListModel {
 		commentList.add(comment);
 		Server server = new Server();
 		server.post(comment);
+		if(this.parent != null) {
+			server = new Server();
+			server.post(this.parent);
+		}
 		if (adapter != null) {
 			adapter.sortList();
 			adapter.notifyDataSetChanged();
