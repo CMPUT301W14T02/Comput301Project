@@ -31,7 +31,7 @@ public class CreateCommentActivityTest extends ActivityInstrumentationTestCase2<
 
 		CommentModel comment = new CommentModel("comment", currentLocation, "username");
 
-		ProjectApplication.setCurrentLocation(myLocation);
+		ProjectApplication.getInstance().setCurrentLocation(myLocation);
 
 		return comment;
 	}
@@ -52,13 +52,13 @@ public class CreateCommentActivityTest extends ActivityInstrumentationTestCase2<
 				assertNotNull(button);
 				String text = "the comment";
 				String username = "default";
-				ProjectApplication.setName(username);
+				ProjectApplication.getInstance().setName(username);
 				edit.setText(text);
 				button.performClick();
-				ArrayList<CommentModel> list = ProjectApplication.getCommentList().getCommentList();
+				ArrayList<CommentModel> list = ProjectApplication.getInstance().getCommentList().getCommentList();
 				CommentModel expected = new CommentModel(text, null, username);
 				assertTrue("List should contain the just created comment", list.contains(expected));
-				ArrayList<CommentModel> myComments = ProjectApplication.getUser().getMyComments().getCommentList();
+				ArrayList<CommentModel> myComments = ProjectApplication.getInstance().getUser().getMyComments().getCommentList();
 				assertTrue("myList should contain the just created comment", myComments.contains(expected));
 				
 			}
@@ -78,7 +78,7 @@ public class CreateCommentActivityTest extends ActivityInstrumentationTestCase2<
 	/* test to see if user is being pushed to server after update */
 	public void testPushUser() {
 		User user = new User("user");
-		ProjectApplication pa = ProjectApplication.getInstance();
+		ProjectApplication pa = ProjectApplication.getInstance().getInstance();
 		pa.pushUser(user);
 		User user2 = pa.getPushedUser("user");
 		assertEquals("Users should be the same",user,user2);

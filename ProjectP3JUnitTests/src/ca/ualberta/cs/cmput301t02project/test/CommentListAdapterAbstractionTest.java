@@ -41,8 +41,8 @@ public class CommentListAdapterAbstractionTest extends ActivityInstrumentationTe
 		l3.setLatitude(300);
 		l3.setLongitude(300);
 		
-		ProjectApplication projectApplication = ProjectApplication.getInstance();
-		projectApplication.setCurrentLocation(currentLocation);
+		ProjectApplication projectApplication = ProjectApplication.getInstance().getInstance();
+		ProjectApplication.getInstance().setCurrentLocation(currentLocation);
 		
 		CommentModel comment1 = new  CommentModel("post 1", l1, "schmoop");
 		
@@ -102,8 +102,8 @@ public class CommentListAdapterAbstractionTest extends ActivityInstrumentationTe
 		l3.setLatitude(300);
 		l3.setLongitude(300);
 		
-		ProjectApplication projectApplication = ProjectApplication.getInstance();
-		projectApplication.setCurrentLocation(currentLocation);
+		ProjectApplication projectApplication = ProjectApplication.getInstance().getInstance();
+		ProjectApplication.getInstance().setCurrentLocation(currentLocation);
 		
 		CommentModel comment1 = new  CommentModel("post 1", l1, "schmoop");
 		
@@ -298,8 +298,8 @@ public class CommentListAdapterAbstractionTest extends ActivityInstrumentationTe
 		l3.setLatitude(120);
 		l3.setLongitude(0);
 		
-		ProjectApplication projectApplication = ProjectApplication.getInstance();
-		projectApplication.setCurrentLocation(currentLocation);
+		ProjectApplication projectApplication = ProjectApplication.getInstance().getInstance();
+		ProjectApplication.getInstance().setCurrentLocation(currentLocation);
 		
 		CommentModel comment1 = new  CommentModel("post 1", l1, "schmoop");
 		comment1.setDate(new Date(1));

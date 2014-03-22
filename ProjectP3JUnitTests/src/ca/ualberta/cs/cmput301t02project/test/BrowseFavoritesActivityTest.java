@@ -29,7 +29,7 @@ public class BrowseFavoritesActivityTest extends ActivityInstrumentationTestCase
 
 		CommentModel comment = new CommentModel("comment", currentLocation,"username");
 
-		ProjectApplication.setCurrentLocation(myLocation);
+		ProjectApplication.getInstance().setCurrentLocation(myLocation);
 
 		return comment;
 	}
@@ -38,7 +38,7 @@ public class BrowseFavoritesActivityTest extends ActivityInstrumentationTestCase
 
 		CommentModel comment = initializeComment();
 		CommentListModel favoriteComments = new CommentListModel();
-		favoriteComments = ProjectApplication.getUser().getFavorites();
+		favoriteComments = ProjectApplication.getInstance().getUser().getFavorites();
 		favoriteComments.add(comment);
 
 		ListView view = (ListView) getActivity().findViewById(R.id.commentListView);
@@ -67,10 +67,10 @@ public class BrowseFavoritesActivityTest extends ActivityInstrumentationTestCase
 	public void testReadFavorites() {
 		CommentModel comment = initializeComment();
 		CommentListModel favoriteComments = new CommentListModel();
-		favoriteComments = ProjectApplication.getUser().getFavorites();
+		favoriteComments = ProjectApplication.getInstance().getUser().getFavorites();
 		favoriteComments.add(comment);
 		
-		assertEquals("Comments should be the same",comment,ProjectApplication.getUser().getFavorites().getCommentList().get(0));
+		assertEquals("Comments should be the same",comment,ProjectApplication.getInstance().getUser().getFavorites().getCommentList().get(0));
 	}
 	
 	/*
@@ -97,8 +97,8 @@ public class BrowseFavoritesActivityTest extends ActivityInstrumentationTestCase
 		l3.setLatitude(300);
 		l3.setLongitude(300);
 		
-		ProjectApplication projectApplication = ProjectApplication.getInstance();
-		projectApplication.setCurrentLocation(currentLocation);
+		ProjectApplication projectApplication = ProjectApplication.getInstance().getInstance();
+		ProjectApplication.getInstance().setCurrentLocation(currentLocation);
 		
 		CommentModel comment1 = new  CommentModel("post 1", l1, "schmoop");
 		
@@ -158,8 +158,8 @@ public class BrowseFavoritesActivityTest extends ActivityInstrumentationTestCase
 		l3.setLatitude(300);
 		l3.setLongitude(300);
 		
-		ProjectApplication projectApplication = ProjectApplication.getInstance();
-		projectApplication.setCurrentLocation(currentLocation);
+		ProjectApplication projectApplication = ProjectApplication.getInstance().getInstance();
+		ProjectApplication.getInstance().setCurrentLocation(currentLocation);
 		
 		CommentModel comment1 = new  CommentModel("post 1", l1, "schmoop");
 		
@@ -354,8 +354,8 @@ public class BrowseFavoritesActivityTest extends ActivityInstrumentationTestCase
 		l3.setLatitude(120);
 		l3.setLongitude(0);
 		
-		ProjectApplication projectApplication = ProjectApplication.getInstance();
-		projectApplication.setCurrentLocation(currentLocation);
+		ProjectApplication projectApplication = ProjectApplication.getInstance().getInstance();
+		ProjectApplication.getInstance().setCurrentLocation(currentLocation);
 		
 		CommentModel comment1 = new  CommentModel("post 1", l1, "schmoop");
 		comment1.setDate(new Date(1));

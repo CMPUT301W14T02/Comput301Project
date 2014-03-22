@@ -64,7 +64,7 @@ public abstract class CommentListAdapterAbstraction extends ArrayAdapter<Comment
 			public int compare(CommentModel a, CommentModel b) {
 				String loc = "Location Initialization";
 				myLocation = new Location(loc);
-				myLocation = ProjectApplication.getCurrentLocation();
+				myLocation = ProjectApplication.getInstance().getCurrentLocation();
 				Float dist1 = a.getLocation().distanceTo(myLocation);
 				Float dist2 = b.getLocation().distanceTo(myLocation);
 				if (dist1 < dist2) {
@@ -128,7 +128,7 @@ public abstract class CommentListAdapterAbstraction extends ArrayAdapter<Comment
 	public void sortByDefaultMethod() {
 		String loc = "Location Initialization";
 		myLocation = new Location(loc);
-		myLocation = ProjectApplication.getCurrentLocation();
+		myLocation = ProjectApplication.getInstance().getCurrentLocation();
 		
 		
 		// will hold the remaining unsorted CommentModels

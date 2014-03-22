@@ -2,26 +2,26 @@ package ca.ualberta.cs.cmput301t02project.activity;
 
 import java.util.ArrayList;
 
-import ca.ualberta.cs.cmput301t02project.ProjectApplication;
-import ca.ualberta.cs.cmput301t02project.R;
-import ca.ualberta.cs.cmput301t02project.model.CommentListModel;
-import ca.ualberta.cs.cmput301t02project.model.CommentModel;
-import ca.ualberta.cs.cmput301t02project.view.MyCommentsAdapter;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Spinner;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.AdapterView.OnItemSelectedListener;
+import ca.ualberta.cs.cmput301t02project.ProjectApplication;
+import ca.ualberta.cs.cmput301t02project.R;
+import ca.ualberta.cs.cmput301t02project.model.CommentListModel;
+import ca.ualberta.cs.cmput301t02project.model.CommentModel;
+import ca.ualberta.cs.cmput301t02project.view.MyCommentsAdapter;
 
 /**
  * Displays comments that the current user authored. 
- * Current user information including a list of their comments is stored in ProjectApplication.
+ * Current user information including a list of their comments is stored in ProjectApplication.getInstance().
  */
 public class BrowseMyCommentsActivity extends Activity implements OnItemSelectedListener {
 
@@ -46,7 +46,7 @@ public class BrowseMyCommentsActivity extends Activity implements OnItemSelected
 			public void onItemClick(AdapterView<?> l, View v, int position, long id) {
 				// Refactor into MVC?	
 				CommentModel nestedComment = (CommentModel) adapter.getItem(position);
-				ProjectApplication.setCurrentComment(nestedComment);
+				ProjectApplication.getInstance().setCurrentComment(nestedComment);
 				
 				Intent goToEditCommentActivity = new Intent(getApplicationContext(),EditCommentActivity.class);
 				startActivity(goToEditCommentActivity);
@@ -71,7 +71,7 @@ public class BrowseMyCommentsActivity extends Activity implements OnItemSelected
 	private void initializeAdapter(){
 		
 		// Retrieve the current comments list -SB
-		myCommentsList = ProjectApplication.getUser().getMyComments();
+		myCommentsList = ProjectApplication.getInstance().getUser().getMyComments();
 
 		// Add comments to adapter
 		adapter = new MyCommentsAdapter(this, R.layout.list_item, myCommentsList.getCommentList());

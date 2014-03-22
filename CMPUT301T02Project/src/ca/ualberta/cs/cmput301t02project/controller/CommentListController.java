@@ -28,7 +28,7 @@ public class CommentListController extends CommentListControllerAbstraction {
 	public CommentModel addNewComment(String text, Bitmap picture, String username) {
 		
 		CommentModel comment;
-		Location currentLocation = ProjectApplication.getCurrentLocation();
+		Location currentLocation = ProjectApplication.getInstance().getCurrentLocation();
 		comment = new CommentModel(text, picture, currentLocation, username);
 		model.add(comment);
 		return comment;

@@ -29,7 +29,7 @@ public class BrowseMyCommentsActivityTest extends ActivityInstrumentationTestCas
 
 		CommentModel comment = new CommentModel("comment", currentLocation, "username");
 
-		ProjectApplication.setCurrentLocation(myLocation);
+		ProjectApplication.getInstance().setCurrentLocation(myLocation);
 
 		return comment;
 	}
@@ -37,7 +37,7 @@ public class BrowseMyCommentsActivityTest extends ActivityInstrumentationTestCas
 	public void testDisplayMyComments() {
 		CommentModel comment = initializeComment();
 		CommentListModel myComments = new CommentListModel();
-		myComments = ProjectApplication.getUser().getMyComments();
+		myComments = ProjectApplication.getInstance().getUser().getMyComments();
 		myComments.add(comment);
 
 		ListView view = (ListView) getActivity().findViewById(R.id.commentListView);
@@ -77,8 +77,8 @@ public class BrowseMyCommentsActivityTest extends ActivityInstrumentationTestCas
 		l3.setLatitude(300);
 		l3.setLongitude(300);
 		
-		ProjectApplication projectApplication = ProjectApplication.getInstance();
-		projectApplication.setCurrentLocation(currentLocation);
+		ProjectApplication projectApplication = ProjectApplication.getInstance().getInstance();
+		ProjectApplication.getInstance().setCurrentLocation(currentLocation);
 		
 		CommentModel comment1 = new  CommentModel("post 1", l1, "schmoop");
 		
@@ -138,8 +138,8 @@ public class BrowseMyCommentsActivityTest extends ActivityInstrumentationTestCas
 		l3.setLatitude(300);
 		l3.setLongitude(300);
 		
-		ProjectApplication projectApplication = ProjectApplication.getInstance();
-		projectApplication.setCurrentLocation(currentLocation);
+		ProjectApplication projectApplication = ProjectApplication.getInstance().getInstance();
+		ProjectApplication.getInstance().setCurrentLocation(currentLocation);
 		
 		CommentModel comment1 = new  CommentModel("post 1", l1, "schmoop");
 		
@@ -334,8 +334,8 @@ public class BrowseMyCommentsActivityTest extends ActivityInstrumentationTestCas
 		l3.setLatitude(120);
 		l3.setLongitude(0);
 		
-		ProjectApplication projectApplication = ProjectApplication.getInstance();
-		projectApplication.setCurrentLocation(currentLocation);
+		ProjectApplication projectApplication = ProjectApplication.getInstance().getInstance();
+		ProjectApplication.getInstance().setCurrentLocation(currentLocation);
 		
 		CommentModel comment1 = new  CommentModel("post 1", l1, "schmoop");
 		comment1.setDate(new Date(1));

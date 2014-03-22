@@ -40,7 +40,7 @@ public class UserList {
 		// Check if the username exists in the list of all users -SB
 		for (int i = 0; i < userList.size(); i++) {
 			if (userList.get(i).getName().equals(username)) {
-				ProjectApplication.setName(userList.get(i).getName());
+				ProjectApplication.getInstance().setName(userList.get(i).getName());
 				return true;
 			}
 		}
@@ -62,7 +62,7 @@ public class UserList {
 	 */
 	public static void createUser(String username) {
 		
-		ProjectApplication.setName(username);
+		ProjectApplication.getInstance().setName(username);
 		
 		// Add new user to the userlist -SB
 		userList.add(new User(username));

@@ -1,17 +1,14 @@
 package ca.ualberta.cs.cmput301t02project.activity;
 
-import ca.ualberta.cs.cmput301t02project.R;
-import ca.ualberta.cs.cmput301t02project.UserList;
-import ca.ualberta.cs.cmput301t02project.R.id;
-import ca.ualberta.cs.cmput301t02project.R.layout;
-import ca.ualberta.cs.cmput301t02project.R.menu;
-import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import ca.ualberta.cs.cmput301t02project.R;
+import ca.ualberta.cs.cmput301t02project.UserList;
 
 /**
  * Allows a user to log in to the app with a selected username.
@@ -47,7 +44,7 @@ public class LoginActivity extends Activity {
 	/**
 	 * Sets the current user's username.
 	 * <p>
-	 * Sets the current username in ProjectApplication.
+	 * Sets the current username in ProjectApplication.getInstance().
 	 * The current username is posted along with any comments the user makes. 
 	 * The user's information including old posted comments and favorite comments can be restored after the user is set. 
 	 * If an invalid username was entered, a message is printed to the screen.

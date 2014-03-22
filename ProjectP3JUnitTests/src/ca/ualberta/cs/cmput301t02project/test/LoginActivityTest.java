@@ -22,9 +22,9 @@ public class LoginActivityTest extends ActivityInstrumentationTestCase2<LoginAct
 	public void testSetUsername() {
 		
 		User user = new User("desiredName");
-		ProjectApplication.setName(user.getName());
+		ProjectApplication.getInstance().setName(user.getName());
 		
-		assertEquals("CurrentUser name should match current user's username", ProjectApplication.getName(), user.getName());
+		assertEquals("CurrentUser name should match current user's username", ProjectApplication.getInstance().getName(), user.getName());
 	}
 	
 	// Use Case 20 - part 3 -SB
@@ -38,7 +38,7 @@ public class LoginActivityTest extends ActivityInstrumentationTestCase2<LoginAct
 	/* test to see if user is being pushed to server after update */
 	public void testPushUser() {
 		User user = new User("user");
-		ProjectApplication pa = ProjectApplication.getInstance();
+		ProjectApplication pa = ProjectApplication.getInstance().getInstance();
 		pa.pushUser(user);
 		User user2 = pa.getPushedUser("user");
 		assertEquals("Users should be the same",user,user2);

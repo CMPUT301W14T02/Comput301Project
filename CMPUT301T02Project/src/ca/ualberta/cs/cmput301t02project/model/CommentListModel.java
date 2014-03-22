@@ -2,10 +2,10 @@ package ca.ualberta.cs.cmput301t02project.model;
 
 import java.util.ArrayList;
 
-import com.google.gson.Gson;
-
 import ca.ualberta.cs.cmput301t02project.Server;
 import ca.ualberta.cs.cmput301t02project.view.CommentListAdapterAbstraction;
+
+import com.google.gson.Gson;
 
 /**
  * Holds information about a specific list of CommentModels.
@@ -71,7 +71,6 @@ public class CommentListModel {
 		commentList.add(comment);
 		Server server = new Server();
 		server.post(comment);
-		server.shutdown();
 		if (adapter != null) {
 			adapter.sortList();
 			adapter.notifyDataSetChanged();

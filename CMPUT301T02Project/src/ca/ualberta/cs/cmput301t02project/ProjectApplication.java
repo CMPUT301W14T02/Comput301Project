@@ -15,11 +15,11 @@ public class ProjectApplication {
 
 	// Singleton
 	private static ProjectApplication instance = null;
-	private static CommentListModel commentList;
-	private static CommentListModel currentCommentList;
-	private static CommentModel currentComment;
-	private static Location currentLocation = null;
-	private static User currentUser = new User("default");
+	private CommentListModel commentList;
+	private CommentListModel currentCommentList;
+	private CommentModel currentComment;
+	private Location currentLocation = null;
+	private User currentUser = new User("default");
 
 	// Singleton code adapted from http://www.javaworld.com/article/2073352/core-java/simply-singleton.html
 	protected ProjectApplication() {
@@ -36,7 +36,7 @@ public class ProjectApplication {
 	 * <p>
 	 * @return Current user's username
 	 */
-	public static String getName() {
+	public String getName() {
 		return currentUser.getName();
 	}
 	
@@ -49,7 +49,7 @@ public class ProjectApplication {
 	 * <p>
 	 * @param name	Current user's username
 	 */
-	public static void setName(String name) {
+	public void setName(String name) {
 		currentUser.setName(name);
 	}
 	
@@ -65,12 +65,12 @@ public class ProjectApplication {
 	 * @return Current user information
 	 *
 	 */
-	public static User getUser() {
+	public User getUser() {
 		return currentUser;
 	}
 	
 	/**
-	 * Creates an instance of ProjectApplication.
+	 * Creates an instance of ProjectApplication.getInstance().
 	 * @return Instance of ProjectApplication
 	 */
 	public static ProjectApplication getInstance() {
@@ -92,7 +92,7 @@ public class ProjectApplication {
 	 * @return List of all top level comments
 	 * @see CommentListModel	Example of a CommentListModel
 	 */
-	public static CommentListModel getCommentList() {
+	public CommentListModel getCommentList() {
 		if (commentList == null) {
 			commentList = new CommentListModel();
 		}
@@ -110,8 +110,8 @@ public class ProjectApplication {
 	 * @param currentCommentList	The up-to-date comment list of interest
 	 * @see CommentListModel	Example of a CommentListModel
 	 */
-	public static void setCurrentCommentList(CommentListModel currentCommentList) {
-		ProjectApplication.currentCommentList = currentCommentList;
+	public void setCurrentCommentList(CommentListModel currentCommentList) {
+		this.currentCommentList = currentCommentList;
 	}
 
 	/**
@@ -125,12 +125,12 @@ public class ProjectApplication {
 	 * @return List of current comments of interest
 	 * @see CommentListModel	Example of a CommentListModel
 	 */
-	public static CommentListModel getCurrentCommentList() {
+	public CommentListModel getCurrentCommentList() {
 
 		if (currentCommentList == null) {
 
 			// Creating before browsing comments.
-			currentCommentList = ProjectApplication.getCommentList();
+			currentCommentList = this.getCommentList();
 		}
 		return currentCommentList;
 	}
@@ -144,7 +144,7 @@ public class ProjectApplication {
 	 * @return Current comment of interest
 	 * @see CommentModel	Example of a CommentModel
 	 */
-	public static CommentModel getCurrentComment() {
+	public CommentModel getCurrentComment() {
 		return currentComment;
 	}
 
@@ -158,8 +158,8 @@ public class ProjectApplication {
 	 * @param currentComment	Current comment of interest
 	 * @see CommentModel	Example of a CommentModel
 	 */
-	public static void setCurrentComment(CommentModel currentComment) {
-		ProjectApplication.currentComment = currentComment;
+	public void setCurrentComment(CommentModel currentComment) {
+		this.currentComment = currentComment;
 		currentCommentList = currentComment.getReplies();
 	}
 
@@ -171,7 +171,7 @@ public class ProjectApplication {
 	 * <p>
 	 * @return current user's location
 	 */
-	public static Location getCurrentLocation() {
+	public Location getCurrentLocation() {
 		return currentLocation;
 	}
 
@@ -184,8 +184,8 @@ public class ProjectApplication {
 	 * <p>
 	 * @param location	Location to record
 	 */
-	public static void setCurrentLocation(Location location) {		
-		ProjectApplication.currentLocation = location;
+	public void setCurrentLocation(Location location) {		
+		this.currentLocation = location;
 	}
 	
 	/**
@@ -196,7 +196,7 @@ public class ProjectApplication {
 	 * <p>
 	 * @param context	A context is required to get a System Service
 	 */
-	public static void InitializeLocationManager(Context context) {
+	public void InitializeLocationManager(Context context) {
 		LocationManager locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
 		currentLocation = new Location("");
 		
@@ -207,7 +207,7 @@ public class ProjectApplication {
 					public void onLocationChanged(Location location) {
 
 						if (location != null) {
-							ProjectApplication.setCurrentLocation(location);
+							setCurrentLocation(location);
 
 						} else {
 							// do something later here

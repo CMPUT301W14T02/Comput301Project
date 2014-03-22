@@ -29,7 +29,7 @@ public class MainMenuActivity extends Activity {
 
 		// Print welcome message on screen -SB
 		TextView welcomeMessage = (TextView) findViewById(R.id.welcome_message);
-		welcomeMessage.setText("Welcome " + ProjectApplication.getName().toString()	+ "!");
+		welcomeMessage.setText("Welcome " + ProjectApplication.getInstance().getName().toString()	+ "!");
 		
 		// If "Create" is clicked -SB
 		Button createComment = (Button) findViewById(R.id.create);
@@ -37,7 +37,7 @@ public class MainMenuActivity extends Activity {
 			
 			@Override
 			public void onClick(View v) {
-				ProjectApplication.setCurrentCommentList(ProjectApplication.getCommentList());
+				ProjectApplication.getInstance().setCurrentCommentList(ProjectApplication.getInstance().getCommentList());
 				startActivity(new Intent(MainMenuActivity.this, CreateCommentActivity.class));
 			}
 		});
@@ -64,7 +64,7 @@ public class MainMenuActivity extends Activity {
 		});
 		
 		// Initialize location -SB
-		ProjectApplication.InitializeLocationManager(this.getApplicationContext());
+		ProjectApplication.getInstance().InitializeLocationManager(this.getApplicationContext());
 	}
 
 	@Override

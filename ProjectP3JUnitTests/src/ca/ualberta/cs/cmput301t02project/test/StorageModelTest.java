@@ -21,7 +21,7 @@ public class StorageModelTest extends TestCase {
 
 		CommentModel comment = new CommentModel("comment", currentLocation, "username");
 
-		ProjectApplication.setCurrentLocation(myLocation);
+		ProjectApplication.getInstance().setCurrentLocation(myLocation);
 
 		return comment;
 	}

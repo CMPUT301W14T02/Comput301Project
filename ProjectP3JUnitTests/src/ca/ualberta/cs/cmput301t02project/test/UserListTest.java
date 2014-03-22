@@ -17,7 +17,7 @@ public class UserListTest extends ActivityInstrumentationTestCase2<LoginActivity
 		String name = "Schmoopy";
 		UserList.createUser(name);
 		
-		assertEquals("Creating a user should set the name in project application", ProjectApplication.getName(), name);
+		assertEquals("Creating a user should set the name in project application", ProjectApplication.getInstance().getName(), name);
 	}
 	
 	// Test the findUser method in UserList -SB

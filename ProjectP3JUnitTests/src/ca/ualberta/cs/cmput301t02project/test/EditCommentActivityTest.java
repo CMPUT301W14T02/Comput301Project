@@ -20,7 +20,7 @@ public class EditCommentActivityTest extends ActivityInstrumentationTestCase2<Ed
 
 	protected void setUp() throws Exception {
 		super.setUp();
-		ProjectApplication.setCurrentComment(new CommentModel("the original comment", null, username));
+		ProjectApplication.getInstance().setCurrentComment(new CommentModel("the original comment", null, username));
 		activity = getActivity();
 	}
 
@@ -38,7 +38,7 @@ public class EditCommentActivityTest extends ActivityInstrumentationTestCase2<Ed
 				button.performClick();
 				CommentModel expectedComment = new CommentModel(text, null, username);
 				assertEquals("The comment should be equal to the edited one",
-						ProjectApplication.getCurrentComment(), expectedComment);
+						ProjectApplication.getInstance().getCurrentComment(), expectedComment);
 			}
 		});
 
@@ -47,7 +47,7 @@ public class EditCommentActivityTest extends ActivityInstrumentationTestCase2<Ed
 	/* test to see if user is being pushed to server after update */
 	public void testPushUser() {
 		User user = new User("user");
-		ProjectApplication pa = ProjectApplication.getInstance();
+		ProjectApplication pa = ProjectApplication.getInstance().getInstance();
 		pa.pushUser(user);
 		User user2 = pa.getPushedUser("user");
 		assertEquals("Users should be the same",user,user2);

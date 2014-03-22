@@ -22,7 +22,7 @@ import ca.ualberta.cs.cmput301t02project.view.CommentListAdapter;
 
 /**
  * Displays comments replies to the current selected comment.
- * Current comment information including the current comment and a list of its replies is stored in ProjectApplication.
+ * Current comment information including the current comment and a list of its replies is stored in ProjectApplication.getInstance().
  */
 public class BrowseReplyCommentsActivity extends Activity implements OnItemSelectedListener {
 
@@ -41,7 +41,7 @@ public class BrowseReplyCommentsActivity extends Activity implements OnItemSelec
 		selectedComment = (TextView) findViewById(R.id.selected_comment);
 
 		// Display selected comment
-		selectedComment.setText(ProjectApplication.getCurrentComment().getText());
+		selectedComment.setText(ProjectApplication.getInstance().getCurrentComment().getText());
 		
 		createSpinner();
 
@@ -62,10 +62,10 @@ public class BrowseReplyCommentsActivity extends Activity implements OnItemSelec
 			public void onItemClick(AdapterView<?> l, View v, int position, long id) {
 				// Refactor into MVC?
 				CommentModel nestedComment = (CommentModel) adapter.getItem(position);
-				ProjectApplication.setCurrentComment(nestedComment);
+				ProjectApplication.getInstance().setCurrentComment(nestedComment);
 				
 				CommentListModel nestedCommentList = nestedComment.getReplies();
-				ProjectApplication.setCurrentCommentList(nestedCommentList);
+				ProjectApplication.getInstance().setCurrentCommentList(nestedCommentList);
 
 				Intent goToReplyListActivity = new Intent(getApplicationContext(), BrowseReplyCommentsActivity.class);
 				startActivity(goToReplyListActivity);
@@ -89,7 +89,7 @@ public class BrowseReplyCommentsActivity extends Activity implements OnItemSelec
 	private void initializeAdapter(){
 
 		// Get the comment list of replies to selected comment
-		replyCommentList = ProjectApplication.getCurrentCommentList();
+		replyCommentList = ProjectApplication.getInstance().getCurrentCommentList();
 		
 		// Add comments to adapter
 		adapter = new CommentListAdapter(this, R.layout.list_item, replyCommentList.getCommentList());

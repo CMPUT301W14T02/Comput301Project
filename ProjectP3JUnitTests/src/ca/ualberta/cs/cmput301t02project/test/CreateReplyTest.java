@@ -21,7 +21,7 @@ public class CreateReplyTest extends ActivityInstrumentationTestCase2<CreateComm
 	protected void setUp() throws Exception {
 		super.setUp();
 		CommentModel comment = new CommentModel("text", null, null, "user");
-		ProjectApplication.setCurrentComment(comment);
+		ProjectApplication.getInstance().setCurrentComment(comment);
 		activity = getActivity();
 	}
 	
@@ -32,9 +32,9 @@ public class CreateReplyTest extends ActivityInstrumentationTestCase2<CreateComm
 			public void run() {
 				//CommentModel comment = new CommentModel("text", null, null, "user");
 				String username = "default";
-				ProjectApplication.setName(username);
-				//ProjectApplication.setCurrentComment(comment);
-				ProjectApplication.InitializeLocationManager(activity.getApplicationContext());
+				ProjectApplication.getInstance().setName(username);
+				//ProjectApplication.getInstance().setCurrentComment(comment);
+				ProjectApplication.getInstance().InitializeLocationManager(activity.getApplicationContext());
 				
 				EditText edit = (EditText) activity.findViewById(ca.ualberta.cs.cmput301t02project.R.id.create_text);
 				Button button = (Button) activity.findViewById(ca.ualberta.cs.cmput301t02project.R.id.create_post);
@@ -43,8 +43,8 @@ public class CreateReplyTest extends ActivityInstrumentationTestCase2<CreateComm
 				String text = "the comment";
 				edit.setText(text);
 				button.performClick();
-				ArrayList<CommentModel> list = ProjectApplication.getCurrentComment().getReplies().getCommentList();
-				assertTrue("List should contain the just created comment", list.contains(new CommentModel(text, ProjectApplication.getCurrentLocation(), username)));
+				ArrayList<CommentModel> list = ProjectApplication.getInstance().getCurrentComment().getReplies().getCommentList();
+				assertTrue("List should contain the just created comment", list.contains(new CommentModel(text, ProjectApplication.getInstance().getCurrentLocation(), username)));
 			}
 		});
 	}

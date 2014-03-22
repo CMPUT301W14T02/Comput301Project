@@ -36,9 +36,9 @@ public class BrowseReplyCommentsActivityTest extends ActivityInstrumentationTest
 		CommentListModel comments = new CommentListModel();
 		comments.add(comment);
 
-		ProjectApplication.setCurrentComment(comment);
-		ProjectApplication.setCurrentCommentList(comments);
-		ProjectApplication.setCurrentLocation(myLocation);
+		ProjectApplication.getInstance().setCurrentComment(comment);
+		ProjectApplication.getInstance().setCurrentCommentList(comments);
+		ProjectApplication.getInstance().setCurrentLocation(myLocation);
 
 		return comment;
 	}
@@ -119,7 +119,7 @@ public class BrowseReplyCommentsActivityTest extends ActivityInstrumentationTest
 	/* test to see if user is being pushed to server after update */
 	public void testPushUser() {
 		User user = new User("user");
-		ProjectApplication pa = ProjectApplication.getInstance();
+		ProjectApplication pa = ProjectApplication.getInstance().getInstance();
 		pa.pushUser(user);
 		User user2 = pa.getPushedUser("user");
 		assertEquals("Users should be the same",user,user2);
@@ -163,8 +163,8 @@ public class BrowseReplyCommentsActivityTest extends ActivityInstrumentationTest
 		l3.setLatitude(120);
 		l3.setLongitude(0);
 		
-		ProjectApplication projectApplication = ProjectApplication.getInstance();
-		projectApplication.setCurrentLocation(currentLocation);
+		ProjectApplication projectApplication = ProjectApplication.getInstance().getInstance();
+		ProjectApplication.getInstance().setCurrentLocation(currentLocation);
 		
 		CommentModel comment1 = new  CommentModel("post 1", l1, "schmoop");
 		comment1.setDate(new Date(1));
@@ -254,8 +254,8 @@ public class BrowseReplyCommentsActivityTest extends ActivityInstrumentationTest
 		inOrderComments.add(comment8);
 		inOrderComments.add(comment7);
 		
-		projectApplication.getCurrentLocation().setLatitude(0.5);
-		projectApplication.getCurrentLocation().setLongitude(0);
+		ProjectApplication.getInstance().getCurrentLocation().setLatitude(0.5);
+		ProjectApplication.getInstance().getCurrentLocation().setLongitude(0);
 		
 		assertEquals("First items should be in same place", adapter1.getItem(0), adapter2.getItem(0));
 		assertEquals("Second items should be in same place", adapter1.getItem(1), adapter2.getItem(1));
@@ -309,8 +309,8 @@ public class BrowseReplyCommentsActivityTest extends ActivityInstrumentationTest
 		l3.setLatitude(300);
 		l3.setLongitude(300);
 		
-		ProjectApplication projectApplication = ProjectApplication.getInstance();
-		projectApplication.setCurrentLocation(currentLocation);
+		ProjectApplication projectApplication = ProjectApplication.getInstance().getInstance();
+		ProjectApplication.getInstance().setCurrentLocation(currentLocation);
 		
 		CommentModel comment1 = new  CommentModel("post 1", l1, "schmoop");
 		
@@ -370,8 +370,8 @@ public class BrowseReplyCommentsActivityTest extends ActivityInstrumentationTest
 		l3.setLatitude(300);
 		l3.setLongitude(300);
 		
-		ProjectApplication projectApplication = ProjectApplication.getInstance();
-		projectApplication.setCurrentLocation(currentLocation);
+		ProjectApplication projectApplication = ProjectApplication.getInstance().getInstance();
+		ProjectApplication.getInstance().setCurrentLocation(currentLocation);
 		
 		CommentModel comment1 = new  CommentModel("post 1", l1, "schmoop");
 		
@@ -566,8 +566,8 @@ public class BrowseReplyCommentsActivityTest extends ActivityInstrumentationTest
 		l3.setLatitude(120);
 		l3.setLongitude(0);
 		
-		ProjectApplication projectApplication = ProjectApplication.getInstance();
-		projectApplication.setCurrentLocation(currentLocation);
+		ProjectApplication projectApplication = ProjectApplication.getInstance().getInstance();
+		ProjectApplication.getInstance().setCurrentLocation(currentLocation);
 		
 		CommentModel comment1 = new  CommentModel("post 1", l1, "schmoop");
 		comment1.setDate(new Date(1));

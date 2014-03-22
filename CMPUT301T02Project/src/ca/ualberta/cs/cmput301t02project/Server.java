@@ -35,12 +35,9 @@ public class Server {
 					throw new RuntimeException();
 				}
 			}
+			
 		};
 		thread.start();
-	}
-	
-	public void shutdown() {
-		client.shutdownClient();
 	}
 	
 }

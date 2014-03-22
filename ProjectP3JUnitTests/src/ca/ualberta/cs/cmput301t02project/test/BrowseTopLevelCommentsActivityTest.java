@@ -29,7 +29,7 @@ public class BrowseTopLevelCommentsActivityTest extends ActivityInstrumentationT
 
 		CommentModel comment = new CommentModel("comment", currentLocation, "username");
 
-		ProjectApplication.setCurrentLocation(myLocation);
+		ProjectApplication.getInstance().setCurrentLocation(myLocation);
 
 		return comment;
 	}
@@ -38,7 +38,7 @@ public class BrowseTopLevelCommentsActivityTest extends ActivityInstrumentationT
 	public void testDisplayTopLevelComments() {
 		CommentModel comment = initializeComment();
 		CommentListModel comments = new CommentListModel();
-		comments = ProjectApplication.getCommentList();
+		comments = ProjectApplication.getInstance().getCommentList();
 		comments.add(comment);
 
 		ListView view = (ListView) getActivity().findViewById(R.id.commentListView);
@@ -122,8 +122,8 @@ public class BrowseTopLevelCommentsActivityTest extends ActivityInstrumentationT
 		l3.setLatitude(120);
 		l3.setLongitude(0);
 		
-		ProjectApplication projectApplication = ProjectApplication.getInstance();
-		projectApplication.setCurrentLocation(currentLocation);
+		ProjectApplication projectApplication = ProjectApplication.getInstance().getInstance();
+		ProjectApplication.getInstance().setCurrentLocation(currentLocation);
 		
 		CommentModel comment1 = new  CommentModel("post 1", l1, "schmoop");
 		comment1.setDate(new Date(1));
@@ -213,8 +213,8 @@ public class BrowseTopLevelCommentsActivityTest extends ActivityInstrumentationT
 		inOrderComments.add(comment8);
 		inOrderComments.add(comment7);
 		
-		projectApplication.getCurrentLocation().setLatitude(0.5);
-		projectApplication.getCurrentLocation().setLongitude(0);
+		ProjectApplication.getInstance().getCurrentLocation().setLatitude(0.5);
+		ProjectApplication.getInstance().getCurrentLocation().setLongitude(0);
 		
 		assertEquals("First items should be in same place", adapter1.getItem(0), adapter2.getItem(0));
 		assertEquals("Second items should be in same place", adapter1.getItem(1), adapter2.getItem(1));

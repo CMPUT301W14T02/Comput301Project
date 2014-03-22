@@ -21,7 +21,7 @@ import ca.ualberta.cs.cmput301t02project.view.CommentListAdapter;
 
 /**
  * Displays comments top level comments (aka. comments with no parents, comments that are not replies to anything). 
- * A list of all top level comments is stored in ProjectApplication.
+ * A list of all top level comments is stored in ProjectApplication.getInstance().
  */
 public class BrowseTopLevelCommentsActivity extends Activity implements OnItemSelectedListener {
 	// TODO: Refactor code to use new classes
@@ -48,10 +48,10 @@ public class BrowseTopLevelCommentsActivity extends Activity implements OnItemSe
 			public void onItemClick(AdapterView<?> l, View v, int position, long id) {
 				// Refactor into MVC?	
 				CommentModel nestedComment = (CommentModel) adapter.getItem(position);
-				ProjectApplication.setCurrentComment(nestedComment);
+				ProjectApplication.getInstance().setCurrentComment(nestedComment);
 				
 				CommentListModel nestedCommentList = nestedComment.getReplies();
-				ProjectApplication.setCurrentCommentList(nestedCommentList);
+				ProjectApplication.getInstance().setCurrentCommentList(nestedCommentList);
 				
 				Intent goToReplyListActivity = new Intent(getApplicationContext(),BrowseReplyCommentsActivity.class);
 				startActivity(goToReplyListActivity);
@@ -76,7 +76,7 @@ public class BrowseTopLevelCommentsActivity extends Activity implements OnItemSe
 	private void initializeAdapter(){
 		
 		// Retrieve the current comments list -SB
-		topLevelCommentList = ProjectApplication.getCommentList();
+		topLevelCommentList = ProjectApplication.getInstance().getCommentList();
 
 		// Add comments to adapter
 		adapter = new CommentListAdapter(this, R.layout.list_item, topLevelCommentList.getCommentList());

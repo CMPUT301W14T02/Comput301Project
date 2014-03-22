@@ -28,7 +28,7 @@ public class LocationTest extends ActivityInstrumentationTestCase2<CreateComment
 		location = new Location("mock");
 		location.setLatitude(latitude);
 		location.setLongitude(longitude);
-		ProjectApplication.setCurrentLocation(location);
+		ProjectApplication.getInstance().setCurrentLocation(location);
 	}
 	
 	public void testDefaultLocation() throws Throwable{
@@ -43,10 +43,10 @@ public class LocationTest extends ActivityInstrumentationTestCase2<CreateComment
 				assertNotNull(button);
 				String text = "the comment";
 				String username = "default";
-				ProjectApplication.setName(username);
+				ProjectApplication.getInstance().setName(username);
 				edit.setText(text);
 				button.performClick();
-				ArrayList<CommentModel> list = ProjectApplication.getCommentList().getCommentList();
+				ArrayList<CommentModel> list = ProjectApplication.getInstance().getCommentList().getCommentList();
 				CommentModel expected = new CommentModel(text, location, username);
 				assertTrue("List should contain the just created comment", list.contains(expected));
 			}

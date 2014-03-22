@@ -35,8 +35,8 @@ public class CreateCommentActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
-		commentListController = new CommentListController(ProjectApplication.getCurrentCommentList());
-		myCommentsListController = new MyCommentsController(ProjectApplication.getUser().getMyComments());
+		commentListController = new CommentListController(ProjectApplication.getInstance().getCurrentCommentList());
+		myCommentsListController = new MyCommentsController(ProjectApplication.getInstance().getUser().getMyComments());
 		
 		setContentView(R.layout.activity_create_comment);
 
@@ -52,7 +52,7 @@ public class CreateCommentActivity extends Activity {
 				// Refactor into MVC?
 				CommentModel comment;
 				comment = commentListController.addNewComment(inputComment.getText().toString(), 
-						null, ProjectApplication.getName().toString());
+						null, ProjectApplication.getInstance().getName().toString());
 				
 				myCommentsListController.addNewComment(comment);
 				finish();

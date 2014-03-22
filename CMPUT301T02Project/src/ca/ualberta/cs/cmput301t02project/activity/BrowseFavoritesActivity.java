@@ -1,15 +1,15 @@
 package ca.ualberta.cs.cmput301t02project.activity;
 
-import ca.ualberta.cs.cmput301t02project.ProjectApplication;
-import ca.ualberta.cs.cmput301t02project.R;
-import ca.ualberta.cs.cmput301t02project.model.CommentListModel;
-import ca.ualberta.cs.cmput301t02project.view.FavoritesAdapter;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ListView;
 import android.widget.AdapterView.OnItemSelectedListener;
+import android.widget.ListView;
+import ca.ualberta.cs.cmput301t02project.ProjectApplication;
+import ca.ualberta.cs.cmput301t02project.R;
+import ca.ualberta.cs.cmput301t02project.model.CommentListModel;
+import ca.ualberta.cs.cmput301t02project.view.FavoritesAdapter;
 
 /**
  * Displays the favorited comments of the current user.
@@ -51,7 +51,7 @@ public class BrowseFavoritesActivity extends Activity implements OnItemSelectedL
 	private void initializeAdapter(){
 		
 		// Retrieve the current comments list -TH
-		favoritesList = ProjectApplication.getUser().getFavorites();
+		favoritesList = ProjectApplication.getInstance().getUser().getFavorites();
 
 		// Add comments to adapter
 		adapter = new FavoritesAdapter(this, R.layout.list_item, favoritesList.getCommentList());
