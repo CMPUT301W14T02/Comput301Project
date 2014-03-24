@@ -15,7 +15,7 @@ public class Server {
 	
 	public Server() {
 		//TODO Add custom Gson here to clientConfig.Builder
-		DroidClientConfig clientConfig = new DroidClientConfig.Builder(serverUri).multiThreaded(false).build();
+		DroidClientConfig clientConfig = new DroidClientConfig.Builder(serverUri).multiThreaded(true).build();
 		
 		JestClientFactory jestClientFactory = new JestClientFactory();
 		jestClientFactory.setDroidClientConfig(clientConfig);
@@ -47,6 +47,11 @@ public class Server {
 			
 		};
 		thread.start();
+		try {
+			thread.join();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 	}
 	
 }
