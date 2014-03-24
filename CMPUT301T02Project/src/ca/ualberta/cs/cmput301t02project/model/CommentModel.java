@@ -2,6 +2,7 @@ package ca.ualberta.cs.cmput301t02project.model;
 
 import io.searchbox.annotations.JestId;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 import android.graphics.Bitmap;
@@ -15,12 +16,14 @@ public class CommentModel {
 	
 	@JestId
 	private String id;
+	private boolean topLevelComment;
 	private Date date;
-	private transient Location location; //transient until convertible to Json
+	private Location location; //transient until convertible to Json
 	private String text;
 	private transient Bitmap picture; //transient until convertible to Json
 	private int rating;
-	private CommentListModel replies; //to be changed to ArrayList<String> childrenIds
+	private transient CommentListModel replies; //to be changed to ArrayList<String> childrenIds
+	private ArrayList<String> childrenIds;
 	private String username;
 	
 	
@@ -51,6 +54,7 @@ public class CommentModel {
 		this.rating = 0;
 		this.replies = new CommentListModel(this);
 		this.date = new Date();
+		this.childrenIds = new ArrayList<String>();
 	}
 
 	/**
@@ -70,6 +74,7 @@ public class CommentModel {
 		this.rating = 0;
 		this.replies = new CommentListModel(this);
 		this.date = new Date();
+		this.childrenIds = new ArrayList<String>();
 	}
 	
 	/**
@@ -217,6 +222,14 @@ public class CommentModel {
 		}
 	}
 
+	public boolean isTopLevelComment() {
+		return topLevelComment;
+	}
+
+	public void setTopLevelComment(boolean topLevelComment) {
+		this.topLevelComment = topLevelComment;
+	}
+
 	/**
 	 * Enables comparison for equality between Comments.
 	 * <p>
@@ -232,4 +245,17 @@ public class CommentModel {
 				&& ((comment.getImage() == null && this.picture == null) || comment.getImage().equals(this.picture))
 				&& ((comment.getLocation() == null && this.location == null) || comment.getLocation().equals(this.location));
 	}
+
+	public ArrayList<String> getChildrenIds() {
+		return childrenIds;
+	}
+
+	public void setChildrenIds(ArrayList<String> childrenIds) {
+		this.childrenIds = childrenIds;
+	}
+	
+	public void addChildrenId(String id) {
+		this.childrenIds.add(id);
+	}
+	
 }

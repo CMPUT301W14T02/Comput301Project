@@ -20,6 +20,7 @@ public class ProjectApplication {
 	private CommentModel currentComment;
 	private Location currentLocation = null;
 	private User currentUser = new User("default");
+	private Server server = new Server();
 
 	// Singleton code adapted from http://www.javaworld.com/article/2073352/core-java/simply-singleton.html
 	protected ProjectApplication() {
@@ -93,6 +94,7 @@ public class ProjectApplication {
 		if (commentList == null) {
 			commentList = new CommentListModel();
 		}
+		commentList.setCommentList(server.pullTopLevel());
 		return commentList;
 	}
 	
@@ -107,6 +109,7 @@ public class ProjectApplication {
 	 * @param currentCommentList	The up-to-date comment list of interest
 	 * @see CommentListModel	Example of a CommentListModel
 	 */
+	
 	public void setCurrentCommentList(CommentListModel currentCommentList) {
 		this.currentCommentList = currentCommentList;
 	}

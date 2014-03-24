@@ -309,7 +309,7 @@ public abstract class CommentListAdapterAbstraction extends ArrayAdapter<Comment
 		String location = String.format(Locale.getDefault(), "%.4f,%.4f",
 				comment.getLocation().getLatitude(), comment.getLocation().getLongitude());
 		
-		int repliesCount = comment.getReplies().getCommentList().size();
+		int repliesCount = comment.getChildrenIds().size();
 		String replies = Integer.toString(repliesCount) + ' ';
 		replies += repliesCount == 1 ? "reply" : "replies";
 		String text = comment.getText() + "\n(by " 

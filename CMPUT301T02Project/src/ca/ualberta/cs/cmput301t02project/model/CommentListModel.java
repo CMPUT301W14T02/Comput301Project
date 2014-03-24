@@ -76,10 +76,16 @@ public class CommentListModel {
 	 * @param comment	The new comment to add to the list
 	 */
 	public void add(CommentModel comment) {
+		if(this.parent == null) {
+			comment.setTopLevelComment(true);
+		} else {
+			comment.setTopLevelComment(false);
+		}
 		commentList.add(comment);
 		Server server = new Server();
 		server.post(comment);
 		if(this.parent != null) {
+			parent.addChildrenId(comment.getId());
 			server = new Server();
 			server.post(this.parent);
 		}

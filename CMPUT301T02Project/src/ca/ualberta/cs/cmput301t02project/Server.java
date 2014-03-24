@@ -1,8 +1,12 @@
 package ca.ualberta.cs.cmput301t02project;
 
+import java.util.ArrayList;
+
 import io.searchbox.client.JestClient;
 import io.searchbox.client.JestResult;
+import io.searchbox.core.Get;
 import io.searchbox.core.Index;
+import io.searchbox.core.Search;
 import android.accounts.NetworkErrorException;
 import ca.ualberta.cs.cmput301t02project.model.CommentModel;
 
@@ -10,7 +14,7 @@ import com.searchly.jestdroid.DroidClientConfig;
 import com.searchly.jestdroid.JestClientFactory;
 
 public class Server {
-	private final String serverUri = "http://cmput301.softwareprocess.es:8080/cmput301w14t02/comments";
+	private final String serverUri = "http://cmput301.softwareprocess.es:8080/";
 	private JestClient client;
 	
 	public Server() {
@@ -29,7 +33,7 @@ public class Server {
 			public void run() {
 				
 				try {
-					Index index = new Index.Builder(comment).id(comment.getId()).build();
+					Index index = new Index.Builder(comment).index("cmput301w14t02").type("comments").id(comment.getId()).build();
 					
 					JestResult result = client.execute(index);
 					String id = result.getJsonObject().get("_id").getAsString();
@@ -52,6 +56,61 @@ public class Server {
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public ArrayList<CommentModel> pull(final ArrayList<String> idList) {
+		final ArrayList<CommentModel> commentList = new ArrayList<CommentModel>();
+		Thread thread = new Thread() {
+			@Override
+			public void run() {
+				for(String Id:idList) {
+					Get get = new Get.Builder("cmput301w14t02", Id).type("comments").build();
+					JestResult result = null;
+					try {
+						result = client.execute(get);
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					CommentModel comment = result.getSourceAsObject(CommentModel.class);
+					commentList.add(comment);
+				}
+			
+			}
+		};
+		thread.start();
+		try {
+			thread.join();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		return commentList;
+	}
+	
+	public ArrayList<CommentModel> pullTopLevel() {
+		final ArrayList<CommentModel> commentList = new ArrayList<CommentModel>();
+		Thread thread = new Thread() {
+			@Override
+			public void run() {
+				String query = "{\"query\": {\"term\": {\"topLevelComment\": \"True\"}}}";
+				Search search = new Search.Builder(query).addIndex("cmput301w14t02").addType("comments").build();
+				JestResult result = null;
+				try {
+					result = client.execute(search);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				commentList.addAll((ArrayList<CommentModel>) result.getSourceAsObjectList(CommentModel.class));
+				}
+		};
+		thread.start();
+		try {
+			thread.join();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		return commentList;
 	}
 	
 }

@@ -77,6 +77,7 @@ public class BrowseTopLevelCommentsActivity extends Activity implements OnItemSe
 		
 		// Retrieve the current comments list -SB
 		topLevelCommentList = ProjectApplication.getInstance().getCommentList();
+		
 
 		// Add comments to adapter
 		adapter = new CommentListAdapter(this, R.layout.list_item, topLevelCommentList.getCommentList());
