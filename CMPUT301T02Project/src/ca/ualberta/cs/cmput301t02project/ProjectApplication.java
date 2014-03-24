@@ -14,7 +14,7 @@ import ca.ualberta.cs.cmput301t02project.model.CommentModel;
 public class ProjectApplication {
 
 	// Singleton
-	private static ProjectApplication instance = null;
+	private static final ProjectApplication instance = new ProjectApplication();
 	private CommentListModel commentList;
 	private CommentListModel currentCommentList;
 	private CommentModel currentComment;
@@ -74,9 +74,6 @@ public class ProjectApplication {
 	 * @return Instance of ProjectApplication
 	 */
 	public static ProjectApplication getInstance() {
-		if (instance == null) {
-			instance = new ProjectApplication();
-		}
 		return instance;
 	}
 	
