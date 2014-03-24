@@ -108,24 +108,5 @@ public class CommentListModel {
 		return adapter;
 	}
 	
-	public String toJson(CommentListModel replies) {
-		ArrayList<String> idList = new ArrayList<String>();
-		if (replies != null){
-			for (int i=0; i<replies.getCommentList().size(); i++){
-				idList.add(replies.getCommentList().get(i).getId());
-			}
-		}
-		Gson gson = new Gson();
-		String json = gson.toJson(idList);
-		return json;
-	}
-	
-	public CommentListModel fromJson(String json){
-		Gson gson = new Gson();
-		CommentListModel replies = new CommentListModel();
-		//ArrayList<String> idList = gson.fromJson(json, );
-		return replies;
-		
-	}
 
 }
