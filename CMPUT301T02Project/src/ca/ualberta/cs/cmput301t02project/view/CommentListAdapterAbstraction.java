@@ -28,6 +28,7 @@ public abstract class CommentListAdapterAbstraction extends ArrayAdapter<Comment
 	private String sortMethod = "Default";
 	private Comparator<CommentModel> sortByDate;
 	private Comparator<CommentModel> sortByLocation;
+	private Comparator<CommentModel> sortByRank;
 	private Location myLocation = null;
 	
 
@@ -52,6 +53,20 @@ public abstract class CommentListAdapterAbstraction extends ArrayAdapter<Comment
 					return 1;
 				} 
 				else if (a.getDate().after(b.getDate())) {
+					return -1;
+				} 
+				else {
+					return 0;
+				}
+			}
+		};
+		
+		sortByRank = new Comparator<CommentModel>() {
+			public int compare(CommentModel a, CommentModel b) {
+				if (a.getRating() < (b.getRating())) {
+					return 1;
+				} 
+				else if (a.getRating() > (b.getRating())) {
 					return -1;
 				} 
 				else {
@@ -285,7 +300,8 @@ public abstract class CommentListAdapterAbstraction extends ArrayAdapter<Comment
 			
 			} 
 			else if (sortMethod.equals("Ranking")) {
-			
+				Collections.sort(list, sortByRank);
+				notifyDataSetChanged();
 			}
 		}
 
