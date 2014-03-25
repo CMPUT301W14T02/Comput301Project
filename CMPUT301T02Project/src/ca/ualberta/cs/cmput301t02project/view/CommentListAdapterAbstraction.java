@@ -154,17 +154,21 @@ public abstract class CommentListAdapterAbstraction extends ArrayAdapter<Comment
 		ArrayList<CommentModel> finalList = new ArrayList<CommentModel>();
 		Integer i;
 		int l = list.size();
+		int[] calcDistances = {5000,100000,5000000};
 		
-		for (i = 0; i<l; i++) {
-			if ((list.get(i).getLocation().distanceTo(myLocation) < 5000) && (!finalList.contains(list.get(i)))) {
-				list2.add(list.get(i));
+		for (int e = 0; e<(calcDistances.length); e++ )
+		{
+			for (i = 0; i<l; i++) {
+				if ((list.get(i).getLocation().distanceTo(myLocation) < calcDistances[e]) && (!finalList.contains(list.get(i)))) {
+					list2.add(list.get(i));
+				}
 			}
+			Collections.sort(list2, sortByDate);
+			finalList.addAll(list2);
+			list2.clear();
 		}
 		
-		Collections.sort(list2, sortByDate);
-		finalList.addAll(list2);
-		list2.clear();
-			
+		/*
 		for (i = 0; i<l; i++) {
 			if ((list.get(i).getLocation().distanceTo(myLocation) < 100000) && (!finalList.contains(list.get(i)))) {
 				list2.add(list.get(i));
@@ -184,6 +188,8 @@ public abstract class CommentListAdapterAbstraction extends ArrayAdapter<Comment
 		Collections.sort(list2, sortByDate);
 		finalList.addAll(list2);
 		list2.clear();
+		
+		*/
 		
 		// rest of list
 		for (i = 0; i<l; i++) {
