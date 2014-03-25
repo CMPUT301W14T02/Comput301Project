@@ -167,30 +167,7 @@ public abstract class CommentListAdapterAbstraction extends ArrayAdapter<Comment
 			finalList.addAll(list2);
 			list2.clear();
 		}
-		
-		/*
-		for (i = 0; i<l; i++) {
-			if ((list.get(i).getLocation().distanceTo(myLocation) < 100000) && (!finalList.contains(list.get(i)))) {
-				list2.add(list.get(i));
-			}
-		}
-		
-		Collections.sort(list2, sortByDate);
-		finalList.addAll(list2);
-		list2.clear();
-		
-		for (i = 0; i<l; i++) {
-			if ((list.get(i).getLocation().distanceTo(myLocation) < 5000000) && (!finalList.contains(list.get(i)))) {
-				list2.add(list.get(i));
-			}
-		}
-
-		Collections.sort(list2, sortByDate);
-		finalList.addAll(list2);
-		list2.clear();
-		
-		*/
-		
+			
 		// rest of list
 		for (i = 0; i<l; i++) {
 			if (!finalList.contains(list.get(i))) {
