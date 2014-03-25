@@ -154,6 +154,7 @@ public abstract class CommentListAdapterAbstraction extends ArrayAdapter<Comment
 		ArrayList<CommentModel> finalList = new ArrayList<CommentModel>();
 		Integer i;
 		int l = list.size();
+		//distances grouping comments by
 		int[] calcDistances = {5000,100000,5000000};
 		
 		for (int e = 0; e<(calcDistances.length); e++ )
