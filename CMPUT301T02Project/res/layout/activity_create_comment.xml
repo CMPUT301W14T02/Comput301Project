@@ -2,7 +2,7 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical" >
-
+   
     <EditText
         android:id="@+id/create_text"
         android:layout_width="316dp"
@@ -19,6 +19,16 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/create_text"
+        android:layout_marginTop="88dp"
         android:text="@string/post" />
+
+    <TextView
+        android:id="@+id/location_label"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/create_text"
+        android:layout_marginTop="15dp"
+        android:text="@string/cust_location" />
 
 </RelativeLayout>
