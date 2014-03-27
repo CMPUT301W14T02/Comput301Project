@@ -19,6 +19,9 @@ import android.widget.Spinner;
  */
 public abstract class BrowseCommentsActivityAbstraction extends Activity implements OnItemSelectedListener{
 	
+	// The adapter used by the class that extends BrowseCommentsActivityAbstraction -SB
+	CommentListAdapterAbstraction adapter; 
+	
 	/**
 	 * Adapter must be initialized in a class that extends BrowseCommentsActvityAbstraction so it can be specialized to the activity.
 	 * <p>
@@ -27,6 +30,24 @@ public abstract class BrowseCommentsActivityAbstraction extends Activity impleme
 	 * @return the adapter used by the class
 	 */
 	public abstract CommentListAdapterAbstraction initializeAdapter();
+	
+
+	/**
+	 * Performs tasks to set up the activity including creating a sorting menu and initializing the adapter.
+	 * <p>
+	 * Sets up and displays a menu on the screen.
+	 * Initializes the adapter for the class that extends BrowseCommentsActivityAbstraction. 
+	 * Sets the adapter locally so actions can be performed if a menu item is selected
+	 * <p>
+	 */
+	public void setupPage(){
+		
+		// Create the menu -SB
+		createSpinner();
+		
+		// Setup the adapter -SB
+		adapter = initializeAdapter();
+	}
 	
 	/**
 	 * Creates a drop-down menu of sorting options.
@@ -66,9 +87,6 @@ public abstract class BrowseCommentsActivityAbstraction extends Activity impleme
 
 	@Override
 	public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-		
-		// Get the adapter used by the class
-		CommentListAdapterAbstraction adapter = initializeAdapter();
 		
 		String selected = parent.getItemAtPosition(position).toString();
 		if (selected.equals("Date")) {

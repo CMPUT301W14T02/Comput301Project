@@ -32,9 +32,8 @@ public class BrowseMyCommentsActivity extends BrowseCommentsActivityAbstraction 
 		myCommentListView = (ListView) findViewById(R.id.commentListView);
 
 		// Create the sortBy menu, inherited from BrowseCommentsActivity -SB
-		createSpinner();
-
-		initializeAdapter();
+		setupPage(); 
+		
 		
 		myCommentListView.setOnItemClickListener(new OnItemClickListener() {
 			@Override
@@ -48,6 +47,8 @@ public class BrowseMyCommentsActivity extends BrowseCommentsActivityAbstraction 
 			}
 		});
 	}
+	
+	
 
 	@Override
 	public void onResume() {
@@ -64,6 +65,7 @@ public class BrowseMyCommentsActivity extends BrowseCommentsActivityAbstraction 
 	 * <p>
 	 * @return the adapter used for BrowseMyCommentsActivity
 	 */
+	@Override
 	public CommentListAdapterAbstraction initializeAdapter(){
 		
 		// Retrieve the current comments list -SB
