@@ -24,7 +24,7 @@ public class BrowseTopLevelCommentsActivity extends BrowseCommentsActivityAbstra
 	
 	private CommentListModel topLevelCommentList;
 	private ListView topLevelCommentListView;
-	private CommentListAdapter adapter;
+	//private CommentListAdapter adapter;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -70,6 +70,7 @@ public class BrowseTopLevelCommentsActivity extends BrowseCommentsActivityAbstra
 	public CommentListAdapterAbstraction initializeAdapter(){
 		
 		// Retrieve the current comments list -SB
+		topLevelCommentList = new CommentListModel();
 		topLevelCommentList = ProjectApplication.getInstance().getCommentList();
 		
 
