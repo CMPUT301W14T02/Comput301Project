@@ -31,9 +31,8 @@ public class BrowseMyCommentsActivity extends BrowseCommentsActivityAbstraction 
 		setContentView(R.layout.activity_my_comments_list);
 		myCommentListView = (ListView) findViewById(R.id.commentListView);
 
-		// Create the sortBy menu, inherited from BrowseCommentsActivity -SB
+		// Create the sortBy menu and set up the adapter, inherited from BrowseCommentsActivity -SB
 		setupPage(); 
-		
 		
 		myCommentListView.setOnItemClickListener(new OnItemClickListener() {
 			@Override
@@ -42,13 +41,13 @@ public class BrowseMyCommentsActivity extends BrowseCommentsActivityAbstraction 
 				CommentModel nestedComment = (CommentModel) adapter.getItem(position);
 				ProjectApplication.getInstance().setCurrentComment(nestedComment);
 				
+				// Go to the edit comment activity if a comment is selected -SB
 				Intent goToEditCommentActivity = new Intent(getApplicationContext(),EditCommentActivity.class);
 				startActivity(goToEditCommentActivity);
 			}
 		});
 	}
-	
-	
+
 
 	@Override
 	public void onResume() {
