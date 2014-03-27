@@ -24,6 +24,7 @@
     <string name="title_activity_edit_comment">EditCommentActivity</string>
      <string name="title_activity_browse_favorites">BrowseFavoritesActivity</string>
      <string name="cust_location">  Set Custom Location</string>
+     <string name="follow_button">Follow User</string>
      
 
 </resources>

@@ -12,6 +12,7 @@ import ca.ualberta.cs.cmput301t02project.R;
 import ca.ualberta.cs.cmput301t02project.model.CommentListModel;
 import ca.ualberta.cs.cmput301t02project.model.CommentModel;
 import ca.ualberta.cs.cmput301t02project.view.CommentListAdapter;
+import ca.ualberta.cs.cmput301t02project.view.CommentListAdapterAbstraction;
 
 /**
  * Displays comments top level comments (aka. comments with no parents, comments that are not replies to anything). 
@@ -66,7 +67,7 @@ public class BrowseTopLevelCommentsActivity extends BrowseCommentsActivityAbstra
 	 * <p>
 	 * @return 
 	 */
-	public CommentListAdapter initializeAdapter(){
+	public CommentListAdapterAbstraction initializeAdapter(){
 		
 		// Retrieve the current comments list -SB
 		topLevelCommentList = ProjectApplication.getInstance().getCommentList();

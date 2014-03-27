@@ -14,16 +14,6 @@
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <Button
-        android:id="@+id/fav_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/reply_button"
-        android:layout_alignBottom="@+id/reply_button"
-        android:layout_marginLeft="31dp"
-        android:layout_toRightOf="@+id/reply_button"
-        android:text="Add to Favorites" />
-
-    <Button
         android:id="@+id/reply_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -56,6 +46,23 @@
         android:layout_alignTop="@+id/spinner"
         android:layout_toLeftOf="@+id/fav_button"
         android:text="Sort by:" />
+
+    <Button
+        android:id="@+id/fav_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/reply_button"
+        android:layout_alignBottom="@+id/reply_button"
+        android:layout_toRightOf="@+id/reply_button"
+        android:text="Add to Favorites" />
+
+    <Button
+        android:id="@+id/follow_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/spinner"
+        android:layout_toRightOf="@+id/fav_button"
+        android:text="Follow" />
    
 </RelativeLayout>
 

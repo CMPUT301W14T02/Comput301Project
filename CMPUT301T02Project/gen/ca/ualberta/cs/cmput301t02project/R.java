@@ -31,15 +31,16 @@ public final class R {
         public static final int create_text=0x7f080000;
         public static final int edit_post=0x7f080004;
         public static final int edit_text=0x7f080003;
-        public static final int fav_button=0x7f080010;
+        public static final int fav_button=0x7f080011;
         public static final int favorites=0x7f08000c;
+        public static final int follow_button=0x7f080014;
         public static final int location_label=0x7f080002;
         public static final int login_button=0x7f080006;
         public static final int login_message=0x7f080008;
         public static final int login_username=0x7f080007;
         public static final int my_comments=0x7f08000d;
         public static final int replyListView=0x7f080012;
-        public static final int reply_button=0x7f080011;
+        public static final int reply_button=0x7f080010;
         public static final int selected_comment=0x7f08000f;
         public static final int spinner=0x7f08000e;
         public static final int spinner_intro=0x7f080013;
@@ -71,6 +72,7 @@ public final class R {
         public static final int cust_location=0x7f050016;
         public static final int edit_comment=0x7f050012;
         public static final int favorites=0x7f050010;
+        public static final int follow_button=0x7f050017;
         public static final int hello_world=0x7f050002;
         public static final int login_button=0x7f05000e;
         public static final int login_hint=0x7f05000d;
