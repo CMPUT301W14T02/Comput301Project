@@ -55,7 +55,7 @@ public class BrowseTopLevelCommentsActivity extends BrowseCommentsActivityAbstra
 	@Override
 	public void onResume() {
 		super.onResume();
-		
+		initializeAdapter();
 		adapter.notifyDataSetChanged();
 	}
 	

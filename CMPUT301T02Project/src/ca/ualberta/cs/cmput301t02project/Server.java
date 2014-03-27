@@ -92,7 +92,7 @@ public class Server {
 		Thread thread = new Thread() {
 			@Override
 			public void run() {
-				String query = "{\"query\": {\"term\": {\"topLevelComment\": \"True\"}}}";
+				String query = "{\"size\" : 1000, \"query\": {\"term\": {\"topLevelComment\": \"True\"}}}";
 				Search search = new Search.Builder(query).addIndex("cmput301w14t02").addType("comments").build();
 				JestResult result = null;
 				try {
