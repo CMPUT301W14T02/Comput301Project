@@ -27,13 +27,13 @@ public final class R {
         public static final int browse=0x7f08000b;
         public static final int commentListView=0x7f080005;
         public static final int create=0x7f08000a;
-        public static final int create_post=0x7f080002;
+        public static final int create_post=0x7f080001;
         public static final int create_text=0x7f080000;
         public static final int edit_post=0x7f080004;
         public static final int edit_text=0x7f080003;
         public static final int fav_button=0x7f080010;
         public static final int favorites=0x7f08000c;
-        public static final int location_label=0x7f080001;
+        public static final int location_label=0x7f080002;
         public static final int login_button=0x7f080006;
         public static final int login_message=0x7f080008;
         public static final int login_username=0x7f080007;
