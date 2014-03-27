@@ -1,18 +1,12 @@
 package ca.ualberta.cs.cmput301t02project.activity;
 
-import java.util.ArrayList;
-
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.AdapterView.OnItemSelectedListener;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Spinner;
 import ca.ualberta.cs.cmput301t02project.ProjectApplication;
 import ca.ualberta.cs.cmput301t02project.R;
 import ca.ualberta.cs.cmput301t02project.model.CommentListModel;
@@ -24,7 +18,7 @@ import ca.ualberta.cs.cmput301t02project.view.MyCommentsAdapter;
  * Displays comments that the current user authored. 
  * Current user information including a list of their comments is stored in ProjectApplication.getInstance().
  */
-public class BrowseMyCommentsActivity extends BrowseCommentsActivityAbstraction implements OnItemSelectedListener {
+public class BrowseMyCommentsActivity extends BrowseCommentsActivityAbstraction {
 
 	private CommentListModel myCommentsList;
 	private ListView myCommentListView;

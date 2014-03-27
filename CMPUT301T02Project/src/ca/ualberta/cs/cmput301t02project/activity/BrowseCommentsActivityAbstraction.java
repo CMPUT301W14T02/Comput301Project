@@ -67,6 +67,7 @@ public abstract class BrowseCommentsActivityAbstraction extends Activity impleme
 	@Override
 	public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 		
+		// Get the adapter used by the class
 		CommentListAdapterAbstraction adapter = initializeAdapter();
 		
 		String selected = parent.getItemAtPosition(position).toString();
@@ -88,7 +89,6 @@ public abstract class BrowseCommentsActivityAbstraction extends Activity impleme
 		else if (selected.equals("Default")) {
 			adapter.sortByDefault();
 		}
-		
 	}
 
 	@Override
