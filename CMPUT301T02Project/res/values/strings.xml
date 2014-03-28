@@ -25,7 +25,7 @@
     <string name="title_activity_browse_favorites">BrowseFavoritesActivity</string>
     <string name="latitude">Latitude: </string>
     <string name="longitude">Longitude: </string>
-     <string name="cust_location">  Set Custom Location</string>
+     <string name="cust_location"> Location</string>
      <string name="follow_button">Follow User</string>
     
 </resources>
