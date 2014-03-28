@@ -58,8 +58,8 @@ public class BrowseReplyCommentsActivity extends BrowseCommentsActivityAbstracti
 				CommentModel nestedComment = (CommentModel) adapter.getItem(position);
 				ProjectApplication.getInstance().setCurrentComment(nestedComment);
 				
-				//CommentListModel nestedCommentList = nestedComment.getReplies();
-				//ProjectApplication.getInstance().setCurrentCommentList(nestedCommentList);
+				CommentListModel nestedCommentList = nestedComment.getReplies();
+				ProjectApplication.getInstance().setCurrentCommentList(nestedCommentList);
 
 				Intent goToReplyListActivity = new Intent(getApplicationContext(), BrowseReplyCommentsActivity.class);
 				startActivity(goToReplyListActivity);

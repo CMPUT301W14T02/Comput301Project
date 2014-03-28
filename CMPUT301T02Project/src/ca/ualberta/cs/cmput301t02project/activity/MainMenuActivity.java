@@ -38,6 +38,7 @@ public class MainMenuActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 				ProjectApplication.getInstance().setCurrentCommentList(ProjectApplication.getInstance().getCommentList());
+				ProjectApplication.getInstance().setCurrentComment(null);
 				startActivity(new Intent(MainMenuActivity.this, CreateCommentActivity.class));
 			}
 		});
