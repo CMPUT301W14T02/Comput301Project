@@ -22,7 +22,7 @@ public class CommentListModel {
 	private ArrayList<CommentModel> commentList;
 	private transient CommentModel parent;
 	//private CommentListAdapter adapter;
-	private Server server = new Server();
+	private transient Server server = new Server();
 
 	public CommentListModel() {
 		commentList = new ArrayList<CommentModel>();
@@ -129,6 +129,5 @@ public class CommentListModel {
 		topLevelComments.setCommentList(server.pullTopLevel());
 		return topLevelComments;
 	}
-	
 
 }
