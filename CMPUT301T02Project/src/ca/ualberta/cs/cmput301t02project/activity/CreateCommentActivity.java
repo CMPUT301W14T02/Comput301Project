@@ -52,19 +52,19 @@ public class CreateCommentActivity extends Activity {
 				EditText longitude = (EditText) findViewById(R.id.longitude_box);
 				//for custom locations
 				double lat = 0, lon = 0;
-				boolean customLoc = false;
-				/*if ((latitude != null)&&(longitude != null))
+				Location customLocation = new Location("");
+				if ((latitude.toString()!="") && (latitude.toString()!=""))
 				{
-				customLoc = true;
-				lat = Double.valueOf(latitude.toString());
-				lon = Double.valueOf(longitude.toString());
+					lat = Double.valueOf(latitude.toString());
+					lon = Double.valueOf(longitude.toString());
+					customLocation.setLatitude(lat);
+					customLocation.setLongitude(lon);
 				}
-				*/
 				// Refactor into MVC?
 				CommentModel comment;
 				
 				comment = commentListController.addNewComment(inputComment.getText().toString(), 
-						null, ProjectApplication.getInstance().getName().toString(), lat, lon, customLoc);
+						null, ProjectApplication.getInstance().getName().toString(), customLocation);
 				
 				myCommentsListController.addNewComment(comment);
 				finish();
