@@ -70,7 +70,7 @@ public class BrowseReplyCommentsActivity extends BrowseCommentsActivityAbstracti
 	@Override
 	public void onResume() {
 		super.onResume();
-		
+		initializeAdapter();
 		adapter.notifyDataSetChanged();
 	}
 	

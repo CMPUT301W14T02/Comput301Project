@@ -5,10 +5,10 @@ import io.searchbox.annotations.JestId;
 import java.util.ArrayList;
 import java.util.Date;
 
-import ca.ualberta.cs.cmput301t02project.Server;
-
 import android.graphics.Bitmap;
 import android.location.Location;
+import android.util.Log;
+import ca.ualberta.cs.cmput301t02project.Server;
 
 /**
  * Model of the comment.
@@ -264,7 +264,7 @@ public class CommentModel {
 	
 	public CommentListModel pullReplies() {
 		CommentListModel replies;
-		replies = new CommentListModel();
+		replies = new CommentListModel(this);
 		replies.setCommentList(server.pull(childrenIds));
 		return replies;
 	}

@@ -6,8 +6,6 @@ import android.util.Log;
 import ca.ualberta.cs.cmput301t02project.Server;
 import ca.ualberta.cs.cmput301t02project.view.CommentListAdapterAbstraction;
 
-import com.google.gson.Gson;
-
 /**
  * Holds information about a specific list of CommentModels.
  * Some examples of uses of CommentListModels:
@@ -20,7 +18,7 @@ public class CommentListModel {
 	private transient StorageModel store = new StorageModel();
 	private transient CommentListAdapterAbstraction adapter = null;
 	private ArrayList<CommentModel> commentList;
-	private transient CommentModel parent;
+	public transient CommentModel parent;
 	//private CommentListAdapter adapter;
 	private transient Server server = new Server();
 
@@ -85,6 +83,7 @@ public class CommentListModel {
 		commentList.add(comment);
 		Server server = new Server();
 		server.post(comment);
+		Log.e("here", (this.parent==null)+"");
 		if(this.parent != null) {
 			parent.addChildrenId(comment.getId());
 			server = new Server();

@@ -1,13 +1,15 @@
 package ca.ualberta.cs.cmput301t02project;
 
-import java.util.ArrayList;
-
 import io.searchbox.client.JestClient;
 import io.searchbox.client.JestResult;
 import io.searchbox.core.Get;
 import io.searchbox.core.Index;
 import io.searchbox.core.Search;
+
+import java.util.ArrayList;
+
 import android.accounts.NetworkErrorException;
+import android.util.Log;
 import ca.ualberta.cs.cmput301t02project.model.CommentModel;
 
 import com.searchly.jestdroid.DroidClientConfig;

@@ -145,7 +145,7 @@ public class ProjectApplication {
 	 */
 	public void setCurrentComment(CommentModel currentComment) {
 		this.currentComment = currentComment;
-		currentCommentList = currentComment.getReplies();
+		currentCommentList = currentComment.pullReplies();
 	}
 
 	/**
