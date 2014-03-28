@@ -22,16 +22,10 @@
     <string name="edit_comment">Edit Comment</string>
     <string name="title_activity_my_comments_list">MyCommentsActivity</string>
     <string name="title_activity_edit_comment">EditCommentActivity</string>
-<<<<<<< HEAD
     <string name="title_activity_browse_favorites">BrowseFavoritesActivity</string>
-    <string name="cust_location">  Set Custom Location</string>
     <string name="latitude">Latitude: </string>
     <string name="longitude">Longitude: </string>
-=======
-     <string name="title_activity_browse_favorites">BrowseFavoritesActivity</string>
      <string name="cust_location">  Set Custom Location</string>
      <string name="follow_button">Follow User</string>
-     
->>>>>>> 22bcaca7e425ba29de796d1de79a8bdefd71034c
-
+    
 </resources>
