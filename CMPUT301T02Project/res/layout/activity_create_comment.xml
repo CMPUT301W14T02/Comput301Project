@@ -62,8 +62,8 @@
         android:id="@+id/longitude_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/latitude_box"
-        android:layout_toRightOf="@+id/latitude_box"
+        android:layout_alignTop="@+id/longitude_box"
+        android:layout_toLeftOf="@+id/longitude_box"
         android:text="@string/longitude"
         android:textSize="14sp" />
 
