@@ -50,13 +50,19 @@ public class CreateCommentActivity extends Activity {
 				EditText inputComment = (EditText) findViewById(R.id.create_text);
 				EditText latitude = (EditText) findViewById(R.id.latitude_box);
 				EditText longitude = (EditText) findViewById(R.id.longitude_box);
+				
+				double currLat = ProjectApplication.getInstance().getCurrentLocation().getLatitude();
+				double currLon = ProjectApplication.getInstance().getCurrentLocation().getLongitude();
+				latitude.setText(String.valueOf(currLat));
+				longitude.setText(String.valueOf(currLon));
+				
 				//for custom locations
 				double lat = 0, lon = 0;
 				Location customLocation = new Location("");
-				/*if ((latitude.toString()!="") && (latitude.toString()!=""))
+				/*if ((latitude.getText()!= ) && (latitude.getText()!=null))
 				{
-					lat = Double.valueOf(latitude.toString());
-					lon = Double.valueOf(longitude.toString());
+					lat = Double.valueOf(latitude.getText().toString());
+					lon = Double.valueOf(longitude.getText().toString());
 					customLocation.setLatitude(lat);
 					customLocation.setLongitude(lon);
 				}*/
