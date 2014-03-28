@@ -12,6 +12,7 @@ import ca.ualberta.cs.cmput301t02project.R;
 import ca.ualberta.cs.cmput301t02project.model.CommentListModel;
 import ca.ualberta.cs.cmput301t02project.model.CommentModel;
 import ca.ualberta.cs.cmput301t02project.view.CommentListAdapter;
+import ca.ualberta.cs.cmput301t02project.view.CommentListAdapterAbstraction;
 
 /**
  * Displays comments top level comments (aka. comments with no parents, comments that are not replies to anything). 
@@ -23,7 +24,7 @@ public class BrowseTopLevelCommentsActivity extends BrowseCommentsActivityAbstra
 	
 	private CommentListModel topLevelCommentList;
 	private ListView topLevelCommentListView;
-	private CommentListAdapter adapter;
+	//private CommentListAdapter adapter;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +55,7 @@ public class BrowseTopLevelCommentsActivity extends BrowseCommentsActivityAbstra
 	@Override
 	public void onResume() {
 		super.onResume();
-		
+		initializeAdapter();
 		adapter.notifyDataSetChanged();
 	}
 	
@@ -66,9 +67,10 @@ public class BrowseTopLevelCommentsActivity extends BrowseCommentsActivityAbstra
 	 * <p>
 	 * @return 
 	 */
-	public CommentListAdapter initializeAdapter(){
+	public CommentListAdapterAbstraction initializeAdapter(){
 		
 		// Retrieve the current comments list -SB
+		topLevelCommentList = new CommentListModel();
 		topLevelCommentList = ProjectApplication.getInstance().getCommentList();
 		
 

@@ -91,9 +91,8 @@ public class ProjectApplication {
 	 * @see CommentListModel	Example of a CommentListModel
 	 */
 	public CommentListModel getCommentList() {
-		if (commentList == null) {
-			commentList = new CommentListModel();
-		}
+		commentList = new CommentListModel();
+
 		commentList.setCommentList(server.pullTopLevel());
 		return commentList;
 	}
