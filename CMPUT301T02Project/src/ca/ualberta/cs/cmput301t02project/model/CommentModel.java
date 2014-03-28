@@ -5,6 +5,8 @@ import io.searchbox.annotations.JestId;
 import java.util.ArrayList;
 import java.util.Date;
 
+import ca.ualberta.cs.cmput301t02project.Server;
+
 import android.graphics.Bitmap;
 import android.location.Location;
 
@@ -25,6 +27,8 @@ public class CommentModel {
 	private transient CommentListModel replies; //to be changed to ArrayList<String> childrenIds
 	private ArrayList<String> childrenIds;
 	private String username;
+	private transient Server server = new Server();
+
 	
 	
 	/**
@@ -256,6 +260,13 @@ public class CommentModel {
 	
 	public void addChildrenId(String id) {
 		this.childrenIds.add(id);
+	}
+	
+	public CommentListModel pullReplies() {
+		CommentListModel replies;
+		replies = new CommentListModel();
+		replies.setCommentList(server.pull(childrenIds));
+		return replies;
 	}
 	
 }

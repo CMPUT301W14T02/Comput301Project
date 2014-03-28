@@ -58,8 +58,8 @@ public class BrowseReplyCommentsActivity extends BrowseCommentsActivityAbstracti
 				CommentModel nestedComment = (CommentModel) adapter.getItem(position);
 				ProjectApplication.getInstance().setCurrentComment(nestedComment);
 				
-				CommentListModel nestedCommentList = nestedComment.getReplies();
-				ProjectApplication.getInstance().setCurrentCommentList(nestedCommentList);
+				//CommentListModel nestedCommentList = nestedComment.getReplies();
+				//ProjectApplication.getInstance().setCurrentCommentList(nestedCommentList);
 
 				Intent goToReplyListActivity = new Intent(getApplicationContext(), BrowseReplyCommentsActivity.class);
 				startActivity(goToReplyListActivity);
@@ -84,7 +84,7 @@ public class BrowseReplyCommentsActivity extends BrowseCommentsActivityAbstracti
 	public CommentListAdapterAbstraction initializeAdapter(){
 
 		// Get the comment list of replies to selected comment
-		replyCommentList = ProjectApplication.getInstance().getCurrentCommentList();
+		replyCommentList = ProjectApplication.getInstance().getCurrentComment().pullReplies();
 		
 		// Add comments to adapter
 		adapter = new CommentListAdapter(this, R.layout.list_item, replyCommentList.getCommentList());
