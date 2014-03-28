@@ -69,9 +69,10 @@ public class BrowseTopLevelCommentsActivity extends BrowseCommentsActivityAbstra
 	 */
 	public CommentListAdapterAbstraction initializeAdapter(){
 		
-		// Retrieve the current comments list -SB
+		// Call the method in the CommentListModel class that will 
+		// pull comments from the server - TH
 		topLevelCommentList = new CommentListModel();
-		topLevelCommentList = ProjectApplication.getInstance().getCommentList();
+		topLevelCommentList = topLevelCommentList.getTopLevelComments();
 		
 
 		// Add comments to adapter

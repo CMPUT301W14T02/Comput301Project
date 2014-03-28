@@ -15,12 +15,10 @@ public class ProjectApplication {
 
 	// Singleton
 	private static final ProjectApplication instance = new ProjectApplication();
-	private CommentListModel commentList;
 	private CommentListModel currentCommentList;
 	private CommentModel currentComment;
 	private Location currentLocation = null;
 	private User currentUser = new User("default");
-	private Server server = new Server();
 
 	// Singleton code adapted from http://www.javaworld.com/article/2073352/core-java/simply-singleton.html
 	protected ProjectApplication() {
@@ -78,22 +76,10 @@ public class ProjectApplication {
 		return instance;
 	}
 	
-	/**
-	 * Returns the complete list of all comments.
-	 * <p>
-	 * A list of all comments in the app is stored in a CommentListModel.
-	 * The list of all comments can be retrieved to display comments in BrowseTopLevelCommentsActivity.
-	 * Comments in the CommentListModel include information about the text of comments, 
-	 * the username of the comment author, the location of the comment, pictures attached to
-	 * the comment, and a list of replies to that comment. 
-	 * <p>
-	 * @return List of all top level comments
-	 * @see CommentListModel	Example of a CommentListModel
-	 */
+	// This method is only here for now until the replies to comments are
+	// pulled directly from the server, then it can be deleted - TH
 	public CommentListModel getCommentList() {
-		commentList = new CommentListModel();
-
-		commentList.setCommentList(server.pullTopLevel());
+		CommentListModel commentList = new CommentListModel();
 		return commentList;
 	}
 	

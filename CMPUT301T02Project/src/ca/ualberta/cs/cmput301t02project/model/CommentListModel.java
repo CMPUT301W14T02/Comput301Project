@@ -22,6 +22,7 @@ public class CommentListModel {
 	private ArrayList<CommentModel> commentList;
 	private transient CommentModel parent;
 	//private CommentListAdapter adapter;
+	private Server server = new Server();
 
 	public CommentListModel() {
 		commentList = new ArrayList<CommentModel>();
@@ -112,6 +113,21 @@ public class CommentListModel {
 	 */
 	public CommentListAdapterAbstraction getAdapter() {
 		return adapter;
+	}
+	
+	/**
+	 * Returns the complete list of top level comments. -TH
+	 * Comments are stored on the server. This method uses the server class to
+	 * pull all comments from the server that have the topLevelComment 
+	 * attribute set to true.
+	 * <p>
+	 * @return The CommentListModel containing top level comments
+	 */
+	public CommentListModel getTopLevelComments() {
+		CommentListModel topLevelComments;
+		topLevelComments = new CommentListModel();
+		topLevelComments.setCommentList(server.pullTopLevel());
+		return topLevelComments;
 	}
 	
 
