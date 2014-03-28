@@ -53,15 +53,18 @@ public class CreateCommentActivity extends Activity {
 				//for custom locations
 				double lat = 0, lon = 0;
 				Location customLocation = new Location("");
+
 				/*
 				if ((latitude.toString()!="") && (latitude.toString()!=""))
-				{
+
 					lat = Double.valueOf(latitude.toString());
 					lon = Double.valueOf(longitude.toString());
 					customLocation.setLatitude(lat);
 					customLocation.setLongitude(lon);
+
 				}
 				*/
+
 				// Refactor into MVC?
 				CommentModel comment;
 				
