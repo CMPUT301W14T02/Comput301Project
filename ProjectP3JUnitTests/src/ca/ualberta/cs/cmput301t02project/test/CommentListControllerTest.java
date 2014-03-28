@@ -23,7 +23,7 @@ public class CommentListControllerTest extends TestCase {
 	}
 
 	public void testAddNewComment() {
-		CommentModel returned = controller.addNewComment("the comment", null, "username");
+		CommentModel returned = controller.addNewComment("the comment", null, "username", 0, 0, false);
 		CommentModel expected = new CommentModel("the comment", null, "username");
 		assertTrue(model.getCommentList().contains(expected));
 		assertEquals(expected, returned);
@@ -32,7 +32,7 @@ public class CommentListControllerTest extends TestCase {
 	public void testAddNewCommentWithPicture() {
 		Bitmap picture = Bitmap.createBitmap(10, 10, Bitmap.Config.ARGB_8888);
 		assertNotNull(picture);
-		CommentModel returned = controller.addNewComment("the comment", picture, "username");
+		CommentModel returned = controller.addNewComment("the comment", picture, "username", 0, 0, false);
 		CommentModel expected = new CommentModel("the comment", picture, null, "username");
 		assertTrue(model.getCommentList().contains(expected));
 		assertEquals(expected, returned);
