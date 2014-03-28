@@ -39,14 +39,17 @@ public class CreateCommentActivity extends Activity {
 		myCommentsListController = new MyCommentsController(ProjectApplication.getInstance().getUser().getMyComments());
 		
 		setContentView(R.layout.activity_create_comment);
-		EditText latitude = (EditText) findViewById(R.id.latitude_box);
-		EditText longitude = (EditText) findViewById(R.id.longitude_box);
+		
+		final EditText latitude = (EditText) findViewById(R.id.latitude_box);
+		final EditText longitude = (EditText) findViewById(R.id.longitude_box);
 		
 		double currLat = ProjectApplication.getInstance().getCurrentLocation().getLatitude();
 		double currLon = ProjectApplication.getInstance().getCurrentLocation().getLongitude();
-		latitude.setText(String.valueOf(currLat));
-		longitude.setText(String.valueOf(currLon));
+		final String strLat = String.valueOf(currLat);
+		final String strLon = String.valueOf(currLon);
 		
+		latitude.setText(strLat);
+		longitude.setText(strLon);
 		
 		Button post = (Button) findViewById(R.id.create_post);
 
@@ -61,13 +64,13 @@ public class CreateCommentActivity extends Activity {
 				double lat = 0, lon = 0;
 				Location customLocation = new Location("");
 
-				/*if ((latitude.getText()!= ) && (latitude.getText()!=null))
+				if ((latitude.getText().toString())!= strLat && ((longitude.getText().toString())!= strLon))
 				{
 					lat = Double.valueOf(latitude.getText().toString());
 					lon = Double.valueOf(longitude.getText().toString());
 					customLocation.setLatitude(lat);
 					customLocation.setLongitude(lon);
-				} */
+				} 
 
 				// Refactor into MVC?
 				CommentModel comment;

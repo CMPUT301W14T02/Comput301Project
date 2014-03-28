@@ -25,11 +25,18 @@ public class CommentListController extends CommentListControllerAbstraction {
 	 * @param username	The username of the commenter (Eg. "Bob")
 	 * @return	The newly created CommentModel that has been added to the CommentListModel
 	 */
-	public CommentModel addNewComment(String text, Bitmap picture, String username, Location custLoc) {
+	public CommentModel addNewComment(String text, Bitmap picture, String username, Location customLocation) {
 		
 		CommentModel comment;
-		Location currentLocation = ProjectApplication.getInstance().getCurrentLocation();
-		comment = new CommentModel(text, picture, currentLocation, username);
+		Location commentLocation;
+		
+		if (customLocation != null) {
+			commentLocation = customLocation;
+		} else { 
+			commentLocation = ProjectApplication.getInstance().getCurrentLocation();
+		}
+		
+		comment = new CommentModel(text, picture, commentLocation, username);
 		model.add(comment);
 		return comment;
 	}
