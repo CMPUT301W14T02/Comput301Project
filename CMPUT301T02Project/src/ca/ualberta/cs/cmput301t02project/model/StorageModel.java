@@ -84,13 +84,12 @@ public class StorageModel {
 	public void storeFavorite(CommentModel favoritedComment, Context context) {
 		//Pull favorited comments replies
 		CommentListModel repliesToFav = new CommentListModel();
-		favoritedComment.pullReplies();
 		ArrayList<CommentModel> favoriteAndReplies = new ArrayList<CommentModel>();
-		favoriteAndReplies.add(favoritedComment);
-		
+		favoriteAndReplies = repliesToFav.getCommentList();
+		favoriteAndReplies.add(0, favoritedComment);
 		try {
 			FileOutputStream fos = context.openFileOutput(FAVORITESFILE, 0);
-			fos.write((gson.toJson(ProjectApplication.getInstance().getUser().getFavorites().getCommentList()) + "\n").getBytes());
+			fos.write((gson.toJson(favoriteAndReplies) + "\n").getBytes());
 			fos.close();
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block

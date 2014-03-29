@@ -166,12 +166,12 @@ public class Server {
 		Thread thread = new Thread() {
 			@Override
 			public void run() {
-				String query = "{\"size\": 1000, \"query\": {\"term\": {\"username\": \""+ username +"\"}}}";
+				String query = String.format("{\"size\": 1000, \"query\": {\"term\": {\"username\": \"%s\"}}}", username);
 				Search search = new Search.Builder(query).addIndex("cmput301w14t02").addType("users").build();
 				JestResult result = null;
 				try {
 					result = client.execute(search);
-				} catch (Exception e) {
+				} catch (Exception e) { 
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
@@ -184,10 +184,7 @@ public class Server {
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-		
-		if (user == null) {
-			user = new User(username);
-		}
+
 		return user;
 	}
 }

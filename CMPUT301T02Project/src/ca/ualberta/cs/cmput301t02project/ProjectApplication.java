@@ -222,5 +222,8 @@ public class ProjectApplication {
 	
 	public void setUser(String username) {
 		currentUser = server.pullUser(username);
+		if (currentUser == null) {
+			currentUser = new User(username);
+		}
 	}
 }

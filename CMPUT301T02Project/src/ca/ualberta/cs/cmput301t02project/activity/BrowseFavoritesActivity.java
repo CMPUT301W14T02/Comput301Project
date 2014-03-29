@@ -52,10 +52,6 @@ public class BrowseFavoritesActivity extends BrowseCommentsActivityAbstraction {
 		// Retrieve myComments from phone storage -TH
 		favoritesList = ProjectApplication.getInstance().getUser().getFavorites(getApplicationContext());
 
-		
-		// Retrieve the current comments list -TH
-		//favoritesList = ProjectApplication.getInstance().getUser().getFavorites();
-
 		// Add comments to adapter
 		adapter = new FavoritesAdapter(this, R.layout.list_item, favoritesList.getCommentList());
 		adapter.setModel(favoritesList);
