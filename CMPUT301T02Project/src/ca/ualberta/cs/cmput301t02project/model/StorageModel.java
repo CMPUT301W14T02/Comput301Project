@@ -22,6 +22,7 @@ import com.google.gson.reflect.TypeToken;
 public class StorageModel {
 
 	private static Gson gson = new Gson();
+	private transient String MYCOMMENTSFILE = "MyComments.json"; 
 	
 	/**
 	 * Caches a comment locally.
@@ -31,9 +32,9 @@ public class StorageModel {
 	 * BrowseTopLevelCommentsActivity and BrowseReplyCommentsActivity.
 	 * @param comment	CommentModel to cache
 	 */
-	public void cacheComment(Context context, String FILENAME) {
+	public void storeMyComment(Context context) {
 		try {
-			FileOutputStream fos = context.openFileOutput(FILENAME, 0);
+			FileOutputStream fos = context.openFileOutput(MYCOMMENTSFILE, 0);
 			fos.write((gson.toJson(ProjectApplication.getInstance().getUser().getMyComments().getCommentList()) + "\n").getBytes());
 			fos.close();
 		} catch (FileNotFoundException e) {
@@ -45,11 +46,11 @@ public class StorageModel {
 		}
 	}
 	
-	public ArrayList<CommentModel> retrieveCachedComments(Context context, String FILENAME) {
+	public ArrayList<CommentModel> retrieveMyComments(Context context) {
 		ArrayList<CommentModel> myCommentsArray = new ArrayList<CommentModel>();
 		try {
 			System.out.println("Open file");
-			FileInputStream fis = context.openFileInput(FILENAME);
+			FileInputStream fis = context.openFileInput(MYCOMMENTSFILE);
 			BufferedReader in = new BufferedReader(new InputStreamReader(fis));
 			
 			Type type = new TypeToken<ArrayList<CommentModel>>(){}.getType();

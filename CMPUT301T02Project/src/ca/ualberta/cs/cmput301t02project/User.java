@@ -22,7 +22,7 @@ public class User {
 	private CommentListModel myComments;
 	private CommentListModel favorites;
 	private transient StorageModel store = new StorageModel();
-	private transient String MYCOMMENTSFILE = "MyComments.json";
+	
 
 	/**
 	 * Creates a new User.
@@ -102,7 +102,7 @@ public class User {
 	
 	public CommentListModel getMyComments(Context context){
 		ArrayList<CommentModel> myCommentsArray = new ArrayList<CommentModel>();
-		myCommentsArray = store.retrieveCachedComments(context, MYCOMMENTSFILE);
+		myCommentsArray = store.retrieveMyComments(context);
 		myComments.setCommentList(myCommentsArray);
 		return myComments;
 	}
@@ -110,7 +110,7 @@ public class User {
 	public void addMyComment(CommentModel comment, Context context) {
 		myComments.add(comment);
 		myCommentsIds.add(comment.getId());
-		store.cacheComment(context, MYCOMMENTSFILE);
+		store.storeMyComment(context);
 
 	}
 	
