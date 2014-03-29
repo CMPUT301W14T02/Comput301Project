@@ -22,7 +22,7 @@ import ca.ualberta.cs.cmput301t02project.view.CommentListAdapterAbstraction;
  */
 public class CommentListModel {
 	
-	private StorageModel store = new StorageModel();
+	private  StorageModel store = new StorageModel();
 	private CommentListAdapterAbstraction adapter = null;
 	private ArrayList<CommentModel> commentList;
 	private CommentModel parent;
@@ -101,8 +101,8 @@ public class CommentListModel {
 		}
 	}
 	
-	public void add(CommentModel comment, Context context, String FILENAME) {
-		store.cacheComment(comment, context, FILENAME);
+	public void add(Context context, String FILENAME) {
+		store.cacheComment(context, FILENAME);
 	}
 	
 	public void getMyComments(Context context){

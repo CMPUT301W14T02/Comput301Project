@@ -32,11 +32,10 @@ public class StorageModel {
 	 * BrowseTopLevelCommentsActivity and BrowseReplyCommentsActivity.
 	 * @param comment	CommentModel to cache
 	 */
-	public void cacheComment(CommentModel comment, Context context, String FILENAME) {
-		cacheList.add(comment);
+	public void cacheComment(Context context, String FILENAME) {
 		try {
 			FileOutputStream fos = context.openFileOutput(FILENAME, 0);
-			fos.write((comment.toJSON() + "\n").getBytes());
+			fos.write((gson.toJson(ProjectApplication.getInstance().getUser().getMyComments().getCommentList()) + "\n").getBytes());
 			fos.close();
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block

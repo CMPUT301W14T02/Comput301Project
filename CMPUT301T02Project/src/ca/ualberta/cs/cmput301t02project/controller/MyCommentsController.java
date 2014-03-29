@@ -2,6 +2,8 @@ package ca.ualberta.cs.cmput301t02project.controller;
 
 import android.content.Context;
 import android.location.Location;
+import ca.ualberta.cs.cmput301t02project.ProjectApplication;
+import ca.ualberta.cs.cmput301t02project.User;
 import ca.ualberta.cs.cmput301t02project.model.CommentListModel;
 import ca.ualberta.cs.cmput301t02project.model.CommentModel;
 import ca.ualberta.cs.cmput301t02project.model.StorageModel;
@@ -28,8 +30,9 @@ public class MyCommentsController extends CommentListControllerAbstraction {
 	 * @param comment	CommentModel to add to myComments list
 	 */
 	public void addNewComment(CommentModel comment, Context context) {
-		
-		model.add(comment, context, FILENAME);
+		User user = ProjectApplication.getInstance().getUser();
+		user.addMyComment(comment);
+		model.add(context, FILENAME);
 		//TODO Can't add it normally, because it goes to the server
 		//temporary:
 		//model.getCommentList().add(comment);
