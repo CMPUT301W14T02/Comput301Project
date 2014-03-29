@@ -105,6 +105,7 @@ public class User {
 	 * <p>
 	 * Retrieves comments created by current user from phone storage 
 	 * by calling retrieveMyComments method in StorageModel class
+	 * BrowseMyCommentsActivity
 	 * <p>
 	 * @param context - context of the application
 	 * @return CommentListModel containing comments created by user
@@ -121,6 +122,7 @@ public class User {
 	 * <p>
 	 * Stores comment created by user to phone by calling 
 	 * storeMyComment method in StorageModel class
+	 * CreateCommentActivity
 	 * <p>
 	 * @param comment - comment to be stored
 	 * @param context - context of the application

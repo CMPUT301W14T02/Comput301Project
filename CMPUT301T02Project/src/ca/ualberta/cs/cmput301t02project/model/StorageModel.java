@@ -25,12 +25,12 @@ public class StorageModel {
 	private transient String MYCOMMENTSFILE = "MyComments.json"; 
 	
 	/**
-	 * Caches a comment locally.
+	 * Stores comment created by user locally.
 	 * <p>
-	 * Caches a specified CommentModel on the user's local device. 
-	 * Used when a comment is read or favorited in
-	 * BrowseTopLevelCommentsActivity and BrowseReplyCommentsActivity.
-	 * @param comment	CommentModel to cache
+	 * Stores a CommentModel created by user on the user's local device. 
+	 * User
+	 * <p>
+	 * @param context - context of the application
 	 */
 	public void storeMyComment(Context context) {
 		try {
@@ -46,6 +46,15 @@ public class StorageModel {
 		}
 	}
 	
+	/**
+	 * Gets comments stored locally.
+	 * <p>
+	 * Gets comments created by user from user's local device.
+	 * User
+	 * <p>
+	 * @param context - context of the application
+	 * @return arraylist of the comments that were stored locally
+	 */
 	public ArrayList<CommentModel> retrieveMyComments(Context context) {
 		ArrayList<CommentModel> myCommentsArray = new ArrayList<CommentModel>();
 		try {
