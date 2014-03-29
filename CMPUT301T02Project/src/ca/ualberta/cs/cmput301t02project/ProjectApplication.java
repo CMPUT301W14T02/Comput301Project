@@ -18,7 +18,8 @@ public class ProjectApplication {
 	private CommentListModel currentCommentList;
 	private CommentModel currentComment;
 	private Location currentLocation = null;
-	private User currentUser = new User("default");
+	private Server server = new Server();
+	private User currentUser = new User("Anonymous");
 
 	// Singleton code adapted from http://www.javaworld.com/article/2073352/core-java/simply-singleton.html
 	protected ProjectApplication() {
@@ -215,11 +216,11 @@ public class ProjectApplication {
 	 * Pushes the currentUser to server
 	 * @param currentUser
 	 */
-	public void pushUser(User currentUser){
-		
+	public void pushUser(){
+		server.postUser(currentUser);
 	}
 	
-	public User getPushedUser(String name) {
-		return null;
+	public void setUser(String username) {
+		currentUser = server.pullUser(username);
 	}
 }

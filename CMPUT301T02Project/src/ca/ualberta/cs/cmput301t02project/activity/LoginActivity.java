@@ -7,6 +7,7 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import ca.ualberta.cs.cmput301t02project.ProjectApplication;
 import ca.ualberta.cs.cmput301t02project.R;
 import ca.ualberta.cs.cmput301t02project.UserList;
 
@@ -38,7 +39,7 @@ public class LoginActivity extends Activity {
 		EditText enteredName = (EditText) findViewById(R.id.login_username);
 
 		// Test if the input is allowed -SB
-		setUsername(enteredName.getText().toString());
+		login(enteredName.getText().toString());
 	}
 
 	/**
@@ -51,8 +52,8 @@ public class LoginActivity extends Activity {
 	 * <p>
 	 * @param username	The user's username input
 	 */
-	public void setUsername(String username) {
-
+	public void login(String username) {
+		
 		// Message on screen -SB
 		TextView message = (TextView) findViewById(R.id.login_message);
 
@@ -63,7 +64,7 @@ public class LoginActivity extends Activity {
 			message.setText("Login Page");
 
 			// If user doesn't exist, create a user with that name -SB
-			UserList.findUser(username);
+			ProjectApplication.getInstance().setUser(username);
 
 			// Go to the main menu once user is set -SB
 			startActivity(new Intent(LoginActivity.this, MainMenuActivity.class));
