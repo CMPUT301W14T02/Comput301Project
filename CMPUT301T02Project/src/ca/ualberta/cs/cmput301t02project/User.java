@@ -1,5 +1,7 @@
 package ca.ualberta.cs.cmput301t02project;
 
+import java.util.ArrayList;
+
 import ca.ualberta.cs.cmput301t02project.model.CommentListModel;
 
 /**
@@ -10,6 +12,8 @@ import ca.ualberta.cs.cmput301t02project.model.CommentListModel;
 public class User {
 
 	private String username;
+	private ArrayList<String> myCommentsIds;
+	private ArrayList<String> favoritesIds;
 	private CommentListModel myComments;
 	private CommentListModel favorites;
 
@@ -30,6 +34,8 @@ public class User {
 		this.username = username;
 		myComments = new CommentListModel();
 		favorites = new CommentListModel();
+		myCommentsIds = new ArrayList<String>();
+		favoritesIds = new ArrayList<String>();
 	}
 
 	/**
@@ -114,5 +120,23 @@ public class User {
 	 */
 	public CommentListModel getFavorites() {
 		return this.favorites;
+	}
+	
+	public void addCommentId(String id, String list) {
+		if (list.equals("mycomments")) {
+			myCommentsIds.add(id);
+		} else if (list.equals("favorites")) {
+			favoritesIds.add(id);
+		}
+	}
+	
+	public ArrayList<String> getCommentIds(String list) {
+		ArrayList<String> empty = new ArrayList<String>();
+		if (list.equals("mycomments")) {
+			return myCommentsIds;
+		} else if (list.equals("favorites")) {
+			return favoritesIds;
+		}
+		return empty;
 	}
 }
