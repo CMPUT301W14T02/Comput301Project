@@ -1,9 +1,15 @@
 package ca.ualberta.cs.cmput301t02project.model;
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 
+import android.content.Context;
 import android.location.Location;
+
+import ca.ualberta.cs.cmput301t02project.ProjectApplication;
 
 import com.google.gson.Gson;
 
@@ -14,42 +20,6 @@ public class StorageModel {
 
 	private static Gson gson = new Gson();
 	private ArrayList<CommentModel> cacheList = new ArrayList<CommentModel>();
-
-	/**
-	 * Push a comment online.
-	 * <p>
-	 * Converts a specified CommentModel to JSON for for storing on the web. 
-	 * Pushes the specified CommentModel to the web.
-	 * Used when a comment is created in 
-	 * CreateCommentActivity.
-	 * @param comment	CommentModel to be pushed
-	 */
-	public void pushComment(CommentModel comment) {
-
-		/* Some test code for when we work on this method */
-		String text = comment.getText();
-		String username = comment.getUsername();
-		int rating = comment.getRating();
-		Date date = comment.getDate();
-		/* Note: Can convert type Location to Json *
-		 * Can we remove LocationModel? -TH
-		 */
-		String json = gson.toJson(text);
-		String json1 = gson.toJson(username);
-		String json2 = gson.toJson(rating);
-		String json3 = gson.toJson(date);
-
-		String text1 = gson.fromJson(json, String.class);
-		String username1 = gson.fromJson(json1, String.class);
-		Integer rating1 = gson.fromJson(json2, Integer.class);
-		Date date1 = gson.fromJson(json3, Date.class);
-
-		CommentModel comment1 = new CommentModel(text1, comment.getLocation(), username1);
-		comment1.setDate(date1);
-		comment1.setRating(rating1);
-		comment1.setReplies(comment.getReplies());
-
-	}
 	
 	/**
 	 * Caches a comment locally.
@@ -59,8 +29,19 @@ public class StorageModel {
 	 * BrowseTopLevelCommentsActivity and BrowseReplyCommentsActivity.
 	 * @param comment	CommentModel to cache
 	 */
-	public void cacheComment(CommentModel comment) {
+	public void cacheComment(CommentModel comment, Context context, String FILENAME) {
 		cacheList.add(comment);
+		try {
+			FileOutputStream fos = context.openFileOutput(FILENAME, 0);
+			fos.write((comment.toJSON() + "\n").getBytes());
+			fos.close();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	/**

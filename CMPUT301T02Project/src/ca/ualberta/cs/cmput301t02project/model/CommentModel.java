@@ -5,6 +5,8 @@ import io.searchbox.annotations.JestId;
 import java.util.ArrayList;
 import java.util.Date;
 
+import com.google.gson.Gson;
+
 import android.graphics.Bitmap;
 import android.location.Location;
 import ca.ualberta.cs.cmput301t02project.Server;
@@ -241,7 +243,21 @@ public class CommentModel {
 	public void setParent(CommentModel parent) {
 		this.parent = parent;
 	}
-
+	
+	
+	/**
+	 * Return a comment converted to a Json string
+	 * @return String
+	 */
+	public String toJSON() {
+		Gson gson = new Gson();
+		return gson.toJson(this);
+	}
+	
+	public static CommentModel fromJSON(String json) {
+		Gson gson = new Gson();
+		return gson.fromJson(json, CommentModel.class);
+	}
 	
 	/**
 	 * Enables comparison for equality between Comments.

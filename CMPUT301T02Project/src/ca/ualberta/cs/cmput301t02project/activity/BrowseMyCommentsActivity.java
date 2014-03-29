@@ -68,7 +68,8 @@ public class BrowseMyCommentsActivity extends BrowseCommentsActivityAbstraction 
 	public CommentListAdapterAbstraction initializeAdapter(){
 		
 		// Retrieve the current comments list -SB
-		myCommentsList = ProjectApplication.getInstance().getUser().getMyComments();
+		System.out.println("Call method");
+		myCommentsList = myCommentsList.getMyComments(getApplicationContext());
 
 		// Add comments to adapter
 		adapter = new MyCommentsAdapter(this, R.layout.list_item, myCommentsList.getCommentList());

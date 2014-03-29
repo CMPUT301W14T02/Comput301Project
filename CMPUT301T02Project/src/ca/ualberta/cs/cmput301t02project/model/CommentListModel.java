@@ -1,7 +1,13 @@
 package ca.ualberta.cs.cmput301t02project.model;
 
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 
+import android.content.Context;
 import android.util.Log;
 import ca.ualberta.cs.cmput301t02project.ProjectApplication;
 import ca.ualberta.cs.cmput301t02project.Server;
@@ -93,6 +99,36 @@ public class CommentListModel {
 			adapter.sortList();
 			adapter.notifyDataSetChanged();
 		}
+	}
+	
+	public void add(CommentModel comment, Context context, String FILENAME) {
+		store.cacheComment(comment, context, FILENAME);
+	}
+	
+	public CommentListModel getMyComments(Context context){
+		System.out.println("In getMyComments method");
+		String FILENAME = "MyComments.json";
+		CommentListModel myComments = new CommentListModel();
+		ArrayList<CommentModel> myCommentsArray = new ArrayList<CommentModel>();
+		try {
+			System.out.println("Open file");
+			FileInputStream fis = context.openFileInput(FILENAME);
+			BufferedReader in = new BufferedReader(new InputStreamReader(fis));
+			String line = in.readLine();
+			while (line != null) {
+				myCommentsArray.add(CommentModel.fromJSON(line));
+				line = in.readLine();
+			}
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		myComments.setCommentList(myCommentsArray);
+		return myComments;
+	
 	}
 	
 	/**
