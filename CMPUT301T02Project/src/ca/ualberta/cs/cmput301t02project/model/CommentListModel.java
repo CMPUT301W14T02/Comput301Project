@@ -3,6 +3,7 @@ package ca.ualberta.cs.cmput301t02project.model;
 import java.util.ArrayList;
 
 import android.util.Log;
+import ca.ualberta.cs.cmput301t02project.ProjectApplication;
 import ca.ualberta.cs.cmput301t02project.Server;
 import ca.ualberta.cs.cmput301t02project.view.CommentListAdapterAbstraction;
 
@@ -75,23 +76,27 @@ public class CommentListModel {
 	 * @param comment	The new comment to add to the list
 	 */
 	public void add(CommentModel comment) {
-		if(this.parent == null) {
+		if(ProjectApplication.getInstance().getCurrentComment() == null) {
+		//if(this.parent == null) {
 			comment.setTopLevelComment(true);
 		} else {
 			comment.setTopLevelComment(false);
+			this.parent=ProjectApplication.getInstance().getCurrentComment();
+			//comment.setParent(ProjectApplication.getInstance().getCurrentComment());
 		}
 		commentList.add(comment);
 		Server server = new Server();
 		server.post(comment);
-		Log.e("here", (this.parent==null)+"");
 		if(this.parent != null) {
-			parent.addChildrenId(comment.getId());
-			server = new Server();
-			server.post(this.parent);
-		}
-		if (adapter != null) {
-			adapter.sortList();
-			adapter.notifyDataSetChanged();
+			if(!comment.isTopLevelComment()) {
+				parent.addChildId(comment.getId());
+				server = new Server();
+				server.post(this.parent);
+			}
+			if (adapter != null) {
+				adapter.sortList();
+				adapter.notifyDataSetChanged();
+			}
 		}
 	}
 	
