@@ -134,10 +134,11 @@ public class User {
 
 	}
 	
-	public void addFavoriteComment(CommentModel comment) {
+	public void addFavoriteComment(CommentModel comment, Context context) {
 		if (!favoritesIds.contains(comment.getId())) {
 			favorites.add(comment);
 			favoritesIds.add(comment.getId());
+			store.storeFavorite(context);
 		}
 	}
 	

@@ -22,7 +22,9 @@ import com.google.gson.reflect.TypeToken;
 public class StorageModel {
 
 	private static Gson gson = new Gson();
-	private transient String MYCOMMENTSFILE = "MyComments.json"; 
+	private transient String MYCOMMENTSFILE = "MyComments.json";
+	private transient String FAVORITESFILE = "Favorites.json"; 
+	
 	
 	/**
 	 * Stores comment created by user locally.
@@ -69,6 +71,29 @@ public class StorageModel {
 		}
 		return myCommentsArray;
 	}
+	
+	/**
+	 * Stores comment favorited by user locally.
+	 * <p>
+	 * Stores a CommentModel favorited by user on the user's local device. 
+	 * User
+	 * <p>
+	 * @param context - context of the application
+	 */
+	public void storeFavorite(Context context) {
+		try {
+			FileOutputStream fos = context.openFileOutput(FAVORITESFILE, 0);
+			fos.write((gson.toJson(ProjectApplication.getInstance().getUser().getMyComments().getCommentList()) + "\n").getBytes());
+			fos.close();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
 	
 	/**
 	 * Not fully implemented - added for testing for this release only. 

@@ -62,7 +62,7 @@ public class BrowseReplyCommentsActivity extends BrowseCommentsActivityAbstracti
 			@Override
 			public void onClick(View v) {
 				User user = ProjectApplication.getInstance().getUser();
-				user.addFavoriteComment(currentComment);
+				user.addFavoriteComment(currentComment, getApplicationContext());
 				commentController.incrementRating();
 				
 			}
