@@ -18,6 +18,7 @@ import com.searchly.jestdroid.JestClientFactory;
 public class Server {
 	private static final String serverUri = "http://cmput301.softwareprocess.es:8080/";
 	private JestClient client;
+	private User user;
 	
 	public Server() {
 		//TODO Add custom Gson here to clientConfig.Builder
@@ -150,4 +151,29 @@ public class Server {
 		}
 	}
 	
+	public User pullUser(final String username) {
+		Thread thread = new Thread() {
+			@Override
+			public void run() {
+				String query = "{\"size\": 1000, \"query\": {\"term\": {\"username\": \""+ username +"\"}}}";
+				Search search = new Search.Builder(query).addIndex("cmput301w14t02").addType("users").build();
+				JestResult result = null;
+				try {
+					result = client.execute(search);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				user = result.getSourceAsObject(User.class);
+			}
+		};
+		thread.start();
+		try {
+			thread.join();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		
+		return user;
+	}
 }
