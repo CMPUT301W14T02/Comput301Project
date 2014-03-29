@@ -10,6 +10,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import ca.ualberta.cs.cmput301t02project.ProjectApplication;
 import ca.ualberta.cs.cmput301t02project.R;
+import ca.ualberta.cs.cmput301t02project.User;
 import ca.ualberta.cs.cmput301t02project.model.CommentListModel;
 import ca.ualberta.cs.cmput301t02project.model.CommentModel;
 import ca.ualberta.cs.cmput301t02project.view.CommentListAdapter;
@@ -50,6 +51,15 @@ public class BrowseReplyCommentsActivity extends BrowseCommentsActivityAbstracti
 			@Override
 			public void onClick(View v) {
 				startActivity(new Intent(BrowseReplyCommentsActivity.this, CreateCommentActivity.class));
+			}
+		});
+		
+		Button favoriteComment = (Button) findViewById(R.id.fav_button);
+		favoriteComment.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				User user = ProjectApplication.getInstance().getUser();
+				user.addFavoriteComment(currentComment);
 			}
 		});
 

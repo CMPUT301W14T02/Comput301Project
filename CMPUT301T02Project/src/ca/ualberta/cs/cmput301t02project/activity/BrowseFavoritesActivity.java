@@ -34,7 +34,8 @@ public class BrowseFavoritesActivity extends BrowseCommentsActivityAbstraction {
 	@Override
 	public void onResume() {
 		super.onResume();
-		
+		initializeAdapter();
+		adapter.sortList();
 		adapter.notifyDataSetChanged();
 	}
 	

@@ -96,6 +96,14 @@ public class User {
 	
 	public void addMyComment(CommentModel comment) {
 		myComments.add(comment);
+		myCommentsIds.add(comment.getId());
+	}
+	
+	public void addFavoriteComment(CommentModel comment) {
+		if (!favorites.getCommentList().contains(comment)) {
+			favorites.add(comment);
+			favoritesIds.add(comment.getId());
+		}
 	}
 	
 	/**
@@ -127,21 +135,11 @@ public class User {
 		return this.favorites;
 	}
 	
-	public void addCommentId(String id, String list) {
-		if (list.equals("mycomments")) {
-			myCommentsIds.add(id);
-		} else if (list.equals("favorites")) {
-			favoritesIds.add(id);
-		}
+	public ArrayList<String> getMyCommentIds(String list) {
+		return myCommentsIds;
 	}
 	
-	public ArrayList<String> getCommentIds(String list) {
-		ArrayList<String> empty = new ArrayList<String>();
-		if (list.equals("mycomments")) {
-			return myCommentsIds;
-		} else if (list.equals("favorites")) {
-			return favoritesIds;
-		}
-		return empty;
+	public ArrayList<String> getFavoritesCommentIds(String list) {
+		return favoritesIds;
 	}
 }

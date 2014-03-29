@@ -54,6 +54,14 @@ public class MainMenuActivity extends Activity {
 		});
 		
 		// FAVORITES ONCLICK LISTENER WILL GO HERE -SB
+		Button browseFavorites = (Button) findViewById(R.id.favorites);
+		browseFavorites.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				startActivity(new Intent(MainMenuActivity.this, BrowseFavoritesActivity.class));
+			}
+		});
 		
 		// If "My Comments" is clicked -SB
 		Button browseMyComments = (Button) findViewById(R.id.my_comments);
