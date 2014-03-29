@@ -3,6 +3,7 @@ package ca.ualberta.cs.cmput301t02project;
 import java.util.ArrayList;
 
 import ca.ualberta.cs.cmput301t02project.model.CommentListModel;
+import ca.ualberta.cs.cmput301t02project.model.CommentModel;
 
 /**
  * The User class stores information about a user. 
@@ -91,6 +92,10 @@ public class User {
 	 */
 	public CommentListModel getMyComments() {
 		return this.myComments;
+	}
+	
+	public void addMyComment(CommentModel comment) {
+		myComments.add(comment);
 	}
 	
 	/**
