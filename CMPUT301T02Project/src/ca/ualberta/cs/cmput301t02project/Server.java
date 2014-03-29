@@ -138,4 +138,38 @@ public class Server {
 		return false;
 	}
 	
+	public void postUser(final User user) {
+		Thread thread = new Thread() {
+			@Override
+			public void run() {
+				
+				try {
+					Index index = new Index.Builder(user).index("cmput301w14t02").type("users").id(user.getId()).build();
+					
+					JestResult result = client.execute(index);
+					String id = result.getJsonObject().get("_id").getAsString();
+					user.setId(id);
+					
+					index = new Index.Builder(user).index("cmput301w14t02").type("users").id(user.getId()).build();
+					result = client.execute(index);
+					if(!result.isSucceeded()) {
+						throw new NetworkErrorException();
+					}
+				} catch (Exception e) {
+					e.printStackTrace();
+					throw new RuntimeException();
+				} finally {
+					client.shutdownClient();
+				}
+			}
+			
+		};
+		thread.start();
+		try {
+			thread.join();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+	}
+	
 }
