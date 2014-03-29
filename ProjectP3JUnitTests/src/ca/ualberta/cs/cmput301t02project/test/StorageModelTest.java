@@ -31,7 +31,7 @@ public class StorageModelTest extends TestCase {
 		CommentModel comment = initializeComment();
 		
 		StorageModel sM = new StorageModel();
-        sM.pushComment(comment);
+        //sM.storeMyComment(comment); 
         CommentModel comment2 = sM.getLatest();
         assertTrue("Comments should be the same if posted comment is saved correctly.", (comment == comment2));
     }

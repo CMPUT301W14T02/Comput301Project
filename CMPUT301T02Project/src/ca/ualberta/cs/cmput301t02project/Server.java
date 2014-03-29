@@ -9,9 +9,10 @@ import io.searchbox.core.Search;
 import java.util.ArrayList;
 
 import android.accounts.NetworkErrorException;
-import android.util.Log;
 import ca.ualberta.cs.cmput301t02project.model.CommentModel;
 
+import com.google.common.cache.Cache;
+import com.google.common.cache.CacheBuilder;
 import com.searchly.jestdroid.DroidClientConfig;
 import com.searchly.jestdroid.JestClientFactory;
 
@@ -75,7 +76,7 @@ public class Server {
 						CommentModel comment = result.getSourceAsObject(CommentModel.class);
 						commentList.add(comment);
 					} catch (Exception e) {
-						//TODO: If comment with id Id is cached, add it to commentList
+						
 					}
 					
 				}

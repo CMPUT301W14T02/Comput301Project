@@ -85,6 +85,9 @@ public class StorageModel {
 		//Pull favorited comments replies
 		CommentListModel repliesToFav = new CommentListModel();
 		favoritedComment.pullReplies();
+		ArrayList<CommentModel> favoriteAndReplies = new ArrayList<CommentModel>();
+		favoriteAndReplies.add(favoritedComment);
+		
 		try {
 			FileOutputStream fos = context.openFileOutput(FAVORITESFILE, 0);
 			fos.write((gson.toJson(ProjectApplication.getInstance().getUser().getFavorites().getCommentList()) + "\n").getBytes());

@@ -23,7 +23,7 @@ public class MyCommentsControllerTest extends TestCase {
 	
 	public void testAddNewComment() {
 		CommentModel comment = new CommentModel("original text", null ,"username");
-		controller.addNewComment(comment);
+		controller.addNewComment(comment, null);
 		assertTrue(model.getCommentList().contains(comment));
 	}
 
