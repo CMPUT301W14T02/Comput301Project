@@ -13,6 +13,7 @@ import java.util.ArrayList;
 
 import android.accounts.NetworkErrorException;
 import ca.ualberta.cs.cmput301t02project.model.CommentModel;
+import ca.ualberta.cs.cmput301t02project.model.StorageModel;
 
 import com.searchly.jestdroid.DroidClientConfig;
 import com.searchly.jestdroid.JestClientFactory;
@@ -98,29 +99,29 @@ public class Server {
 		Thread thread = new Thread() {
 			@Override
 			public void run() {
-				
-				String query = "{\"size\": 1000, \"query\": {\"term\": {\"topLevelComment\": \"True\"}}}";
-				Search search = new Search.Builder(query).addIndex("cmput301w14t02").addType("comments").build();
-				JestResult result = null;
-				try {
-					result = client.execute(search);
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+				if(isConnectionAvailable()) {
+					String query = "{\"size\": 1000, \"query\": {\"term\": {\"topLevelComment\": \"True\"}}}";
+					Search search = new Search.Builder(query).addIndex("cmput301w14t02").addType("comments").build();
+					JestResult result = null;
+					try {
+						result = client.execute(search);
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					commentList.addAll((ArrayList<CommentModel>) result.getSourceAsObjectList(CommentModel.class));
 				}
-				commentList.addAll((ArrayList<CommentModel>) result.getSourceAsObjectList(CommentModel.class));
+				else {
+					StorageModel storage = new StorageModel();
+					//commentList = storage.retrieveCachedComments(context, FILENAME)
 				}
-		};
-		if(isConnectionAvailable()) {
-			thread.start();
-			try {
-				thread.join();
-			} catch (InterruptedException e) {
-				e.printStackTrace();
 			}
-		}
-		else {
-			
+		};
+		thread.start();
+		try {
+			thread.join();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
 		}
 		
 		return commentList;
