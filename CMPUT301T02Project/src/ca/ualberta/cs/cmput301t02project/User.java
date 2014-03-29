@@ -100,7 +100,7 @@ public class User {
 	}
 	
 	public void addFavoriteComment(CommentModel comment) {
-		if (!favorites.getCommentList().contains(comment)) {
+		if ((!favorites.getCommentList().contains(comment)) && (!favoritesIds.contains(comment.getId()))) {
 			favorites.add(comment);
 			favoritesIds.add(comment.getId());
 		}
