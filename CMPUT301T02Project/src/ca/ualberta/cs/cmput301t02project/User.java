@@ -19,8 +19,8 @@ public class User {
 	private String id;
 	private ArrayList<String> myCommentsIds;
 	private ArrayList<String> favoritesIds;
-	private CommentListModel myComments;
-	private CommentListModel favorites;
+	private transient CommentListModel myComments;
+	private transient CommentListModel favorites;
 	private transient StorageModel store = new StorageModel();
 	private transient String MYCOMMENTSFILE = "MyComments.json";
 
