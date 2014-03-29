@@ -6,14 +6,11 @@ import io.searchbox.core.Get;
 import io.searchbox.core.Index;
 import io.searchbox.core.Search;
 
-import java.io.IOException;
-import java.net.InetAddress;
-import java.net.UnknownHostException;
 import java.util.ArrayList;
 
 import android.accounts.NetworkErrorException;
+import android.util.Log;
 import ca.ualberta.cs.cmput301t02project.model.CommentModel;
-import ca.ualberta.cs.cmput301t02project.model.StorageModel;
 
 import com.searchly.jestdroid.DroidClientConfig;
 import com.searchly.jestdroid.JestClientFactory;
@@ -72,15 +69,14 @@ public class Server {
 			public void run() {
 				for(String Id:idList) {
 					Get get = new Get.Builder("cmput301w14t02", Id).type("comments").build();
-					JestResult result = null;
 					try {
-						result = client.execute(get);
+						JestResult result = client.execute(get);
+						CommentModel comment = result.getSourceAsObject(CommentModel.class);
+						commentList.add(comment);
 					} catch (Exception e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
+						//TODO: If comment with id Id is cached, add it to commentList
 					}
-					CommentModel comment = result.getSourceAsObject(CommentModel.class);
-					commentList.add(comment);
+					
 				}
 			
 			}
@@ -99,25 +95,18 @@ public class Server {
 		Thread thread = new Thread() {
 			@Override
 			public void run() {
-				if(true) {
-					String query = "{\"size\": 1000, \"query\": {\"term\": {\"topLevelComment\": \"True\"}}}";
-					Search search = new Search.Builder(query).addIndex("cmput301w14t02").addType("comments").build();
-					JestResult result = null;
-					try {
-						result = client.execute(search);
-					} catch (Exception e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
+				String query = "{\"size\": 1000, \"query\": {\"term\": {\"topLevelComment\": \"True\"}}}";
+				Search search = new Search.Builder(query).addIndex("cmput301w14t02").addType("comments").build();
+				try {
+					JestResult result = client.execute(search);
 					commentList.addAll((ArrayList<CommentModel>) result.getSourceAsObjectList(CommentModel.class));
-				}
-				else {
-					StorageModel storage = new StorageModel();
-					//commentList = storage.retrieveCachedComments(context, FILENAME)
+				} catch (Exception e) {
+					//TODO: Add cached topLevelComments to commentList
 				}
 			}
 		};
 		thread.start();
+
 		try {
 			thread.join();
 		} catch (InterruptedException e) {
@@ -125,17 +114,6 @@ public class Server {
 		}
 		
 		return commentList;
-	}
-	
-	private static boolean isConnectionAvailable() {
-		try {
-			return InetAddress.getByName(serverUri).isReachable(300);
-		} catch (UnknownHostException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return false;
 	}
 	
 	public void postUser(final User user) {
