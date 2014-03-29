@@ -52,7 +52,7 @@ public class BrowseMyCommentsActivity extends BrowseCommentsActivityAbstraction 
 	@Override
 	public void onResume() {
 		super.onResume();
-		
+		initializeAdapter();
 		adapter.notifyDataSetChanged();
 	}
 	
@@ -68,7 +68,7 @@ public class BrowseMyCommentsActivity extends BrowseCommentsActivityAbstraction 
 	public CommentListAdapterAbstraction initializeAdapter(){
 		
 		// Retrieve myComments from cache -TH
-		myCommentsList.getMyComments(getApplicationContext());
+		myCommentsList = ProjectApplication.getInstance().getUser().getMyComments(getApplicationContext());
 
 		// Add comments to adapter
 		adapter = new MyCommentsAdapter(this, R.layout.list_item, myCommentsList.getCommentList());

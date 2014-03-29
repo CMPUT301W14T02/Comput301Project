@@ -101,17 +101,6 @@ public class CommentListModel {
 		}
 	}
 	
-	public void add(Context context, String FILENAME) {
-		store.cacheComment(context, FILENAME);
-	}
-	
-	public void getMyComments(Context context){
-		String FILENAME = "MyComments.json";
-		ArrayList<CommentModel> myCommentsArray = new ArrayList<CommentModel>();
-		myCommentsArray = store.retrieveCachedComments(context, FILENAME);
-		this.setCommentList(myCommentsArray);
-	}
-	
 	/**
 	 * Sets the adapter for the CommentListModel.
 	 * <p>

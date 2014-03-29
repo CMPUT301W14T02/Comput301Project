@@ -2,8 +2,11 @@ package ca.ualberta.cs.cmput301t02project;
 
 import java.util.ArrayList;
 
+import android.content.Context;
+
 import ca.ualberta.cs.cmput301t02project.model.CommentListModel;
 import ca.ualberta.cs.cmput301t02project.model.CommentModel;
+import ca.ualberta.cs.cmput301t02project.model.StorageModel;
 
 /**
  * The User class stores information about a user. 
@@ -17,6 +20,8 @@ public class User {
 	private ArrayList<String> favoritesIds;
 	private CommentListModel myComments;
 	private CommentListModel favorites;
+	private transient StorageModel store = new StorageModel();
+	private transient String MYCOMMENTSFILE = "MyComments.json";
 
 	/**
 	 * Creates a new User.
@@ -94,9 +99,18 @@ public class User {
 		return this.myComments;
 	}
 	
-	public void addMyComment(CommentModel comment) {
+	public CommentListModel getMyComments(Context context){
+		ArrayList<CommentModel> myCommentsArray = new ArrayList<CommentModel>();
+		myCommentsArray = store.retrieveCachedComments(context, MYCOMMENTSFILE);
+		myComments.setCommentList(myCommentsArray);
+		return myComments;
+	}
+	
+	public void addMyComment(CommentModel comment, Context context) {
 		myComments.add(comment);
 		myCommentsIds.add(comment.getId());
+		store.cacheComment(context, MYCOMMENTSFILE);
+
 	}
 	
 	public void addFavoriteComment(CommentModel comment) {

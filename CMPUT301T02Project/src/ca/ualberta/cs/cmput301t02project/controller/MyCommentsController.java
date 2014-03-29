@@ -13,7 +13,6 @@ import ca.ualberta.cs.cmput301t02project.model.StorageModel;
  */
 public class MyCommentsController extends CommentListControllerAbstraction {
 	
-	String FILENAME = "MyComments.json";
 	StorageModel store = new StorageModel();
 	
 	public MyCommentsController(CommentListModel model) {
@@ -31,8 +30,8 @@ public class MyCommentsController extends CommentListControllerAbstraction {
 	 */
 	public void addNewComment(CommentModel comment, Context context) {
 		User user = ProjectApplication.getInstance().getUser();
-		user.addMyComment(comment);
-		model.add(context, FILENAME);
+		user.addMyComment(comment, context);
+		//model.add(context, FILENAME);
 		//TODO Can't add it normally, because it goes to the server
 		//temporary:
 		//model.getCommentList().add(comment);
