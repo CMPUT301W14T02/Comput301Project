@@ -294,4 +294,8 @@ public class CommentModel {
 		return replies;
 	}
 	
+	public void incrementRating() {
+		rating++;
+	}
+	
 }

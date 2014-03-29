@@ -11,6 +11,7 @@ import android.widget.TextView;
 import ca.ualberta.cs.cmput301t02project.ProjectApplication;
 import ca.ualberta.cs.cmput301t02project.R;
 import ca.ualberta.cs.cmput301t02project.User;
+import ca.ualberta.cs.cmput301t02project.controller.CommentController;
 import ca.ualberta.cs.cmput301t02project.model.CommentListModel;
 import ca.ualberta.cs.cmput301t02project.model.CommentModel;
 import ca.ualberta.cs.cmput301t02project.view.CommentListAdapter;
@@ -28,6 +29,7 @@ public class BrowseReplyCommentsActivity extends BrowseCommentsActivityAbstracti
 	private TextView selectedComment;
 	private CommentListAdapter adapter;
 	private CommentListModel replyCommentList;
+	private CommentController commentController;
 	private CommentModel currentComment;
 
 	@Override
@@ -42,6 +44,7 @@ public class BrowseReplyCommentsActivity extends BrowseCommentsActivityAbstracti
 		
 		currentComment = ProjectApplication.getInstance().getCurrentComment();
 		
+		commentController = new CommentController(currentComment);
 		// Create the sortBy menu and set up the adapter, inherited from BrowseCommentsActivity -SB
 		setupPage();
 		
@@ -60,6 +63,8 @@ public class BrowseReplyCommentsActivity extends BrowseCommentsActivityAbstracti
 			public void onClick(View v) {
 				User user = ProjectApplication.getInstance().getUser();
 				user.addFavoriteComment(currentComment);
+				commentController.incrementRating();
+				
 			}
 		});
 
