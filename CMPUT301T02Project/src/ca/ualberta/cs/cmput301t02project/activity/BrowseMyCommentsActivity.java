@@ -67,7 +67,7 @@ public class BrowseMyCommentsActivity extends BrowseCommentsActivityAbstraction 
 	@Override
 	public CommentListAdapterAbstraction initializeAdapter(){
 		
-		// Retrieve myComments from cache -TH
+		// Retrieve myComments from phone storage -TH
 		myCommentsList = ProjectApplication.getInstance().getUser().getMyComments(getApplicationContext());
 
 		// Add comments to adapter

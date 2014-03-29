@@ -143,6 +143,23 @@ public class User {
 	}
 	
 	/**
+	 * Returns list of comments from phone storage
+	 * <p>
+	 * Retrieves comments favorited by current user from phone storage 
+	 * by calling retrieveFavorites method in StorageModel class
+	 * BrowseFavoritesActivity
+	 * <p>
+	 * @param context - context of the application
+	 * @return CommentListModel containing comments favorited by user
+	 */
+	public CommentListModel getFavorites(Context context){
+		ArrayList<CommentModel> favoritesArray = new ArrayList<CommentModel>();
+		favoritesArray = store.retrieveFavorites(context);
+		favorites.setCommentList(favoritesArray);
+		return favorites;
+	}
+	
+	/**
 	 * Sets the list of comments favorited by a User. 
 	 * <p>
 	 * The user's favorite comments (CommentModels) are stored in a CommentListModel.

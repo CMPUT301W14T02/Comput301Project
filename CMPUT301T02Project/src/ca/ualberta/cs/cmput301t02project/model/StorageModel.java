@@ -83,7 +83,7 @@ public class StorageModel {
 	public void storeFavorite(Context context) {
 		try {
 			FileOutputStream fos = context.openFileOutput(FAVORITESFILE, 0);
-			fos.write((gson.toJson(ProjectApplication.getInstance().getUser().getMyComments().getCommentList()) + "\n").getBytes());
+			fos.write((gson.toJson(ProjectApplication.getInstance().getUser().getFavorites().getCommentList()) + "\n").getBytes());
 			fos.close();
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -92,6 +92,30 @@ public class StorageModel {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	/**
+	 * Gets favorites stored locally.
+	 * <p>
+	 * Gets comments favorited by user from user's local device.
+	 * User
+	 * <p>
+	 * @param context - context of the application
+	 * @return arraylist of the comments that were stored locally
+	 */
+	public ArrayList<CommentModel> retrieveFavorites(Context context) {
+		ArrayList<CommentModel> favoritesArray = new ArrayList<CommentModel>();
+		try {
+			System.out.println("Open file");
+			FileInputStream fis = context.openFileInput(FAVORITESFILE);
+			BufferedReader in = new BufferedReader(new InputStreamReader(fis));
+			
+			Type type = new TypeToken<ArrayList<CommentModel>>(){}.getType();
+			favoritesArray = gson.fromJson(in, type);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		return favoritesArray;
 	}
 	
 	
