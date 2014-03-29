@@ -99,7 +99,7 @@ public class Server {
 		Thread thread = new Thread() {
 			@Override
 			public void run() {
-				if(isConnectionAvailable()) {
+				if(true) {
 					String query = "{\"size\": 1000, \"query\": {\"term\": {\"topLevelComment\": \"True\"}}}";
 					Search search = new Search.Builder(query).addIndex("cmput301w14t02").addType("comments").build();
 					JestResult result = null;
@@ -129,7 +129,7 @@ public class Server {
 	
 	private static boolean isConnectionAvailable() {
 		try {
-			return InetAddress.getByName(serverUri).isReachable(3);
+			return InetAddress.getByName(serverUri).isReachable(300);
 		} catch (UnknownHostException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
