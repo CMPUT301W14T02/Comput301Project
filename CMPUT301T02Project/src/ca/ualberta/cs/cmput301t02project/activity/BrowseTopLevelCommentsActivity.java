@@ -18,6 +18,7 @@ import ca.ualberta.cs.cmput301t02project.view.CommentListAdapterAbstraction;
  * Displays comments top level comments (aka. comments with no parents, comments that are not replies to anything). 
  * A list of all top level comments is stored in ProjectApplication.getInstance().
  */
+
 public class BrowseTopLevelCommentsActivity extends BrowseCommentsActivityAbstraction {
 	
 	// TODO: Refactor code to use new classes
@@ -25,7 +26,6 @@ public class BrowseTopLevelCommentsActivity extends BrowseCommentsActivityAbstra
 	private CommentListModel topLevelCommentList;
 	private ListView topLevelCommentListView;
 	//private CommentListAdapter adapter;
-
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 

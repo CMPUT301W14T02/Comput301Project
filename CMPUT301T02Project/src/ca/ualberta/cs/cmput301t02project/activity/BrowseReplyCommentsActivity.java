@@ -27,6 +27,7 @@ public class BrowseReplyCommentsActivity extends BrowseCommentsActivityAbstracti
 	private TextView selectedComment;
 	private CommentListAdapter adapter;
 	private CommentListModel replyCommentList;
+	private CommentModel currentComment;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +38,8 @@ public class BrowseReplyCommentsActivity extends BrowseCommentsActivityAbstracti
 
 		// Display selected comment
 		selectedComment.setText(ProjectApplication.getInstance().getCurrentComment().getText());
+		
+		currentComment = ProjectApplication.getInstance().getCurrentComment();
 		
 		// Create the sortBy menu and set up the adapter, inherited from BrowseCommentsActivity -SB
 		setupPage();
@@ -58,8 +61,8 @@ public class BrowseReplyCommentsActivity extends BrowseCommentsActivityAbstracti
 				CommentModel nestedComment = (CommentModel) adapter.getItem(position);
 				ProjectApplication.getInstance().setCurrentComment(nestedComment);
 				
-				CommentListModel nestedCommentList = nestedComment.getReplies();
-				ProjectApplication.getInstance().setCurrentCommentList(nestedCommentList);
+				//CommentListModel nestedCommentList = nestedComment.getReplies();
+				//ProjectApplication.getInstance().setCurrentCommentList(nestedCommentList);
 
 				Intent goToReplyListActivity = new Intent(getApplicationContext(), BrowseReplyCommentsActivity.class);
 				startActivity(goToReplyListActivity);
@@ -70,6 +73,7 @@ public class BrowseReplyCommentsActivity extends BrowseCommentsActivityAbstracti
 	@Override
 	public void onResume() {
 		super.onResume();
+		ProjectApplication.getInstance().setCurrentComment(currentComment);
 		initializeAdapter();
 		adapter.notifyDataSetChanged();
 	}

@@ -9,7 +9,6 @@ import io.searchbox.core.Search;
 import java.util.ArrayList;
 
 import android.accounts.NetworkErrorException;
-import android.util.Log;
 import ca.ualberta.cs.cmput301t02project.model.CommentModel;
 
 import com.searchly.jestdroid.DroidClientConfig;
@@ -40,6 +39,9 @@ public class Server {
 					JestResult result = client.execute(index);
 					String id = result.getJsonObject().get("_id").getAsString();
 					comment.setId(id);
+					
+					index = new Index.Builder(comment).index("cmput301w14t02").type("comments").id(comment.getId()).build();
+					result = client.execute(index);
 					if(!result.isSucceeded()) {
 						throw new NetworkErrorException();
 					}
