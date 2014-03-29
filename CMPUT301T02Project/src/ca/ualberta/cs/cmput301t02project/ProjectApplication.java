@@ -78,6 +78,7 @@ public class ProjectApplication {
 	
 	// This method is only here for now until the replies to comments are
 	// pulled directly from the server, then it can be deleted - TH
+	
 	public CommentListModel getCommentList() {
 		CommentListModel commentList = new CommentListModel();
 		return commentList;
@@ -113,9 +114,8 @@ public class ProjectApplication {
 	public CommentListModel getCurrentCommentList() {
 
 		if (currentCommentList == null) {
-
 			// Creating before browsing comments.
-			currentCommentList = this.getCommentList();
+			currentCommentList = new CommentListModel();
 		}
 		return currentCommentList;
 	}
