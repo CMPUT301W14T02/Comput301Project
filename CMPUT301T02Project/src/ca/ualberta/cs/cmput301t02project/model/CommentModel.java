@@ -7,7 +7,6 @@ import java.util.Date;
 
 import android.graphics.Bitmap;
 import android.location.Location;
-import android.util.Log;
 import ca.ualberta.cs.cmput301t02project.Server;
 
 /**
