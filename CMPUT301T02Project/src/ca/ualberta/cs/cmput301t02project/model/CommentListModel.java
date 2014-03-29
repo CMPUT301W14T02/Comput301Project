@@ -16,12 +16,12 @@ import ca.ualberta.cs.cmput301t02project.view.CommentListAdapterAbstraction;
  */
 public class CommentListModel {
 	
-	private transient StorageModel store = new StorageModel();
-	private transient CommentListAdapterAbstraction adapter = null;
+	private StorageModel store = new StorageModel();
+	private CommentListAdapterAbstraction adapter = null;
 	private ArrayList<CommentModel> commentList;
-	public transient CommentModel parent;
+	private CommentModel parent;
 	//private CommentListAdapter adapter;
-	private transient Server server = new Server();
+	private Server server = new Server();
 
 	public CommentListModel() {
 		commentList = new ArrayList<CommentModel>();
