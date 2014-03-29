@@ -64,6 +64,7 @@ public class BrowseReplyCommentsActivity extends BrowseCommentsActivityAbstracti
 				User user = ProjectApplication.getInstance().getUser();
 				user.addFavoriteComment(currentComment, getApplicationContext());
 				commentController.incrementRating();
+				ProjectApplication.getInstance().pushUser();
 				
 			}
 		});

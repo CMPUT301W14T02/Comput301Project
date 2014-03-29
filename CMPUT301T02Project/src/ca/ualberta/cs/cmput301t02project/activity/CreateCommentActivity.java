@@ -79,6 +79,7 @@ public class CreateCommentActivity extends Activity {
 						null, ProjectApplication.getInstance().getName().toString(), customLocation);
 				
 				myCommentsListController.addNewComment(comment, getApplicationContext());
+				ProjectApplication.getInstance().pushUser();
 				finish();
 			}
 		});
