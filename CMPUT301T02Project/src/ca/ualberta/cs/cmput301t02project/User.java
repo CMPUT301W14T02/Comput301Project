@@ -105,6 +105,7 @@ public class User {
 	 * <p>
 	 * Retrieves comments created by current user from phone storage 
 	 * by calling retrieveMyComments method in StorageModel class
+	 * BrowseMyCommentsActivity
 	 * <p>
 	 * @param context - context of the application
 	 * @return CommentListModel containing comments created by user
@@ -121,22 +122,43 @@ public class User {
 	 * <p>
 	 * Stores comment created by user to phone by calling 
 	 * storeMyComment method in StorageModel class
+	 * CreateCommentActivity
 	 * <p>
 	 * @param comment - comment to be stored
 	 * @param context - context of the application
 	 */
 	public void addMyComment(CommentModel comment, Context context) {
+		getMyComments(context);
 		myComments.add(comment);
 		myCommentsIds.add(comment.getId());
 		store.storeMyComment(context);
 
 	}
 	
-	public void addFavoriteComment(CommentModel comment) {
+	public void addFavoriteComment(CommentModel comment, Context context) {
+		getFavorites(context);
 		if (!favoritesIds.contains(comment.getId())) {
 			favorites.add(comment);
 			favoritesIds.add(comment.getId());
+			store.storeFavorite(comment, context);
 		}
+	}
+	
+	/**
+	 * Returns list of comments from phone storage
+	 * <p>
+	 * Retrieves comments favorited by current user from phone storage 
+	 * by calling retrieveFavorites method in StorageModel class
+	 * BrowseFavoritesActivity
+	 * <p>
+	 * @param context - context of the application
+	 * @return CommentListModel containing comments favorited by user
+	 */
+	public CommentListModel getFavorites(Context context){
+		ArrayList<CommentModel> favoritesArray = new ArrayList<CommentModel>();
+		favoritesArray = store.retrieveFavorites(context);
+		favorites.setCommentList(favoritesArray);
+		return favorites;
 	}
 	
 	/**

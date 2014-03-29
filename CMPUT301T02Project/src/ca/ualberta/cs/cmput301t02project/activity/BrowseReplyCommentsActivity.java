@@ -62,7 +62,7 @@ public class BrowseReplyCommentsActivity extends BrowseCommentsActivityAbstracti
 			@Override
 			public void onClick(View v) {
 				User user = ProjectApplication.getInstance().getUser();
-				user.addFavoriteComment(currentComment);
+				user.addFavoriteComment(currentComment, getApplicationContext());
 				commentController.incrementRating();
 				ProjectApplication.getInstance().pushUser();
 				
@@ -76,9 +76,6 @@ public class BrowseReplyCommentsActivity extends BrowseCommentsActivityAbstracti
 				// Refactor into MVC?
 				CommentModel nestedComment = (CommentModel) adapter.getItem(position);
 				ProjectApplication.getInstance().setCurrentComment(nestedComment);
-				
-				//CommentListModel nestedCommentList = nestedComment.getReplies();
-				//ProjectApplication.getInstance().setCurrentCommentList(nestedCommentList);
 
 				Intent goToReplyListActivity = new Intent(getApplicationContext(), BrowseReplyCommentsActivity.class);
 				startActivity(goToReplyListActivity);

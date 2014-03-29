@@ -243,21 +243,7 @@ public class CommentModel {
 	public void setParent(CommentModel parent) {
 		this.parent = parent;
 	}
-	
-	
-	/**
-	 * Return a comment converted to a Json string
-	 * @return String
-	 */
-	public String toJSON() {
-		Gson gson = new Gson();
-		return gson.toJson(this);
-	}
-	
-	public static CommentModel fromJSON(String json) {
-		Gson gson = new Gson();
-		return gson.fromJson(json, CommentModel.class);
-	}
+
 	
 	/**
 	 * Enables comparison for equality between Comments.

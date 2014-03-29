@@ -22,15 +22,17 @@ import com.google.gson.reflect.TypeToken;
 public class StorageModel {
 
 	private static Gson gson = new Gson();
-	private transient String MYCOMMENTSFILE = "MyComments.json"; 
+	private transient String MYCOMMENTSFILE = "MyComments.json";
+	private transient String FAVORITESFILE = "Favorites.json"; 
+	
 	
 	/**
-	 * Caches a comment locally.
+	 * Stores comment created by user locally.
 	 * <p>
-	 * Caches a specified CommentModel on the user's local device. 
-	 * Used when a comment is read or favorited in
-	 * BrowseTopLevelCommentsActivity and BrowseReplyCommentsActivity.
-	 * @param comment	CommentModel to cache
+	 * Stores a CommentModel created by user on the user's local device. 
+	 * User
+	 * <p>
+	 * @param context - context of the application
 	 */
 	public void storeMyComment(Context context) {
 		try {
@@ -46,6 +48,16 @@ public class StorageModel {
 		}
 	}
 	
+	/**
+	 * Gets comments stored locally.
+	 * <p>
+	 * Gets comments created by user from user's local device.
+	 * User
+	 * <p>
+	 * @param context - context of the application
+	 * @return arraylist of the comments that were stored locally
+	 * User
+	 */
 	public ArrayList<CommentModel> retrieveMyComments(Context context) {
 		ArrayList<CommentModel> myCommentsArray = new ArrayList<CommentModel>();
 		try {
@@ -60,6 +72,56 @@ public class StorageModel {
 		}
 		return myCommentsArray;
 	}
+	
+	/**
+	 * Stores comment favorited by user locally.
+	 * <p>
+	 * Stores a CommentModel favorited by user on the user's local device. 
+	 * User
+	 * <p>
+	 * @param context - context of the application
+	 */
+	public void storeFavorite(CommentModel favoritedComment, Context context) {
+		//Pull favorited comments replies
+		CommentListModel repliesToFav = new CommentListModel();
+		favoritedComment.pullReplies();
+		try {
+			FileOutputStream fos = context.openFileOutput(FAVORITESFILE, 0);
+			fos.write((gson.toJson(ProjectApplication.getInstance().getUser().getFavorites().getCommentList()) + "\n").getBytes());
+			fos.close();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * Gets favorites stored locally.
+	 * <p>
+	 * Gets comments favorited by user from user's local device.
+	 * User
+	 * <p>
+	 * @param context - context of the application
+	 * @return arraylist of the comments that were stored locally
+	 */
+	public ArrayList<CommentModel> retrieveFavorites(Context context) {
+		ArrayList<CommentModel> favoritesArray = new ArrayList<CommentModel>();
+		try {
+			System.out.println("Open file");
+			FileInputStream fis = context.openFileInput(FAVORITESFILE);
+			BufferedReader in = new BufferedReader(new InputStreamReader(fis));
+			
+			Type type = new TypeToken<ArrayList<CommentModel>>(){}.getType();
+			favoritesArray = gson.fromJson(in, type);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		return favoritesArray;
+	}
+	
 	
 	/**
 	 * Not fully implemented - added for testing for this release only. 
