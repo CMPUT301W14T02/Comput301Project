@@ -70,6 +70,7 @@ public final class R {
     }
     public static final class string {
         public static final int action_settings=0x7f050001;
+        public static final int anonymous_button=0x7f05001a;
         public static final int app_name=0x7f050000;
         public static final int browse=0x7f050005;
         public static final int create=0x7f050004;

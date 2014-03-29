@@ -174,6 +174,9 @@ public class Server {
 			e.printStackTrace();
 		}
 		
+		if (user == null) {
+			user = new User(username);
+		}
 		return user;
 	}
 }
