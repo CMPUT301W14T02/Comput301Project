@@ -68,7 +68,7 @@ public class BrowseMyCommentsActivity extends BrowseCommentsActivityAbstraction 
 	public CommentListAdapterAbstraction initializeAdapter(){
 		
 		// Retrieve myComments from cache -TH
-		myCommentsList = myCommentsList.getMyComments(getApplicationContext());
+		myCommentsList.getMyComments(getApplicationContext());
 
 		// Add comments to adapter
 		adapter = new MyCommentsAdapter(this, R.layout.list_item, myCommentsList.getCommentList());

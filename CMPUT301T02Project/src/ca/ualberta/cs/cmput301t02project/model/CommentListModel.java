@@ -105,30 +105,11 @@ public class CommentListModel {
 		store.cacheComment(comment, context, FILENAME);
 	}
 	
-	public CommentListModel getMyComments(Context context){
-		System.out.println("In getMyComments method");
+	public void getMyComments(Context context){
 		String FILENAME = "MyComments.json";
-		CommentListModel myComments = new CommentListModel();
 		ArrayList<CommentModel> myCommentsArray = new ArrayList<CommentModel>();
-		try {
-			System.out.println("Open file");
-			FileInputStream fis = context.openFileInput(FILENAME);
-			BufferedReader in = new BufferedReader(new InputStreamReader(fis));
-			String line = in.readLine();
-			while (line != null) {
-				myCommentsArray.add(CommentModel.fromJSON(line));
-				line = in.readLine();
-			}
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		myComments.setCommentList(myCommentsArray);
-		return myComments;
-	
+		myCommentsArray = store.retrieveCachedComments(context, FILENAME);
+		this.setCommentList(myCommentsArray);
 	}
 	
 	/**
