@@ -20,7 +20,7 @@ import ca.ualberta.cs.cmput301t02project.view.MyCommentsAdapter;
  */
 public class BrowseMyCommentsActivity extends BrowseCommentsActivityAbstraction {
 
-	private CommentListModel myCommentsList;
+	private CommentListModel myCommentsList = new CommentListModel();
 	private ListView myCommentListView;
 	private MyCommentsAdapter adapter;
 
@@ -67,8 +67,7 @@ public class BrowseMyCommentsActivity extends BrowseCommentsActivityAbstraction 
 	@Override
 	public CommentListAdapterAbstraction initializeAdapter(){
 		
-		// Retrieve the current comments list -SB
-		System.out.println("Call method");
+		// Retrieve myComments from cache -TH
 		myCommentsList = myCommentsList.getMyComments(getApplicationContext());
 
 		// Add comments to adapter
