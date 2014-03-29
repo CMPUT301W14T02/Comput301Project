@@ -75,6 +75,7 @@ public class BrowseReplyCommentsActivity extends BrowseCommentsActivityAbstracti
 		super.onResume();
 		ProjectApplication.getInstance().setCurrentComment(currentComment);
 		initializeAdapter();
+		adapter.sortList();
 		adapter.notifyDataSetChanged();
 	}
 	
