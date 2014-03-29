@@ -16,6 +16,7 @@ import ca.ualberta.cs.cmput301t02project.model.StorageModel;
 public class User {
 
 	private String username;
+	private String id;
 	private ArrayList<String> myCommentsIds;
 	private ArrayList<String> favoritesIds;
 	private CommentListModel myComments;
@@ -114,7 +115,7 @@ public class User {
 	}
 	
 	public void addFavoriteComment(CommentModel comment) {
-		if ((!favorites.getCommentList().contains(comment)) && (!favoritesIds.contains(comment.getId()))) {
+		if (!favoritesIds.contains(comment.getId())) {
 			favorites.add(comment);
 			favoritesIds.add(comment.getId());
 		}
@@ -155,5 +156,13 @@ public class User {
 	
 	public ArrayList<String> getFavoritesCommentIds(String list) {
 		return favoritesIds;
+	}
+	
+	public void setId(String id) {
+		this.id = id;
+	}
+	
+	public String getId() {
+		return id;
 	}
 }
