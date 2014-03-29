@@ -7,12 +7,13 @@ import io.searchbox.core.Index;
 import io.searchbox.core.Search;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import android.accounts.NetworkErrorException;
+import ca.ualberta.cs.cmput301t02project.model.Cache;
 import ca.ualberta.cs.cmput301t02project.model.CommentModel;
 
-import com.google.common.cache.Cache;
-import com.google.common.cache.CacheBuilder;
 import com.searchly.jestdroid.DroidClientConfig;
 import com.searchly.jestdroid.JestClientFactory;
 
@@ -65,6 +66,7 @@ public class Server {
 	}
 	
 	public ArrayList<CommentModel> pull(final ArrayList<String> idList) {
+		final Cache cache = Cache.getInstance();
 		final ArrayList<CommentModel> commentList = new ArrayList<CommentModel>();
 		Thread thread = new Thread() {
 			@Override
@@ -75,8 +77,12 @@ public class Server {
 						JestResult result = client.execute(get);
 						CommentModel comment = result.getSourceAsObject(CommentModel.class);
 						commentList.add(comment);
+						//cache.put(Id, comment);
 					} catch (Exception e) {
-						
+						CommentModel comment = cache.getIfPresent(Id);
+						if(comment != null) {
+							commentList.add(comment);
+						}
 					}
 					
 				}
@@ -93,6 +99,7 @@ public class Server {
 	}
 	
 	public ArrayList<CommentModel> pullTopLevel() {
+		final Cache cache = Cache.getInstance();
 		final ArrayList<CommentModel> commentList = new ArrayList<CommentModel>();
 		Thread thread = new Thread() {
 			@Override
@@ -102,8 +109,11 @@ public class Server {
 				try {
 					JestResult result = client.execute(search);
 					commentList.addAll((ArrayList<CommentModel>) result.getSourceAsObjectList(CommentModel.class));
+					/*for(CommentModel c : commentList) {
+						cache.put(c.getId(), c);
+					}*/
 				} catch (Exception e) {
-					//TODO: Add cached topLevelComments to commentList
+					commentList.addAll(cache.getAllTopLevelPresent());
 				}
 			}
 		};
