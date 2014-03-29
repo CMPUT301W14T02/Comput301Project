@@ -8,11 +8,9 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.Date;
 
 import android.content.Context;
 import android.location.Location;
-
 import ca.ualberta.cs.cmput301t02project.ProjectApplication;
 
 import com.google.gson.Gson;
@@ -24,7 +22,6 @@ import com.google.gson.reflect.TypeToken;
 public class StorageModel {
 
 	private static Gson gson = new Gson();
-	private ArrayList<CommentModel> cacheList = new ArrayList<CommentModel>();
 	
 	/**
 	 * Caches a comment locally.
@@ -57,16 +54,7 @@ public class StorageModel {
 			
 			Type type = new TypeToken<ArrayList<CommentModel>>(){}.getType();
 			myCommentsArray = gson.fromJson(in, type);
-			//String line = in.readLine();
-			//while (line != null) {
-				//myCommentsArray.add(gson.fromJson(line, CommentModel.class));
-				//line = in.readLine();
-			//}
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return myCommentsArray;
@@ -86,13 +74,5 @@ public class StorageModel {
 
 		CommentModel comment = new CommentModel("comment", currentLocation, "username");
 		return comment;
-	}
-	
-	/**
-	 * Returns a list of the cached comments.
-	 * @return	ArrayList of cached CommentModels
-	 */
-	public ArrayList<CommentModel> getCacheList() {
-		return cacheList;
 	}
 }

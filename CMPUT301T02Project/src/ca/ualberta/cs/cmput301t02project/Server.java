@@ -6,6 +6,9 @@ import io.searchbox.core.Get;
 import io.searchbox.core.Index;
 import io.searchbox.core.Search;
 
+import java.io.IOException;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.util.ArrayList;
 
 import android.accounts.NetworkErrorException;
@@ -15,13 +18,12 @@ import com.searchly.jestdroid.DroidClientConfig;
 import com.searchly.jestdroid.JestClientFactory;
 
 public class Server {
-	private final String serverUri = "http://cmput301.softwareprocess.es:8080/";
+	private static final String serverUri = "http://cmput301.softwareprocess.es:8080/";
 	private JestClient client;
 	
 	public Server() {
 		//TODO Add custom Gson here to clientConfig.Builder
 		DroidClientConfig clientConfig = new DroidClientConfig.Builder(serverUri).multiThreaded(true).build();
-		
 		JestClientFactory jestClientFactory = new JestClientFactory();
 		jestClientFactory.setDroidClientConfig(clientConfig);
 		client = jestClientFactory.getObject();
@@ -96,6 +98,7 @@ public class Server {
 		Thread thread = new Thread() {
 			@Override
 			public void run() {
+				
 				String query = "{\"size\": 1000, \"query\": {\"term\": {\"topLevelComment\": \"True\"}}}";
 				Search search = new Search.Builder(query).addIndex("cmput301w14t02").addType("comments").build();
 				JestResult result = null;
@@ -108,13 +111,30 @@ public class Server {
 				commentList.addAll((ArrayList<CommentModel>) result.getSourceAsObjectList(CommentModel.class));
 				}
 		};
-		thread.start();
+		if(isConnectionAvailable()) {
+			thread.start();
+			try {
+				thread.join();
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+		else {
+			
+		}
+		
+		return commentList;
+	}
+	
+	private static boolean isConnectionAvailable() {
 		try {
-			thread.join();
-		} catch (InterruptedException e) {
+			return InetAddress.getByName(serverUri).isReachable(3);
+		} catch (UnknownHostException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		return commentList;
+		return false;
 	}
 	
 }
