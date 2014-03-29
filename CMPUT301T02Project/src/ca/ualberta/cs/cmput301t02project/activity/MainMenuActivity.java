@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import ca.ualberta.cs.cmput301t02project.ProjectApplication;
 import ca.ualberta.cs.cmput301t02project.R;
+import ca.ualberta.cs.cmput301t02project.model.CommentListModel;
 
 /**
  * Displays menu options. 
@@ -37,7 +38,7 @@ public class MainMenuActivity extends Activity {
 			
 			@Override
 			public void onClick(View v) {
-				ProjectApplication.getInstance().setCurrentCommentList(ProjectApplication.getInstance().getCommentList());
+				ProjectApplication.getInstance().setCurrentCommentList(new CommentListModel());
 				startActivity(new Intent(MainMenuActivity.this, CreateCommentActivity.class));
 			}
 		});
