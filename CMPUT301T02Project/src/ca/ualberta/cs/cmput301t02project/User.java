@@ -100,6 +100,15 @@ public class User {
 		return this.myComments;
 	}
 	
+	/**
+	 * Returns list of comments from phone storage
+	 * <p>
+	 * Retrieves comments created by current user from phone storage 
+	 * by calling retrieveMyComments method in StorageModel class
+	 * <p>
+	 * @param context - context of the application
+	 * @return CommentListModel containing comments created by user
+	 */
 	public CommentListModel getMyComments(Context context){
 		ArrayList<CommentModel> myCommentsArray = new ArrayList<CommentModel>();
 		myCommentsArray = store.retrieveMyComments(context);
@@ -107,6 +116,15 @@ public class User {
 		return myComments;
 	}
 	
+	/**
+	 * Stores comment on phone storage
+	 * <p>
+	 * Stores comment created by user to phone by calling 
+	 * storeMyComment method in StorageModel class
+	 * <p>
+	 * @param comment - comment to be stored
+	 * @param context - context of the application
+	 */
 	public void addMyComment(CommentModel comment, Context context) {
 		myComments.add(comment);
 		myCommentsIds.add(comment.getId());
