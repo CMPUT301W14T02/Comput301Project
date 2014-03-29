@@ -56,6 +56,7 @@ public class StorageModel {
 	 * <p>
 	 * @param context - context of the application
 	 * @return arraylist of the comments that were stored locally
+	 * User
 	 */
 	public ArrayList<CommentModel> retrieveMyComments(Context context) {
 		ArrayList<CommentModel> myCommentsArray = new ArrayList<CommentModel>();
@@ -80,7 +81,10 @@ public class StorageModel {
 	 * <p>
 	 * @param context - context of the application
 	 */
-	public void storeFavorite(Context context) {
+	public void storeFavorite(CommentModel favoritedComment, Context context) {
+		//Pull favorited comments replies
+		CommentListModel repliesToFav = new CommentListModel();
+		favoritedComment.pullReplies();
 		try {
 			FileOutputStream fos = context.openFileOutput(FAVORITESFILE, 0);
 			fos.write((gson.toJson(ProjectApplication.getInstance().getUser().getFavorites().getCommentList()) + "\n").getBytes());

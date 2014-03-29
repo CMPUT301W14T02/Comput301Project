@@ -128,6 +128,7 @@ public class User {
 	 * @param context - context of the application
 	 */
 	public void addMyComment(CommentModel comment, Context context) {
+		getMyComments(context);
 		myComments.add(comment);
 		myCommentsIds.add(comment.getId());
 		store.storeMyComment(context);
@@ -135,10 +136,11 @@ public class User {
 	}
 	
 	public void addFavoriteComment(CommentModel comment, Context context) {
+		getFavorites(context);
 		if (!favoritesIds.contains(comment.getId())) {
 			favorites.add(comment);
 			favoritesIds.add(comment.getId());
-			store.storeFavorite(context);
+			store.storeFavorite(comment, context);
 		}
 	}
 	
