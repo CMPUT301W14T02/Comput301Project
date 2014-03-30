@@ -165,11 +165,18 @@ public class User {
 	 * @return CommentListModel containing comments favorited by user
 	 */
 	public CommentListModel getFavorites(Context context){
-		ArrayList<CommentModel> favoritesArray;;
+		ArrayList<ArrayList<CommentModel>> favoritesArray;;
 		favoritesArray = store.retrieveFavorites(context);
+		// Create new list each time otherwise same comments will continuously
+		// be added to favorites -TH
+		favorites = new CommentListModel();
 		if (favoritesArray == null)
-			 favoritesArray = new ArrayList<CommentModel>();
-		favorites.setCommentList(favoritesArray);
+			 favoritesArray = new ArrayList<ArrayList<CommentModel>>();
+		for (int i=0; i<favoritesArray.size();i++){
+			favorites.add(favoritesArray.get(i).get(0));
+		}
+		
+		//favorites.setCommentList(favoritesArray);
 		return favorites;
 	}
 	

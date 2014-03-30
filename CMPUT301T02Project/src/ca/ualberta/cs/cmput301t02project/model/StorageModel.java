@@ -61,7 +61,6 @@ public class StorageModel {
 	public ArrayList<CommentModel> retrieveMyComments(Context context) {
 		ArrayList<CommentModel> myCommentsArray = new ArrayList<CommentModel>();
 		try {
-			System.out.println("Open file");
 			FileInputStream fis = context.openFileInput(MYCOMMENTSFILE);
 			BufferedReader in = new BufferedReader(new InputStreamReader(fis));
 			
@@ -83,21 +82,21 @@ public class StorageModel {
 	 */
 	public void storeFavorite(CommentModel favoritedComment, Context context) {
 		//Pull previously favorited comments -TH
-		ArrayList<CommentModel> oldFavs = new ArrayList<CommentModel>();
+		ArrayList<ArrayList<CommentModel>> oldFavs = new ArrayList<ArrayList<CommentModel>>();
 		oldFavs = retrieveFavorites(context);
 		
 		//Get replies to favorited comment -TH
-		CommentListModel repliesToFav = favoritedComment.pullReplies();
+		ArrayList<CommentModel> repliesToFav = favoritedComment.pullReplies().getCommentList();
 		if (repliesToFav == null) {
-			repliesToFav = new CommentListModel();
+			repliesToFav = new ArrayList<CommentModel>();
 		}
+		repliesToFav.add(0, favoritedComment);
 		
 		//Initialize master list -TH
-		ArrayList<CommentModel> favoritesAndReplies = new ArrayList<CommentModel>();
+		ArrayList<ArrayList<CommentModel>> favoritesAndReplies = new ArrayList<ArrayList<CommentModel>>();
 		
 		//Add all comments to master list -TH
-		favoritesAndReplies = repliesToFav.getCommentList();
-		favoritesAndReplies.add(0, favoritedComment);
+		favoritesAndReplies.add(repliesToFav);
 		for(int i=0; i<oldFavs.size(); i++){
 			favoritesAndReplies.add(oldFavs.get(i));
 		}
@@ -124,14 +123,13 @@ public class StorageModel {
 	 * @param context - context of the application
 	 * @return arraylist of the comments that were stored locally
 	 */
-	public ArrayList<CommentModel> retrieveFavorites(Context context) {
-		ArrayList<CommentModel> favoritesArray = new ArrayList<CommentModel>();
+	public ArrayList<ArrayList<CommentModel>> retrieveFavorites(Context context) {
+		ArrayList<ArrayList<CommentModel>> favoritesArray = new ArrayList<ArrayList<CommentModel>>();
 		try {
-			System.out.println("Open file");
 			FileInputStream fis = context.openFileInput(FAVORITESFILE);
 			BufferedReader in = new BufferedReader(new InputStreamReader(fis));
 			
-			Type type = new TypeToken<ArrayList<CommentModel>>(){}.getType();
+			Type type = new TypeToken<ArrayList<ArrayList<CommentModel>>>(){}.getType();
 			favoritesArray = gson.fromJson(in, type);
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
