@@ -1,10 +1,15 @@
 package ca.ualberta.cs.cmput301t02project.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.AdapterView.OnItemClickListener;
 import ca.ualberta.cs.cmput301t02project.ProjectApplication;
 import ca.ualberta.cs.cmput301t02project.R;
 import ca.ualberta.cs.cmput301t02project.model.CommentListModel;
+import ca.ualberta.cs.cmput301t02project.model.CommentModel;
 import ca.ualberta.cs.cmput301t02project.view.CommentListAdapterAbstraction;
 import ca.ualberta.cs.cmput301t02project.view.FavoritesAdapter;
 
@@ -28,6 +33,19 @@ public class BrowseFavoritesActivity extends BrowseCommentsActivityAbstraction {
 		favoritesListView = (ListView) findViewById(R.id.commentListView);
 
 		setupPage();
+		
+		// To view the replies of a favorited comment -TH
+		favoritesListView.setOnItemClickListener(new OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> l, View v, int position, long id) {
+				// Refactor into MVC?
+				CommentModel nestedComment = (CommentModel) adapter.getItem(position);
+				ProjectApplication.getInstance().setCurrentComment(nestedComment);
+
+				Intent goToReplyListActivity = new Intent(getApplicationContext(), BrowseReplyCommentsActivity.class);
+				startActivity(goToReplyListActivity);
+			}
+		});
 
 	}
 
@@ -49,7 +67,7 @@ public class BrowseFavoritesActivity extends BrowseCommentsActivityAbstraction {
 	
 	public CommentListAdapterAbstraction initializeAdapter(){
 		
-		// Retrieve myComments from phone storage -TH
+		// Retrieve favorites from phone storage -TH
 		favoritesList = ProjectApplication.getInstance().getUser().getFavorites(getApplicationContext());
 
 		// Add comments to adapter

@@ -155,8 +155,10 @@ public class User {
 	 * @return CommentListModel containing comments favorited by user
 	 */
 	public CommentListModel getFavorites(Context context){
-		ArrayList<CommentModel> favoritesArray = new ArrayList<CommentModel>();
+		ArrayList<CommentModel> favoritesArray;;
 		favoritesArray = store.retrieveFavorites(context);
+		if (favoritesArray == null)
+			 favoritesArray = new ArrayList<CommentModel>();
 		favorites.setCommentList(favoritesArray);
 		return favorites;
 	}
