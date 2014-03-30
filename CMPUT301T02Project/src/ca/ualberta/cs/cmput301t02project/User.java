@@ -154,6 +154,22 @@ public class User {
 		}
 	}
 	
+	public CommentListModel getFavoriteReplies(Context context, int i){
+		CommentListModel replies = new CommentListModel();
+		ArrayList<ArrayList<CommentModel>> favoritesArray;
+		favoritesArray = store.retrieveFavorites(context);
+		if (favoritesArray == null)
+			 favoritesArray = new ArrayList<ArrayList<CommentModel>>();
+		//for (int i=0; i<favoritesArray.size();i++){
+			//if (favoritesArray.get(i).get(0).equals(favComment)){
+				for (int j=1; j<favoritesArray.get(i).size();j++){
+					replies.add(favoritesArray.get(i).get(j));
+				}
+			//}
+		//}
+		return replies;
+	}
+	
 	/**
 	 * Returns list of comments from phone storage
 	 * <p>
@@ -165,7 +181,7 @@ public class User {
 	 * @return CommentListModel containing comments favorited by user
 	 */
 	public CommentListModel getFavorites(Context context){
-		ArrayList<ArrayList<CommentModel>> favoritesArray;;
+		ArrayList<ArrayList<CommentModel>> favoritesArray;
 		favoritesArray = store.retrieveFavorites(context);
 		// Create new list each time otherwise same comments will continuously
 		// be added to favorites -TH
@@ -175,8 +191,6 @@ public class User {
 		for (int i=0; i<favoritesArray.size();i++){
 			favorites.add(favoritesArray.get(i).get(0));
 		}
-		
-		//favorites.setCommentList(favoritesArray);
 		return favorites;
 	}
 	

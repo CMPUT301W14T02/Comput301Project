@@ -40,8 +40,9 @@ public class BrowseFavoritesActivity extends BrowseCommentsActivityAbstraction {
 			public void onItemClick(AdapterView<?> l, View v, int position, long id) {
 				// Refactor into MVC?
 				//CommentModel nestedComment = (CommentModel) adapter.getItem(position);
-				ProjectApplication.getInstance().getUser().getFavorites(getApplicationContext());
-
+				//ProjectApplication.getInstance().getUser().getFavorites(getApplicationContext());
+				CommentListModel favReplies = ProjectApplication.getInstance().getUser().getFavoriteReplies(getApplicationContext(), position);
+				ProjectApplication.getInstance().getUser().setFavoritesToView(favReplies);
 				Intent goToReplyListActivity = new Intent(getApplicationContext(), BrowseFavoritesActivity.class);
 				startActivity(goToReplyListActivity);
 			}
