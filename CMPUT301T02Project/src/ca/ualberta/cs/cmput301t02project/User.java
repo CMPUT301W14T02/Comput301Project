@@ -21,6 +21,7 @@ public class User {
 	private ArrayList<String> favoritesIds;
 	private transient CommentListModel myComments;
 	private transient CommentListModel favorites;
+	private transient CommentListModel favoritesToView;
 	private transient StorageModel store = new StorageModel();
 	
 
@@ -135,8 +136,17 @@ public class User {
 
 	}
 	
+	public CommentListModel getFavoritesToView() {
+		return favoritesToView;
+	}
+
+	public void setFavoritesToView(CommentListModel favoritesToView) {
+		this.favoritesToView = favoritesToView;
+	}
+
 	public void addFavoriteComment(CommentModel comment, Context context) {
 		getFavorites(context);
+		// Need to retrieve favorites list from storage before checking id
 		if (!favoritesIds.contains(comment.getId())) {
 			favorites.add(comment);
 			favoritesIds.add(comment.getId());

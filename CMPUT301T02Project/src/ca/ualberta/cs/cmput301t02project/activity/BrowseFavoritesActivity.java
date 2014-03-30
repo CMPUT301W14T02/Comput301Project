@@ -39,10 +39,10 @@ public class BrowseFavoritesActivity extends BrowseCommentsActivityAbstraction {
 			@Override
 			public void onItemClick(AdapterView<?> l, View v, int position, long id) {
 				// Refactor into MVC?
-				CommentModel nestedComment = (CommentModel) adapter.getItem(position);
-				ProjectApplication.getInstance().setCurrentComment(nestedComment);
+				//CommentModel nestedComment = (CommentModel) adapter.getItem(position);
+				ProjectApplication.getInstance().getUser().getFavorites(getApplicationContext());
 
-				Intent goToReplyListActivity = new Intent(getApplicationContext(), BrowseReplyCommentsActivity.class);
+				Intent goToReplyListActivity = new Intent(getApplicationContext(), BrowseFavoritesActivity.class);
 				startActivity(goToReplyListActivity);
 			}
 		});
@@ -68,7 +68,8 @@ public class BrowseFavoritesActivity extends BrowseCommentsActivityAbstraction {
 	public CommentListAdapterAbstraction initializeAdapter(){
 		
 		// Retrieve favorites from phone storage -TH
-		favoritesList = ProjectApplication.getInstance().getUser().getFavorites(getApplicationContext());
+		//favoritesList = ProjectApplication.getInstance().getUser().getFavorites(getApplicationContext());
+		favoritesList = ProjectApplication.getInstance().getUser().getFavoritesToView();
 
 		// Add comments to adapter
 		adapter = new FavoritesAdapter(this, R.layout.list_item, favoritesList.getCommentList());

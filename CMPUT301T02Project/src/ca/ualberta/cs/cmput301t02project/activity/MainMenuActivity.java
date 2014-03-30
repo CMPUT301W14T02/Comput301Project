@@ -59,6 +59,9 @@ public class MainMenuActivity extends Activity {
 			
 			@Override
 			public void onClick(View v) {
+				CommentListModel favs = new CommentListModel();
+				favs = ProjectApplication.getInstance().getUser().getFavorites(getApplicationContext());
+				ProjectApplication.getInstance().getUser().setFavoritesToView(favs);
 				startActivity(new Intent(MainMenuActivity.this, BrowseFavoritesActivity.class));
 			}
 		});
