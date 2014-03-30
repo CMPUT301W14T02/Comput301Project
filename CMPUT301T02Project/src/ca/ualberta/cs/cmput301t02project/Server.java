@@ -77,16 +77,14 @@ public class Server {
 						JestResult result = client.execute(get);
 						CommentModel comment = result.getSourceAsObject(CommentModel.class);
 						commentList.add(comment);
-						//cache.put(Id, comment);
+						cache.put(Id, comment);
 					} catch (Exception e) {
 						CommentModel comment = cache.getIfPresent(Id);
 						if(comment != null) {
 							commentList.add(comment);
 						}
 					}
-					
 				}
-			
 			}
 		};
 		thread.start();
@@ -104,14 +102,14 @@ public class Server {
 		Thread thread = new Thread() {
 			@Override
 			public void run() {
-				String query = "{\"size\": 1000, \"query\": {\"term\": {\"topLevelComment\": \"True\"}}}";
+				String query = "{\"size\": 1000, \"query\": {\"term\": {\"topLevelComment\": \"true\"}}}";
 				Search search = new Search.Builder(query).addIndex("cmput301w14t02").addType("comments").build();
 				try {
 					JestResult result = client.execute(search);
 					commentList.addAll((ArrayList<CommentModel>) result.getSourceAsObjectList(CommentModel.class));
-					/*for(CommentModel c : commentList) {
+					for(CommentModel c : commentList) {
 						cache.put(c.getId(), c);
-					}*/
+					}
 				} catch (Exception e) {
 					commentList.addAll(cache.getAllTopLevelPresent());
 				}
