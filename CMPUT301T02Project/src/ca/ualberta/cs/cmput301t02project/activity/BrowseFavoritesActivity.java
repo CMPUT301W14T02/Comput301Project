@@ -39,10 +39,11 @@ public class BrowseFavoritesActivity extends BrowseCommentsActivityAbstraction {
 			@Override
 			public void onItemClick(AdapterView<?> l, View v, int position, long id) {
 				// Refactor into MVC?
+				// Set the list of favorites the next activity should display -TH
 				CommentModel nestedComment = (CommentModel) adapter.getItem(position);
-				//ProjectApplication.getInstance().getUser().getFavorites(getApplicationContext());
 				CommentListModel favReplies = ProjectApplication.getInstance().getUser().getFavoriteReplies(getApplicationContext(), nestedComment);
 				ProjectApplication.getInstance().getUser().setFavoritesToView(favReplies);
+				
 				Intent goToReplyListActivity = new Intent(getApplicationContext(), BrowseFavoritesActivity.class);
 				startActivity(goToReplyListActivity);
 			}
@@ -53,6 +54,7 @@ public class BrowseFavoritesActivity extends BrowseCommentsActivityAbstraction {
 	@Override
 	public void onResume() {
 		super.onResume();
+		//Set to correct list on back button -TH
 		ProjectApplication.getInstance().getUser().setFavoritesToView(favoritesList);
 		initializeAdapter();
 		adapter.sortList();
@@ -69,8 +71,7 @@ public class BrowseFavoritesActivity extends BrowseCommentsActivityAbstraction {
 	
 	public CommentListAdapterAbstraction initializeAdapter(){
 		
-		// Retrieve favorites from phone storage -TH
-		//favoritesList = ProjectApplication.getInstance().getUser().getFavorites(getApplicationContext());
+		// Retrieve favorites to view (either favorites or a favorited comments replies -TH
 		favoritesList = ProjectApplication.getInstance().getUser().getFavoritesToView();
 
 		// Add comments to adapter

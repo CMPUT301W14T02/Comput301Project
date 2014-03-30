@@ -136,14 +136,44 @@ public class User {
 
 	}
 	
+	/**
+	 * Returns current favorites list
+	 * <p>
+	 * Returns the list of favorites or a selected favorite's 
+	 * replies to be displayed
+	 * BrowseFavoritesActivity
+	 * <p>
+	 * @return CommentListModel containing comments favorited by user, 
+	 * or their replies
+	 */
 	public CommentListModel getFavoritesToView() {
 		return favoritesToView;
 	}
 
+	/**
+	 * Sets current favorites list
+	 * <p>
+	 * Sets the list of favorites or a selected favorite's 
+	 * replies
+	 * BrowseFavoritesActivity
+	 * @param CommentListModel containing the list favorites the 
+	 * next activity will display
+	 * <p>
+	 */
 	public void setFavoritesToView(CommentListModel favoritesToView) {
 		this.favoritesToView = favoritesToView;
 	}
 
+	/**
+	 * Stores comment on phone storage
+	 * <p>
+	 * Stores comment favorited by user to phone by calling 
+	 * storeFavorite method in StorageModel class
+	 * BrowseRepliesActivity
+	 * <p>
+	 * @param comment - comment to be stored
+	 * @param context - context of the application
+	 */
 	public void addFavoriteComment(CommentModel comment, Context context) {
 		getFavorites(context);
 		// Need to retrieve favorites list from storage before checking id
@@ -154,6 +184,17 @@ public class User {
 		}
 	}
 	
+	/**
+	 * Returns list of comments from phone storage
+	 * <p>
+	 * Retrieves replies of comments favorited by current user from phone storage 
+	 * by calling retrieveFavorites method in StorageModel class
+	 * BrowseFavoritesActivity
+	 * <p>
+	 * @param context - context of the application
+	 * @param CommentModel - favorited comment selected by the user
+	 * @return CommentListModel containing comments favorited by user
+	 */
 	public CommentListModel getFavoriteReplies(Context context, CommentModel favComment){
 		CommentListModel replies = new CommentListModel();
 		ArrayList<ArrayList<CommentModel>> favoritesArray;

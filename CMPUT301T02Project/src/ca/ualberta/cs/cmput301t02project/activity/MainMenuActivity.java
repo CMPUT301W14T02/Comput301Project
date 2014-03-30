@@ -59,6 +59,8 @@ public class MainMenuActivity extends Activity {
 			
 			@Override
 			public void onClick(View v) {
+				// Retrieve favorites from storage and set it as the list to view in the next
+				// activity -TH
 				CommentListModel favs = new CommentListModel();
 				favs = ProjectApplication.getInstance().getUser().getFavorites(getApplicationContext());
 				ProjectApplication.getInstance().getUser().setFavoritesToView(favs);
