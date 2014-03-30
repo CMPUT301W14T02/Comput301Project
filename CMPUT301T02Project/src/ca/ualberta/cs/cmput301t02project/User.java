@@ -154,19 +154,19 @@ public class User {
 		}
 	}
 	
-	public CommentListModel getFavoriteReplies(Context context, int i){
+	public CommentListModel getFavoriteReplies(Context context, CommentModel favComment){
 		CommentListModel replies = new CommentListModel();
 		ArrayList<ArrayList<CommentModel>> favoritesArray;
 		favoritesArray = store.retrieveFavorites(context);
 		if (favoritesArray == null)
 			 favoritesArray = new ArrayList<ArrayList<CommentModel>>();
-		//for (int i=0; i<favoritesArray.size();i++){
-			//if (favoritesArray.get(i).get(0).equals(favComment)){
+		for (int i=0; i<favoritesArray.size();i++){
+			if (favoritesArray.get(i).get(0).getId().matches(favComment.getId())){
 				for (int j=1; j<favoritesArray.get(i).size();j++){
 					replies.add(favoritesArray.get(i).get(j));
 				}
-			//}
-		//}
+			}
+		}
 		return replies;
 	}
 	
