@@ -22,7 +22,7 @@ public class User {
 	private transient CommentListModel myComments;
 	private transient CommentListModel favorites;
 	private transient CommentListModel favoritesToView;
-	private transient StorageModel store = new StorageModel();
+	private transient StorageModel store;
 	
 
 	/**
@@ -44,6 +44,22 @@ public class User {
 		favorites = new CommentListModel();
 		myCommentsIds = new ArrayList<String>();
 		favoritesIds = new ArrayList<String>();
+		store = new StorageModel();
+	}
+	
+	/**
+	 * Creates a new User.
+	 * <p>
+	 * No args constructor
+	 */
+	public User() {
+		super();
+		this.username = null;
+		myComments = new CommentListModel();
+		favorites = new CommentListModel();
+		myCommentsIds = new ArrayList<String>();
+		favoritesIds = new ArrayList<String>();
+		store = new StorageModel();
 	}
 
 	/**
@@ -130,7 +146,9 @@ public class User {
 	 */
 	public void addMyComment(CommentModel comment, Context context) {
 		getMyComments(context);
-		myComments.add(comment);
+		//Added directly to the comment list so that it isn't added to the server.
+		myComments.getCommentList().add(comment);
+		//myComments.add(comment);
 		myCommentsIds.add(comment.getId());
 		store.storeMyComment(context);
 
@@ -278,5 +296,12 @@ public class User {
 	
 	public String getId() {
 		return id;
+	}
+
+	public void set(User source) {
+		this.username = source.username;
+		this.id = source.id;
+		this.myCommentsIds = source.myCommentsIds;
+		this.favoritesIds = source.favoritesIds;
 	}
 }

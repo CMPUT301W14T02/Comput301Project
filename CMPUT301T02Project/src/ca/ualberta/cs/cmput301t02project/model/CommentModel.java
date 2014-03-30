@@ -28,8 +28,7 @@ public class CommentModel {
 	private transient CommentListModel replies; //to be changed to ArrayList<String> childrenIds
 	private ArrayList<String> childrenIds;
 	private String username;
-	private CommentModel parent;
-	private transient Server server = new Server();
+	//private transient Server server;
 
 	
 	
@@ -235,15 +234,6 @@ public class CommentModel {
 	public void setTopLevelComment(boolean topLevelComment) {
 		this.topLevelComment = topLevelComment;
 	}
-
-	public CommentModel getParent() {
-		return parent;
-	}
-
-	public void setParent(CommentModel parent) {
-		this.parent = parent;
-	}
-
 	
 	/**
 	 * Enables comparison for equality between Comments.
@@ -276,6 +266,7 @@ public class CommentModel {
 	public CommentListModel pullReplies() {
 		CommentListModel replies;
 		replies = new CommentListModel(this);
+		Server server = new Server();
 		replies.setCommentList(server.pull(childrenIds));
 		return replies;
 	}

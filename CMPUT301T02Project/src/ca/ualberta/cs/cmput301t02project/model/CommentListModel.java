@@ -1,15 +1,7 @@
 package ca.ualberta.cs.cmput301t02project.model;
 
-import java.io.BufferedReader;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 
-import android.content.Context;
-import android.util.Log;
-import ca.ualberta.cs.cmput301t02project.ProjectApplication;
 import ca.ualberta.cs.cmput301t02project.Server;
 import ca.ualberta.cs.cmput301t02project.view.CommentListAdapterAbstraction;
 
@@ -22,11 +14,10 @@ import ca.ualberta.cs.cmput301t02project.view.CommentListAdapterAbstraction;
  */
 public class CommentListModel {
 	
-	private  StorageModel store = new StorageModel();
+	private StorageModel store = new StorageModel();
 	private CommentListAdapterAbstraction adapter = null;
 	private ArrayList<CommentModel> commentList;
 	private CommentModel parent;
-	//private CommentListAdapter adapter;
 	private Server server = new Server();
 
 	public CommentListModel() {

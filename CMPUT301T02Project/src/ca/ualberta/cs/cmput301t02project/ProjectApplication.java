@@ -19,7 +19,7 @@ public class ProjectApplication {
 	private CommentModel currentComment;
 	private Location currentLocation = null;
 	private Server server = new Server();
-	private User currentUser = new User("Anonymous");
+	private static User currentUser = new User("Anonymous");
 
 	// Singleton code adapted from http://www.javaworld.com/article/2073352/core-java/simply-singleton.html
 	protected ProjectApplication() {

@@ -20,7 +20,6 @@ import com.searchly.jestdroid.JestClientFactory;
 public class Server {
 	private static final String serverUri = "http://cmput301.softwareprocess.es:8080/";
 	private JestClient client;
-	private User user;
 	
 	public Server() {
 		//TODO Add custom Gson here to clientConfig.Builder
@@ -161,6 +160,7 @@ public class Server {
 	}
 	
 	public User pullUser(final String username) {
+		final User user = new User();
 		Thread thread = new Thread() {
 			@Override
 			public void run() {
@@ -173,7 +173,7 @@ public class Server {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				user = result.getSourceAsObject(User.class);
+				user.set((User)result.getSourceAsObject(User.class));
 			}
 		};
 		thread.start();
