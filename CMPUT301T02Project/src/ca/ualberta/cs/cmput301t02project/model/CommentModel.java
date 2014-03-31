@@ -5,7 +5,6 @@ import io.searchbox.annotations.JestId;
 import java.util.ArrayList;
 import java.util.Date;
 
-import android.content.Context;
 import android.graphics.Bitmap;
 import android.location.Location;
 
@@ -236,12 +235,10 @@ public class CommentModel {
 	}
 	
 	public void addChildId(String id) {
+		if(id == null) {
+			throw new IllegalArgumentException("A comment can't have a children whose id is null");
+		}
 		this.childrenIds.add(id);
-	}
-	
-	public ArrayList<CommentModel> pullReplies(Context context) {
-		Server server = new Server(context);
-		return server.pull(childrenIds);
 	}
 	
 	public void incrementRating() {

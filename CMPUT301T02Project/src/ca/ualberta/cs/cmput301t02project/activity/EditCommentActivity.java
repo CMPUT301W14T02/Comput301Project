@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import ca.ualberta.cs.cmput301t02project.R;
+import ca.ualberta.cs.cmput301t02project.controller.CommentController;
 import ca.ualberta.cs.cmput301t02project.controller.MyCommentsController;
 import ca.ualberta.cs.cmput301t02project.model.User;
 
@@ -29,25 +30,22 @@ public class EditCommentActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-			
-		myCommentsListController = new MyCommentsController(User.getUser().getMyComments());
+		String commentId = getIntent().getStringExtra("CommentId");
+		final CommentController commentController = new CommentController(commentId, this);
 			
 		setContentView(R.layout.activity_edit_comment);
 		
 		EditText inputComment = (EditText) findViewById(R.id.edit_text);
-		inputComment.setText(ProjectApplication.getInstance().getCurrentComment().getText());
+		inputComment.setText(commentController.getText());
 
 		Button post = (Button) findViewById(R.id.edit_post);
-		
-		String loc = "No location yet";
-			
-		currentLocation = new Location(loc);
 		
 		post.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				EditText inputComment = (EditText) findViewById(R.id.edit_text);
-				// Refactor into MVC?
+				String newText = inputComment.getText().toString();
+				commentController.edit(newText);
 
 				myCommentsListController.changeText(ProjectApplication.getInstance().getCurrentComment(), 
 						inputComment.getText().toString());
