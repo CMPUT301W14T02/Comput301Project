@@ -1,5 +1,7 @@
 package ca.ualberta.cs.cmput301t02project.activity;
 
+import java.util.ArrayList;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -7,7 +9,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
-import ca.ualberta.cs.cmput301t02project.ProjectApplication;
 import ca.ualberta.cs.cmput301t02project.R;
 import ca.ualberta.cs.cmput301t02project.model.CommentListModel;
 import ca.ualberta.cs.cmput301t02project.model.CommentModel;
@@ -23,7 +24,7 @@ public class BrowseTopLevelCommentsActivity extends BrowseCommentsActivityAbstra
 	
 	// TODO: Refactor code to use new classes
 	
-	private CommentListModel topLevelCommentList;
+	private ArrayList<CommentModel> topLevelCommentList;
 	private ListView topLevelCommentListView;
 	//private CommentListAdapter adapter;
 	@Override
@@ -72,13 +73,12 @@ public class BrowseTopLevelCommentsActivity extends BrowseCommentsActivityAbstra
 		
 		// Call the method in the CommentListModel class that will 
 		// pull comments from the server - TH
-		topLevelCommentList = new CommentListModel();
-		topLevelCommentList = topLevelCommentList.getTopLevelComments(getApplicationContext());
+		topLevelCommentList = new ArrayList<CommentModel>();
+		topLevelCommentList = CommentListModel.getTopLevelComments(getApplicationContext()).getCommentList();
 		
 
 		// Add comments to adapter
-		adapter = new CommentListAdapter(this, R.layout.list_item, topLevelCommentList.getCommentList());
-		topLevelCommentList.setAdapter(adapter);
+		adapter = new CommentListAdapter(this, R.layout.list_item, topLevelCommentList);
 		adapter.setModel(topLevelCommentList);
 
 		// Display comments in adapter

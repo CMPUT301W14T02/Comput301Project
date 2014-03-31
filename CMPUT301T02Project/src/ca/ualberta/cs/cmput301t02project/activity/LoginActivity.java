@@ -7,8 +7,8 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
-import ca.ualberta.cs.cmput301t02project.ProjectApplication;
 import ca.ualberta.cs.cmput301t02project.R;
+import ca.ualberta.cs.cmput301t02project.model.User;
 
 /**
  * Allows a user to log in to the app with a selected username.
@@ -63,7 +63,7 @@ public class LoginActivity extends Activity {
 			message.setText("Login Page");
 
 			// If user doesn't exist, create a user with that name -SB
-			ProjectApplication.getInstance().setUser(username);
+			User.login(username, getApplicationContext());
 
 			// Go to the main menu once user is set -SB
 			startActivity(new Intent(LoginActivity.this, MainMenuActivity.class));

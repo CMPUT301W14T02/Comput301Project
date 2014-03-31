@@ -2,14 +2,14 @@ package ca.ualberta.cs.cmput301t02project.activity;
 
 import java.util.ArrayList;
 
-import ca.ualberta.cs.cmput301t02project.R;
-import ca.ualberta.cs.cmput301t02project.view.CommentListAdapterAbstraction;
 import android.app.Activity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import ca.ualberta.cs.cmput301t02project.R;
+import ca.ualberta.cs.cmput301t02project.view.CommentListAdapterAbstraction;
 
 /**
  * Contains common code inherited by activities that browse and sort comments, including 

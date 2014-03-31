@@ -1,6 +1,9 @@
 package ca.ualberta.cs.cmput301t02project.model;
 
 import java.util.AbstractMap;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
@@ -83,6 +86,25 @@ public abstract class StoredCommentListAbstraction extends AbstractMap<String, C
 		CommentModel previousValue = gson.fromJson(previousValueJson, CommentModel.class);
 		cache.edit().putString(id, v).commit();
 		return previousValue;
-	}	
+	}
+	
+	public void add(CommentModel comment) {
+		if(comment.getId() == null) {
+			throw  new IllegalArgumentException("Can't store a comment with null id");
+		}
+		this.put(comment.getId(), comment);
+	}
+	
+	public ArrayList<CommentModel> getCommentList() {
+		ArrayList<CommentModel> list = new ArrayList<CommentModel>();
+		list.addAll(this.values());
+		return list;
+	}
+	
+	public ArrayList<String> getIdList() {
+		ArrayList<String> list = new ArrayList<String>();
+		list.addAll(this.keySet());
+		return list;
+	}
 
 }

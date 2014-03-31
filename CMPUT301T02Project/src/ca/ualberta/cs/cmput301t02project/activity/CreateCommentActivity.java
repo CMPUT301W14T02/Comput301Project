@@ -7,11 +7,11 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import ca.ualberta.cs.cmput301t02project.ProjectApplication;
 import ca.ualberta.cs.cmput301t02project.R;
 import ca.ualberta.cs.cmput301t02project.controller.CommentListController;
 import ca.ualberta.cs.cmput301t02project.controller.MyCommentsController;
 import ca.ualberta.cs.cmput301t02project.model.CommentModel;
+import ca.ualberta.cs.cmput301t02project.model.User;
 
 /**
  * Allows a user to create their own comment. 
@@ -35,8 +35,8 @@ public class CreateCommentActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
-		commentListController = new CommentListController(ProjectApplication.getInstance().getCurrentCommentList());
-		myCommentsListController = new MyCommentsController(ProjectApplication.getInstance().getUser().getMyComments());
+		commentListController = new CommentListController(ProjectApplication.getInstance().getCurrentCommentList().getCommentList());
+		myCommentsListController = new MyCommentsController(User.getUser().getMyComments());
 		
 		setContentView(R.layout.activity_create_comment);
 		
@@ -76,10 +76,10 @@ public class CreateCommentActivity extends Activity {
 				CommentModel comment;
 				
 				comment = commentListController.addNewComment(inputComment.getText().toString(), 
-						null, ProjectApplication.getInstance().getName().toString(), customLocation);
+						null, User.getUser().getName().toString(), customLocation);
 				
-				myCommentsListController.addNewComment(comment, getApplicationContext());
-				ProjectApplication.getInstance().pushUser();
+				//myCommentsListController.addNewComment(comment, getApplicationContext());
+				//ProjectApplication.getInstance().pushUser();
 				finish();
 			}
 		});

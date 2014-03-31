@@ -7,9 +7,9 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import ca.ualberta.cs.cmput301t02project.ProjectApplication;
 import ca.ualberta.cs.cmput301t02project.R;
 import ca.ualberta.cs.cmput301t02project.controller.MyCommentsController;
+import ca.ualberta.cs.cmput301t02project.model.User;
 
 /**
  * Allows a user to edit the comment they selected.
@@ -30,7 +30,7 @@ public class EditCommentActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 			
-		myCommentsListController = new MyCommentsController(ProjectApplication.getInstance().getUser().getMyComments());
+		myCommentsListController = new MyCommentsController(User.getUser().getMyComments());
 			
 		setContentView(R.layout.activity_edit_comment);
 		

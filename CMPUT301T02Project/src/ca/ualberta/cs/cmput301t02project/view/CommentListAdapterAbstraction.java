@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Locale;
+import java.util.Observable;
+import java.util.Observer;
 
 import android.content.Context;
 import android.location.Location;
@@ -11,8 +13,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
-import ca.ualberta.cs.cmput301t02project.ProjectApplication;
-import ca.ualberta.cs.cmput301t02project.model.CommentListModel;
 import ca.ualberta.cs.cmput301t02project.model.CommentModel;
 
 /**
@@ -22,9 +22,9 @@ import ca.ualberta.cs.cmput301t02project.model.CommentModel;
  * and is called on by either an activity, to change sorting method, or by its model,
  * to update the view and/or resort the list due to changes to the model.
  */
-public abstract class CommentListAdapterAbstraction extends ArrayAdapter<CommentModel> {
+public abstract class CommentListAdapterAbstraction extends ArrayAdapter<CommentModel> implements Observer {
 
-	private CommentListModel model = null;
+	private ArrayList<CommentModel> model = null;
 	private String sortMethod = "Default";
 	private Comparator<CommentModel> sortByDate;
 	private Comparator<CommentModel> sortByLocation;
@@ -95,6 +95,10 @@ public abstract class CommentListAdapterAbstraction extends ArrayAdapter<Comment
 		};
 	}
 	
+	public void update(Observable observable, Object data) {
+		this.sortList();
+		super.notifyDataSetChanged();
+	}
 	
 	/**
 	 * Returns the current sorting method.
@@ -113,7 +117,7 @@ public abstract class CommentListAdapterAbstraction extends ArrayAdapter<Comment
 	 * <p>
 	 * @param model Sets model for adapter instance
 	 */
-	public void setModel(CommentListModel model) {
+	public void setModel(ArrayList<CommentModel> model) {
 		this.model = model;
 	}
 	
@@ -122,7 +126,7 @@ public abstract class CommentListAdapterAbstraction extends ArrayAdapter<Comment
 	 * <p>
 	 * @return Model set for adapter instance
 	 */
-	public CommentListModel getModel() {
+	public ArrayList<CommentModel> getModel() {
 		return model;
 	}
 	
@@ -147,7 +151,7 @@ public abstract class CommentListAdapterAbstraction extends ArrayAdapter<Comment
 		
 		
 		// will hold the remaining unsorted CommentModels
-		ArrayList<CommentModel> list = (ArrayList<CommentModel>) model.getCommentList();
+		ArrayList<CommentModel> list = (ArrayList<CommentModel>) model;
 		// holds the sorted CommentModels to be passed to sortByLocation
 		ArrayList<CommentModel> list2 = new ArrayList<CommentModel>();
 		// contains the final list
@@ -264,7 +268,7 @@ public abstract class CommentListAdapterAbstraction extends ArrayAdapter<Comment
 	 */
 	public void sortList() {
 		if (model != null) {
-			ArrayList<CommentModel> list = model.getCommentList();
+			ArrayList<CommentModel> list = model;
 			if (sortMethod.equals("Default")) {
 				sortByDefaultMethod();
 				notifyDataSetChanged();

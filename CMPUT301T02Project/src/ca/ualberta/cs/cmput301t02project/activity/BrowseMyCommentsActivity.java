@@ -1,5 +1,8 @@
 package ca.ualberta.cs.cmput301t02project.activity;
 
+import java.util.ArrayList;
+
+import android.app.backup.RestoreObserver;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -7,10 +10,9 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
-import ca.ualberta.cs.cmput301t02project.ProjectApplication;
 import ca.ualberta.cs.cmput301t02project.R;
-import ca.ualberta.cs.cmput301t02project.model.CommentListModel;
 import ca.ualberta.cs.cmput301t02project.model.CommentModel;
+import ca.ualberta.cs.cmput301t02project.model.User;
 import ca.ualberta.cs.cmput301t02project.view.CommentListAdapterAbstraction;
 import ca.ualberta.cs.cmput301t02project.view.MyCommentsAdapter;
 
@@ -20,7 +22,7 @@ import ca.ualberta.cs.cmput301t02project.view.MyCommentsAdapter;
  */
 public class BrowseMyCommentsActivity extends BrowseCommentsActivityAbstraction {
 
-	private CommentListModel myCommentsList = new CommentListModel();
+	private ArrayList<CommentModel> myCommentsList = new ArrayList<CommentModel>();
 	private ListView myCommentListView;
 	private MyCommentsAdapter adapter;
 
@@ -44,6 +46,7 @@ public class BrowseMyCommentsActivity extends BrowseCommentsActivityAbstraction 
 				// Go to the edit comment activity if a comment is selected -SB
 				Intent goToEditCommentActivity = new Intent(getApplicationContext(),EditCommentActivity.class);
 				startActivity(goToEditCommentActivity);
+				RestoreObserver s;
 			}
 		});
 	}
@@ -68,10 +71,10 @@ public class BrowseMyCommentsActivity extends BrowseCommentsActivityAbstraction 
 	public CommentListAdapterAbstraction initializeAdapter(){
 		
 		// Retrieve myComments from phone storage -TH
-		myCommentsList = ProjectApplication.getInstance().getUser().getMyComments(getApplicationContext());
+		myCommentsList = User.getUser().getMyComments();
 
 		// Add comments to adapter
-		adapter = new MyCommentsAdapter(this, R.layout.list_item, myCommentsList.getCommentList());
+		adapter = new MyCommentsAdapter(this, R.layout.list_item, myCommentsList);
 		adapter.setModel(myCommentsList);
 		
 		// Display comments in adapter

@@ -1,7 +1,7 @@
 package ca.ualberta.cs.cmput301t02project.controller;
 
-import ca.ualberta.cs.cmput301t02project.Server;
 import ca.ualberta.cs.cmput301t02project.model.CommentModel;
+import ca.ualberta.cs.cmput301t02project.model.Server;
 
 public class CommentController {
 

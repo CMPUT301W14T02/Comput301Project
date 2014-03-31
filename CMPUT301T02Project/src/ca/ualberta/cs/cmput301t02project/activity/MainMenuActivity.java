@@ -1,5 +1,7 @@
 package ca.ualberta.cs.cmput301t02project.activity;
 
+import java.util.ArrayList;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,9 +9,10 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import ca.ualberta.cs.cmput301t02project.ProjectApplication;
 import ca.ualberta.cs.cmput301t02project.R;
 import ca.ualberta.cs.cmput301t02project.model.CommentListModel;
+import ca.ualberta.cs.cmput301t02project.model.CommentModel;
+import ca.ualberta.cs.cmput301t02project.model.User;
 
 /**
  * Displays menu options. 
@@ -30,7 +33,7 @@ public class MainMenuActivity extends Activity {
 
 		// Print welcome message on screen -SB
 		TextView welcomeMessage = (TextView) findViewById(R.id.welcome_message);
-		welcomeMessage.setText("Welcome " + ProjectApplication.getInstance().getName().toString()	+ "!");
+		welcomeMessage.setText("Welcome " + User.getUser().getName() + "!");
 		
 		// If "Create" is clicked -SB
 		Button createComment = (Button) findViewById(R.id.create);
@@ -38,8 +41,9 @@ public class MainMenuActivity extends Activity {
 			
 			@Override
 			public void onClick(View v) {
-				ProjectApplication.getInstance().setCurrentCommentList(new CommentListModel());
-				startActivity(new Intent(MainMenuActivity.this, CreateCommentActivity.class));
+				Intent intent = new Intent(MainMenuActivity.this, CreateCommentActivity.class);
+				intent.putExtra("isTopLevelComment", true);
+				startActivity(intent);
 			}
 		});
 
@@ -61,9 +65,9 @@ public class MainMenuActivity extends Activity {
 			public void onClick(View v) {
 				// Retrieve favorites from storage and set it as the list to view in the next
 				// activity -TH
-				CommentListModel favs = new CommentListModel();
-				favs = ProjectApplication.getInstance().getUser().getFavorites(getApplicationContext());
-				ProjectApplication.getInstance().getUser().setFavoritesToView(favs);
+				ArrayList<CommentModel> favs = new ArrayList<CommentModel>();
+				favs = User.getUser().getFavorites();
+				//ProjectApplication.getInstance().getUser().setFavoritesToView(favs);
 				startActivity(new Intent(MainMenuActivity.this, BrowseFavoritesActivity.class));
 			}
 		});
@@ -76,9 +80,6 @@ public class MainMenuActivity extends Activity {
 				startActivity(new Intent(MainMenuActivity.this, BrowseMyCommentsActivity.class));
 			}
 		});
-		
-		// Initialize location -SB
-		ProjectApplication.getInstance().InitializeLocationManager(this.getApplicationContext());
 	}
 
 	@Override

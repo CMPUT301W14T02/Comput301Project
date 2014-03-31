@@ -1,9 +1,9 @@
 package ca.ualberta.cs.cmput301t02project.controller;
 
+import java.util.ArrayList;
+
 import android.graphics.Bitmap;
 import android.location.Location;
-import ca.ualberta.cs.cmput301t02project.ProjectApplication;
-import ca.ualberta.cs.cmput301t02project.model.CommentListModel;
 import ca.ualberta.cs.cmput301t02project.model.CommentModel;
 
 /**
@@ -11,7 +11,7 @@ import ca.ualberta.cs.cmput301t02project.model.CommentModel;
  */
 public class CommentListController extends CommentListControllerAbstraction {
 
-	public CommentListController(CommentListModel model) {
+	public CommentListController(ArrayList<CommentModel> model) {
 		this.model = model;
 	}
 
@@ -25,18 +25,10 @@ public class CommentListController extends CommentListControllerAbstraction {
 	 * @param username	The username of the commenter (Eg. "Bob")
 	 * @return	The newly created CommentModel that has been added to the CommentListModel
 	 */
-	public CommentModel addNewComment(String text, Bitmap picture, String username, Location customLocation) {
-		
+	public CommentModel addNewComment(String text, Bitmap picture, String username, Location location) {
 		CommentModel comment;
-		Location commentLocation;
 		
-		if (customLocation != null) {
-			commentLocation = customLocation;
-		} else { 
-			commentLocation = ProjectApplication.getInstance().getCurrentLocation();
-		}
-		
-		comment = new CommentModel(text, picture, commentLocation, username);
+		comment = new CommentModel(text, picture, location, username);
 		model.add(comment);
 		return comment;
 	}

@@ -1,6 +1,7 @@
 package ca.ualberta.cs.cmput301t02project.controller;
 
-import ca.ualberta.cs.cmput301t02project.model.CommentListModel;
+import java.util.ArrayList;
+
 import ca.ualberta.cs.cmput301t02project.model.CommentModel;
 
 /**
@@ -8,7 +9,7 @@ import ca.ualberta.cs.cmput301t02project.model.CommentModel;
  */
 public class FavoritesController extends CommentListControllerAbstraction {
 
-	public FavoritesController(CommentListModel model) {
+	public FavoritesController(ArrayList<CommentModel> model) {
 		this.model = model;
 	}
 

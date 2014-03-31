@@ -8,7 +8,6 @@ import java.util.Date;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.location.Location;
-import ca.ualberta.cs.cmput301t02project.Server;
 
 /**
  * Model of the comment.

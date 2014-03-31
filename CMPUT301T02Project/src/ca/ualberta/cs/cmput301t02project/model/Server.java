@@ -1,4 +1,4 @@
-package ca.ualberta.cs.cmput301t02project;
+package ca.ualberta.cs.cmput301t02project.model;
 
 import io.searchbox.client.JestClient;
 import io.searchbox.client.JestResult;
@@ -10,8 +10,6 @@ import java.util.ArrayList;
 
 import android.accounts.NetworkErrorException;
 import android.content.Context;
-import ca.ualberta.cs.cmput301t02project.model.Cache;
-import ca.ualberta.cs.cmput301t02project.model.CommentModel;
 
 import com.searchly.jestdroid.DroidClientConfig;
 import com.searchly.jestdroid.JestClientFactory;
@@ -156,7 +154,7 @@ public class Server {
 	}
 	
 	public User pullUser(final String username) {
-		final User user = new User();
+		final User user = null;//new User();
 		Thread thread = new Thread() {
 			@Override
 			public void run() {

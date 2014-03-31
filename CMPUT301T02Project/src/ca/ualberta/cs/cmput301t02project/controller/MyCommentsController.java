@@ -1,21 +1,19 @@
 package ca.ualberta.cs.cmput301t02project.controller;
 
+import java.util.ArrayList;
+
 import android.content.Context;
 import android.location.Location;
-import ca.ualberta.cs.cmput301t02project.ProjectApplication;
-import ca.ualberta.cs.cmput301t02project.User;
-import ca.ualberta.cs.cmput301t02project.model.CommentListModel;
 import ca.ualberta.cs.cmput301t02project.model.CommentModel;
-import ca.ualberta.cs.cmput301t02project.model.StorageModel;
+import ca.ualberta.cs.cmput301t02project.model.User;
 
 /**
  * For updating a CommentListModel of the current user's comments.
  */
 public class MyCommentsController extends CommentListControllerAbstraction {
 	
-	StorageModel store = new StorageModel();
 	
-	public MyCommentsController(CommentListModel model) {
+	public MyCommentsController(ArrayList<CommentModel> model) {
 		this.model = model;
 	}
 
@@ -29,8 +27,8 @@ public class MyCommentsController extends CommentListControllerAbstraction {
 	 * @param comment	CommentModel to add to myComments list
 	 */
 	public void addNewComment(CommentModel comment, Context context) {
-		User user = ProjectApplication.getInstance().getUser();
-		user.addMyComment(comment, context);
+		User user = User.getUser();
+		user.addMyComment(comment);
 		//model.add(context, FILENAME);
 		//TODO Can't add it normally, because it goes to the server
 		//temporary:

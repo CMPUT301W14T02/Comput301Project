@@ -1,9 +1,9 @@
 package ca.ualberta.cs.cmput301t02project.model;
 
 import java.util.ArrayList;
+import java.util.Observable;
 
 import android.content.Context;
-import ca.ualberta.cs.cmput301t02project.Server;
 import ca.ualberta.cs.cmput301t02project.view.CommentListAdapterAbstraction;
 
 /**
@@ -13,19 +13,13 @@ import ca.ualberta.cs.cmput301t02project.view.CommentListAdapterAbstraction;
  * Storing a list of a comments that a user has composed, 
  * Storing a list of all top level comments.
  */
-public class CommentListModel {
-	
-	private StorageModel store = new StorageModel();
-	private CommentListAdapterAbstraction adapter = null;
-	private ArrayList<CommentModel> commentList;
+public class CommentListModel extends Observable {
 	private CommentModel parent;
 	public CommentListModel() {
-		commentList = new ArrayList<CommentModel>();
 		this.parent = null;
 	}
 
 	public CommentListModel(CommentModel parent) {
-		commentList = new ArrayList<CommentModel>();
 		this.parent=parent;
 	}
 
@@ -118,7 +112,7 @@ public class CommentListModel {
 	 * <p>
 	 * @return The CommentListModel containing top level comments
 	 */
-	public CommentListModel getTopLevelComments(Context context) {
+	public static CommentListModel getTopLevelComments(Context context) {
 		CommentListModel topLevelComments;
 		topLevelComments = new CommentListModel();
 		Server server = new Server();

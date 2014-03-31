@@ -1,5 +1,7 @@
 package ca.ualberta.cs.cmput301t02project.activity;
 
+import java.util.ArrayList;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -8,12 +10,10 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
-import ca.ualberta.cs.cmput301t02project.ProjectApplication;
 import ca.ualberta.cs.cmput301t02project.R;
-import ca.ualberta.cs.cmput301t02project.User;
 import ca.ualberta.cs.cmput301t02project.controller.CommentController;
-import ca.ualberta.cs.cmput301t02project.model.CommentListModel;
 import ca.ualberta.cs.cmput301t02project.model.CommentModel;
+import ca.ualberta.cs.cmput301t02project.model.User;
 import ca.ualberta.cs.cmput301t02project.view.CommentListAdapter;
 import ca.ualberta.cs.cmput301t02project.view.CommentListAdapterAbstraction;
 
@@ -28,7 +28,7 @@ public class BrowseReplyCommentsActivity extends BrowseCommentsActivityAbstracti
 	private ListView replyCommentListView;
 	private TextView selectedComment;
 	private CommentListAdapter adapter;
-	private CommentListModel replyCommentList;
+	private ArrayList<CommentModel> replyCommentList;
 	private CommentController commentController;
 	private CommentModel currentComment;
 
@@ -61,10 +61,10 @@ public class BrowseReplyCommentsActivity extends BrowseCommentsActivityAbstracti
 		favoriteComment.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				User user = ProjectApplication.getInstance().getUser();
-				user.addFavoriteComment(currentComment, getApplicationContext());
+				User user = User.getUser();
+				user.addFavoriteComment(currentComment);
 				commentController.incrementRating();
-				ProjectApplication.getInstance().pushUser();
+				//ProjectApplication.getInstance().pushUser();
 				
 			}
 		});
@@ -102,11 +102,11 @@ public class BrowseReplyCommentsActivity extends BrowseCommentsActivityAbstracti
 	public CommentListAdapterAbstraction initializeAdapter(){
 
 		// Get the comment list of replies to selected comment
-		replyCommentList = ProjectApplication.getInstance().getCurrentComment().pullReplies(getApplicationContext());
+		replyCommentList = ProjectApplication.getInstance().getCurrentComment().pullReplies(getApplicationContext()).getCommentList();
 		
 		// Add comments to adapter
-		adapter = new CommentListAdapter(this, R.layout.list_item, replyCommentList.getCommentList());
-		replyCommentList.setAdapter(adapter);
+		adapter = new CommentListAdapter(this, R.layout.list_item, replyCommentList);
+		//replyCommentList.setAdapter(adapter);
 		adapter.setModel(replyCommentList);
 
 		// Display comments in adapter
