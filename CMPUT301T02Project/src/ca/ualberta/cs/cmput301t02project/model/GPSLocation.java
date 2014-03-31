@@ -7,9 +7,23 @@ import android.location.LocationManager;
 
 public class GPSLocation {
 
-	LocationManager locationManager;
-	public GPSLocation(Context context) {
+	private LocationManager locationManager;
+	private static GPSLocation instance;
+	private GPSLocation(Context context) {
 		locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
+	}
+	
+	public static void initializeLocation(Context context) {
+		if(instance == null) {
+			instance = new GPSLocation(context);
+		}
+	}
+	
+	public static GPSLocation getInstance() {
+		if(instance == null) {
+			throw new IllegalAccessError("Location isn't initialized yet");
+		}
+		return instance;
 	}
 
 	public Location getLocation() {

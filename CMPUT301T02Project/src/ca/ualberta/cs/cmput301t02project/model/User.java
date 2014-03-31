@@ -1,5 +1,7 @@
 package ca.ualberta.cs.cmput301t02project.model;
 
+import io.searchbox.annotations.JestId;
+
 import java.util.ArrayList;
 
 import android.content.Context;
@@ -11,27 +13,28 @@ import android.content.Context;
  */
 public class User {
 
-	private String username;
+	@JestId
 	private String id;
-	private ArrayList<String> myCommentsIds;
-	private ArrayList<String> favoritesIds;
+	private String username;
 	private transient MyCommentsListModel myComments;
 	private transient FavoritesListModel favorites;
-	private transient CommentListModel favoritesToView;
 	
 	private static User user;
 
-	private User(String username, Context context) {
+	private User(String username) {
 		this.username = username;
-		myComments = new MyCommentsListModel(context);
-		favorites = new FavoritesListModel(context);
-		favoritesToView = new CommentListModel();
-		myCommentsIds = new ArrayList<String>();
-		favoritesIds = new ArrayList<String>();
 	}
 	
 	public static void login(String username, Context context) {
-		user = new User(username, context);
+		Server server = new Server(context);
+		User user = new User(username);
+		server.pullUser(user);
+		if(user.getId() == null) {
+			user = new User(username);
+			server.postUser(user);
+		}
+		user.myComments = new MyCommentsListModel(context);
+		user.favorites = new FavoritesListModel(context);
 	}
 	
 	public static User getUser() {
@@ -93,34 +96,6 @@ public class User {
 	 */
 	public void addMyComment(CommentModel comment) {
 		myComments.add(comment);
-	}
-	
-	/**
-	 * Returns current favorites list
-	 * <p>
-	 * Returns the list of favorites or a selected favorite's 
-	 * replies to be displayed
-	 * BrowseFavoritesActivity
-	 * <p>
-	 * @return CommentListModel containing comments favorited by user, 
-	 * or their replies
-	 */
-	public CommentListModel getFavoritesToView() {
-		return favoritesToView;
-	}
-
-	/**
-	 * Sets current favorites list
-	 * <p>
-	 * Sets the list of favorites or a selected favorite's 
-	 * replies
-	 * BrowseFavoritesActivity
-	 * @param CommentListModel containing the list favorites the 
-	 * next activity will display
-	 * <p>
-	 */
-	public void setFavoritesToView(CommentListModel favoritesToView) {
-		this.favoritesToView = favoritesToView;
 	}
 
 	/**
@@ -191,12 +166,5 @@ public class User {
 	
 	public String getId() {
 		return id;
-	}
-
-	public void set(User source) {
-		this.username = source.username;
-		this.id = source.id;
-		this.myCommentsIds = source.myCommentsIds;
-		this.favoritesIds = source.favoritesIds;
 	}
 }

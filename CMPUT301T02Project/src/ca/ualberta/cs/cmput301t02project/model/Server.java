@@ -17,13 +17,15 @@ import com.searchly.jestdroid.JestClientFactory;
 public class Server {
 	private static final String serverUri = "http://cmput301.softwareprocess.es:8080/";
 	private JestClient client;
+	Context context;
 	
-	public Server() {
+	public Server(Context context) {
 		//TODO Add custom Gson here to clientConfig.Builder
 		DroidClientConfig clientConfig = new DroidClientConfig.Builder(serverUri).multiThreaded(true).build();
 		JestClientFactory jestClientFactory = new JestClientFactory();
 		jestClientFactory.setDroidClientConfig(clientConfig);
 		client = jestClientFactory.getObject();
+		this.context = context;
 		
 	}
 	
@@ -58,7 +60,7 @@ public class Server {
 		}
 	}
 	
-	public ArrayList<CommentModel> pull(final ArrayList<String> idList, Context context) {
+	public ArrayList<CommentModel> pull(final ArrayList<String> idList) {
 		final Cache cache = Cache.getInstance(context);
 		final ArrayList<CommentModel> commentList = new ArrayList<CommentModel>();
 		Thread thread = new Thread() {
@@ -89,7 +91,7 @@ public class Server {
 		return commentList;
 	}
 	
-	public ArrayList<CommentModel> pullTopLevel(Context context) {
+	public ArrayList<CommentModel> pullTopLevel() {
 		final Cache cache = Cache.getInstance(context);
 		final ArrayList<CommentModel> commentList = new ArrayList<CommentModel>();
 		Thread thread = new Thread() {
@@ -152,9 +154,10 @@ public class Server {
 			e.printStackTrace();
 		}
 	}
-	
-	public User pullUser(final String username) {
-		final User user = null;//new User();
+	final int q =3;
+	public void pullUser(final User user) {
+		final String username = user.getName();
+		
 		Thread thread = new Thread() {
 			@Override
 			public void run() {
@@ -168,7 +171,11 @@ public class Server {
 					e.printStackTrace();
 				}
 				if(result != null) {
-					user.set((User)result.getSourceAsObject(User.class));
+					User temporaryUser = ((User)result.getSourceAsObject(User.class));
+					user.setId(temporaryUser.getId());
+				}
+				else {
+					user.setId(null);
 				}
 			}
 		};
@@ -178,7 +185,13 @@ public class Server {
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
+	}
 
-		return user.getName()!=null?user:null;
+	public void addChildren(String parentId, String childId) {
+		ArrayList<String> list = new ArrayList<String>();
+		list.add(parentId);
+		CommentModel comment = this.pull(list).get(0);
+		comment.addChildId(childId);
+		this.post(comment);
 	}
 }

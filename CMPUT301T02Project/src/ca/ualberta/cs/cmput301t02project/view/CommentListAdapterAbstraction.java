@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 import ca.ualberta.cs.cmput301t02project.model.CommentModel;
+import ca.ualberta.cs.cmput301t02project.model.GPSLocation;
 
 /**
  * CommentListAdapterAbstraction is a subclass of ArrayAdapter that is extended by
@@ -79,7 +80,7 @@ public abstract class CommentListAdapterAbstraction extends ArrayAdapter<Comment
 			public int compare(CommentModel a, CommentModel b) {
 				String loc = "Location Initialization";
 				myLocation = new Location(loc);
-				myLocation = ProjectApplication.getInstance().getCurrentLocation();
+				myLocation = GPSLocation.getInstance().getLocation();
 				Float dist1 = a.getLocation().distanceTo(myLocation);
 				Float dist2 = b.getLocation().distanceTo(myLocation);
 				if (dist1 < dist2) {
@@ -147,7 +148,7 @@ public abstract class CommentListAdapterAbstraction extends ArrayAdapter<Comment
 	public void sortByDefaultMethod() {
 		String loc = "Location Initialization";
 		myLocation = new Location(loc);
-		myLocation = ProjectApplication.getInstance().getCurrentLocation();
+		myLocation = GPSLocation.getInstance().getLocation();
 		
 		
 		// will hold the remaining unsorted CommentModels

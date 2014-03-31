@@ -1,10 +1,8 @@
 package ca.ualberta.cs.cmput301t02project.model;
 
-import java.util.ArrayList;
 import java.util.Observable;
 
 import android.content.Context;
-import ca.ualberta.cs.cmput301t02project.view.CommentListAdapterAbstraction;
 
 /**
  * Holds information about a specific list of CommentModels.
@@ -14,45 +12,18 @@ import ca.ualberta.cs.cmput301t02project.view.CommentListAdapterAbstraction;
  * Storing a list of all top level comments.
  */
 public class CommentListModel extends Observable {
-	private CommentModel parent;
-	public CommentListModel() {
-		this.parent = null;
+	private String parentId;
+	private Context context;
+	
+	public CommentListModel(Context context) {
+		this.parentId = null;
+		this.context = context;
 	}
 
-	public CommentListModel(CommentModel parent) {
-		this.parent=parent;
+	public CommentListModel(String parentId, Context context) {
+		this.parentId = parentId;
+		this.context = context;
 	}
-
-	/**
-	 * Returns a list of the comments stored in the CommentListModel.
-	 * <p>
-	 * Returns an ArrayList of CommentModels representing comments in the CommentListModel.
-	 * Used whenever the CommentModels need to be accessed directly.
-	 * <p>
-	 * @return	The comments stored in the CommentListModel
-	 */
-	public ArrayList<CommentModel> getCommentList() {
-		return commentList;
-	}
-
-	/**
-	 * Sets a list of comments to store in the CommentListModel.
-	 * <p>
-	 * Updates the current ArrayList of CommentModels to a specified list.
-	 * Once the list of comments has been changed, if an adapter is currently set
-	 * the updated list is sorted by the set sorting method,
-	 * and all observers are notified that the data in the model has changed.
-	 * <p> 
-	 * @param commentList	The new list of comments to replace the old list
-	 */
-	public void setCommentList(ArrayList<CommentModel> commentList) {
-		this.commentList = commentList;
-		if (adapter != null) {
-			adapter.sortList();
-			adapter.notifyDataSetChanged();
-		}
-	}
-
 	/**
 	 * Adds a new comment to the CommentListModel. 
 	 * <p>
@@ -66,58 +37,17 @@ public class CommentListModel extends Observable {
 	 * @param comment	The new comment to add to the list
 	 */
 	public void add(CommentModel comment) {
-		if(this.parent == null) {
+		if(this.parentId == null) {
 			comment.setTopLevelComment(true);
 		} else {
 			comment.setTopLevelComment(false);
 		}
-		commentList.add(comment);
-		Server server = new Server();
+		Server server = new Server(context);
 		server.post(comment);
-		if(this.parent != null) {
-			parent.addChildId(comment.getId());
-			server = new Server();
-			server.post(this.parent);
+		if(this.parentId != null) {
+			server = new Server(context);
+			server.addChildren(this.parentId, comment.getId());
 		}
-		if (adapter != null) {
-			adapter.sortList();
-			adapter.notifyDataSetChanged();
-		}
+		notifyObservers();
 	}
-	
-	/**
-	 * Sets the adapter for the CommentListModel.
-	 * <p>
-	 * Assigns a specified adapter to the CommentListModel.
-	 * <p>
-	 * @param adapter	The adapter to set to the CommentListModel
-	 */
-	public void setAdapter(CommentListAdapterAbstraction adapter) {
-		this.adapter = adapter;
-	}
-	
-	/**
-	 * Returns the CommentListModel's current adapter.
-	 * @return	The adapter assigned to the CommentListModel
-	 */
-	public CommentListAdapterAbstraction getAdapter() {
-		return adapter;
-	}
-	
-	/**
-	 * Returns the complete list of top level comments. -TH
-	 * Comments are stored on the server. This method uses the server class to
-	 * pull all comments from the server that have the topLevelComment 
-	 * attribute set to true.
-	 * <p>
-	 * @return The CommentListModel containing top level comments
-	 */
-	public static CommentListModel getTopLevelComments(Context context) {
-		CommentListModel topLevelComments;
-		topLevelComments = new CommentListModel();
-		Server server = new Server();
-		topLevelComments.setCommentList(server.pullTopLevel(context));
-		return topLevelComments;
-	}
-
 }

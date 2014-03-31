@@ -11,6 +11,8 @@ import ca.ualberta.cs.cmput301t02project.R;
 import ca.ualberta.cs.cmput301t02project.controller.CommentListController;
 import ca.ualberta.cs.cmput301t02project.controller.MyCommentsController;
 import ca.ualberta.cs.cmput301t02project.model.CommentModel;
+import ca.ualberta.cs.cmput301t02project.model.GPSLocation;
+import ca.ualberta.cs.cmput301t02project.model.Server;
 import ca.ualberta.cs.cmput301t02project.model.User;
 
 /**
@@ -35,7 +37,8 @@ public class CreateCommentActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
-		commentListController = new CommentListController(ProjectApplication.getInstance().getCurrentCommentList().getCommentList());
+		String commentId = getIntent().getStringExtra("CommentId");
+		commentListController = new CommentListController(commentId);
 		myCommentsListController = new MyCommentsController(User.getUser().getMyComments());
 		
 		setContentView(R.layout.activity_create_comment);
@@ -43,8 +46,8 @@ public class CreateCommentActivity extends Activity {
 		final EditText latitude = (EditText) findViewById(R.id.latitude_box);
 		final EditText longitude = (EditText) findViewById(R.id.longitude_box);
 		
-		double currLat = ProjectApplication.getInstance().getCurrentLocation().getLatitude();
-		double currLon = ProjectApplication.getInstance().getCurrentLocation().getLongitude();
+		double currLat = GPSLocation.getInstance().getLocation().getLatitude();
+		double currLon = GPSLocation.getInstance().getLocation().getLongitude();
 		final String strLat = String.valueOf(currLat);
 		final String strLon = String.valueOf(currLon);
 		
@@ -74,6 +77,9 @@ public class CreateCommentActivity extends Activity {
 
 				// Refactor into MVC?
 				CommentModel comment;
+				
+				Server server = new Server();
+				server.post(comment);
 				
 				comment = commentListController.addNewComment(inputComment.getText().toString(), 
 						null, User.getUser().getName().toString(), customLocation);

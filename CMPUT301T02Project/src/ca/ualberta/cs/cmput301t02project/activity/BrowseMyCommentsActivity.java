@@ -41,12 +41,11 @@ public class BrowseMyCommentsActivity extends BrowseCommentsActivityAbstraction 
 			public void onItemClick(AdapterView<?> l, View v, int position, long id) {
 				// Refactor into MVC?	
 				CommentModel nestedComment = (CommentModel) adapter.getItem(position);
-				ProjectApplication.getInstance().setCurrentComment(nestedComment, getApplicationContext());
 				
 				// Go to the edit comment activity if a comment is selected -SB
-				Intent goToEditCommentActivity = new Intent(getApplicationContext(),EditCommentActivity.class);
+				Intent goToEditCommentActivity = new Intent(getApplicationContext(), EditCommentActivity.class);
+				goToEditCommentActivity.putExtra("CommentId", nestedComment.getId());
 				startActivity(goToEditCommentActivity);
-				RestoreObserver s;
 			}
 		});
 	}

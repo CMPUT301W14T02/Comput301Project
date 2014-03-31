@@ -1,9 +1,8 @@
 package ca.ualberta.cs.cmput301t02project.controller;
 
-import java.util.ArrayList;
-
 import android.graphics.Bitmap;
 import android.location.Location;
+import ca.ualberta.cs.cmput301t02project.model.CommentListModel;
 import ca.ualberta.cs.cmput301t02project.model.CommentModel;
 
 /**
@@ -11,7 +10,7 @@ import ca.ualberta.cs.cmput301t02project.model.CommentModel;
  */
 public class CommentListController extends CommentListControllerAbstraction {
 
-	public CommentListController(ArrayList<CommentModel> model) {
+	public CommentListController(St) {
 		this.model = model;
 	}
 

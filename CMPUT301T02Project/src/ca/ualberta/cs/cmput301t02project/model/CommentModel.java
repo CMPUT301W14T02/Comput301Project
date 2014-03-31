@@ -19,16 +19,12 @@ public class CommentModel {
 	private String id;
 	private boolean topLevelComment;
 	private Date date;
-	private Location location; //transient until convertible to Json
+	private Location location;
 	private String text;
 	private transient Bitmap picture; //transient until convertible to Json
 	private int rating;
-	private transient CommentListModel replies; //to be changed to ArrayList<String> childrenIds
 	private ArrayList<String> childrenIds;
-	private String username;
-	//private transient Server server;
-
-	
+	private String username;	
 	
 	/**
 	 * Creates a new Comment.
@@ -55,7 +51,6 @@ public class CommentModel {
 		this.location = location;
 		this.username = username;
 		this.rating = 0;
-		this.replies = new CommentListModel(this);
 		this.date = new Date();
 		this.childrenIds = new ArrayList<String>();
 	}
@@ -75,7 +70,6 @@ public class CommentModel {
 		this.location = location;
 		this.username = username;
 		this.rating = 0;
-		this.replies = new CommentListModel(this);
 		this.date = new Date();
 		this.childrenIds = new ArrayList<String>();
 	}
@@ -177,22 +171,6 @@ public class CommentModel {
 	}
 
 	/**
-	 * Gets the comment's list of replies.
-	 * @return The reply list
-	 */
-	public CommentListModel getReplies() {
-		return replies;
-	}
-
-	/**
-	 * Sets the comment's list of replies.
-	 * @param replies	The reply list
-	 */
-	public void setReplies(CommentListModel replies) {
-		this.replies = replies;
-	}
-
-	/**
 	 * Gets the comment author's username.
 	 * @return The username
 	 */
@@ -217,11 +195,11 @@ public class CommentModel {
 
 		// If statement to fix grammar issue of a singular reply vs replies
 		// plural -SB
-		if (replies.getCommentList().size() == 1) {
+		if (childrenIds.size() == 1) {
 			return text + " (by " + username + ", 1 reply)";
 		} 
 		else {
-			return text + " (by " + username + ", " + replies.getCommentList().size() + " replies)";
+			return text + " (by " + username + ", " + childrenIds.size() + " replies)";
 		}
 	}
 
@@ -261,16 +239,13 @@ public class CommentModel {
 		this.childrenIds.add(id);
 	}
 	
-	public CommentListModel pullReplies(Context context) {
-		CommentListModel replies;
-		replies = new CommentListModel(this);
-		Server server = new Server();
-		replies.setCommentList(server.pull(childrenIds, context));
-		return replies;
+	public ArrayList<CommentModel> pullReplies(Context context) {
+		Server server = new Server(context);
+		return server.pull(childrenIds);
 	}
 	
 	public void incrementRating() {
-		rating++;
+		this.rating++;
 	}
 	
 }
