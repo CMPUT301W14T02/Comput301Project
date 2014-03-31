@@ -42,6 +42,7 @@ public class User {
 		this.username = username;
 		myComments = new CommentListModel();
 		favorites = new CommentListModel();
+		favoritesToView = new CommentListModel();
 		myCommentsIds = new ArrayList<String>();
 		favoritesIds = new ArrayList<String>();
 		store = new StorageModel();
@@ -57,6 +58,7 @@ public class User {
 		this.username = null;
 		myComments = new CommentListModel();
 		favorites = new CommentListModel();
+		favoritesToView = new CommentListModel();
 		myCommentsIds = new ArrayList<String>();
 		favoritesIds = new ArrayList<String>();
 		store = new StorageModel();

@@ -5,8 +5,7 @@ import io.searchbox.annotations.JestId;
 import java.util.ArrayList;
 import java.util.Date;
 
-import com.google.gson.Gson;
-
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.location.Location;
 import ca.ualberta.cs.cmput301t02project.Server;
@@ -263,11 +262,11 @@ public class CommentModel {
 		this.childrenIds.add(id);
 	}
 	
-	public CommentListModel pullReplies() {
+	public CommentListModel pullReplies(Context context) {
 		CommentListModel replies;
 		replies = new CommentListModel(this);
 		Server server = new Server();
-		replies.setCommentList(server.pull(childrenIds));
+		replies.setCommentList(server.pull(childrenIds, context));
 		return replies;
 	}
 	

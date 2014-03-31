@@ -2,6 +2,7 @@ package ca.ualberta.cs.cmput301t02project.model;
 
 import java.util.ArrayList;
 
+import android.content.Context;
 import ca.ualberta.cs.cmput301t02project.Server;
 import ca.ualberta.cs.cmput301t02project.view.CommentListAdapterAbstraction;
 
@@ -119,10 +120,10 @@ public class CommentListModel {
 	 * <p>
 	 * @return The CommentListModel containing top level comments
 	 */
-	public CommentListModel getTopLevelComments() {
+	public CommentListModel getTopLevelComments(Context context) {
 		CommentListModel topLevelComments;
 		topLevelComments = new CommentListModel();
-		topLevelComments.setCommentList(server.pullTopLevel());
+		topLevelComments.setCommentList(server.pullTopLevel(context));
 		return topLevelComments;
 	}
 

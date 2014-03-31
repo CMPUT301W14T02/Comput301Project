@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Map;
 
 import android.content.Context;
 import android.location.Location;
@@ -86,7 +87,7 @@ public class StorageModel {
 		oldFavs = retrieveFavorites(context);
 		
 		//Get replies to favorited comment -TH
-		ArrayList<CommentModel> repliesToFav = favoritedComment.pullReplies().getCommentList();
+		ArrayList<CommentModel> repliesToFav = favoritedComment.pullReplies(context).getCommentList();
 		if (repliesToFav == null) {
 			repliesToFav = new ArrayList<CommentModel>();
 		}
@@ -135,6 +136,10 @@ public class StorageModel {
 			e.printStackTrace();
 		}
 		return favoritesArray;
+	}
+	
+	public Map<String, CommentModel> retrieveCache() {
+		return null;
 	}
 	
 	

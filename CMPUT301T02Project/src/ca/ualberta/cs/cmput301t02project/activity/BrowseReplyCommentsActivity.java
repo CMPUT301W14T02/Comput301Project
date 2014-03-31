@@ -75,7 +75,7 @@ public class BrowseReplyCommentsActivity extends BrowseCommentsActivityAbstracti
 			public void onItemClick(AdapterView<?> l, View v, int position, long id) {
 				// Refactor into MVC?
 				CommentModel nestedComment = (CommentModel) adapter.getItem(position);
-				ProjectApplication.getInstance().setCurrentComment(nestedComment);
+				ProjectApplication.getInstance().setCurrentComment(nestedComment, getApplicationContext());
 
 				Intent goToReplyListActivity = new Intent(getApplicationContext(), BrowseReplyCommentsActivity.class);
 				startActivity(goToReplyListActivity);
@@ -86,7 +86,7 @@ public class BrowseReplyCommentsActivity extends BrowseCommentsActivityAbstracti
 	@Override
 	public void onResume() {
 		super.onResume();
-		ProjectApplication.getInstance().setCurrentComment(currentComment);
+		ProjectApplication.getInstance().setCurrentComment(currentComment, getApplicationContext());
 		initializeAdapter();
 		adapter.sortList();
 		adapter.notifyDataSetChanged();
@@ -102,7 +102,7 @@ public class BrowseReplyCommentsActivity extends BrowseCommentsActivityAbstracti
 	public CommentListAdapterAbstraction initializeAdapter(){
 
 		// Get the comment list of replies to selected comment
-		replyCommentList = ProjectApplication.getInstance().getCurrentComment().pullReplies();
+		replyCommentList = ProjectApplication.getInstance().getCurrentComment().pullReplies(getApplicationContext());
 		
 		// Add comments to adapter
 		adapter = new CommentListAdapter(this, R.layout.list_item, replyCommentList.getCommentList());

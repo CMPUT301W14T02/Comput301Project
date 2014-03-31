@@ -2,6 +2,13 @@ package ca.ualberta.cs.cmput301t02project.test;
 
 import java.util.Date;
 
+import android.app.Activity;
+import android.graphics.Bitmap;
+import android.location.Location;
+import android.test.ActivityInstrumentationTestCase2;
+import android.test.ViewAsserts;
+import android.widget.ListView;
+import android.widget.TextView;
 import ca.ualberta.cs.cmput301t02project.ProjectApplication;
 import ca.ualberta.cs.cmput301t02project.R;
 import ca.ualberta.cs.cmput301t02project.User;
@@ -11,17 +18,16 @@ import ca.ualberta.cs.cmput301t02project.model.CommentListModel;
 import ca.ualberta.cs.cmput301t02project.model.CommentModel;
 import ca.ualberta.cs.cmput301t02project.model.StorageModel;
 import ca.ualberta.cs.cmput301t02project.view.CommentListAdapter;
-import android.graphics.Bitmap;
-import android.location.Location;
-import android.test.ActivityInstrumentationTestCase2;
-import android.test.ViewAsserts;
-import android.widget.ListView;
-import android.widget.TextView;
 
 public class BrowseReplyCommentsActivityTest extends ActivityInstrumentationTestCase2<BrowseReplyCommentsActivity> {
 
+	Activity activity;
 	public BrowseReplyCommentsActivityTest() {
 		super(BrowseReplyCommentsActivity.class);
+	}
+	
+	public void setUp() {
+		activity = getActivity();
 	}
 
 	public CommentModel initializeComment() {
@@ -36,7 +42,7 @@ public class BrowseReplyCommentsActivityTest extends ActivityInstrumentationTest
 		CommentListModel comments = new CommentListModel();
 		comments.add(comment);
 
-		ProjectApplication.getInstance().setCurrentComment(comment);
+		ProjectApplication.getInstance().setCurrentComment(comment, activity.getApplicationContext());
 		ProjectApplication.getInstance().setCurrentCommentList(comments);
 		ProjectApplication.getInstance().setCurrentLocation(myLocation);
 
@@ -120,9 +126,7 @@ public class BrowseReplyCommentsActivityTest extends ActivityInstrumentationTest
 	public void testPushUser() {
 		User user = new User("user");
 		ProjectApplication pa = ProjectApplication.getInstance().getInstance();
-		pa.pushUser(user);
-		User user2 = pa.getPushedUser("user");
-		assertEquals("Users should be the same",user,user2);
+		pa.pushUser();
 	}
 	
 

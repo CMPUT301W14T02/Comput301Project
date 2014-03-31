@@ -1,45 +1,57 @@
 package ca.ualberta.cs.cmput301t02project.model;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Map;
+import java.util.Map.Entry;
 
-import com.google.common.cache.AbstractCache;
+import android.content.Context;
+import android.content.SharedPreferences;
 
-public class Cache extends AbstractCache<String, CommentModel> {
-	private final static String FILENAME = "Cache.json";
-	private Map<String, CommentModel> map = new HashMap<String, CommentModel>();
+import com.google.gson.Gson;
+
+public class Cache {
+	private final static String CACHE_KEY = "CacheKey";
 	private static Cache cache;
+	private Context context;
 	
-	private Cache(){
+	private Cache(Context context){
+		this.context = context;
 	}
 	
-	public static Cache getInstance() {
+	public static Cache getInstance(Context context) {
 		if(cache == null) {
-			
-			cache = new Cache();
-			
+			cache = new Cache(context.getApplicationContext());
 		}
 		return cache;
 	}
 	
-	@Override
 	public CommentModel getIfPresent(Object arg0) {
-		if(map.containsKey(arg0))
-			return map.get(arg0);
-		return null;
+		SharedPreferences cache = context.getSharedPreferences(CACHE_KEY, 0);
+		String key = (String) arg0;
+		String comment = cache.getString(key, null);
+		Gson gson = new Gson();
+		CommentModel result = gson.fromJson(comment, CommentModel.class);
+		return result;
 	}
 	
-	@Override
 	public void put(String key, CommentModel value) {
-		map.put(key, value);
+		Gson gson = new Gson();
+		String v = gson.toJson(value);
+		SharedPreferences cache = context.getSharedPreferences(CACHE_KEY, 0);
+		cache.edit().putString(key, v).commit();
 	}
 	
 	public ArrayList<CommentModel> getAllTopLevelPresent() {
+		Gson gson = new Gson();
+		SharedPreferences cache = context.getSharedPreferences(CACHE_KEY, 0);
+		Map<String, ?> map = cache.getAll();
 		ArrayList<CommentModel> list = new ArrayList<CommentModel>();
-		for(Map.Entry<String, CommentModel> entry : map.entrySet()) {
-			if(entry.getValue().isTopLevelComment())
-				list.add(entry.getValue());
+		for(Entry<String, ?> entry : map.entrySet()) {
+			String value = (String) entry.getValue();
+			CommentModel comment = gson.fromJson(value, CommentModel.class);
+			if(comment.isTopLevelComment()) {
+				list.add(comment);
+			}
 		}
 		return list;
 	}

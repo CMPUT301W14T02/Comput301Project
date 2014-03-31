@@ -9,7 +9,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 import ca.ualberta.cs.cmput301t02project.ProjectApplication;
 import ca.ualberta.cs.cmput301t02project.R;
-import ca.ualberta.cs.cmput301t02project.UserList;
 
 /**
  * Allows a user to log in to the app with a selected username.

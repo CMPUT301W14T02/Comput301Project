@@ -136,9 +136,9 @@ public class ProjectApplication {
 	 * @param currentComment	Current comment of interest
 	 * @see CommentModel	Example of a CommentModel
 	 */
-	public void setCurrentComment(CommentModel currentComment) {
+	public void setCurrentComment(CommentModel currentComment, Context context) {
 		this.currentComment = currentComment;
-		currentCommentList = currentComment.pullReplies();
+		currentCommentList = currentComment.pullReplies(context);
 	}
 
 	/**

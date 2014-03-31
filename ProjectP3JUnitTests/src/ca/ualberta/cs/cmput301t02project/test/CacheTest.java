@@ -1,16 +1,25 @@
 package ca.ualberta.cs.cmput301t02project.test;
 
-import junit.framework.TestCase;
+import android.app.Activity;
+import android.test.ActivityInstrumentationTestCase2;
+import ca.ualberta.cs.cmput301t02project.activity.LoginActivity;
 import ca.ualberta.cs.cmput301t02project.model.Cache;
 import ca.ualberta.cs.cmput301t02project.model.CommentModel;
 
-public class CacheTest extends TestCase{
+public class CacheTest extends ActivityInstrumentationTestCase2<LoginActivity>{
+	
+	public CacheTest() {
+		super(LoginActivity.class);
+	}
 	
 	public void testCache() {
-		Cache cache = new Cache();
-		CommentModel model = new CommentModel("text", null, "user");
+		Activity activity = getActivity();
+		assertNotNull(activity);
+		Cache cache = Cache.getInstance(activity.getApplicationContext());
 		assertNotNull(cache);
+		CommentModel model = new CommentModel("text", null, "user");
 		cache.put("i", model);
-		assertEquals(cache.getIfPresent("i"), model);
+		assertNotNull(cache.getIfPresent("i"));
+		assertEquals(model, cache.getIfPresent("i"));
 	}
 }

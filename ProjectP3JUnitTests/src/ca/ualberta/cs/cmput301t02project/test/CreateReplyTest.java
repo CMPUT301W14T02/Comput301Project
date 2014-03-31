@@ -21,8 +21,8 @@ public class CreateReplyTest extends ActivityInstrumentationTestCase2<CreateComm
 	protected void setUp() throws Exception {
 		super.setUp();
 		CommentModel comment = new CommentModel("text", null, null, "user");
-		ProjectApplication.getInstance().setCurrentComment(comment);
 		activity = getActivity();
+		ProjectApplication.getInstance().setCurrentComment(comment, activity.getApplicationContext());
 	}
 	
 	public void testCreateReply() throws Throwable {

@@ -41,7 +41,7 @@ public class BrowseTopLevelCommentsActivity extends BrowseCommentsActivityAbstra
 			public void onItemClick(AdapterView<?> l, View v, int position, long id) {
 				// Refactor into MVC?	
 				CommentModel nestedComment = (CommentModel) adapter.getItem(position);
-				ProjectApplication.getInstance().setCurrentComment(nestedComment);
+				ProjectApplication.getInstance().setCurrentComment(nestedComment, getApplicationContext());
 				
 				//CommentListModel nestedCommentList = nestedComment.getReplies();
 				//ProjectApplication.getInstance().setCurrentCommentList(nestedCommentList);
@@ -73,7 +73,7 @@ public class BrowseTopLevelCommentsActivity extends BrowseCommentsActivityAbstra
 		// Call the method in the CommentListModel class that will 
 		// pull comments from the server - TH
 		topLevelCommentList = new CommentListModel();
-		topLevelCommentList = topLevelCommentList.getTopLevelComments();
+		topLevelCommentList = topLevelCommentList.getTopLevelComments(getApplicationContext());
 		
 
 		// Add comments to adapter

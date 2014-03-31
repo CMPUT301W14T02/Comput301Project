@@ -7,10 +7,9 @@ import io.searchbox.core.Index;
 import io.searchbox.core.Search;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 import android.accounts.NetworkErrorException;
+import android.content.Context;
 import ca.ualberta.cs.cmput301t02project.model.Cache;
 import ca.ualberta.cs.cmput301t02project.model.CommentModel;
 
@@ -49,9 +48,6 @@ public class Server {
 					}
 				} catch (Exception e) {
 					e.printStackTrace();
-					throw new RuntimeException();
-				} finally {
-					client.shutdownClient();
 				}
 			}
 			
@@ -64,8 +60,8 @@ public class Server {
 		}
 	}
 	
-	public ArrayList<CommentModel> pull(final ArrayList<String> idList) {
-		final Cache cache = Cache.getInstance();
+	public ArrayList<CommentModel> pull(final ArrayList<String> idList, Context context) {
+		final Cache cache = Cache.getInstance(context);
 		final ArrayList<CommentModel> commentList = new ArrayList<CommentModel>();
 		Thread thread = new Thread() {
 			@Override
@@ -95,8 +91,8 @@ public class Server {
 		return commentList;
 	}
 	
-	public ArrayList<CommentModel> pullTopLevel() {
-		final Cache cache = Cache.getInstance();
+	public ArrayList<CommentModel> pullTopLevel(Context context) {
+		final Cache cache = Cache.getInstance(context);
 		final ArrayList<CommentModel> commentList = new ArrayList<CommentModel>();
 		Thread thread = new Thread() {
 			@Override
@@ -173,7 +169,9 @@ public class Server {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				user.set((User)result.getSourceAsObject(User.class));
+				if(result != null) {
+					user.set((User)result.getSourceAsObject(User.class));
+				}
 			}
 		};
 		thread.start();
@@ -183,6 +181,6 @@ public class Server {
 			e.printStackTrace();
 		}
 
-		return user;
+		return user.getName()!=null?user:null;
 	}
 }
