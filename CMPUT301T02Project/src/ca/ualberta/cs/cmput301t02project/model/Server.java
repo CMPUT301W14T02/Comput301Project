@@ -60,6 +60,38 @@ public class Server {
 		}
 	}
 	
+	public CommentModel pull(final String id) {
+		final Cache cache = Cache.getInstance(context);
+		final ObjectWrapper wrapper = new ObjectWrapper();
+		Thread thread = new Thread() {
+			@Override
+			public void run() {
+				Get get = new Get.Builder("cmput301w14t02", id).type("comments").build();
+				CommentModel comment;
+				try {
+					JestResult result = client.execute(get);
+					comment = result.getSourceAsObject(CommentModel.class);
+					cache.put(id, comment);
+				} catch (Exception e) {
+					comment = cache.getIfPresent(id);
+				}
+				wrapper.object = comment;
+			}
+		};
+		thread.start();
+		try {
+			thread.join();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		return (CommentModel) wrapper.object;
+	}
+	
+	public ArrayList<CommentModel> pullChildrenOf(String parentId) {
+		CommentModel parent = this.pull(parentId);
+		return this.pull(parent.getChildrenIds());
+	}
+	
 	public ArrayList<CommentModel> pull(final ArrayList<String> idList) {
 		final Cache cache = Cache.getInstance(context);
 		final ArrayList<CommentModel> commentList = new ArrayList<CommentModel>();
@@ -193,5 +225,9 @@ public class Server {
 		CommentModel comment = this.pull(list).get(0);
 		comment.addChildId(childId);
 		this.post(comment);
+	}
+	
+	private class ObjectWrapper {
+		public Object object;
 	}
 }

@@ -1,5 +1,6 @@
 package ca.ualberta.cs.cmput301t02project.model;
 
+import java.util.ArrayList;
 import java.util.Observable;
 
 import android.content.Context;
@@ -49,5 +50,10 @@ public class CommentListModel extends Observable {
 			server.addChildren(this.parentId, comment.getId());
 		}
 		notifyObservers();
+	}
+	
+	public ArrayList<CommentModel> getList() {
+		Server server = new Server(context);
+		return server.pullChildrenOf(this.parentId);
 	}
 }
