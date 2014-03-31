@@ -19,8 +19,6 @@ public class CommentListModel {
 	private CommentListAdapterAbstraction adapter = null;
 	private ArrayList<CommentModel> commentList;
 	private CommentModel parent;
-	private Server server = new Server();
-
 	public CommentListModel() {
 		commentList = new ArrayList<CommentModel>();
 		this.parent = null;
@@ -123,6 +121,7 @@ public class CommentListModel {
 	public CommentListModel getTopLevelComments(Context context) {
 		CommentListModel topLevelComments;
 		topLevelComments = new CommentListModel();
+		Server server = new Server();
 		topLevelComments.setCommentList(server.pullTopLevel(context));
 		return topLevelComments;
 	}
