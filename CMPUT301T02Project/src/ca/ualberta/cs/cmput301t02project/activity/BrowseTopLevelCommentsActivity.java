@@ -4,10 +4,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ListView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ListView;
 import ca.ualberta.cs.cmput301t02project.R;
-import ca.ualberta.cs.cmput301t02project.model.CommentListModel;
 import ca.ualberta.cs.cmput301t02project.model.CommentModel;
 import ca.ualberta.cs.cmput301t02project.model.TopLevelCommentList;
 import ca.ualberta.cs.cmput301t02project.view.CommentListAdapter;
@@ -18,18 +17,18 @@ import ca.ualberta.cs.cmput301t02project.view.CommentListAdapterAbstraction;
  * A list of all top level comments is stored in ProjectApplication.getInstance().
  */
 
-public class BrowseTopLevelCommentsActivity extends BrowseCommentsActivityAbstraction {
+public class BrowseTopLevelCommentsActivity extends BrowseCommentsActivityAbstraction{
 	
-	
-	private CommentListModel model;
+	private TopLevelCommentList model;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_top_level_list);
-		model = new TopLevelCommentList(this);
+		model = TopLevelCommentList.getInstance(getApplicationContext());
 		// Create the sortBy menu and set up the adapter, inherited from BrowseCommentsActivity -SB
 		listView = (ListView) findViewById(R.id.commentListView);
 		setupPage();
+		model.addObserver(adapter);
 		
 		listView.setOnItemClickListener(new OnItemClickListener() {
 			@Override
@@ -42,6 +41,11 @@ public class BrowseTopLevelCommentsActivity extends BrowseCommentsActivityAbstra
 		});
 	}
 	
+	@Override
+	public void onResume() {
+		super.onResume();
+		adapter.notifyDataSetChanged();
+	}
 	/**
 	 * Creates an adapter for displaying the top level comments.
 	 * <p>

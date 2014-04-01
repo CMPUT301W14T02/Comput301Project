@@ -36,7 +36,7 @@ public class BrowseFavoritesActivity extends BrowseCommentsActivityAbstraction {
 			@Override
 			public void onItemClick(AdapterView<?> l, View v, int position, long id) {
 				CommentModel nestedComment = (CommentModel) adapter.getItem(position);
-				Intent goToReplyListActivity = new Intent(getApplicationContext(), BrowseFavoritesActivity.class);
+				Intent goToReplyListActivity = new Intent(BrowseFavoritesActivity.this, BrowseReplyCommentsActivity.class);
 				goToReplyListActivity.putExtra("CommentId", nestedComment.getId());
 				startActivity(goToReplyListActivity);
 			}

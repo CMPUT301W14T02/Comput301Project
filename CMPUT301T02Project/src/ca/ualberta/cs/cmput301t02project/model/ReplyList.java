@@ -23,7 +23,7 @@ public class ReplyList extends Observable implements CommentListModel {
 		Server server = new Server(context);
 		server.post(comment);
 		server.addChildren(parentId, comment.getId());
-		this.notifyAll();
+		notifyObservers();
 	}
 
 	@Override

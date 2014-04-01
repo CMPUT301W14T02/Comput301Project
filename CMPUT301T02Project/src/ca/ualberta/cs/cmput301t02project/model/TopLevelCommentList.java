@@ -6,18 +6,26 @@ import java.util.Observable;
 import android.content.Context;
 
 public class TopLevelCommentList extends Observable implements CommentListModel{
-
-	private Context context;
 	
-	public TopLevelCommentList(Context context) {
+	private Context context;
+	private static TopLevelCommentList instance;
+	
+	private TopLevelCommentList(Context context) {
 		this.context = context;
+	}
+	
+	public static TopLevelCommentList getInstance(Context context) {
+		if(instance == null) {
+			instance = new TopLevelCommentList(context);
+		}
+		return instance;
 	}
 
 	@Override
 	public void add(CommentModel comment) {
 		Server server = new Server(context);
 		server.post(comment);
-		this.notifyAll();
+		notifyObservers();
 	}
 
 	@Override

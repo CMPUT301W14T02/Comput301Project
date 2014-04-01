@@ -9,8 +9,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import ca.ualberta.cs.cmput301t02project.R;
 import ca.ualberta.cs.cmput301t02project.controller.CommentController;
+import ca.ualberta.cs.cmput301t02project.controller.TopLevelListController;
 import ca.ualberta.cs.cmput301t02project.model.GPSLocation;
-import ca.ualberta.cs.cmput301t02project.model.TopLevelCommentList;
 import ca.ualberta.cs.cmput301t02project.model.User;
 
 /**
@@ -46,8 +46,8 @@ public class CreateCommentActivity extends Activity {
 				EditText inputComment = (EditText) findViewById(R.id.create_text);
 				String text = inputComment.getText().toString();
 				Bitmap picture = null;
-				
-				Location location;
+				String username = User.getUser().getName();
+				Location location = GPSLocation.getInstance().getLocation();
 				if ((latitude.getText().toString())!= strLat || ((longitude.getText().toString())!= strLon)) {
 					double lat = Double.valueOf(latitude.getText().toString());
 					double lon = Double.valueOf(longitude.getText().toString());
@@ -55,15 +55,13 @@ public class CreateCommentActivity extends Activity {
 					location.setLatitude(lat);
 					location.setLongitude(lon);
 				}
-				else {
-					location = GPSLocation.getInstance().getLocation();
-				}
 				if(isTopLevel) {
-					CommentListModel list = new TopLevelCommentList(CreateCommentActivity)
+					TopLevelListController controller = new TopLevelListController(CreateCommentActivity.this);
+					controller.add(text, picture, location, username);
 				}
 				else {
 					CommentController commentController = new CommentController(commentId, CreateCommentActivity.this);
-					commentController.addReply(text, picture, location, User.getUser().getName());
+					commentController.addReply(text, picture, location, username);
 				}
 				finish();
 			}

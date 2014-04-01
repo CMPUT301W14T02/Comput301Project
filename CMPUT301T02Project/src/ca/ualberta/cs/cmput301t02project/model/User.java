@@ -5,7 +5,6 @@ import io.searchbox.annotations.JestId;
 import java.util.ArrayList;
 
 import android.content.Context;
-import android.util.Log;
 
 /**
  * The User class stores information about a user. 
@@ -30,14 +29,12 @@ public class User {
 		Server server = new Server(context);
 		user = new User(username);
 		server.pullUser(user);
-		Log.e("alex", (user==null)+"");
 		if(user.getId() == null) {
 			user = new User(username);
 			server.postUser(user);
 		}
-		Log.e("alex", "logged in");
-		user.myComments = new MyCommentsListModel(context);
-		user.favorites = new FavoritesListModel(context);
+		user.myComments = MyCommentsListModel.getInstance(context);
+		user.favorites = FavoritesListModel.getInstance(context);
 	}
 	
 	public static User getUser() {

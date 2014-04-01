@@ -1,9 +1,11 @@
 package ca.ualberta.cs.cmput301t02project.model;
 
-import java.util.AbstractMap;
+import java.util.AbstractMap.SimpleEntry;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Observable;
 import java.util.Set;
 
 import android.content.Context;
@@ -19,7 +21,7 @@ import com.google.gson.Gson;
  * and override the getPreferencesKey method.
  *
  */
-public abstract class StoredCommentListAbstraction extends AbstractMap<String, CommentModel> implements CommentListModel{
+public abstract class StoredCommentListAbstraction extends Observable implements CommentListModel {
 
 	private Context context;
 	
@@ -27,7 +29,7 @@ public abstract class StoredCommentListAbstraction extends AbstractMap<String, C
 	 * Constructor
 	 * @param context A context is needed to handle Storage
 	 */
-	public StoredCommentListAbstraction(Context context) {
+	protected StoredCommentListAbstraction(Context context) {
 		this.context = context;
 	}
 	
@@ -37,7 +39,6 @@ public abstract class StoredCommentListAbstraction extends AbstractMap<String, C
 	 */
 	protected abstract String getPreferencesKey();
 	
-	@Override
 	public Set<Entry<String, CommentModel>> entrySet() {
 		Gson gson = new Gson();
 		SharedPreferences storage = context.getSharedPreferences(getPreferencesKey(), 0);
@@ -58,7 +59,6 @@ public abstract class StoredCommentListAbstraction extends AbstractMap<String, C
 	 * @param id The id.
 	 * @return If the id is present, the comment, else, null.
 	 */
-	@Override
 	public CommentModel get(Object id) {
 		SharedPreferences cache = context.getSharedPreferences(getPreferencesKey(), 0);
 		String key = (String) id;
@@ -74,7 +74,6 @@ public abstract class StoredCommentListAbstraction extends AbstractMap<String, C
 	 * @param value The CommentModel.
 	 * @return If the id already existed, return the comment that was there, else returns null.
 	 */
-	@Override
 	public CommentModel put(String id, CommentModel value) {
 		Gson gson = new Gson();
 		String v = gson.toJson(value);
@@ -90,17 +89,22 @@ public abstract class StoredCommentListAbstraction extends AbstractMap<String, C
 			throw  new IllegalArgumentException("Can't store a comment with null id");
 		}
 		this.put(comment.getId(), comment);
+		notifyObservers();
 	}
 	
 	public ArrayList<CommentModel> getList() {
 		ArrayList<CommentModel> list = new ArrayList<CommentModel>();
-		list.addAll(this.values());
+		for(Entry<String, CommentModel> entry : this.entrySet()) {
+			list.add(entry.getValue());
+		}
 		return list;
 	}
 	
 	public ArrayList<String> getIdList() {
 		ArrayList<String> list = new ArrayList<String>();
-		list.addAll(this.keySet());
+		for(Entry<String, CommentModel> entry : this.entrySet()) {
+			list.add(entry.getKey());
+		}
 		return list;
 	}
 	
@@ -109,6 +113,7 @@ public abstract class StoredCommentListAbstraction extends AbstractMap<String, C
 		if(storage.contains(id)) {
 			this.put(id, comment);
 		}
+		notifyObservers();
 	}
 
 }

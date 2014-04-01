@@ -7,9 +7,9 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 import ca.ualberta.cs.cmput301t02project.R;
 import ca.ualberta.cs.cmput301t02project.controller.CommentController;
-import ca.ualberta.cs.cmput301t02project.model.CommentListModel;
 import ca.ualberta.cs.cmput301t02project.model.CommentModel;
 import ca.ualberta.cs.cmput301t02project.model.ReplyList;
 import ca.ualberta.cs.cmput301t02project.model.User;
@@ -23,19 +23,21 @@ import ca.ualberta.cs.cmput301t02project.view.CommentListAdapterAbstraction;
 public class BrowseReplyCommentsActivity extends BrowseCommentsActivityAbstraction {
 
 	//private TextView selectedComment;
-	private CommentListModel model;
+	private ReplyList model;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_reply_list);
 		listView = (ListView) findViewById(R.id.replyListView);
-		//selectedComment = (TextView) findViewById(R.id.selected_comment);
+		TextView selectedComment = (TextView) findViewById(R.id.selected_comment);
 		final String currentCommentId = getIntent().getStringExtra("CommentId");
 		final CommentController commentController = new CommentController(currentCommentId, this);
 		final CommentModel currentComment = commentController.getComment();
+		selectedComment.setText(currentComment.getText());
 		model = new ReplyList(currentCommentId, this);
 		setupPage();
+		model.addObserver(adapter);
 		
 		Button replyComment = (Button) findViewById(R.id.reply_button);
 		replyComment.setOnClickListener(new View.OnClickListener() {
@@ -66,6 +68,12 @@ public class BrowseReplyCommentsActivity extends BrowseCommentsActivityAbstracti
 				startActivity(goToReplyListActivity);
 			}
 		});
+	}
+	
+	@Override
+	public void onResume() {
+		super.onResume();
+		adapter.notifyDataSetChanged();
 	}
 	
 	@Override
