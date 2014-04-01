@@ -13,15 +13,6 @@
         <requestFocus />
     </EditText>
 
-    <Button
-        android:id="@+id/create_post"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/location_label"
-        android:layout_marginTop="96dp"
-        android:text="@string/post" />
-
     <EditText
         android:id="@+id/longitude_box"
         android:layout_width="80dp"
@@ -69,5 +60,24 @@
         android:layout_toLeftOf="@+id/longitude_box"
         android:text="@string/longitude"
         android:textSize="14sp" />
+
+    <ImageButton
+        android:id="@+id/takeAPhoto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/longitude_box"
+        android:layout_marginTop="47dp"
+        android:layout_toRightOf="@+id/longitude_label"
+        android:onClick="takePhoto"
+        android:src="@android:drawable/ic_menu_camera" />
+
+    <Button
+        android:id="@+id/create_post"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/latitude_label"
+        android:layout_below="@+id/takeAPhoto"
+        android:layout_marginTop="19dp"
+        android:text="@string/post" />
 
 </RelativeLayout>
