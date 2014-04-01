@@ -4,13 +4,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ListView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ListView;
 import ca.ualberta.cs.cmput301t02project.R;
 import ca.ualberta.cs.cmput301t02project.model.CommentModel;
 import ca.ualberta.cs.cmput301t02project.model.FavoritesListModel;
 import ca.ualberta.cs.cmput301t02project.model.User;
-import ca.ualberta.cs.cmput301t02project.view.CommentListAdapter;
 import ca.ualberta.cs.cmput301t02project.view.CommentListAdapterAbstraction;
 import ca.ualberta.cs.cmput301t02project.view.FavoritesAdapter;
 
@@ -20,7 +19,6 @@ import ca.ualberta.cs.cmput301t02project.view.FavoritesAdapter;
  */
 public class BrowseFavoritesActivity extends BrowseCommentsActivityAbstraction {
 
-	private FavoritesAdapter adapter;
 	private FavoritesListModel model;
 	
 	@Override
@@ -47,10 +45,12 @@ public class BrowseFavoritesActivity extends BrowseCommentsActivityAbstraction {
 	@Override
 	public void onResume() {
 		super.onResume();
+		model.refresh();
+		adapter.notifyDataSetChanged();
 	}
 	
 	public CommentListAdapterAbstraction initializeAdapter(){
-		CommentListAdapterAbstraction adapter = new CommentListAdapter(this, R.layout.list_item, model);
+		this.adapter = new FavoritesAdapter(this, R.layout.list_item, model);
 		return adapter;
 	}
 

@@ -8,7 +8,6 @@ import io.searchbox.core.Search;
 
 import java.util.ArrayList;
 
-import android.accounts.NetworkErrorException;
 import android.content.Context;
 
 import com.searchly.jestdroid.DroidClientConfig;
@@ -168,14 +167,8 @@ public class Server {
 					
 					index = new Index.Builder(user).index("cmput301w14t02").type("users").id(user.getId()).build();
 					result = client.execute(index);
-					if(!result.isSucceeded()) {
-						throw new NetworkErrorException();
-					}
 				} catch (Exception e) {
 					e.printStackTrace();
-					throw new RuntimeException();
-				} finally {
-					client.shutdownClient();
 				}
 			}
 			

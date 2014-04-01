@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.location.Location;
 import ca.ualberta.cs.cmput301t02project.model.CommentModel;
 import ca.ualberta.cs.cmput301t02project.model.Server;
+import ca.ualberta.cs.cmput301t02project.model.User;
 
 public class CommentController {
 
@@ -30,6 +31,7 @@ public class CommentController {
 	
 	public void edit(String newText) {
 		model.setText(newText);
+		User.getUser().getMyComments().put(model.getId(), model);
 		update();
 	}
 	
@@ -37,11 +39,12 @@ public class CommentController {
 		return model.getText();
 	}
 	
-	public void addReply(String text, Bitmap picture, Location location, String username) {
-		CommentModel comment = new CommentModel(text, picture, location, username);
+	public void addReply(String text, Bitmap picture, Location location, User user) {
+		CommentModel comment = new CommentModel(text, picture, location, user.getName());
 		comment.setTopLevelComment(false);
 		Server server = new Server(context);
 		server.post(comment);
+		user.addMyComment(comment);
 		this.model.addChildId(comment.getId());
 		update();
 	}

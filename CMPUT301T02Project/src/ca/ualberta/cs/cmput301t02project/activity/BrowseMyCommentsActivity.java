@@ -4,8 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ListView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ListView;
 import ca.ualberta.cs.cmput301t02project.R;
 import ca.ualberta.cs.cmput301t02project.model.CommentModel;
 import ca.ualberta.cs.cmput301t02project.model.MyCommentsListModel;
@@ -39,6 +39,13 @@ public class BrowseMyCommentsActivity extends BrowseCommentsActivityAbstraction 
 				startActivity(goToEditCommentActivity);
 			}
 		});
+	}
+	
+	@Override
+	public void onResume() {
+		super.onResume();
+		model.refresh();
+		adapter.notifyDataSetChanged();
 	}
 	
 	/**

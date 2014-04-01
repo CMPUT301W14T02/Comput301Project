@@ -19,7 +19,7 @@ public class FavoritesListModel extends StoredCommentListAbstraction {
 
 	@Override
 	protected String getPreferencesKey() {
-		return "FAVORITES_LIST_KEY";
+		return "FAVORITES_LIST_KEY" + User.getUser().getName();
 	}
 
 }

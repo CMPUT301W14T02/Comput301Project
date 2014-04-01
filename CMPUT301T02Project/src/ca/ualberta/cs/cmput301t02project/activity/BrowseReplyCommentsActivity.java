@@ -22,7 +22,6 @@ import ca.ualberta.cs.cmput301t02project.view.CommentListAdapterAbstraction;
  */
 public class BrowseReplyCommentsActivity extends BrowseCommentsActivityAbstraction {
 
-	//private TextView selectedComment;
 	private ReplyList model;
 
 	@Override

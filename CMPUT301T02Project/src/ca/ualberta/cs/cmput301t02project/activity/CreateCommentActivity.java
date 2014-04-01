@@ -46,7 +46,6 @@ public class CreateCommentActivity extends Activity {
 				EditText inputComment = (EditText) findViewById(R.id.create_text);
 				String text = inputComment.getText().toString();
 				Bitmap picture = null;
-				String username = User.getUser().getName();
 				Location location = GPSLocation.getInstance().getLocation();
 				if ((latitude.getText().toString())!= strLat || ((longitude.getText().toString())!= strLon)) {
 					double lat = Double.valueOf(latitude.getText().toString());
@@ -57,11 +56,11 @@ public class CreateCommentActivity extends Activity {
 				}
 				if(isTopLevel) {
 					TopLevelListController controller = new TopLevelListController(CreateCommentActivity.this);
-					controller.add(text, picture, location, username);
+					controller.add(text, picture, location, User.getUser());
 				}
 				else {
 					CommentController commentController = new CommentController(commentId, CreateCommentActivity.this);
-					commentController.addReply(text, picture, location, username);
+					commentController.addReply(text, picture, location, User.getUser());
 				}
 				finish();
 			}

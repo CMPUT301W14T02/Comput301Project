@@ -19,7 +19,7 @@ public class MyCommentsListModel extends StoredCommentListAbstraction {
 
 	@Override
 	protected String getPreferencesKey() {
-		return "MY_COMMENTS_KEY";
+		return "MY_COMMENTS_KEY" + User.getUser().getName();
 	}
 
 }

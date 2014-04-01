@@ -81,6 +81,7 @@ public abstract class StoredCommentListAbstraction extends Observable implements
 		String previousValueJson = storage.getString(id, null);
 		CommentModel previousValue = gson.fromJson(previousValueJson, CommentModel.class);
 		storage.edit().putString(id, v).commit();
+		notifyObservers();
 		return previousValue;
 	}
 	
@@ -108,12 +109,13 @@ public abstract class StoredCommentListAbstraction extends Observable implements
 		return list;
 	}
 	
-	public void update(String id, CommentModel comment) {
-		SharedPreferences storage = context.getSharedPreferences(getPreferencesKey(), 0);
-		if(storage.contains(id)) {
-			this.put(id, comment);
+	public void refresh() {
+		ArrayList<String> ids = this.getIdList();
+		Server server = new Server(context);
+		ArrayList<CommentModel> comments = server.pull(ids);
+		for(CommentModel c : comments) {
+			this.put(c.getId(), c);
 		}
-		notifyObservers();
 	}
 
 }
