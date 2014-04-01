@@ -66,8 +66,8 @@ public class EditCommentActivity extends Activity {
 				//for editing locations
 				double lat = 0, lon = 0;
 				Location commentLocation = new Location("");
-
-				if ((latitude.getText().toString())!= strLat && ((longitude.getText().toString())!= strLon))
+				
+				if ((latitude.getText().toString())!= strLat | ((longitude.getText().toString())!= strLon))
 				{
 					lat = Double.valueOf(latitude.getText().toString());
 					lon = Double.valueOf(longitude.getText().toString());
