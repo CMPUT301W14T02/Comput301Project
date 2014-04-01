@@ -1,9 +1,16 @@
 package ca.ualberta.cs.cmput301t02project.activity;
 
+import java.io.File;
+
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.location.Location;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
+import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -66,6 +73,45 @@ public class CreateCommentActivity extends Activity {
 			}
 		});
 
+	}
+	
+	// For the takePhoto method
+	Uri imageFileUri;
+	private static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 100;
+	
+	/**
+	 * Takes a photo using the android camera
+	 * <p>
+	 * * Taken directly from the CameraTest project on eclass (accessed April 1, 2014) *
+	 * Sets up a file to store the photo.
+	 * Takes the photo and allows the user to retake it if needed.
+	 * Returns to this activity when done.
+	 * <p>
+	 * @param v	to allow takePhoto to be called using XML, view is a required parameter
+	 */
+	public void takePhoto(View v) {
+		Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+		String folder = Environment.getExternalStorageDirectory().getAbsolutePath() + "/tmp";
+		File folderF = new File(folder);
+		
+		if (!folderF.exists()) {
+			folderF.mkdir();
+		}
+	        
+		String imageFilePath = folder + "/" + String.valueOf(System.currentTimeMillis()) + "jpg";
+		File imageFile = new File(imageFilePath);
+		imageFileUri = Uri.fromFile(imageFile);
+	        
+		intent.putExtra(MediaStore.EXTRA_OUTPUT, imageFileUri);
+		startActivityForResult(intent, CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);
+	}
+	    
+	
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.create_comment, menu);
+		return true;
 	}
 
 }
