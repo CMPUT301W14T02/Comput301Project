@@ -13,17 +13,6 @@
         <requestFocus />
     </EditText>
 
-    <TextView
-        android:id="@+id/location_editLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/edit_text"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="23dp"
-        android:text="@string/cust_location"
-        android:textSize="20sp" />
-
     <Button
         android:id="@+id/edit_post"
         android:layout_width="wrap_content"
@@ -70,5 +59,16 @@
         android:layout_alignBottom="@+id/longitude_editLabel"
         android:layout_toRightOf="@+id/longitude_editLabel"
         android:ems="10" />
+
+    <TextView
+        android:id="@+id/location_editLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/edit_text"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="25dp"
+        android:text="@string/cust_location"
+        android:textSize="20sp" />
 
 </RelativeLayout>

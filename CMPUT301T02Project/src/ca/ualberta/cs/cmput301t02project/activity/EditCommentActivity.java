@@ -36,6 +36,17 @@ public class EditCommentActivity extends Activity {
 		
 		EditText inputComment = (EditText) findViewById(R.id.edit_text);
 		inputComment.setText(ProjectApplication.getInstance().getCurrentComment().getText());
+		
+		final EditText latitude = (EditText) findViewById(R.id.latitude_editBox);
+		final EditText longitude = (EditText) findViewById(R.id.longitude_editBox);
+		
+		double commentLat = ProjectApplication.getInstance().getCurrentComment().getLocation().getLatitude();
+		double commentLon = ProjectApplication.getInstance().getCurrentComment().getLocation().getLongitude();
+		final String strLat = String.valueOf(commentLat);
+		final String strLon = String.valueOf(commentLon);
+		
+		latitude.setText(strLat);
+		longitude.setText(strLon);
 
 		Button post = (Button) findViewById(R.id.edit_post);
 		
@@ -51,7 +62,20 @@ public class EditCommentActivity extends Activity {
 
 				myCommentsListController.changeText(ProjectApplication.getInstance().getCurrentComment(), 
 						inputComment.getText().toString());
-					
+				
+				//for editing locations
+				double lat = 0, lon = 0;
+				Location commentLocation = new Location("");
+
+				if ((latitude.getText().toString())!= strLat && ((longitude.getText().toString())!= strLon))
+				{
+					lat = Double.valueOf(latitude.getText().toString());
+					lon = Double.valueOf(longitude.getText().toString());
+					commentLocation.setLatitude(lat);
+					commentLocation.setLongitude(lon);
+					ProjectApplication.getInstance().getCurrentComment().setLocation(commentLocation);
+				} 
+				
 				finish();
 			}
 		});
