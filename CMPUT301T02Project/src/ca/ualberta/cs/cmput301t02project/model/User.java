@@ -22,7 +22,7 @@ public class User {
 	private static User user;
 
 	private User(String username) {
-		this.username = username;
+		this.username = username.toLowerCase();
 	}
 	
 	public static void login(String username, Context context) {
@@ -52,7 +52,7 @@ public class User {
 	 * @param username	The username for the User
 	 */
 	public void setName(String username) {
-		this.username = username;
+		this.username = username.toLowerCase();
 	}
 	
 	/**
