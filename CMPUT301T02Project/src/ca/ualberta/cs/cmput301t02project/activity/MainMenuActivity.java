@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import ca.ualberta.cs.cmput301t02project.R;
+import ca.ualberta.cs.cmput301t02project.model.GPSLocation;
 import ca.ualberta.cs.cmput301t02project.model.User;
 
 /**
@@ -29,7 +30,7 @@ public class MainMenuActivity extends Activity {
 		// Print welcome message on screen -SB
 		TextView welcomeMessage = (TextView) findViewById(R.id.welcome_message);
 		welcomeMessage.setText("Welcome " + User.getUser().getName() + "!");
-		
+		GPSLocation.initializeLocation(getApplicationContext());
 		// If "Create" is clicked -SB
 		Button createComment = (Button) findViewById(R.id.create);
 		createComment.setOnClickListener(new View.OnClickListener() {

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ListView;
 import android.widget.AdapterView.OnItemClickListener;
 import ca.ualberta.cs.cmput301t02project.R;
 import ca.ualberta.cs.cmput301t02project.model.CommentListModel;
@@ -19,24 +20,21 @@ import ca.ualberta.cs.cmput301t02project.view.CommentListAdapterAbstraction;
 
 public class BrowseTopLevelCommentsActivity extends BrowseCommentsActivityAbstraction {
 	
-	// TODO: Refactor code to use new classes
 	
 	private CommentListModel model;
-	//private CommentListAdapter adapter;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_top_level_list);
 		model = new TopLevelCommentList(this);
-
 		// Create the sortBy menu and set up the adapter, inherited from BrowseCommentsActivity -SB
+		listView = (ListView) findViewById(R.id.commentListView);
 		setupPage();
 		
 		listView.setOnItemClickListener(new OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> l, View v, int position, long id) {
 				CommentModel nestedComment = (CommentModel) adapter.getItem(position);
-				
 				Intent goToReplyListActivity = new Intent(getApplicationContext(),BrowseReplyCommentsActivity.class);
 				goToReplyListActivity.putExtra("CommentId", nestedComment.getId());
 				startActivity(goToReplyListActivity);

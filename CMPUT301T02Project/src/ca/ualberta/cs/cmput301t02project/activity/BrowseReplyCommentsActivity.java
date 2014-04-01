@@ -43,7 +43,7 @@ public class BrowseReplyCommentsActivity extends BrowseCommentsActivityAbstracti
 			public void onClick(View v) {
 				Intent intent = new Intent(BrowseReplyCommentsActivity.this, CreateCommentActivity.class);
 				intent.putExtra("CommentId", currentCommentId);
-				startActivity(new Intent(BrowseReplyCommentsActivity.this, CreateCommentActivity.class));
+				startActivity(intent);
 			}
 		});
 		

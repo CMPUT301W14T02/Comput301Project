@@ -17,7 +17,6 @@ import com.google.gson.Gson;
  * With this, you can abstract the storage details and treat it like a Map.
  * All the CommentLists that are stored on the phone should inherit from this
  * and override the getPreferencesKey method.
- * @author alex
  *
  */
 public abstract class StoredCommentListAbstraction extends AbstractMap<String, CommentModel> implements CommentListModel{

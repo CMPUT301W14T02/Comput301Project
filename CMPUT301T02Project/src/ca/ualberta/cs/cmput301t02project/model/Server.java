@@ -42,9 +42,6 @@ public class Server {
 					
 					index = new Index.Builder(comment).index("cmput301w14t02").type("comments").id(comment.getId()).build();
 					result = client.execute(index);
-					if(!result.isSucceeded()) {
-						throw new NetworkErrorException();
-					}
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

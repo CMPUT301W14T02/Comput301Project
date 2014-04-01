@@ -29,7 +29,13 @@ public class GPSLocation {
 	public Location getLocation() {
 		Criteria criteria = new Criteria();
 		String provider = locationManager.getBestProvider(criteria, false);
-		return locationManager.getLastKnownLocation(provider);
+		Location location = locationManager.getLastKnownLocation(provider);
+		if(location == null) {
+			location = new Location("");
+			location.setLatitude(0.0);
+			location.setLongitude(0.0);
+		}
+		return location;
 	}
 	
 }

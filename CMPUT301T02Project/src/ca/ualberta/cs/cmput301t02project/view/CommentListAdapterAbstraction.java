@@ -30,6 +30,7 @@ public abstract class CommentListAdapterAbstraction extends ArrayAdapter<Comment
 	private Comparator<CommentModel> sortByLocation;
 	private Comparator<CommentModel> sortByRank;
 	private Location myLocation = null;
+	private ArrayList<CommentModel> list;
 	
 
 	/**
@@ -47,6 +48,7 @@ public abstract class CommentListAdapterAbstraction extends ArrayAdapter<Comment
 	public CommentListAdapterAbstraction(Context context, int resource, CommentListModel model) {
 		super(context, resource, model.getList());
 		this.model = model;
+		this.list = model.getList();
 		sortByDate = new Comparator<CommentModel>() {
 			public int compare(CommentModel a, CommentModel b) {
 				if (a.getDate().before(b.getDate())) {
@@ -97,10 +99,13 @@ public abstract class CommentListAdapterAbstraction extends ArrayAdapter<Comment
 	
 	@Override
 	public void notifyDataSetChanged() {
+		setNotifyOnChange(false);
+		this.list = model.getList();
 		this.clear();
-		this.addAll(model.getList());
+		this.addAll(this.list);
 		this.sortList();
 		super.notifyDataSetChanged();
+		setNotifyOnChange(true);
 	}
 	
 	/**
@@ -148,13 +153,8 @@ public abstract class CommentListAdapterAbstraction extends ArrayAdapter<Comment
 	 * adds the sorted list of comments contained in finalList.
 	 */
 	public void sortByDefaultMethod() {
-		String loc = "Location Initialization";
-		myLocation = new Location(loc);
 		myLocation = GPSLocation.getInstance().getLocation();
 		
-		
-		// will hold the remaining unsorted CommentModels
-		ArrayList<CommentModel> list = (ArrayList<CommentModel>) model.getList();
 		// holds the sorted CommentModels to be passed to sortByLocation
 		ArrayList<CommentModel> list2 = new ArrayList<CommentModel>();
 		// contains the final list
@@ -270,30 +270,26 @@ public abstract class CommentListAdapterAbstraction extends ArrayAdapter<Comment
 	 * the view.
 	 */
 	public void sortList() {
-		if (model != null) {
-			ArrayList<CommentModel> list = model.getList();
+		if (list != null) {
 			if (sortMethod.equals("Default")) {
 				sortByDefaultMethod();
-				notifyDataSetChanged();
 			} 
 			else if (sortMethod.equals("Date")) {
 				Collections.sort(list, sortByDate);
-				notifyDataSetChanged();
 			} 
 			else if (sortMethod.equals("Picture")) {
 
 			} 
 			else if (sortMethod.equals("Location")) {
 				Collections.sort(list, sortByLocation);
-				notifyDataSetChanged();
 			} 
 			else if (sortMethod.equals("Other Location")) {
 			
 			} 
 			else if (sortMethod.equals("Ranking")) {
 				Collections.sort(list, sortByRank);
-				notifyDataSetChanged();
 			}
+			super.notifyDataSetChanged();
 		}
 
 	}
