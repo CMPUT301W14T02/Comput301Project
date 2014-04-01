@@ -33,7 +33,6 @@ public class Server {
 		Thread thread = new Thread() {
 			@Override
 			public void run() {
-				
 				try {
 					Index index = new Index.Builder(comment).index("cmput301w14t02").type("comments").id(comment.getId()).build();
 					
@@ -88,8 +87,13 @@ public class Server {
 	}
 	
 	public ArrayList<CommentModel> pullChildrenOf(String parentId) {
-		CommentModel parent = this.pull(parentId);
-		return this.pull(parent.getChildrenIds());
+		if(parentId != null) {
+			CommentModel parent = this.pull(parentId);
+			return this.pull(parent.getChildrenIds());
+		}
+		else {
+			return this.pullTopLevel();
+		}
 	}
 	
 	public ArrayList<CommentModel> pull(final ArrayList<String> idList) {
@@ -186,7 +190,7 @@ public class Server {
 			e.printStackTrace();
 		}
 	}
-	final int q =3;
+
 	public void pullUser(final User user) {
 		final String username = user.getName();
 		
@@ -198,13 +202,17 @@ public class Server {
 				JestResult result = null;
 				try {
 					result = client.execute(search);
-				} catch (Exception e) { 
-					// TODO Auto-generated catch block
+				} catch (Exception e) {
 					e.printStackTrace();
 				}
 				if(result != null) {
 					User temporaryUser = ((User)result.getSourceAsObject(User.class));
-					user.setId(temporaryUser.getId());
+					if(temporaryUser != null) {
+						user.setId(temporaryUser.getId());
+					}
+					else {
+						user.setId(null);
+					}
 				}
 				else {
 					user.setId(null);
@@ -220,9 +228,10 @@ public class Server {
 	}
 
 	public void addChildren(String parentId, String childId) {
-		ArrayList<String> list = new ArrayList<String>();
-		list.add(parentId);
-		CommentModel comment = this.pull(list).get(0);
+		if(parentId == null) {
+			throw new IllegalArgumentException("Parent Id can't be null");
+		}
+		CommentModel comment = this.pull(parentId);
 		comment.addChildId(childId);
 		this.post(comment);
 	}

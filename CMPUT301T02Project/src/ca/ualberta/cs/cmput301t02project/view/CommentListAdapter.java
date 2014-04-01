@@ -1,9 +1,7 @@
 package ca.ualberta.cs.cmput301t02project.view;
 
-import java.util.ArrayList;
-
 import android.content.Context;
-import ca.ualberta.cs.cmput301t02project.model.CommentModel;
+import ca.ualberta.cs.cmput301t02project.model.CommentListModel;
 
 /**
  * View for comment lists.
@@ -13,7 +11,7 @@ import ca.ualberta.cs.cmput301t02project.model.CommentModel;
  */
 public class CommentListAdapter extends CommentListAdapterAbstraction {
 
-	public CommentListAdapter(Context context, int resource, ArrayList<CommentModel> model) {
+	public CommentListAdapter(Context context, int resource, CommentListModel model) {
 		super(context, resource, model);
 	}
 

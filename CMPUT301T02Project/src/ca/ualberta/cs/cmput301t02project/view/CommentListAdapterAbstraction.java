@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Locale;
-import java.util.Observable;
-import java.util.Observer;
 
 import android.content.Context;
 import android.location.Location;
@@ -13,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
+import ca.ualberta.cs.cmput301t02project.model.CommentListModel;
 import ca.ualberta.cs.cmput301t02project.model.CommentModel;
 import ca.ualberta.cs.cmput301t02project.model.GPSLocation;
 
@@ -23,9 +22,9 @@ import ca.ualberta.cs.cmput301t02project.model.GPSLocation;
  * and is called on by either an activity, to change sorting method, or by its model,
  * to update the view and/or resort the list due to changes to the model.
  */
-public abstract class CommentListAdapterAbstraction extends ArrayAdapter<CommentModel> implements Observer {
+public abstract class CommentListAdapterAbstraction extends ArrayAdapter<CommentModel> {
 
-	private ArrayList<CommentModel> model = null;
+	private CommentListModel model;
 	private String sortMethod = "Default";
 	private Comparator<CommentModel> sortByDate;
 	private Comparator<CommentModel> sortByLocation;
@@ -45,9 +44,9 @@ public abstract class CommentListAdapterAbstraction extends ArrayAdapter<Comment
 	 * @param resource The resource ID for the layout file containing the ListView to use
 	 * @param model Objects to represent in the ListView
 	 */
-	public CommentListAdapterAbstraction(Context context, int resource, ArrayList<CommentModel> list) {
-		super(context, resource, list);
-		
+	public CommentListAdapterAbstraction(Context context, int resource, CommentListModel model) {
+		super(context, resource, model.getList());
+		this.model = model;
 		sortByDate = new Comparator<CommentModel>() {
 			public int compare(CommentModel a, CommentModel b) {
 				if (a.getDate().before(b.getDate())) {
@@ -96,7 +95,10 @@ public abstract class CommentListAdapterAbstraction extends ArrayAdapter<Comment
 		};
 	}
 	
-	public void update(Observable observable, Object data) {
+	@Override
+	public void notifyDataSetChanged() {
+		this.clear();
+		this.addAll(model.getList());
 		this.sortList();
 		super.notifyDataSetChanged();
 	}
@@ -118,7 +120,7 @@ public abstract class CommentListAdapterAbstraction extends ArrayAdapter<Comment
 	 * <p>
 	 * @param model Sets model for adapter instance
 	 */
-	public void setModel(ArrayList<CommentModel> model) {
+	public void setModel(CommentListModel model) {
 		this.model = model;
 	}
 	
@@ -127,7 +129,7 @@ public abstract class CommentListAdapterAbstraction extends ArrayAdapter<Comment
 	 * <p>
 	 * @return Model set for adapter instance
 	 */
-	public ArrayList<CommentModel> getModel() {
+	public CommentListModel getModel() {
 		return model;
 	}
 	
@@ -152,7 +154,7 @@ public abstract class CommentListAdapterAbstraction extends ArrayAdapter<Comment
 		
 		
 		// will hold the remaining unsorted CommentModels
-		ArrayList<CommentModel> list = (ArrayList<CommentModel>) model;
+		ArrayList<CommentModel> list = (ArrayList<CommentModel>) model.getList();
 		// holds the sorted CommentModels to be passed to sortByLocation
 		ArrayList<CommentModel> list2 = new ArrayList<CommentModel>();
 		// contains the final list
@@ -269,7 +271,7 @@ public abstract class CommentListAdapterAbstraction extends ArrayAdapter<Comment
 	 */
 	public void sortList() {
 		if (model != null) {
-			ArrayList<CommentModel> list = model;
+			ArrayList<CommentModel> list = model.getList();
 			if (sortMethod.equals("Default")) {
 				sortByDefaultMethod();
 				notifyDataSetChanged();

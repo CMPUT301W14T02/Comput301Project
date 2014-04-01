@@ -3,7 +3,6 @@ package ca.ualberta.cs.cmput301t02project.activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -20,7 +19,7 @@ public class LoginActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-	
+		android.util.Log.e("hey","login");
 		setContentView(R.layout.activity_login);
 	}
 
@@ -38,6 +37,7 @@ public class LoginActivity extends Activity {
 		EditText enteredName = (EditText) findViewById(R.id.login_username);
 
 		// Test if the input is allowed -SB
+
 		login(enteredName.getText().toString());
 	}
 
@@ -51,11 +51,9 @@ public class LoginActivity extends Activity {
 	 * <p>
 	 * @param username	The user's username input
 	 */
-	public void login(String username) {
-		
+	private void login(String username) {
 		// Message on screen -SB
 		TextView message = (TextView) findViewById(R.id.login_message);
-
 		// If valid username set it -SB
 		if (checkIfValid(username)) {
 
@@ -85,18 +83,8 @@ public class LoginActivity extends Activity {
 	 * @param username	The username entered by the user
 	 * @return	Returns false for invalid username, else true
 	 */
-	public boolean checkIfValid(String username) {
-		if (username.equals("")) {
-			return false;
-		} 
-		return true;
-	}
-	
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.login, menu);
-		return true;
+	private boolean checkIfValid(String username) {
+		return !username.equals("");
 	}
 
 }

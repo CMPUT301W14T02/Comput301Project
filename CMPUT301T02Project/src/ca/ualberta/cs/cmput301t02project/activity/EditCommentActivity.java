@@ -9,16 +9,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import ca.ualberta.cs.cmput301t02project.R;
 import ca.ualberta.cs.cmput301t02project.controller.CommentController;
-import ca.ualberta.cs.cmput301t02project.controller.MyCommentsController;
-import ca.ualberta.cs.cmput301t02project.model.User;
 
 /**
  * Allows a user to edit the comment they selected.
  */
 public class EditCommentActivity extends Activity {
 
-	private MyCommentsController myCommentsListController;
-		
 	//Likely will not need this attribute. Will know when write code for custom location. -KW
 	private Location currentLocation;
 
@@ -46,9 +42,6 @@ public class EditCommentActivity extends Activity {
 				EditText inputComment = (EditText) findViewById(R.id.edit_text);
 				String newText = inputComment.getText().toString();
 				commentController.edit(newText);
-
-				myCommentsListController.changeText(ProjectApplication.getInstance().getCurrentComment(), 
-						inputComment.getText().toString());
 					
 				finish();
 			}

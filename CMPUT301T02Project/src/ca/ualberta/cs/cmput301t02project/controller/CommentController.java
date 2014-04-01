@@ -4,7 +4,10 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.location.Location;
 import ca.ualberta.cs.cmput301t02project.model.CommentModel;
+import ca.ualberta.cs.cmput301t02project.model.FavoritesListModel;
+import ca.ualberta.cs.cmput301t02project.model.MyCommentsListModel;
 import ca.ualberta.cs.cmput301t02project.model.Server;
+import ca.ualberta.cs.cmput301t02project.model.User;
 
 public class CommentController {
 
@@ -21,6 +24,11 @@ public class CommentController {
 	private void update() {
 		Server server = new Server(context);
 		server.post(model);
+		User user = User.getUser();
+		FavoritesListModel favorites = user.getFavorites();
+		MyCommentsListModel myComments = user.getMyComments();
+		favorites.update(model.getId(), model);
+		myComments.update(model.getId(), model);
 	}
 	
 	public void incrementRating() {
@@ -43,5 +51,9 @@ public class CommentController {
 		server.post(comment);
 		this.model.addChildId(comment.getId());
 		update();
+	}
+	
+	public CommentModel getComment() {
+		return model;
 	}
 }

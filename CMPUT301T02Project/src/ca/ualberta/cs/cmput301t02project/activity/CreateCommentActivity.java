@@ -1,46 +1,27 @@
 package ca.ualberta.cs.cmput301t02project.activity;
 
 import android.app.Activity;
+import android.graphics.Bitmap;
 import android.location.Location;
 import android.os.Bundle;
-import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import ca.ualberta.cs.cmput301t02project.R;
-import ca.ualberta.cs.cmput301t02project.controller.CommentListController;
-import ca.ualberta.cs.cmput301t02project.controller.MyCommentsController;
-import ca.ualberta.cs.cmput301t02project.model.CommentModel;
+import ca.ualberta.cs.cmput301t02project.controller.CommentController;
 import ca.ualberta.cs.cmput301t02project.model.GPSLocation;
-import ca.ualberta.cs.cmput301t02project.model.Server;
 import ca.ualberta.cs.cmput301t02project.model.User;
 
 /**
  * Allows a user to create their own comment. 
  */
 public class CreateCommentActivity extends Activity {
-
-	// TODO: Refactor with new classes
-	private CommentListController commentListController;
-	private MyCommentsController myCommentsListController;
-
-	
-	//Likely will not need this attribute. Will know when write code for custom location. -KW
-	private Location currentLocation;
-
-	public void setCustomCurrentLocation(double lat, double lon) {
-		currentLocation.setLatitude(lat);
-		currentLocation.setLongitude(lon);
-	}
 		
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
 		String commentId = getIntent().getStringExtra("CommentId");
-		commentListController = new CommentListController(commentId);
-		myCommentsListController = new MyCommentsController(User.getUser().getMyComments());
-		
+		final CommentController commentController = new CommentController(commentId, this);
 		setContentView(R.layout.activity_create_comment);
 		
 		final EditText latitude = (EditText) findViewById(R.id.latitude_box);
@@ -60,43 +41,26 @@ public class CreateCommentActivity extends Activity {
 			
 			@Override
 			public void onClick(View v) {
-
 				EditText inputComment = (EditText) findViewById(R.id.create_text);
+				String text = inputComment.getText().toString();
+				Bitmap picture = null;
 				
-				//for custom locations
-				double lat = 0, lon = 0;
-				Location customLocation = new Location("");
-
-				if ((latitude.getText().toString())!= strLat && ((longitude.getText().toString())!= strLon))
-				{
-					lat = Double.valueOf(latitude.getText().toString());
-					lon = Double.valueOf(longitude.getText().toString());
-					customLocation.setLatitude(lat);
-					customLocation.setLongitude(lon);
-				} 
-
-				// Refactor into MVC?
-				CommentModel comment;
-				
-				Server server = new Server();
-				server.post(comment);
-				
-				comment = commentListController.addNewComment(inputComment.getText().toString(), 
-						null, User.getUser().getName().toString(), customLocation);
-				
-				//myCommentsListController.addNewComment(comment, getApplicationContext());
-				//ProjectApplication.getInstance().pushUser();
+				Location location;
+				if ((latitude.getText().toString())!= strLat || ((longitude.getText().toString())!= strLon)) {
+					double lat = Double.valueOf(latitude.getText().toString());
+					double lon = Double.valueOf(longitude.getText().toString());
+					location = new Location("");
+					location.setLatitude(lat);
+					location.setLongitude(lon);
+				}
+				else {
+					location = GPSLocation.getInstance().getLocation();
+				}
+				commentController.addReply(text, picture, location, User.getUser().getName());
 				finish();
 			}
 		});
 
-	}
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.create_comment, menu);
-		return true;
 	}
 
 }

@@ -1,7 +1,5 @@
 package ca.ualberta.cs.cmput301t02project.activity;
 
-import java.util.ArrayList;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -9,10 +7,11 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.TextView;
 import ca.ualberta.cs.cmput301t02project.R;
 import ca.ualberta.cs.cmput301t02project.controller.CommentController;
+import ca.ualberta.cs.cmput301t02project.model.CommentListModel;
 import ca.ualberta.cs.cmput301t02project.model.CommentModel;
+import ca.ualberta.cs.cmput301t02project.model.ReplyList;
 import ca.ualberta.cs.cmput301t02project.model.User;
 import ca.ualberta.cs.cmput301t02project.view.CommentListAdapter;
 import ca.ualberta.cs.cmput301t02project.view.CommentListAdapterAbstraction;
@@ -23,36 +22,27 @@ import ca.ualberta.cs.cmput301t02project.view.CommentListAdapterAbstraction;
  */
 public class BrowseReplyCommentsActivity extends BrowseCommentsActivityAbstraction {
 
-	// TODO: Refactor using new classes
-
-	private ListView replyCommentListView;
-	private TextView selectedComment;
-	private CommentListAdapter adapter;
-	private ArrayList<CommentModel> replyCommentList;
-	private CommentController commentController;
-	private CommentModel currentComment;
+	//private TextView selectedComment;
+	private CommentListModel model;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_reply_list);
-		replyCommentListView = (ListView) findViewById(R.id.replyListView);
-		selectedComment = (TextView) findViewById(R.id.selected_comment);
-
-		// Display selected comment
-		selectedComment.setText(ProjectApplication.getInstance().getCurrentComment().getText());
-		
-		currentComment = ProjectApplication.getInstance().getCurrentComment();
-		
-		commentController = new CommentController(currentComment);
-		// Create the sortBy menu and set up the adapter, inherited from BrowseCommentsActivity -SB
+		listView = (ListView) findViewById(R.id.replyListView);
+		//selectedComment = (TextView) findViewById(R.id.selected_comment);
+		final String currentCommentId = getIntent().getStringExtra("CommentId");
+		final CommentController commentController = new CommentController(currentCommentId, this);
+		final CommentModel currentComment = commentController.getComment();
+		model = new ReplyList(currentCommentId, this);
 		setupPage();
 		
-		// If replying to comment -SB
 		Button replyComment = (Button) findViewById(R.id.reply_button);
 		replyComment.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
+				Intent intent = new Intent(BrowseReplyCommentsActivity.this, CreateCommentActivity.class);
+				intent.putExtra("CommentId", currentCommentId);
 				startActivity(new Intent(BrowseReplyCommentsActivity.this, CreateCommentActivity.class));
 			}
 		});
@@ -64,54 +54,23 @@ public class BrowseReplyCommentsActivity extends BrowseCommentsActivityAbstracti
 				User user = User.getUser();
 				user.addFavoriteComment(currentComment);
 				commentController.incrementRating();
-				//ProjectApplication.getInstance().pushUser();
-				
 			}
 		});
 
-		// To view the replies of a reply -SB
-		replyCommentListView.setOnItemClickListener(new OnItemClickListener() {
+		listView.setOnItemClickListener(new OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> l, View v, int position, long id) {
-				// Refactor into MVC?
 				CommentModel nestedComment = (CommentModel) adapter.getItem(position);
-				ProjectApplication.getInstance().setCurrentComment(nestedComment, getApplicationContext());
-
 				Intent goToReplyListActivity = new Intent(getApplicationContext(), BrowseReplyCommentsActivity.class);
+				goToReplyListActivity.putExtra("CommentId", nestedComment.getId());
 				startActivity(goToReplyListActivity);
 			}
 		});
 	}
-
-	@Override
-	public void onResume() {
-		super.onResume();
-		ProjectApplication.getInstance().setCurrentComment(currentComment, getApplicationContext());
-		initializeAdapter();
-		adapter.sortList();
-		adapter.notifyDataSetChanged();
-	}
 	
-	/**
-	 * Creates an adapter for displaying the replies to the current selected comment.
-	 * <p>
-	 * Called from onCreate().
-	 * <p>
-	 * @return 
-	 */
-	public CommentListAdapterAbstraction initializeAdapter(){
-
-		// Get the comment list of replies to selected comment
-		replyCommentList = ProjectApplication.getInstance().getCurrentComment().pullReplies(getApplicationContext()).getCommentList();
-		
-		// Add comments to adapter
-		adapter = new CommentListAdapter(this, R.layout.list_item, replyCommentList);
-		//replyCommentList.setAdapter(adapter);
-		adapter.setModel(replyCommentList);
-
-		// Display comments in adapter
-		replyCommentListView.setAdapter(adapter);
-
+	@Override
+	public CommentListAdapterAbstraction initializeAdapter() {
+		this.adapter = new CommentListAdapter(this, R.layout.list_item, model);
 		return adapter;
 	}
 	

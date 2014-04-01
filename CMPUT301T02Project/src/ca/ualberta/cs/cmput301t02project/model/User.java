@@ -5,6 +5,7 @@ import io.searchbox.annotations.JestId;
 import java.util.ArrayList;
 
 import android.content.Context;
+import android.util.Log;
 
 /**
  * The User class stores information about a user. 
@@ -27,12 +28,14 @@ public class User {
 	
 	public static void login(String username, Context context) {
 		Server server = new Server(context);
-		User user = new User(username);
+		user = new User(username);
 		server.pullUser(user);
+		Log.e("alex", (user==null)+"");
 		if(user.getId() == null) {
 			user = new User(username);
 			server.postUser(user);
 		}
+		Log.e("alex", "logged in");
 		user.myComments = new MyCommentsListModel(context);
 		user.favorites = new FavoritesListModel(context);
 	}
@@ -80,8 +83,8 @@ public class User {
 	 * @return	List of comments that the User posted
 	 * @see CommentListModel	Example of a CommentListModel
 	 */
-	public ArrayList<CommentModel> getMyComments() {
-		return myComments.getCommentList();
+	public MyCommentsListModel getMyComments() {
+		return myComments;
 	}
 	
 	/**
@@ -148,15 +151,15 @@ public class User {
 	 * @param context - context of the application
 	 * @return CommentListModel containing comments favorited by user
 	 */
-	public ArrayList<CommentModel> getFavorites(){
-		return favorites.getCommentList();
+	public FavoritesListModel getFavorites(){
+		return favorites;
 	}
 	
-	public ArrayList<String> getMyCommentIds(String list) {
+	public ArrayList<String> getMyCommentIds() {
 		return myComments.getIdList();
 	}
 	
-	public ArrayList<String> getFavoritesCommentIds(String list) {
+	public ArrayList<String> getFavoritesCommentIds() {
 		return favorites.getIdList();
 	}
 	

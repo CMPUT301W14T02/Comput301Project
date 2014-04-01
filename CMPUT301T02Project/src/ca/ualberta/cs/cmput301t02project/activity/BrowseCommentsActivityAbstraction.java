@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.Spinner;
 import ca.ualberta.cs.cmput301t02project.R;
 import ca.ualberta.cs.cmput301t02project.view.CommentListAdapterAbstraction;
@@ -20,7 +21,8 @@ import ca.ualberta.cs.cmput301t02project.view.CommentListAdapterAbstraction;
 public abstract class BrowseCommentsActivityAbstraction extends Activity implements OnItemSelectedListener{
 	
 	// The adapter used by the class that extends BrowseCommentsActivityAbstraction -SB
-	CommentListAdapterAbstraction adapter; 
+	protected CommentListAdapterAbstraction adapter;
+	protected ListView listView;
 	
 	/**
 	 * Adapter must be initialized in a class that extends BrowseCommentsActvityAbstraction so it can be specialized to the activity.
@@ -41,12 +43,10 @@ public abstract class BrowseCommentsActivityAbstraction extends Activity impleme
 	 * <p>
 	 */
 	public void setupPage(){
-		
 		// Create the menu -SB
 		createSpinner();
-		
-		// Setup the adapter -SB
 		adapter = initializeAdapter();
+		listView.setAdapter(adapter);
 	}
 	
 	/**

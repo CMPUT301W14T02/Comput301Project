@@ -20,7 +20,7 @@ import com.google.gson.Gson;
  * @author alex
  *
  */
-public abstract class StoredCommentListAbstraction extends AbstractMap<String, CommentModel> {
+public abstract class StoredCommentListAbstraction extends AbstractMap<String, CommentModel> implements CommentListModel{
 
 	private Context context;
 	
@@ -41,8 +41,8 @@ public abstract class StoredCommentListAbstraction extends AbstractMap<String, C
 	@Override
 	public Set<Entry<String, CommentModel>> entrySet() {
 		Gson gson = new Gson();
-		SharedPreferences cache = context.getSharedPreferences(getPreferencesKey(), 0);
-		Map<String, ?> map = cache.getAll();
+		SharedPreferences storage = context.getSharedPreferences(getPreferencesKey(), 0);
+		Map<String, ?> map = storage.getAll();
 		Set<Entry<String, CommentModel>> entrySet = new HashSet<Entry<String, CommentModel>>();
 		for(Entry<String, ?> entry : map.entrySet()) {
 			String key = entry.getKey();
@@ -79,10 +79,10 @@ public abstract class StoredCommentListAbstraction extends AbstractMap<String, C
 	public CommentModel put(String id, CommentModel value) {
 		Gson gson = new Gson();
 		String v = gson.toJson(value);
-		SharedPreferences cache = context.getSharedPreferences(getPreferencesKey(), 0);
-		String previousValueJson = cache.getString(id, null);
+		SharedPreferences storage = context.getSharedPreferences(getPreferencesKey(), 0);
+		String previousValueJson = storage.getString(id, null);
 		CommentModel previousValue = gson.fromJson(previousValueJson, CommentModel.class);
-		cache.edit().putString(id, v).commit();
+		storage.edit().putString(id, v).commit();
 		return previousValue;
 	}
 	
@@ -93,7 +93,7 @@ public abstract class StoredCommentListAbstraction extends AbstractMap<String, C
 		this.put(comment.getId(), comment);
 	}
 	
-	public ArrayList<CommentModel> getCommentList() {
+	public ArrayList<CommentModel> getList() {
 		ArrayList<CommentModel> list = new ArrayList<CommentModel>();
 		list.addAll(this.values());
 		return list;
@@ -103,6 +103,13 @@ public abstract class StoredCommentListAbstraction extends AbstractMap<String, C
 		ArrayList<String> list = new ArrayList<String>();
 		list.addAll(this.keySet());
 		return list;
+	}
+	
+	public void update(String id, CommentModel comment) {
+		SharedPreferences storage = context.getSharedPreferences(getPreferencesKey(), 0);
+		if(storage.contains(id)) {
+			this.put(id, comment);
+		}
 	}
 
 }

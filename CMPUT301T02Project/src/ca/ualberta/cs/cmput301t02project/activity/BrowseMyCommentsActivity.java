@@ -1,17 +1,13 @@
 package ca.ualberta.cs.cmput301t02project.activity;
 
-import java.util.ArrayList;
-
-import android.app.backup.RestoreObserver;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ListView;
 import ca.ualberta.cs.cmput301t02project.R;
 import ca.ualberta.cs.cmput301t02project.model.CommentModel;
+import ca.ualberta.cs.cmput301t02project.model.MyCommentsListModel;
 import ca.ualberta.cs.cmput301t02project.model.User;
 import ca.ualberta.cs.cmput301t02project.view.CommentListAdapterAbstraction;
 import ca.ualberta.cs.cmput301t02project.view.MyCommentsAdapter;
@@ -22,40 +18,26 @@ import ca.ualberta.cs.cmput301t02project.view.MyCommentsAdapter;
  */
 public class BrowseMyCommentsActivity extends BrowseCommentsActivityAbstraction {
 
-	private ArrayList<CommentModel> myCommentsList = new ArrayList<CommentModel>();
-	private ListView myCommentListView;
-	private MyCommentsAdapter adapter;
+	private MyCommentsListModel model;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_my_comments_list);
-		myCommentListView = (ListView) findViewById(R.id.commentListView);
-
+		model = User.getUser().getMyComments();
 		// Create the sortBy menu and set up the adapter, inherited from BrowseCommentsActivity -SB
-		setupPage(); 
+		setupPage();
 		
-		myCommentListView.setOnItemClickListener(new OnItemClickListener() {
+		listView.setOnItemClickListener(new OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> l, View v, int position, long id) {
-				// Refactor into MVC?	
 				CommentModel nestedComment = (CommentModel) adapter.getItem(position);
-				
-				// Go to the edit comment activity if a comment is selected -SB
 				Intent goToEditCommentActivity = new Intent(getApplicationContext(), EditCommentActivity.class);
 				goToEditCommentActivity.putExtra("CommentId", nestedComment.getId());
 				startActivity(goToEditCommentActivity);
 			}
 		});
-	}
-
-
-	@Override
-	public void onResume() {
-		super.onResume();
-		initializeAdapter();
-		adapter.notifyDataSetChanged();
 	}
 	
 	/**
@@ -68,28 +50,8 @@ public class BrowseMyCommentsActivity extends BrowseCommentsActivityAbstraction 
 	 */
 	@Override
 	public CommentListAdapterAbstraction initializeAdapter(){
-		
-		// Retrieve myComments from phone storage -TH
-		myCommentsList = User.getUser().getMyComments();
-
-		// Add comments to adapter
-		adapter = new MyCommentsAdapter(this, R.layout.list_item, myCommentsList);
-		adapter.setModel(myCommentsList);
-		
-		// Display comments in adapter
-		myCommentListView.setAdapter(adapter);
-		
+		this.adapter = new MyCommentsAdapter(this, R.layout.list_item, model);
 		return adapter;
 	}
-
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.top_level_list, menu);
-		return true;
-	}
-
 
 }
