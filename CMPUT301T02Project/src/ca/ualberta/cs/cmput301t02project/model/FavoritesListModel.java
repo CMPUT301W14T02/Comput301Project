@@ -21,5 +21,5 @@ public class FavoritesListModel extends StoredCommentListAbstraction {
 	protected String getPreferencesKey() {
 		return "FAVORITES_LIST_KEY" + User.getUser().getName();
 	}
-
+	
 }

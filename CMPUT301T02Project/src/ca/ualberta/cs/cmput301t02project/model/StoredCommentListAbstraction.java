@@ -60,9 +60,9 @@ public abstract class StoredCommentListAbstraction extends Observable implements
 	 * @return If the id is present, the comment, else, null.
 	 */
 	public CommentModel get(Object id) {
-		SharedPreferences cache = context.getSharedPreferences(getPreferencesKey(), 0);
+		SharedPreferences storage = context.getSharedPreferences(getPreferencesKey(), 0);
 		String key = (String) id;
-		String comment = cache.getString(key, null);
+		String comment = storage.getString(key, null);
 		Gson gson = new Gson();
 		CommentModel result = gson.fromJson(comment, CommentModel.class);
 		return result;

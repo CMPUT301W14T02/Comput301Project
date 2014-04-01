@@ -3,6 +3,7 @@ package ca.ualberta.cs.cmput301t02project.model;
 import io.searchbox.annotations.JestId;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 import android.content.Context;
 
@@ -30,7 +31,6 @@ public class User {
 		user = new User(username);
 		server.pullUser(user);
 		if(user.getId() == null) {
-			user = new User(username);
 			server.postUser(user);
 		}
 		user.myComments = MyCommentsListModel.getInstance(context);
