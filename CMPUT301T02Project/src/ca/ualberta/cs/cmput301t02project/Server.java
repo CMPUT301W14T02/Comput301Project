@@ -170,7 +170,10 @@ public class Server {
 					e.printStackTrace();
 				}
 				if(result != null) {
-					user.set((User)result.getSourceAsObject(User.class));
+					User temporaryUser = (User)result.getSourceAsObject(User.class);
+					if(temporaryUser != null) {
+						user.set(temporaryUser);
+					}
 				}
 			}
 		};
