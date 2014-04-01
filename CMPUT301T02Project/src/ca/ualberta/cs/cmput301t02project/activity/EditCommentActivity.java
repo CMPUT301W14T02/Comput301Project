@@ -15,13 +15,6 @@ import ca.ualberta.cs.cmput301t02project.controller.CommentController;
  */
 public class EditCommentActivity extends Activity {
 
-	//Likely will not need this attribute. Will know when write code for custom location. -KW
-	private Location currentLocation;
-
-	public void setCustomCurrentLocation(double lat, double lon) {
-		currentLocation.setLatitude(lat);
-		currentLocation.setLongitude(lon);
-	}
 			
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -58,16 +51,20 @@ public class EditCommentActivity extends Activity {
 				
 				//for editing locations
 				double lat = 0, lon = 0;
-				Location commentLocation = new Location("");
-				
+				/*
 				if ((latitude.getText().toString())!= strLat || ((longitude.getText().toString())!= strLon))
 				{
 					lat = Double.valueOf(latitude.getText().toString());
 					lon = Double.valueOf(longitude.getText().toString());
-					commentLocation.setLatitude(lat);
-					commentLocation.setLongitude(lon);
+					commentLocation.setLatitude(strLat);
+					commentLocation.setLongitude(strLon);
 					commentController.getComment().setLocation(commentLocation);
-				} 
+				} */
+				
+				lat = Double.valueOf(latitude.getText().toString());
+				lon = Double.valueOf(longitude.getText().toString());
+				commentController.getComment().getLocation().setLatitude(lat);
+				commentController.getComment().getLocation().setLongitude(lon);
 				
 				finish();
 			}
