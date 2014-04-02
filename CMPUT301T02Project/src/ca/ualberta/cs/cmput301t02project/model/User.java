@@ -158,6 +158,10 @@ public class User {
 		return favorites;
 	}
 	
+	public RepliesToFavsListModel getRepliesToFavs() {
+		return repliesToFavs;
+	}
+	
 	public ArrayList<String> getMyCommentIds() {
 		return myComments.getIdList();
 	}

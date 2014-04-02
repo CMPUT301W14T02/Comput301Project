@@ -57,6 +57,10 @@
             android:name="ca.ualberta.cs.cmput301t02project.activity.BrowseFavoritesActivity"
             android:label="@string/title_activity_browse_favorites" >
         </activity>
+        <activity
+            android:name="ca.ualberta.cs.cmput301t02project.activity.BrowseRepliesToFavsActivity"
+            android:label="@string/title_activity_browse_replies_to_favs" >
+        </activity>
     </application>
 
 </manifest>
