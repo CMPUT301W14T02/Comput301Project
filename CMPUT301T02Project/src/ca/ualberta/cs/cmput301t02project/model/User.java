@@ -18,6 +18,7 @@ public class User {
 	private String username;
 	private transient MyCommentsListModel myComments;
 	private transient FavoritesListModel favorites;
+	private transient RepliesToFavsListModel repliesToFavs;
 	
 	private static User user;
 
@@ -35,6 +36,7 @@ public class User {
 		}
 		user.myComments = MyCommentsListModel.getInstance(context);
 		user.favorites = FavoritesListModel.getInstance(context);
+		user.repliesToFavs = RepliesToFavsListModel.getInstance(context);
 	}
 	
 	public static User getUser() {
@@ -107,8 +109,11 @@ public class User {
 	 * <p>
 	 * @param comment - comment to be stored
 	 */
-	public void addFavoriteComment(CommentModel comment) {
+	public void addFavoriteComment(CommentModel comment, ArrayList<CommentModel> replies) {
 		favorites.add(comment);
+		if (replies != null) {
+			repliesToFavs.addReplies(replies);
+		}
 	}
 	
 	/**

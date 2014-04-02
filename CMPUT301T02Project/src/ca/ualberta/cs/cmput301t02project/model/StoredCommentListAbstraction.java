@@ -93,6 +93,16 @@ public abstract class StoredCommentListAbstraction extends Observable implements
 		notifyObservers();
 	}
 	
+	public void addReplies(ArrayList<CommentModel> replies) {
+		if(replies.isEmpty()) {
+			throw  new IllegalArgumentException("No replies to store");
+		}
+		for(CommentModel comment:replies)
+			this.put(comment.getId(), comment);
+		notifyObservers();
+	}
+	
+	
 	public ArrayList<CommentModel> getList() {
 		ArrayList<CommentModel> list = new ArrayList<CommentModel>();
 		for(Entry<String, CommentModel> entry : this.entrySet()) {
