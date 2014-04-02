@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -27,17 +28,22 @@ import ca.ualberta.cs.cmput301t02project.view.CommentListAdapterAbstraction;
 public class BrowseReplyCommentsActivity extends BrowseCommentsActivityAbstraction {
 
 	private ReplyList model;
+	
+	final String currentCommentId = getIntent().getStringExtra("CommentId");
+	final CommentController commentController = new CommentController(currentCommentId, this);
+	final CommentModel currentComment = commentController.getComment();
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+		
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_reply_list);
+		
 		listView = (ListView) findViewById(R.id.replyListView);
 		TextView selectedComment = (TextView) findViewById(R.id.selected_comment);
-		final String currentCommentId = getIntent().getStringExtra("CommentId");
-		final CommentController commentController = new CommentController(currentCommentId, this);
-		final CommentModel currentComment = commentController.getComment();
+		
 		selectedComment.setText(currentComment.getText());
+		
 		model = new ReplyList(currentCommentId, this);
 		setupPage();
 		model.addObserver(adapter);
@@ -93,6 +99,20 @@ public class BrowseReplyCommentsActivity extends BrowseCommentsActivityAbstracti
 	public CommentListAdapterAbstraction initializeAdapter() {
 		this.adapter = new CommentListAdapter(this, R.layout.list_item, model);
 		return adapter;
+	}
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.reply_list, menu);
+		
+		String currentUser = User.getUser().getName();
+		String currentCommentAuthor = currentComment.getUsername();
+		
+		if(currentUser.equals(currentCommentAuthor)){
+			menu.add(0, Menu.FIRST, Menu.NONE, R.string.edit_menu_item);
+		}
+		return true;
 	}
 	
 }
