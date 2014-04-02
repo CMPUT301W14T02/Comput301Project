@@ -99,14 +99,14 @@ public abstract class CommentListAdapterAbstraction extends ArrayAdapter<Comment
 	
 	@Override
 	public void notifyDataSetChanged() {
-		setNotifyOnChange(false);
+		//setNotifyOnChange(false);
 		this.list = model.getList();
-		this.clear();
+		//this.clear();
 		this.sortList();
-		setNotifyOnChange(false);
-		this.addAll(this.list);
-		super.notifyDataSetChanged();
-		setNotifyOnChange(true);
+		//setNotifyOnChange(false);
+		//this.addAll(this.list);
+		//super.notifyDataSetChanged();
+		//setNotifyOnChange(true);
 	}
 	
 	@Override
@@ -277,6 +277,8 @@ public abstract class CommentListAdapterAbstraction extends ArrayAdapter<Comment
 	 */
 	public void sortList() {
 		if (list != null) {
+			super.setNotifyOnChange(false);
+			super.clear();
 			if (sortMethod.equals("Default")) {
 				sortByDefaultMethod();
 			} 
@@ -295,6 +297,7 @@ public abstract class CommentListAdapterAbstraction extends ArrayAdapter<Comment
 			else if (sortMethod.equals("Ranking")) {
 				Collections.sort(list, sortByRank);
 			}
+			super.addAll(this.list);
 			super.notifyDataSetChanged();
 		}
 

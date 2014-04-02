@@ -107,6 +107,7 @@ public abstract class BrowseCommentsActivityAbstraction extends Activity impleme
 		else if (selected.equals("Default")) {
 			adapter.sortByDefault();
 		}
+		adapter.notifyDataSetChanged();
 	}
 
 	@Override

@@ -1,6 +1,4 @@
 package ca.ualberta.cs.cmput301t02project.view;
-import java.util.ArrayList;
-
 import android.content.Context;
 import ca.ualberta.cs.cmput301t02project.model.CommentListModel;
 import ca.ualberta.cs.cmput301t02project.model.CommentModel;
