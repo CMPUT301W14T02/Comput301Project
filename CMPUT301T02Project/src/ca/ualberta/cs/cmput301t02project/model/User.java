@@ -17,6 +17,7 @@ public class User {
 	@JestId
 	private String id;
 	private String username;
+	private ArrayList<String> myCommentsIds;
 	private transient MyCommentsListModel myComments;
 	private transient FavoritesListModel favorites;
 	private transient RepliesToFavsListModel repliesToFavs;
@@ -32,6 +33,7 @@ public class User {
 		user = new User(username);
 		server.pullUser(user);
 		if(user.getId() == null) {
+			user.myCommentsIds = new ArrayList<String>();
 			server.postUser(user);
 		}
 		user.myComments = MyCommentsListModel.getInstance(context);
@@ -97,8 +99,11 @@ public class User {
 	 * @param comment - comment to be stored
 	 * @param context - context of the application
 	 */
-	public void addMyComment(CommentModel comment) {
+	public void addMyComment(CommentModel comment, Context context) {
+		Server server = new Server(context);
 		myComments.add(comment);
+		myCommentsIds.add(comment.getId());
+		server.postUser(user);
 	}
 
 	/**
@@ -163,7 +168,7 @@ public class User {
 	}
 	
 	public ArrayList<String> getMyCommentIds() {
-		return myComments.getIdList();
+		return myCommentsIds;
 	}
 	
 	public ArrayList<String> getFavoritesCommentIds() {
@@ -177,4 +182,9 @@ public class User {
 	public String getId() {
 		return id;
 	}
+	
+	public void setMyCommentIds(ArrayList<String> myCommentsIds) {
+		this.myCommentsIds = myCommentsIds;
+	}
+	
 }

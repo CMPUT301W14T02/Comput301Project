@@ -10,15 +10,17 @@ import ca.ualberta.cs.cmput301t02project.model.User;
 public class TopLevelListController {
 	
 	private TopLevelCommentList list;
+	private Context context;
 	
 	public TopLevelListController(Context context) {
 		list = TopLevelCommentList.getInstance(context);
+		this.context = context;
 	}
 
 	public void add(String text, Bitmap picture, Location location, User user) {
 		CommentModel comment = new CommentModel(text, picture, location, user.getName());
 		comment.setTopLevelComment(true);
 		list.add(comment);
-		user.addMyComment(comment);
+		user.addMyComment(comment, context);
 	}
 }

@@ -201,6 +201,7 @@ public class Server {
 					User temporaryUser = ((User)result.getSourceAsObject(User.class));
 					if(temporaryUser != null) {
 						user.setId(temporaryUser.getId());
+						user.setMyCommentIds(temporaryUser.getMyCommentIds());
 					}
 					else {
 						user.setId(null);
