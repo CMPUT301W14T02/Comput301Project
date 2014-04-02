@@ -21,9 +21,12 @@ public class BrowseRepliesToFavsActivity extends BrowseCommentsActivityAbstracti
 		setContentView(R.layout.activity_favorites_list);
 		listView = (ListView) findViewById(R.id.commentListView);
 		model = User.getUser().getRepliesToFavs();
+		
 		final String currentCommentId = getIntent().getStringExtra("CommentId");
 		final CommentController commentController = new CommentController(currentCommentId, this);
 		currentComment = commentController.getComment();
+		
+		RepliesToFavsListModel.setParent(currentComment);
 
 		setupPage();
 		
