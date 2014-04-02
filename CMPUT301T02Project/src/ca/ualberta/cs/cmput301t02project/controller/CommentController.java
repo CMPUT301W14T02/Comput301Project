@@ -44,7 +44,7 @@ public class CommentController {
 		comment.setTopLevelComment(false);
 		Server server = new Server(context);
 		server.post(comment);
-		user.addMyComment(comment);
+		user.addMyComment(comment, context);
 		this.model.addChildId(comment.getId());
 		update();
 	}
