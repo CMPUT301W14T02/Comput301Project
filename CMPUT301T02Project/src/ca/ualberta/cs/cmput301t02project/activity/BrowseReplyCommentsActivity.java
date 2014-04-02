@@ -29,9 +29,7 @@ public class BrowseReplyCommentsActivity extends BrowseCommentsActivityAbstracti
 
 	private ReplyList model;
 	
-	final String currentCommentId = getIntent().getStringExtra("CommentId");
-	final CommentController commentController = new CommentController(currentCommentId, this);
-	final CommentModel currentComment = commentController.getComment();
+	
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +39,10 @@ public class BrowseReplyCommentsActivity extends BrowseCommentsActivityAbstracti
 		
 		listView = (ListView) findViewById(R.id.replyListView);
 		TextView selectedComment = (TextView) findViewById(R.id.selected_comment);
+		
+		final String currentCommentId = getIntent().getStringExtra("CommentId");
+		final CommentController commentController = new CommentController(currentCommentId, this);
+		final CommentModel currentComment = commentController.getComment();
 		
 		selectedComment.setText(currentComment.getText());
 		
@@ -104,14 +106,14 @@ public class BrowseReplyCommentsActivity extends BrowseCommentsActivityAbstracti
 	public boolean onCreateOptionsMenu(Menu menu) {
 		
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.reply_list, menu);
-		
+		getMenuInflater().inflate(R.menu.create_comment, menu);
+		/*
 		String currentUser = User.getUser().getName();
 		String currentCommentAuthor = currentComment.getUsername();
 		
 		if(currentUser.equals(currentCommentAuthor)){
 			menu.add(0, Menu.FIRST, Menu.NONE, R.string.edit_menu_item);
-		}
+		}*/
 		return true;
 	}
 	
