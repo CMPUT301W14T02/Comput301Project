@@ -2,6 +2,7 @@ package ca.ualberta.cs.cmput301t02project.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -9,6 +10,7 @@ import android.widget.ListView;
 import ca.ualberta.cs.cmput301t02project.R;
 import ca.ualberta.cs.cmput301t02project.model.CommentModel;
 import ca.ualberta.cs.cmput301t02project.model.TopLevelCommentList;
+import ca.ualberta.cs.cmput301t02project.model.User;
 import ca.ualberta.cs.cmput301t02project.view.CommentListAdapter;
 import ca.ualberta.cs.cmput301t02project.view.CommentListAdapterAbstraction;
 
@@ -58,4 +60,16 @@ public class BrowseTopLevelCommentsActivity extends BrowseCommentsActivityAbstra
 		this.adapter = new CommentListAdapter(this, R.layout.list_item, model);
 		return adapter;
 	}
+	
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.create_comment, menu);
+		
+		if(1 == 0){
+			menu.add(0, Menu.FIRST, Menu.NONE, R.string.edit_menu_item);
+		}
+		return true;
+	}
+	
 }

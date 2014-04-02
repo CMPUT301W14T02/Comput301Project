@@ -29,5 +29,8 @@
     <string name="cust_location"> Location</string>
     <string name="follow_button">Follow User</string>
 	<string name="anonymous_button">Anonymous Mode</string>
+	<string name="edit_menu_item">Edit Comment</string>
+	<string name="home_menu_item">Home</string>
+	<string name="logout_menu_item">Logout</string>
     
 </resources>

@@ -34,6 +34,7 @@ public final class R {
         public static final int fav_button=0x7f08001b;
         public static final int favorites=0x7f080017;
         public static final int follow_button=0x7f08001e;
+        public static final int home=0x7f08001f;
         public static final int latitude_box=0x7f080003;
         public static final int latitude_editBox=0x7f08000b;
         public static final int latitude_editLabel=0x7f08000a;
@@ -43,6 +44,7 @@ public final class R {
         public static final int login_button=0x7f080011;
         public static final int login_message=0x7f080013;
         public static final int login_username=0x7f080012;
+        public static final int logout=0x7f080020;
         public static final int longitude_box=0x7f080001;
         public static final int longitude_editBox=0x7f08000e;
         public static final int longitude_editLabel=0x7f08000d;
@@ -72,7 +74,8 @@ public final class R {
         public static final int create_comment=0x7f070000;
         public static final int login=0x7f070001;
         public static final int main=0x7f070002;
-        public static final int top_level_list=0x7f070003;
+        public static final int reply_list=0x7f070003;
+        public static final int top_level_list=0x7f070004;
     }
     public static final class string {
         public static final int action_settings=0x7f050001;
@@ -82,13 +85,16 @@ public final class R {
         public static final int create=0x7f050004;
         public static final int cust_location=0x7f050019;
         public static final int edit_comment=0x7f050012;
+        public static final int edit_menu_item=0x7f05001c;
         public static final int favorites=0x7f050010;
         public static final int follow_button=0x7f05001a;
         public static final int hello_world=0x7f050002;
+        public static final int home_menu_item=0x7f05001d;
         public static final int latitude=0x7f050017;
         public static final int login_button=0x7f05000e;
         public static final int login_hint=0x7f05000d;
         public static final int login_message=0x7f05000c;
+        public static final int logout_menu_item=0x7f05001e;
         public static final int longitude=0x7f050018;
         public static final int my_comments=0x7f050011;
         public static final int post=0x7f050007;
