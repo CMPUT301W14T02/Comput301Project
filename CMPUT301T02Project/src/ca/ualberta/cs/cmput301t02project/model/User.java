@@ -1,9 +1,9 @@
 package ca.ualberta.cs.cmput301t02project.model;
 
+
 import io.searchbox.annotations.JestId;
 
 import java.util.ArrayList;
-import java.util.Locale;
 
 import android.content.Context;
 
@@ -53,6 +53,7 @@ public class User {
 	 * <p>
 	 * @param username	The username for the User
 	 */
+
 	public void setName(String username) {
 		this.username = username.toLowerCase();
 	}
