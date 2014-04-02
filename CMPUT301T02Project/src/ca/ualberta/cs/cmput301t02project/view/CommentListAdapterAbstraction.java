@@ -81,8 +81,6 @@ public abstract class CommentListAdapterAbstraction extends ArrayAdapter<Comment
 		
 		sortByLocation = new Comparator<CommentModel>() {
 			public int compare(CommentModel a, CommentModel b) {
-				String loc = "Location Initialization";
-				myLocation = new Location(loc);
 				myLocation = GPSLocation.getInstance().getLocation();
 				Float dist1 = a.getLocation().distanceTo(myLocation);
 				Float dist2 = b.getLocation().distanceTo(myLocation);
@@ -104,8 +102,9 @@ public abstract class CommentListAdapterAbstraction extends ArrayAdapter<Comment
 		setNotifyOnChange(false);
 		this.list = model.getList();
 		this.clear();
-		this.addAll(this.list);
 		this.sortList();
+		setNotifyOnChange(false);
+		this.addAll(this.list);
 		super.notifyDataSetChanged();
 		setNotifyOnChange(true);
 	}

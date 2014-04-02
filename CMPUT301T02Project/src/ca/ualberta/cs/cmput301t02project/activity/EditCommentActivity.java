@@ -1,7 +1,6 @@
 package ca.ualberta.cs.cmput301t02project.activity;
 
 import android.app.Activity;
-import android.location.Location;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;

@@ -1,5 +1,6 @@
 package ca.ualberta.cs.cmput301t02project.model;
 
+
 import io.searchbox.annotations.JestId;
 
 import java.util.ArrayList;
@@ -31,7 +32,6 @@ public class User {
 		user = new User(username);
 		server.pullUser(user);
 		if(user.getId() == null) {
-			user = new User(username);
 			server.postUser(user);
 		}
 		user.myComments = MyCommentsListModel.getInstance(context);
@@ -53,6 +53,7 @@ public class User {
 	 * <p>
 	 * @param username	The username for the User
 	 */
+
 	public void setName(String username) {
 		this.username = username.toLowerCase();
 	}
