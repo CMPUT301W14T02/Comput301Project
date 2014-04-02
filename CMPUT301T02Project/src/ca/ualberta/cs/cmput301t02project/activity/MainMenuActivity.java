@@ -6,8 +6,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 import ca.ualberta.cs.cmput301t02project.R;
 import ca.ualberta.cs.cmput301t02project.model.GPSLocation;
+import ca.ualberta.cs.cmput301t02project.model.Server;
 import ca.ualberta.cs.cmput301t02project.model.User;
 
 /**
@@ -37,9 +39,17 @@ public class MainMenuActivity extends Activity {
 			
 			@Override
 			public void onClick(View v) {
-				Intent intent = new Intent(MainMenuActivity.this, CreateCommentActivity.class);
-				intent.putExtra("isTopLevelComment", true);
-				startActivity(intent);
+				Server server = new Server(MainMenuActivity.this);
+				if(!server.isNetworkAvailable()) {
+					int duration = Toast.LENGTH_SHORT;
+					Toast toast = Toast.makeText(MainMenuActivity.this, "You don't have internet connection.", duration);
+					toast.show();
+				}
+				else {
+					Intent intent = new Intent(MainMenuActivity.this, CreateCommentActivity.class);
+					intent.putExtra("isTopLevelComment", true);
+					startActivity(intent);
+				}
 			}
 		});
 

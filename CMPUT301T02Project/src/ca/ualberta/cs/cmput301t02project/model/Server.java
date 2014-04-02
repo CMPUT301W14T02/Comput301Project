@@ -9,6 +9,8 @@ import io.searchbox.core.Search;
 import java.util.ArrayList;
 
 import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 
 import com.searchly.jestdroid.DroidClientConfig;
 import com.searchly.jestdroid.JestClientFactory;
@@ -225,6 +227,14 @@ public class Server {
 		CommentModel comment = this.pull(parentId);
 		comment.addChildId(childId);
 		this.post(comment);
+	}
+	
+	//http://stackoverflow.com/a/4239019 April 2 2014
+	public boolean isNetworkAvailable() {
+		    ConnectivityManager connectivityManager 
+		          = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+		    NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+		    return activeNetworkInfo != null && activeNetworkInfo.isConnected();
 	}
 	
 	private class ObjectWrapper {
