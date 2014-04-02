@@ -29,18 +29,6 @@ public class BrowseRepliesToFavsActivity extends BrowseCommentsActivityAbstracti
 		RepliesToFavsListModel.setParent(currentComment);
 
 		setupPage();
-		
-		/*
-		listView.setOnItemClickListener(new OnItemClickListener() {
-			@Override
-			public void onItemClick(AdapterView<?> l, View v, int position, long id) {
-				CommentModel nestedComment = (CommentModel) adapter.getItem(position);
-				Intent goToReplyListActivity = new Intent(BrowseFavoritesActivity.this, BrowseReplyCommentsActivity.class);
-				goToReplyListActivity.putExtra("CommentId", nestedComment.getId());
-				startActivity(goToReplyListActivity);
-			}
-		});
-		*/
 
 	}
 
@@ -52,7 +40,7 @@ public class BrowseRepliesToFavsActivity extends BrowseCommentsActivityAbstracti
 	}
 	
 	public CommentListAdapterAbstraction initializeAdapter(){
-		this.adapter = new RepliesToFavsAdapter(this, R.layout.list_item, model, currentComment);
+		this.adapter = new RepliesToFavsAdapter(this, R.layout.list_item, model);
 		return adapter;
 	}
 

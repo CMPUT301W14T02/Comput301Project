@@ -27,7 +27,6 @@ public class Server {
 		jestClientFactory.setDroidClientConfig(clientConfig);
 		client = jestClientFactory.getObject();
 		this.context = context;
-		
 	}
 	
 	public void post(final CommentModel comment) {
