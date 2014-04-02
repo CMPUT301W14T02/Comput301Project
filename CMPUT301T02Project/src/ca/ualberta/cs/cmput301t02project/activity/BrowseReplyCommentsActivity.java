@@ -10,10 +10,12 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 import ca.ualberta.cs.cmput301t02project.R;
 import ca.ualberta.cs.cmput301t02project.controller.CommentController;
 import ca.ualberta.cs.cmput301t02project.model.CommentModel;
 import ca.ualberta.cs.cmput301t02project.model.ReplyList;
+import ca.ualberta.cs.cmput301t02project.model.Server;
 import ca.ualberta.cs.cmput301t02project.model.User;
 import ca.ualberta.cs.cmput301t02project.view.CommentListAdapter;
 import ca.ualberta.cs.cmput301t02project.view.CommentListAdapterAbstraction;
@@ -44,9 +46,17 @@ public class BrowseReplyCommentsActivity extends BrowseCommentsActivityAbstracti
 		replyComment.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Intent intent = new Intent(BrowseReplyCommentsActivity.this, CreateCommentActivity.class);
-				intent.putExtra("CommentId", currentCommentId);
-				startActivity(intent);
+				Server server = new Server(BrowseReplyCommentsActivity.this);
+				if(!server.isNetworkAvailable()) {
+					int duration = Toast.LENGTH_SHORT;
+					Toast toast = Toast.makeText(BrowseReplyCommentsActivity.this, "You don't have internet connection.", duration);
+					toast.show();
+				}
+				else {
+					Intent intent = new Intent(BrowseReplyCommentsActivity.this, CreateCommentActivity.class);
+					intent.putExtra("CommentId", currentCommentId);
+					startActivity(intent);
+				}
 			}
 		});
 		

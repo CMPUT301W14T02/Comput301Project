@@ -24,7 +24,7 @@ import ca.ualberta.cs.cmput301t02project.model.User;
  * Allows a user to create their own comment. 
  */
 public class CreateCommentActivity extends Activity {
-		
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -49,7 +49,6 @@ public class CreateCommentActivity extends Activity {
 			
 			@Override
 			public void onClick(View v) {
-				//
 				EditText inputComment = (EditText) findViewById(R.id.create_text);
 				String text = inputComment.getText().toString();
 				Bitmap picture = null;
