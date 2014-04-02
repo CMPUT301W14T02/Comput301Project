@@ -1,5 +1,7 @@
 package ca.ualberta.cs.cmput301t02project.activity;
 
+import java.util.ArrayList;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -53,7 +55,9 @@ public class BrowseReplyCommentsActivity extends BrowseCommentsActivityAbstracti
 			@Override
 			public void onClick(View v) {
 				User user = User.getUser();
-				user.addFavoriteComment(currentComment);
+				ReplyList repliesToFav = new ReplyList(currentComment.getId(), getApplicationContext());
+				ArrayList<CommentModel> replies = repliesToFav.getList();
+				user.addFavoriteComment(currentComment, replies);
 				commentController.incrementRating();
 			}
 		});
