@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -28,6 +29,9 @@ import ca.ualberta.cs.cmput301t02project.view.CommentListAdapterAbstraction;
 public class BrowseReplyCommentsActivity extends BrowseCommentsActivityAbstraction {
 
 	private ReplyList model;
+	
+	// the name of the author of the selected comment is used by the menu 
+	// to check if it should create a "edit comment" item
 	private String currentCommentAuthor = "";
 
 	@Override
@@ -107,6 +111,12 @@ public class BrowseReplyCommentsActivity extends BrowseCommentsActivityAbstracti
 		this.adapter = new CommentListAdapter(this, R.layout.list_item, model);
 		return adapter;
 	}
+	
+	@Override
+	public void goToHelpPage(){
+		// go to help page for replying to comments
+	}
+	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		
@@ -120,5 +130,4 @@ public class BrowseReplyCommentsActivity extends BrowseCommentsActivityAbstracti
 		}
 		return true;
 	}
-	
 }

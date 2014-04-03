@@ -21,6 +21,7 @@ import ca.ualberta.cs.cmput301t02project.view.CommentListAdapterAbstraction;
 public class BrowseTopLevelCommentsActivity extends BrowseCommentsActivityAbstraction{
 	
 	private TopLevelCommentList model;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -64,7 +65,7 @@ public class BrowseTopLevelCommentsActivity extends BrowseCommentsActivityAbstra
 	public boolean onCreateOptionsMenu(Menu menu) {
 		
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.reply_list, menu);
+		getMenuInflater().inflate(R.menu.top_level_list, menu);
 		
 		return true;
 	}
