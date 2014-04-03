@@ -28,6 +28,9 @@ import ca.ualberta.cs.cmput301t02project.view.CommentListAdapterAbstraction;
 public class BrowseReplyCommentsActivity extends BrowseCommentsActivityAbstraction {
 
 	private ReplyList model;
+	
+	// the name of the author of the selected comment is used by the menu 
+	// to check if it should create a "edit comment" item
 	private String currentCommentAuthor = "";
 
 	@Override
