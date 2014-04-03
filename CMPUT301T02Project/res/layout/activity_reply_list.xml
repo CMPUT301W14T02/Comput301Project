@@ -7,26 +7,19 @@
         android:id="@+id/selected_comment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_above="@+id/fav_button"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
+        android:layout_toLeftOf="@+id/follow_button"
         android:text="Current Comment"
         android:textAppearance="?android:attr/textAppearanceMedium" />
-
-    <Button
-        android:id="@+id/reply_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/selected_comment"
-        android:text="Reply" />
 
     <Spinner
         android:id="@+id/spinner"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/fav_button" />
+        android:layout_below="@+id/reply_button" />
 
     <ListView
         android:id="@+id/replyListView"
@@ -48,11 +41,18 @@
         android:text="Sort by:" />
 
     <Button
+        android:id="@+id/reply_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_marginTop="79dp"
+        android:text="Reply" />
+
+    <Button
         android:id="@+id/fav_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/reply_button"
-        android:layout_alignBottom="@+id/reply_button"
+        android:layout_above="@+id/spinner"
         android:layout_toRightOf="@+id/reply_button"
         android:text="Add to Favorites" />
 
@@ -63,6 +63,16 @@
         android:layout_above="@+id/spinner"
         android:layout_toRightOf="@+id/fav_button"
         android:text="Follow" />
+
+    <ImageView
+        android:id="@+id/comment_picture"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/follow_button"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/selected_comment"
+        android:src="@drawable/ic_launcher" />
    
 </RelativeLayout>
 

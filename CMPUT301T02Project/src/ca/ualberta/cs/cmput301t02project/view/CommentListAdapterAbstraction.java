@@ -328,6 +328,7 @@ public abstract class CommentListAdapterAbstraction extends ArrayAdapter<Comment
 	 * <p>
 	 * Inspired on
 	 * https://github.com/zjullion/PicPosterComplete/blob/master/src/ca/ualberta/cs/picposter/view/PicPostModelAdapter.java
+	 * Accessed April 1 2014
 	 * @return The view
 	 * <p>
 	 */
@@ -343,11 +344,16 @@ public abstract class CommentListAdapterAbstraction extends ArrayAdapter<Comment
 		
 		int repliesCount = comment.getChildrenIds().size();
 		int ratingCount = comment.getRating();
+		
+		String hasPicture = "";
+		if(comment.getImage() != null){
+			hasPicture = " | image attatched";
+		}
 		String replies = Integer.toString(repliesCount) + ' ';
 		String rating = Integer.toString(ratingCount) + " Faves";
 		replies += (repliesCount == 1) ? "reply" : "replies";
 		String text = comment.getText() + "\n(by " 
-				+ comment.getUsername() + " | " + location + " | " + replies + " | " + rating +')';
+				+ comment.getUsername() + " | " + location + " | " + replies + " | " + rating + hasPicture +')';
 		
 		((TextView)convertView).setText(text);
 		

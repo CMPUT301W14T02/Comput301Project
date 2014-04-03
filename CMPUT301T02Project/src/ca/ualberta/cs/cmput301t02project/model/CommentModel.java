@@ -45,8 +45,16 @@ public class CommentModel {
 	 * @param username	The user that the comment belongs to
 	 */
 	public CommentModel(String text, Bitmap picture, Location location, String username) {
-		this.text = text;
+		
 		this.picture = picture;
+		
+		// temporary. just to ensure the picture is there.
+		if (picture != null){
+			this.text = text + " PICTURE ATTATCHED";
+		}
+		else{
+			this.text = text;
+		}
 		this.location = location;
 		this.username = username;
 		this.rating = 0;
