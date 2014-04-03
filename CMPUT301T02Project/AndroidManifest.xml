@@ -65,7 +65,7 @@
           <activity
             android:name="ca.ualberta.cs.cmput301t02project.activity.EnterSearchCoordinatesActivity"
             android:label="@string/title_activity_enter_coor" >
-        </activity>
+            </activity>
     </application>
 
 </manifest>

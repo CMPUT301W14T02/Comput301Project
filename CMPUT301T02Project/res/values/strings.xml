@@ -34,5 +34,6 @@
 	<string name="logout_menu_item">Logout</string>
 	<string name="help_page_menu_item">Help</string>
 	<string name="title_activity_enter_coor">EnterCoordinates</string>
+	<string name="enter_coor_message">Enter the coordinates of the location you would like to search by</string>
     
 </resources>

@@ -2,6 +2,7 @@ package ca.ualberta.cs.cmput301t02project.activity;
 
 import java.util.ArrayList;
 
+import android.content.Intent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
