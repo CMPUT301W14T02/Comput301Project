@@ -119,7 +119,7 @@ public class User {
 	public void addFavoriteComment(CommentModel comment, ArrayList<CommentModel> replies) {
 		favorites.add(comment);
 		if (!replies.isEmpty()) {
-			repliesToFavs.addReplies(replies);
+			repliesToFavs.addAll(replies);
 		}
 	}
 	
