@@ -3,6 +3,8 @@ package ca.ualberta.cs.cmput301t02project.activity;
 import java.util.ArrayList;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
@@ -10,6 +12,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Spinner;
 import ca.ualberta.cs.cmput301t02project.R;
+import ca.ualberta.cs.cmput301t02project.model.User;
 import ca.ualberta.cs.cmput301t02project.view.CommentListAdapterAbstraction;
 
 /**
@@ -33,7 +36,6 @@ public abstract class BrowseCommentsActivityAbstraction extends Activity impleme
 	 */
 	public abstract CommentListAdapterAbstraction initializeAdapter();
 	
-
 	/**
 	 * Performs tasks to set up the activity including creating a sorting menu and initializing the adapter.
 	 * <p>
@@ -47,6 +49,32 @@ public abstract class BrowseCommentsActivityAbstraction extends Activity impleme
 		createSpinner();
 		adapter = initializeAdapter();
 		listView.setAdapter(adapter);
+	}
+	
+	public void logout(){
+		Intent logoutActivity = new Intent(getApplicationContext(),LoginActivity.class);
+		startActivity(logoutActivity);
+	}
+	
+	public void returnToHomepage(){
+		Intent goHome = new Intent(getApplicationContext(),MainMenuActivity.class);
+		startActivity(goHome);
+	}
+	
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+	    
+	    switch (item.getItemId()) {
+	    	case R.id.home:
+	    		returnToHomepage();
+	    		return true;
+	        case R.id.logout:
+	            logout();
+	            return true;
+	        default:
+	            return super.onOptionsItemSelected(item);
+	    }
 	}
 	
 	/**

@@ -22,6 +22,7 @@ import ca.ualberta.cs.cmput301t02project.view.CommentListAdapterAbstraction;
 public class BrowseTopLevelCommentsActivity extends BrowseCommentsActivityAbstraction{
 	
 	private TopLevelCommentList model;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
