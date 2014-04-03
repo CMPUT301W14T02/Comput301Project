@@ -73,7 +73,7 @@ public class BrowseReplyCommentsActivity extends BrowseCommentsActivityAbstracti
 			}
 		});
 		
-		Button favoriteComment = (Button) findViewById(R.id.fav_button);
+		final Button favoriteComment = (Button) findViewById(R.id.fav_button);
 		favoriteComment.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -82,6 +82,10 @@ public class BrowseReplyCommentsActivity extends BrowseCommentsActivityAbstracti
 				ArrayList<CommentModel> replies = repliesToFav.getList();
 				user.addFavoriteComment(currentComment, replies);
 				commentController.incrementRating();
+				int duration = Toast.LENGTH_SHORT;
+				favoriteComment.animate();
+				Toast toast = Toast.makeText(BrowseReplyCommentsActivity.this, "Added to favorites!", duration);
+				toast.show();
 			}
 		});
 

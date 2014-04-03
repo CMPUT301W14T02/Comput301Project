@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 import ca.ualberta.cs.cmput301t02project.R;
 import ca.ualberta.cs.cmput301t02project.model.User;
 
@@ -58,10 +59,8 @@ public class LoginActivity extends Activity {
 
 			// Reset message -SB
 			message.setText("Login Page");
-
 			// If user doesn't exist, create a user with that name -SB
 			User.login(username, getApplicationContext());
-
 			// Go to the main menu once user is set -SB
 			startActivity(new Intent(LoginActivity.this, MainMenuActivity.class));
 		}
