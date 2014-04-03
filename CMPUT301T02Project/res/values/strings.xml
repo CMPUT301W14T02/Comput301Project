@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">CMPUT301T02Project</string>
+    <string name="app_name">SKRAT CHAT</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_top_level_list">TopLevelListActivity</string>
@@ -34,8 +34,7 @@
 	<string name="logout_menu_item">Logout</string>
 	<string name="help_page_menu_item">Help</string>
 	<string name="title_activity_enter_coor">EnterCoordinates</string>
-	<string name="enter_coor_message">Enter the coordinates of the location you would like to search by</string>
+	<string name="enter_coor_message">Enter the coordinates to Sort By</string>
 	<string name="sort_button">Sort</string>
-	<string name="cancel_button">Cancel</string>
     
 </resources>

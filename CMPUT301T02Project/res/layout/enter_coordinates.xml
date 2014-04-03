@@ -1,25 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
     tools:context=".EnterSearchCoordinatesActivity"  >
 
-    
     <EditText
         android:id="@+id/search_latitude_box"
         android:layout_width="80dp"
         android:layout_height="40dp"
-        android:layout_marginRight="14dp"
+        android:layout_alignBaseline="@+id/search_latitude_label"
+        android:layout_alignBottom="@+id/search_latitude_label"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="80dp"
         android:ems="10"
-        android:inputType="numberDecimal|numberSigned" />
+        android:inputType="numberDecimal|numberSigned" >
+
+        <requestFocus />
+    </EditText>
 
     <TextView
         android:id="@+id/search_longitude_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginRight="15dp"
+        android:layout_alignBaseline="@+id/search_longitude_box"
+        android:layout_alignBottom="@+id/search_longitude_box"
+        android:layout_alignLeft="@+id/search_latitude_label"
         android:text="@string/longitude"
         android:textSize="14sp" />
 
@@ -27,20 +34,30 @@
         android:id="@+id/search_latitude_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_above="@+id/search_longitude_box"
+        android:layout_marginBottom="21dp"
+        android:layout_marginRight="49dp"
+        android:layout_toLeftOf="@+id/search_latitude_box"
         android:text="@string/latitude"
         android:textSize="14sp" />
-
-   
 
     <EditText
         android:id="@+id/search_longitude_box"
         android:layout_width="80dp"
         android:layout_height="40dp"
-        android:layout_marginTop="26dp"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@+id/search_latitude_label"
         android:ems="10"
-        android:inputType="numberDecimal|numberSigned" >
+        android:inputType="numberDecimal|numberSigned" />
 
-        <requestFocus />
-    </EditText>
+    <TextView
+        android:id="@+id/search_location_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/search_latitude_box"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="24dp"
+        android:text="@string/enter_coor_message"
+        android:textSize="20sp" />
 
-</LinearLayout>
+</RelativeLayout>

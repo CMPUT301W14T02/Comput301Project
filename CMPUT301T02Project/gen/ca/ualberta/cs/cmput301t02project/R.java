@@ -35,8 +35,8 @@ public final class R {
         public static final int fav_button=0x7f08001a;
         public static final int favorites=0x7f080017;
         public static final int follow_button=0x7f08001b;
-        public static final int help_page=0x7f080024;
-        public static final int home=0x7f080025;
+        public static final int help_page=0x7f080025;
+        public static final int home=0x7f080026;
         public static final int latitude_box=0x7f080003;
         public static final int latitude_editBox=0x7f08000b;
         public static final int latitude_editLabel=0x7f08000a;
@@ -46,7 +46,7 @@ public final class R {
         public static final int login_button=0x7f080011;
         public static final int login_message=0x7f080013;
         public static final int login_username=0x7f080012;
-        public static final int logout=0x7f080026;
+        public static final int logout=0x7f080027;
         public static final int longitude_box=0x7f080001;
         public static final int longitude_editBox=0x7f08000e;
         public static final int longitude_editLabel=0x7f08000d;
@@ -55,9 +55,10 @@ public final class R {
         public static final int replyListView=0x7f08001d;
         public static final int reply_button=0x7f08001c;
         public static final int search_latitude_box=0x7f080020;
-        public static final int search_latitude_label=0x7f080022;
+        public static final int search_latitude_label=0x7f080021;
+        public static final int search_location_label=0x7f080024;
         public static final int search_longitude_box=0x7f080023;
-        public static final int search_longitude_label=0x7f080021;
+        public static final int search_longitude_label=0x7f080022;
         public static final int selected_comment=0x7f080019;
         public static final int spinner=0x7f08000f;
         public static final int spinner_intro=0x7f08001e;
@@ -87,7 +88,6 @@ public final class R {
         public static final int anonymous_button=0x7f05001b;
         public static final int app_name=0x7f050000;
         public static final int browse=0x7f050005;
-        public static final int cancel_button=0x7f050023;
         public static final int create=0x7f050004;
         public static final int cust_location=0x7f050019;
         public static final int edit_comment=0x7f050012;
