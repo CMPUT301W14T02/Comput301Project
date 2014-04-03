@@ -5,6 +5,9 @@ import io.searchbox.annotations.JestId;
 import java.util.ArrayList;
 import java.util.Date;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 import android.graphics.Bitmap;
 import android.location.Location;
 
@@ -20,10 +23,11 @@ public class CommentModel {
 	private Date date;
 	private Location location;
 	private String text;
-	private transient Bitmap picture; //transient until convertible to Json
+	private String picture; //transient until convertible to Json
 	private int rating;
 	private ArrayList<String> childrenIds;
 	private String username;	
+	private transient static Gson GSON = null; 
 	
 	/**
 	 * Creates a new Comment.
@@ -46,7 +50,8 @@ public class CommentModel {
 	 */
 	public CommentModel(String text, Bitmap picture, Location location, String username) {
 		
-		this.picture = picture;
+		constructGson();
+		this.picture = GSON.toJson(picture);
 		
 		// temporary. just to ensure the picture is there.
 		if (picture != null){
@@ -61,6 +66,17 @@ public class CommentModel {
 		this.date = new Date();
 		this.childrenIds = new ArrayList<String>();
 	}
+	
+	/**
+	 * Constructs a Gson with a custom serializer / desserializer registered for Bitmaps.
+	 */
+	private static void constructGson() {
+		GsonBuilder builder = new GsonBuilder();
+		builder.registerTypeAdapter(Bitmap.class, new BitmapJsonConverter());
+		GSON = builder.create();
+		System.out.println("GSON");
+	}
+	
 
 	/**
 	 * Creates a new Comment.
@@ -150,7 +166,9 @@ public class CommentModel {
 	 * @return The picture
 	 */
 	public Bitmap getImage() {
-		return picture;
+		constructGson();
+		return GSON.fromJson(this.picture, Bitmap.class);
+		
 	}
 
 	/**
@@ -158,7 +176,8 @@ public class CommentModel {
 	 * @param image	the picture
 	 */
 	public void setImage(Bitmap image) {
-		this.picture = image;
+		constructGson();
+		this.picture = GSON.toJson(image);
 	}
 
 	/**

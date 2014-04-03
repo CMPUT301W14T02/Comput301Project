@@ -112,7 +112,8 @@ public class LoginActivity extends Activity {
 	 * Redirects to the default help page
 	 */
 	public void goToHelpPage(){
-		Intent viewIntent = new Intent("android.intent.action.VIEW",Uri.parse("http://www.google.com/"));
+		Intent viewIntent = new Intent("android.intent.action.VIEW",Uri.parse(
+				"https://rawgithub.com/CMPUT301W14T02/Comput301Project/master/Help%20Pages/login.html"));
 		startActivity(viewIntent);// redirect to help page for logging in -SB
 	}
 

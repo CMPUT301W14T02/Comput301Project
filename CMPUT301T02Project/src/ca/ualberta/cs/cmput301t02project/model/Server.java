@@ -28,7 +28,7 @@ public class Server {
 		client = jestClientFactory.getObject();
 		this.context = context;
 	}
-	
+
 	public void post(final CommentModel comment) {
 		Thread thread = new Thread() {
 			@Override
