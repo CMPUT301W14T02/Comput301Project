@@ -69,6 +69,7 @@ public class CreateCommentActivity extends PictureActivity {
 					commentLocation = location;
 				}
 				
+				// picture is defined in PictureActivity -SB
 				if(isTopLevel) {
 					TopLevelListController controller = new TopLevelListController(CreateCommentActivity.this);
 					controller.add(text, picture, commentLocation, User.getUser());

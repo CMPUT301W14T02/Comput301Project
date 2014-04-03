@@ -8,6 +8,11 @@ import android.view.View;
 import android.widget.ImageButton;
 import ca.ualberta.cs.cmput301t02project.R;
 
+/**
+ * Performs tasks to do with taking and storing images.
+ * Inherited by CreateCommentActivity and EditCommentActivity when the user tries to take a photo.
+ * Extends ActionBarActivity because all activities that inherit it should have a menu bar.
+ */
 public class PictureActivity extends ActionBarActivity {
 
 	// if no picture is taken, picture should remain null -SB
