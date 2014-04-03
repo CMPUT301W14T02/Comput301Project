@@ -29,8 +29,10 @@ public class CommentController {
 		update();
 	}
 	
-	public void edit(String newText) {
+	public void edit(String newText, double latitude, double longitude) {
 		model.setText(newText);
+		model.getLocation().setLatitude(latitude);
+		model.getLocation().setLongitude(longitude);
 		User.getUser().getMyComments().put(model.getId(), model);
 		update();
 	}

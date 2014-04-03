@@ -44,26 +44,17 @@ public class EditCommentActivity extends Activity {
 		post.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
+				//for editing text
 				EditText inputComment = (EditText) findViewById(R.id.edit_text);
 				String newText = inputComment.getText().toString();
-				commentController.edit(newText);
 				
 				//for editing locations
 				double lat = 0, lon = 0;
-				/*
-				if ((latitude.getText().toString())!= strLat || ((longitude.getText().toString())!= strLon))
-				{
-					lat = Double.valueOf(latitude.getText().toString());
-					lon = Double.valueOf(longitude.getText().toString());
-					commentLocation.setLatitude(strLat);
-					commentLocation.setLongitude(strLon);
-					commentController.getComment().setLocation(commentLocation);
-				} */
-				
 				lat = Double.valueOf(latitude.getText().toString());
 				lon = Double.valueOf(longitude.getText().toString());
-				commentController.getComment().getLocation().setLatitude(lat);
-				commentController.getComment().getLocation().setLongitude(lon);
+				
+				commentController.edit(newText, lat, lon);
+	
 				
 				finish();
 			}
