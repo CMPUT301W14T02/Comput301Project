@@ -61,7 +61,6 @@ public class EditCommentActivity extends ActionBarActivity {
 				
 				commentController.edit(newText, lat, lon);
 	
-				
 				finish();
 			}
 		});

@@ -108,8 +108,11 @@ public class LoginActivity extends Activity {
 	    }
 	}
 	
+	/**
+	 * Redirects to the default help page
+	 */
 	public void goToHelpPage(){
-		// redirect to help page for loging in -SB
+		// redirect to help page for logging in -SB
 	}
 
 }
