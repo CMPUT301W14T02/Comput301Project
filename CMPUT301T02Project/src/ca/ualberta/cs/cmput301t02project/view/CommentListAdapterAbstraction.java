@@ -325,7 +325,7 @@ public abstract class CommentListAdapterAbstraction extends ArrayAdapter<Comment
 		int ratingCount = comment.getRating();
 		String replies = Integer.toString(repliesCount) + ' ';
 		String rating = Integer.toString(ratingCount) + " Faves";
-		replies += repliesCount == 1 ? "reply" : "replies";
+		replies += (repliesCount == 1) ? "reply" : "replies";
 		String text = comment.getText() + "\n(by " 
 				+ comment.getUsername() + " | " + location + " | " + replies + " | " + rating +')';
 		

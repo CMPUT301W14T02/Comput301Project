@@ -7,7 +7,7 @@ import android.content.Context;
 public class RepliesToFavsListModel extends StoredCommentListAbstraction {
 
 	private static RepliesToFavsListModel instance;
-	private static CommentModel parent;
+	private CommentModel parent;
 	
 	private RepliesToFavsListModel(Context context) {
 		super(context);
@@ -38,12 +38,12 @@ public class RepliesToFavsListModel extends StoredCommentListAbstraction {
 		return list;
 	}
 
-	public static CommentModel getParent() {
+	public CommentModel getParent() {
 		return parent;
 	}
 
-	public static void setParent(CommentModel parent) {
-		RepliesToFavsListModel.parent = parent;
+	public void setParent(CommentModel parent) {
+		this.parent = parent;
 	}
 
 }
