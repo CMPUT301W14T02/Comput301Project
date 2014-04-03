@@ -29,7 +29,7 @@ public class BrowseReplyCommentsActivity extends BrowseCommentsActivityAbstracti
 
 	private ReplyList model;
 	// the name of the author of the selected comment is used by the menu 
-	// to check if it should create a "edit comment" item
+	// to check if it should create a "edit comment" item -SB
 	private String currentCommentAuthor = "";
 
 	@Override
@@ -111,22 +111,25 @@ public class BrowseReplyCommentsActivity extends BrowseCommentsActivityAbstracti
 		return adapter;
 	}
 	
-	@Override
-	public void goToHelpPage(){
-		// go to help page for replying to comments
-	}
-	
+	// override to select a different menu xml than the default -SB
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.reply_list, menu);
+		// do all the default menu setup tasks -SB
+		super.onCreateOptionsMenu(menu);
 		
+		// the current user who is logged in -SB
 		String currentUser = User.getUser().getName();
 		
+		// if the current user is also the comment author, show "edit comment" as a menu option -SB
 		if(currentUser.equals(currentCommentAuthor)){
 			menu.add(0, Menu.FIRST, Menu.NONE, R.string.edit_menu_item);
 		}
 		return true;
+	}
+
+	@Override
+	public void goToHelpPage(){
+		// go to help page for replying to comments
 	}
 }

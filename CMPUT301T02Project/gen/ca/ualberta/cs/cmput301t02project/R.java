@@ -72,11 +72,9 @@ public final class R {
         public static final int list_item=0x7f030009;
     }
     public static final class menu {
-        public static final int create_comment=0x7f070000;
+        public static final int default_menu=0x7f070000;
         public static final int login=0x7f070001;
         public static final int main=0x7f070002;
-        public static final int reply_list=0x7f070003;
-        public static final int top_level_list=0x7f070004;
     }
     public static final class string {
         public static final int action_settings=0x7f050001;

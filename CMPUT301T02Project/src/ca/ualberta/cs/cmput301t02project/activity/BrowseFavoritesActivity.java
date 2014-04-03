@@ -53,5 +53,9 @@ public class BrowseFavoritesActivity extends BrowseCommentsActivityAbstraction {
 		this.adapter = new FavoritesAdapter(this, R.layout.list_item, model);
 		return adapter;
 	}
-
+	
+	@Override
+	public void goToHelpPage(){
+		// go to help page for favoriting comments
+	}
 }

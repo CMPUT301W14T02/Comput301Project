@@ -3,6 +3,7 @@ package ca.ualberta.cs.cmput301t02project.activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -21,7 +22,7 @@ import ca.ualberta.cs.cmput301t02project.model.User;
  * Favorites, 
  * and My Comments.
  */
-public class MainMenuActivity extends Activity {
+public class MainMenuActivity extends ActionBarActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -81,5 +82,20 @@ public class MainMenuActivity extends Activity {
 				startActivity(new Intent(MainMenuActivity.this, BrowseMyCommentsActivity.class));
 			}
 		});
+	}
+	
+	// override to select a different menu xml than the ActionBarActivity default -SB
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.main, menu);
+		
+		return true;
+	}
+	
+	@Override
+	public void goToHelpPage(){
+		// redirect to help page for main menu -SB
 	}
 }

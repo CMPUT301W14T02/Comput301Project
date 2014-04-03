@@ -3,6 +3,8 @@ package ca.ualberta.cs.cmput301t02project.activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -82,6 +84,31 @@ public class LoginActivity extends Activity {
 	 */
 	private boolean checkIfValid(String username) {
 		return !username.equals("");
+	}
+	
+	
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.login, menu);
+		return true;
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+	    
+	    switch (item.getItemId()) {
+	    	case R.id.help_page:
+	    		goToHelpPage();
+	    		return true;
+	        default:
+	            return super.onOptionsItemSelected(item);
+	    }
+	}
+	
+	public void goToHelpPage(){
+		// redirect to help page for loging in -SB
 	}
 
 }
