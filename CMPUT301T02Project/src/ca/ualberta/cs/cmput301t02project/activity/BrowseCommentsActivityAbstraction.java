@@ -2,10 +2,6 @@ package ca.ualberta.cs.cmput301t02project.activity;
 
 import java.util.ArrayList;
 
-import android.app.Activity;
-import android.content.Intent;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
@@ -13,7 +9,6 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Spinner;
 import ca.ualberta.cs.cmput301t02project.R;
-import ca.ualberta.cs.cmput301t02project.model.User;
 import ca.ualberta.cs.cmput301t02project.view.CommentListAdapterAbstraction;
 
 /**
