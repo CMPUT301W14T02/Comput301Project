@@ -2,6 +2,7 @@ package ca.ualberta.cs.cmput301t02project.activity;
 
 import java.util.ArrayList;
 
+import android.content.Intent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
@@ -98,7 +99,10 @@ public abstract class BrowseCommentsActivityAbstraction extends ActionBarActivit
 			adapter.sortByLocation();
 		} 
 		else if (selected.equals("Other Location")) {
-			adapter.sortByOtherLocation();
+			Intent intent = new Intent(BrowseCommentsActivityAbstraction.this, EnterSearchCoordinatesActivity.class);
+			startActivity(intent);
+			
+			//adapter.sortByOtherLocation();
 		} 
 		else if (selected.equals("Ranking")) {
 			adapter.sortByRanking();
