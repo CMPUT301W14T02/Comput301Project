@@ -9,6 +9,9 @@ import android.content.SharedPreferences;
 
 import com.google.gson.Gson;
 
+/**
+ * Cache class used by the Server as a fallback if there's no internet.
+ */
 public class Cache {
 	private final static String CACHE_KEY = "CacheKey";
 	private static Cache cache;
@@ -18,6 +21,11 @@ public class Cache {
 		this.context = context;
 	}
 	
+	/**
+	 * This class is a singleton
+	 * @param context A context is needed for storage
+	 * @return The singleton instance
+	 */
 	public static Cache getInstance(Context context) {
 		if(cache == null) {
 			cache = new Cache(context.getApplicationContext());
@@ -25,6 +33,11 @@ public class Cache {
 		return cache;
 	}
 	
+	/**
+	 * If the comment is present in the cache, returns it, else return null
+	 * @param arg0 The id of the comment
+	 * @return If the comment is present in the cache, returns it, else return null
+	 */
 	public CommentModel getIfPresent(Object arg0) {
 		SharedPreferences cache = context.getSharedPreferences(CACHE_KEY, 0);
 		String key = (String) arg0;
@@ -34,6 +47,11 @@ public class Cache {
 		return result;
 	}
 	
+	/**
+	 * Adds a key value pair to the cache
+	 * @param key The comment id
+	 * @param value The comment
+	 */
 	public void put(String key, CommentModel value) {
 		Gson gson = new Gson();
 		String v = gson.toJson(value);
@@ -41,6 +59,10 @@ public class Cache {
 		cache.edit().putString(key, v).commit();
 	}
 	
+	/**
+	 * Returns a list of all comments present on the cache
+	 * @return The list of comments
+	 */
 	public ArrayList<CommentModel> getAllTopLevelPresent() {
 		Gson gson = new Gson();
 		SharedPreferences cache = context.getSharedPreferences(CACHE_KEY, 0);

@@ -1,19 +1,10 @@
 package ca.ualberta.cs.cmput301t02project.activity;
 
-import java.io.File;
-
-import android.content.Intent;
-import android.graphics.Bitmap;
 import android.location.Location;
-import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
-import android.provider.MediaStore;
-import android.view.Display;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import ca.ualberta.cs.cmput301t02project.R;
 import ca.ualberta.cs.cmput301t02project.controller.CommentController;
 import ca.ualberta.cs.cmput301t02project.controller.TopLevelListController;
