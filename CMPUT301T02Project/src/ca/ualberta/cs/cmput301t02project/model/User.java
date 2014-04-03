@@ -22,6 +22,7 @@ public class User {
 	private transient FavoritesListModel favorites;
 	private transient RepliesToFavsListModel repliesToFavs;
 	
+	//Singleton
 	private static User user;
 
 	private User(String username) {
