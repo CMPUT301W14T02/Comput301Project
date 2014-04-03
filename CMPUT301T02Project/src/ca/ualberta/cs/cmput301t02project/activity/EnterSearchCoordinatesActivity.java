@@ -13,11 +13,11 @@ import ca.ualberta.cs.cmput301t02project.model.User;
 
 public class EnterSearchCoordinatesActivity extends DialogFragment {
 	
-	public Dialog onCreateDialog(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.enter_coordinates);
+	//public Dialog onCreateDialog(Bundle savedInstanceState) {
+		//super.onCreate(savedInstanceState);
+		//setContentView(R.layout.enter_coordinates);
 		
-	}
+	//}
 
 	
 }
