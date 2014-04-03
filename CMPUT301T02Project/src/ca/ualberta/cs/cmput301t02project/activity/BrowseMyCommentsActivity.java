@@ -71,5 +71,9 @@ public class BrowseMyCommentsActivity extends BrowseCommentsActivityAbstraction 
 		this.adapter = new MyCommentsAdapter(this, R.layout.list_item, model);
 		return adapter;
 	}
-
+	
+	@Override
+	public void goToHelpPage(){
+		// go to help page for replying to comments
+	}
 }

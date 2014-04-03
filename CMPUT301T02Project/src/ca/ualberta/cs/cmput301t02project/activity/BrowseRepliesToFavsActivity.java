@@ -43,5 +43,10 @@ public class BrowseRepliesToFavsActivity extends BrowseCommentsActivityAbstracti
 		this.adapter = new RepliesToFavsAdapter(this, R.layout.list_item, model);
 		return adapter;
 	}
+	
 
+	@Override
+	public void goToHelpPage(){
+		// go to help page for browsing favorites
+	}
 }

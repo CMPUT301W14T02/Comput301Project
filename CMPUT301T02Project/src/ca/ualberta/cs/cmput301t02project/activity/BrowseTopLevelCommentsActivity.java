@@ -60,14 +60,9 @@ public class BrowseTopLevelCommentsActivity extends BrowseCommentsActivityAbstra
 		this.adapter = new CommentListAdapter(this, R.layout.list_item, model);
 		return adapter;
 	}
-	
+
 	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.top_level_list, menu);
-		
-		return true;
+	public void goToHelpPage(){
+		// go to help page for top level comments
 	}
-	
 }

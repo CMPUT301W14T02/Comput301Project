@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -20,6 +21,7 @@ import ca.ualberta.cs.cmput301t02project.view.CommentListAdapterAbstraction;
  * BrowseMyCommmentsActivity, BrowseReplyCommentsActivity, BrowseFavoritesActivity, BrowseTopLevelCommentsActivtiy.
  * Includes methods for 
  * displaying a drop-down menu of sorting options, 
+ * setting up an action-bar menu and dealing with menu items being clicked
  */
 public abstract class BrowseCommentsActivityAbstraction extends Activity implements OnItemSelectedListener{
 	
@@ -90,6 +92,14 @@ public abstract class BrowseCommentsActivityAbstraction extends Activity impleme
 		startActivity(goHome);
 	}
 	
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.comments_list, menu);
+		
+		return true;
+	}
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
