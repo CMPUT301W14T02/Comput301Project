@@ -1,8 +1,6 @@
 package ca.ualberta.cs.cmput301t02project.activity;
 
-import android.app.Activity;
 import android.os.Bundle;
-import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -12,7 +10,7 @@ import ca.ualberta.cs.cmput301t02project.controller.CommentController;
 /**
  * Allows a user to edit the comment they selected.
  */
-public class EditCommentActivity extends Activity {
+public class EditCommentActivity extends ActionBarActivity {
 
 			
 	@Override
@@ -61,16 +59,8 @@ public class EditCommentActivity extends Activity {
 				
 				commentController.edit(newText, lat, lon);
 	
-				
 				finish();
 			}
 		});
-	}
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.create_comment, menu);
-		return true;
 	}
 }

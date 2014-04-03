@@ -2,7 +2,6 @@ package ca.ualberta.cs.cmput301t02project.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -60,14 +59,9 @@ public class BrowseTopLevelCommentsActivity extends BrowseCommentsActivityAbstra
 		this.adapter = new CommentListAdapter(this, R.layout.list_item, model);
 		return adapter;
 	}
-	
+
 	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.top_level_list, menu);
-		
-		return true;
+	public void goToHelpPage(){
+		// go to help page for top level comments
 	}
-	
 }

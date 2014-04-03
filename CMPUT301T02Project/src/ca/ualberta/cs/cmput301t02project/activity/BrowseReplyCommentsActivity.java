@@ -24,15 +24,21 @@ import ca.ualberta.cs.cmput301t02project.view.CommentListAdapterAbstraction;
 
 /**
  * Displays comments replies to the current selected comment.
- * Current comment information including the current comment and a list of its replies is stored in ProjectApplication.getInstance().
+ * Current comment information including the current comment and a list of its replies is stored in User.
  */
 public class BrowseReplyCommentsActivity extends BrowseCommentsActivityAbstraction {
 
 	private ReplyList model;
-	
 	// the name of the author of the selected comment is used by the menu 
-	// to check if it should create a "edit comment" item
+	// to check if it should create a "edit comment" item -SB
 	private String currentCommentAuthor = "";
+	
+	// the comment to be edited when "edit comment" menu option is selected -SB
+	private CommentModel editComment = null;
+	
+	// for the edit comment menu item when it is created dynamically -SB
+	private final int MENU_EDIT = Menu.FIRST;
+	
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -44,10 +50,10 @@ public class BrowseReplyCommentsActivity extends BrowseCommentsActivityAbstracti
 		TextView selectedComment = (TextView) findViewById(R.id.selected_comment);
 		
 		final String currentCommentId = getIntent().getStringExtra("CommentId");
-		final CommentController commentController = new CommentController(currentCommentId, this);
-		final CommentModel currentComment = commentController.getComment();
-		
+		CommentController commentController = new CommentController(currentCommentId, this);
+		CommentModel currentComment = commentController.getComment();
 		currentCommentAuthor = currentComment.getUsername();
+		editComment = currentComment;
 		
 		selectedComment.setText(currentComment.getText());
 		
@@ -77,6 +83,8 @@ public class BrowseReplyCommentsActivity extends BrowseCommentsActivityAbstracti
 		favoriteComment.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
+				CommentController commentController = new CommentController(currentCommentId, BrowseReplyCommentsActivity.this);
+				CommentModel currentComment = commentController.getComment();
 				User user = User.getUser();
 				ReplyList repliesToFav = new ReplyList(currentComment.getId(), getApplicationContext());
 				ArrayList<CommentModel> replies = repliesToFav.getList();
@@ -112,22 +120,59 @@ public class BrowseReplyCommentsActivity extends BrowseCommentsActivityAbstracti
 		return adapter;
 	}
 	
-	@Override
-	public void goToHelpPage(){
-		// go to help page for replying to comments
-	}
 	
+	// override to select a different menu xml than the default -SB
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.reply_list, menu);
+		// do all the default menu setup tasks -SB
+		super.onCreateOptionsMenu(menu);
 		
+		// the current user who is logged in -SB
 		String currentUser = User.getUser().getName();
 		
+		// if the current user is also the comment author, show "edit comment" as a menu option -SB
 		if(currentUser.equals(currentCommentAuthor)){
-			menu.add(0, Menu.FIRST, Menu.NONE, R.string.edit_menu_item);
+			menu.add(0, MENU_EDIT, Menu.NONE, R.string.edit_menu_item);
 		}
 		return true;
+	}
+	
+	// override to deal with new edit menu item
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item){
+		super.onOptionsItemSelected(item);
+		
+		 switch (item.getItemId()) {
+	    	case MENU_EDIT:
+	    		editComment();
+	    		return true;
+	        default:
+	            return super.onOptionsItemSelected(item);
+		 }
+	}
+	
+	/**
+	 * Allows the user to edit a selected comment.
+	 * <p>
+	 * Redirects to the EditCommentActivity when it is called if editComment is set in onCreate.
+	 * Called when the "edit comment" menu item is selected.
+	 * <p>
+	 */
+	private void editComment(){
+		
+		// make sure editComment was set in onCreate -SB
+		if(editComment != null){
+			
+			// go to the edit comment activity & send comment to edit -SB
+			Intent goToEditCommentActivity = new Intent(getApplicationContext(), EditCommentActivity.class);
+			goToEditCommentActivity.putExtra("CommentId", editComment.getId());
+			startActivity(goToEditCommentActivity);
+		}
+	}
+
+	@Override
+	public void goToHelpPage(){
+		// go to help page for replying to comments
 	}
 }

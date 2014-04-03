@@ -2,7 +2,6 @@ package ca.ualberta.cs.cmput301t02project.activity;
 
 import java.io.File;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.location.Location;
@@ -10,7 +9,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -23,7 +21,7 @@ import ca.ualberta.cs.cmput301t02project.model.User;
 /**
  * Allows a user to create their own comment. 
  */
-public class CreateCommentActivity extends Activity {
+public class CreateCommentActivity extends ActionBarActivity {
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -111,13 +109,10 @@ public class CreateCommentActivity extends Activity {
 		intent.putExtra(MediaStore.EXTRA_OUTPUT, imageFileUri);
 		startActivityForResult(intent, CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);
 	}
-	    
 	
 	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.create_comment, menu);
-		return true;
+	public void goToHelpPage(){
+		// redirect to help page for creating comments -SB
 	}
 
 }
