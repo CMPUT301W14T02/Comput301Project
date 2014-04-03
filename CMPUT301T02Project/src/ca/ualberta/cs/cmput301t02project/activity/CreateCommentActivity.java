@@ -9,9 +9,11 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.view.Display;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import ca.ualberta.cs.cmput301t02project.R;
 import ca.ualberta.cs.cmput301t02project.controller.CommentController;
 import ca.ualberta.cs.cmput301t02project.controller.TopLevelListController;
@@ -22,6 +24,9 @@ import ca.ualberta.cs.cmput301t02project.model.User;
  * Allows a user to create their own comment. 
  */
 public class CreateCommentActivity extends ActionBarActivity {
+	
+	// if no picture is taken, picture should remain null -SB
+	Bitmap picture = null;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +52,7 @@ public class CreateCommentActivity extends ActionBarActivity {
 			public void onClick(View v) {
 				EditText inputComment = (EditText) findViewById(R.id.create_text);
 				String text = inputComment.getText().toString();
-				Bitmap picture = null;
+				
 				Location location = GPSLocation.getInstance().getLocation();
 				Location commentLocation = new Location("");
 				
@@ -79,9 +84,6 @@ public class CreateCommentActivity extends ActionBarActivity {
 
 	}
 	
-	// For the takePhoto method
-	Uri imageFileUri;
-	private static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 100;
 	
 	/**
 	 * Takes a photo using the android camera
@@ -94,22 +96,38 @@ public class CreateCommentActivity extends ActionBarActivity {
 	 * @param v	to allow takePhoto to be called using XML, view is a required parameter
 	 */
 	public void takePhoto(View v) {
+
 		Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-		String folder = Environment.getExternalStorageDirectory().getAbsolutePath() + "/tmp";
-		File folderF = new File(folder);
 		
-		if (!folderF.exists()) {
-			folderF.mkdir();
-		}
-	        
-		String imageFilePath = folder + "/" + String.valueOf(System.currentTimeMillis()) + "jpg";
-		File imageFile = new File(imageFilePath);
-		imageFileUri = Uri.fromFile(imageFile);
-	        
-		intent.putExtra(MediaStore.EXTRA_OUTPUT, imageFileUri);
-		startActivityForResult(intent, CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);
+		String path = Environment.getExternalStorageDirectory().getAbsolutePath()+"/savefile.jpg";
+		intent.putExtra(MediaStore.EXTRA_OUTPUT, path);
+		startActivityForResult(intent, 0);
 	}
 	
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		
+		//String path = data.getStringExtra(MediaStore.EXTRA_OUTPUT);
+		ImageButton imageButton = (ImageButton) findViewById(R.id.takeAPhoto);
+		
+		if(requestCode == 0) {
+			if(resultCode == RESULT_OK) {
+				
+				// retrieve the bitmap -SB
+				Bitmap bm = (Bitmap) data.getExtras().getParcelable("data");
+				
+				// display the image on the image button -SB
+				imageButton.setImageBitmap(bm);
+				
+				// set the picture for the comment to the bitmap -SB
+				picture = bm;
+			}
+			else {
+				//something went wrong
+			}
+		}
+	}	
+
 	@Override
 	public void goToHelpPage(){
 		// redirect to help page for creating comments -SB
