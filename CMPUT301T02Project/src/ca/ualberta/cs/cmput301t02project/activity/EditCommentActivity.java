@@ -50,8 +50,16 @@ public class EditCommentActivity extends Activity {
 				
 				//for editing locations
 				double lat = 0, lon = 0;
-				lat = Double.valueOf(latitude.getText().toString());
-				lon = Double.valueOf(longitude.getText().toString());
+				try {
+					lat = Double.valueOf(latitude.getText().toString());
+					lon = Double.valueOf(longitude.getText().toString());
+					if ((lat > 90) || (lat < -90)) { throw new NumberFormatException();}
+					if ((lon > 180) || (lon < -180)) { throw new NumberFormatException();}
+
+				} catch  (NumberFormatException ex){
+					lat =  commentController.getComment().getLocation().getLatitude();
+					lon = commentController.getComment().getLocation().getLongitude();
+				}
 				
 				commentController.edit(newText, lat, lon);
 	
