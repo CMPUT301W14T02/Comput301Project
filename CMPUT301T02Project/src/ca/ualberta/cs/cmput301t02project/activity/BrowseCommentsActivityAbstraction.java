@@ -36,8 +36,16 @@ public abstract class BrowseCommentsActivityAbstraction extends Activity impleme
 	 */
 	public abstract CommentListAdapterAbstraction initializeAdapter();
 	
+	/**
+	 * Redirects to the help page for that activity
+	 * <p>
+	 * If goToHelpPage method is not re-implemented in a class that extends this class then default help page is used.
+	 * Any classes that extend BrowseCommentsActivityAbstraction should override this method to set their own specific help page.
+	 * All the Browse* classes override this method to set their own specific help page
+	 * <p>
+	 */
 	public void goToHelpPage(){
-		// default help page
+		// default help page -SB
 	}
 	
 	/**
@@ -55,11 +63,28 @@ public abstract class BrowseCommentsActivityAbstraction extends Activity impleme
 		listView.setAdapter(adapter);
 	}
 	
+	/**
+	 * Return to the login screen.
+	 * <p>
+	 * Redirects page to the login page (LoginActivity).
+	 * Currently does not unset the User. 
+	 * Called by any classes with a logout button on their menu that extend BrowseCommentsActivityAbstraction, 
+	 * a.k.a. all the Browse* activities.
+	 * <p>
+	 */
 	public void logout(){
 		Intent logoutActivity = new Intent(getApplicationContext(),LoginActivity.class);
 		startActivity(logoutActivity);
 	}
 	
+	/**
+	 * Return to the main menu (homepage).
+	 * <p>
+	 * Redirects page to the homepage (MainMenuActivity).
+	 * Called by any classes with a home button on their menu that extend BrowseCommentsActivityAbstraction, 
+	 * a.k.a. all the Browse* activities.
+	 * <p>
+	 */
 	public void returnToHomepage(){
 		Intent goHome = new Intent(getApplicationContext(),MainMenuActivity.class);
 		startActivity(goHome);
