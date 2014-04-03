@@ -31,6 +31,7 @@ public abstract class CommentListAdapterAbstraction extends ArrayAdapter<Comment
 	private Comparator<CommentModel> sortByDate;
 	private Comparator<CommentModel> sortByLocation;
 	private Comparator<CommentModel> sortByRank;
+	private Comparator<CommentModel> sortByPicture;
 	private Location myLocation = null;
 	private ArrayList<CommentModel> list;
 	
@@ -94,6 +95,23 @@ public abstract class CommentListAdapterAbstraction extends ArrayAdapter<Comment
 					return 0;
 				}
 			}
+		};
+		
+		sortByPicture = new Comparator<CommentModel>(){
+
+			@Override
+			public int compare(CommentModel left, CommentModel right) {
+				if ((left.getImage() == null) && (right.getImage() != null)){
+					return 1;
+				}
+				else if ((right.getImage() == null) && (left.getImage() != null)){
+					return -1;
+				}
+				else {
+					return 0;
+				}
+			}
+			
 		};
 	}
 	
@@ -264,6 +282,7 @@ public abstract class CommentListAdapterAbstraction extends ArrayAdapter<Comment
 		sortList();
 	}
 	
+	
 	/**
 	 * Sorts the list by the method currently set in sortMethod.
 	 * <p>
@@ -286,6 +305,7 @@ public abstract class CommentListAdapterAbstraction extends ArrayAdapter<Comment
 				Collections.sort(list, sortByDate);
 			} 
 			else if (sortMethod.equals("Picture")) {
+				Collections.sort(list, sortByPicture);
 
 			} 
 			else if (sortMethod.equals("Location")) {
