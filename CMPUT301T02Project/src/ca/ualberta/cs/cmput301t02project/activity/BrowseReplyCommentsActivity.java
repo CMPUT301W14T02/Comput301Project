@@ -10,6 +10,8 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -56,6 +58,14 @@ public class BrowseReplyCommentsActivity extends BrowseCommentsActivityAbstracti
 		editComment = currentComment;
 		
 		selectedComment.setText(currentComment.getText());
+		
+		// display the image if there is one
+		if(currentComment.getImage() != null){
+
+			ImageView image = (ImageView) findViewById(R.id.comment_picture);
+			image.setImageBitmap(currentComment.getImage());
+		}
+		
 		
 		model = new ReplyList(currentCommentId, this);
 		setupPage();
