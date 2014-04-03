@@ -19,6 +19,8 @@ import com.google.gson.Gson;
  * With this, you can abstract the storage details and treat it like a Map.
  * All the CommentLists that are stored on the phone should inherit from this
  * and override the getPreferencesKey method.
+ * This class uses the template pattern, in which the classes that inherit from it
+ * must specify the PreferencesKey.
  *
  */
 public abstract class StoredCommentListAbstraction extends Observable implements CommentListModel {
@@ -39,7 +41,7 @@ public abstract class StoredCommentListAbstraction extends Observable implements
 	 */
 	protected abstract String getPreferencesKey();
 	
-	public Set<Entry<String, CommentModel>> entrySet() {
+	private Set<Entry<String, CommentModel>> entrySet() {
 		Gson gson = new Gson();
 		SharedPreferences storage = context.getSharedPreferences(getPreferencesKey(), 0);
 		Map<String, ?> map = storage.getAll();
@@ -85,6 +87,10 @@ public abstract class StoredCommentListAbstraction extends Observable implements
 		return previousValue;
 	}
 	
+	/**
+	 * Adds a comment that already has an id to the list
+	 * @param comment The comment to be added
+	 */
 	public void add(CommentModel comment) {
 		if(comment.getId() == null) {
 			throw  new IllegalArgumentException("Can't store a comment with null id");
@@ -93,13 +99,20 @@ public abstract class StoredCommentListAbstraction extends Observable implements
 		notifyObservers();
 	}
 	
-	public void addReplies(ArrayList<CommentModel> replies) {
-		for(CommentModel comment:replies)
+	/**
+	 * Adds a list of comments
+	 * @param list The list of replies to be added
+	 */
+	public void addAll(ArrayList<CommentModel> list) {
+		for(CommentModel comment:list)
 			this.put(comment.getId(), comment);
 		notifyObservers();
 	}
 	
-	
+	/**
+	 * Returns the list of comment
+	 * @return The list
+	 */
 	public ArrayList<CommentModel> getList() {
 		ArrayList<CommentModel> list = new ArrayList<CommentModel>();
 		for(Entry<String, CommentModel> entry : this.entrySet()) {
@@ -108,6 +121,10 @@ public abstract class StoredCommentListAbstraction extends Observable implements
 		return list;
 	}
 	
+	/**
+	 * Returns the list of all ids
+	 * @return The list of ids
+	 */
 	public ArrayList<String> getIdList() {
 		ArrayList<String> list = new ArrayList<String>();
 		for(Entry<String, CommentModel> entry : this.entrySet()) {
@@ -116,6 +133,9 @@ public abstract class StoredCommentListAbstraction extends Observable implements
 		return list;
 	}
 	
+	/**
+	 * Updates the stored list with whatever is newer on the Server
+	 */
 	public void refresh() {
 		ArrayList<String> ids = this.getIdList();
 		Server server = new Server(context);
