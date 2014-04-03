@@ -3,6 +3,7 @@ package ca.ualberta.cs.cmput301t02project.activity;
 import java.util.ArrayList;
 
 import android.content.Intent;
+import android.location.Location;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
@@ -102,6 +103,15 @@ public abstract class BrowseCommentsActivityAbstraction extends ActionBarActivit
 			Intent intent = new Intent(BrowseCommentsActivityAbstraction.this, EnterSearchCoordinatesActivity.class);
 			startActivity(intent);
 			
+			Intent newIntent = getIntent();
+			
+		    double otherLocLat = newIntent.getDoubleExtra("Other Location Lat", 0);
+		    double otherLocLon = newIntent.getDoubleExtra("Other Location Lon", 0);
+
+		    Location otherLocation = new Location("");
+		    otherLocation.setLatitude(otherLocLat);
+		    otherLocation.setLongitude(otherLocLon);
+		    
 			//adapter.sortByOtherLocation();
 		} 
 		else if (selected.equals("Faves")) {

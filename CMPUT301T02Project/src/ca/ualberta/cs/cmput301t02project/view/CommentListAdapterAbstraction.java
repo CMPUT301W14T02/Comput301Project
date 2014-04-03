@@ -360,4 +360,5 @@ public abstract class CommentListAdapterAbstraction extends ArrayAdapter<Comment
 		return convertView;
 
 	}
+	
 }
