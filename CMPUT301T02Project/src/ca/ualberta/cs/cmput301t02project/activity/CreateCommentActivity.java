@@ -51,28 +51,29 @@ public class CreateCommentActivity extends Activity {
 				String text = inputComment.getText().toString();
 				Bitmap picture = null;
 				Location location = GPSLocation.getInstance().getLocation();
+				Location commentLocation = new Location("");
 				
-				double lat = 0, lon = 0;
 				try {
-					lat = Double.valueOf(latitude.getText().toString());
-					lon = Double.valueOf(longitude.getText().toString());
+					double lat = Double.valueOf(latitude.getText().toString());
+					double lon = Double.valueOf(longitude.getText().toString());
 					if ((lat > 90) || (lat < -90)) { throw new NumberFormatException();}
 					if ((lon > 180) || (lon < -180)) { throw new NumberFormatException();}
+					commentLocation.setLatitude(lat);
+					commentLocation.setLongitude(lon);
+					
 				} catch (NumberFormatException ex){
-					lat = GPSLocation.getInstance().getLocation().getLatitude();
-					lon = GPSLocation.getInstance().getLocation().getLongitude();
+					/*if any exceptions are caught above, the comment will be given 
+						GPS coordinates by default */
+					commentLocation = location;
 				}
-					location = new Location("");
-					location.setLatitude(lat);
-					location.setLongitude(lon);
 				
 				if(isTopLevel) {
 					TopLevelListController controller = new TopLevelListController(CreateCommentActivity.this);
-					controller.add(text, picture, location, User.getUser());
+					controller.add(text, picture, commentLocation, User.getUser());
 				}
 				else {
 					CommentController commentController = new CommentController(commentId, CreateCommentActivity.this);
-					commentController.addReply(text, picture, location, User.getUser());
+					commentController.addReply(text, picture, commentLocation, User.getUser());
 				}
 				finish();
 			}
