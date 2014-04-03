@@ -37,11 +37,9 @@ public class CreateCommentActivity extends Activity {
 		
 		double currLat = GPSLocation.getInstance().getLocation().getLatitude();
 		double currLon = GPSLocation.getInstance().getLocation().getLongitude();
-		final String strLat = String.valueOf(currLat);
-		final String strLon = String.valueOf(currLon);
-		
-		latitude.setText(strLat);
-		longitude.setText(strLon);
+	
+		latitude.setText(String.valueOf(currLat));
+		longitude.setText(String.valueOf(currLon));
 		
 		Button post = (Button) findViewById(R.id.create_post);
 
@@ -53,13 +51,21 @@ public class CreateCommentActivity extends Activity {
 				String text = inputComment.getText().toString();
 				Bitmap picture = null;
 				Location location = GPSLocation.getInstance().getLocation();
-				if ((latitude.getText().toString())!= strLat || ((longitude.getText().toString())!= strLon)) {
-					double lat = Double.valueOf(latitude.getText().toString());
-					double lon = Double.valueOf(longitude.getText().toString());
+				
+				double lat = 0, lon = 0;
+				try {
+					lat = Double.valueOf(latitude.getText().toString());
+					lon = Double.valueOf(longitude.getText().toString());
+					if ((lat > 90) || (lat < -90)) { throw new NumberFormatException();}
+					if ((lon > 180) || (lon < -180)) { throw new NumberFormatException();}
+				} catch (NumberFormatException ex){
+					lat = GPSLocation.getInstance().getLocation().getLatitude();
+					lon = GPSLocation.getInstance().getLocation().getLongitude();
+				}
 					location = new Location("");
 					location.setLatitude(lat);
 					location.setLongitude(lon);
-				}
+				
 				if(isTopLevel) {
 					TopLevelListController controller = new TopLevelListController(CreateCommentActivity.this);
 					controller.add(text, picture, location, User.getUser());

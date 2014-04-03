@@ -32,11 +32,9 @@ public class EditCommentActivity extends Activity {
 		
 		double commentLat = commentController.getComment().getLocation().getLatitude();
 		double commentLon = commentController.getComment().getLocation().getLongitude();
-		final String strLat = String.valueOf(commentLat);
-		final String strLon = String.valueOf(commentLon);
-		
-		latitude.setText(strLat);
-		longitude.setText(strLon);
+	
+		latitude.setText(String.valueOf(commentLat));
+		longitude.setText(String.valueOf(commentLon));
 
 
 		Button post = (Button) findViewById(R.id.edit_post);
