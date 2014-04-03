@@ -159,7 +159,10 @@ public abstract class BrowseCommentsActivityAbstraction extends Activity impleme
 			adapter.sortByLocation();
 		} 
 		else if (selected.equals("Other Location")) {
-			adapter.sortByOtherLocation();
+			Intent intent = new Intent(BrowseCommentsActivityAbstraction.this, EnterSearchCoordinatesActivity.class);
+			startActivity(intent);
+			
+			//adapter.sortByOtherLocation();
 		} 
 		else if (selected.equals("Ranking")) {
 			adapter.sortByRanking();

@@ -69,7 +69,8 @@ public final class R {
         public static final int activity_reply_list=0x7f030006;
         public static final int activity_reply_list_old=0x7f030007;
         public static final int activity_top_level_list=0x7f030008;
-        public static final int list_item=0x7f030009;
+        public static final int enter_coordinates=0x7f030009;
+        public static final int list_item=0x7f03000a;
     }
     public static final class menu {
         public static final int create_comment=0x7f070000;
@@ -105,6 +106,7 @@ public final class R {
         public static final int title_activity_browse_replies_to_favs=0x7f050016;
         public static final int title_activity_create_comment=0x7f050006;
         public static final int title_activity_edit_comment=0x7f050014;
+        public static final int title_activity_enter_coor=0x7f050020;
         public static final int title_activity_login=0x7f05000b;
         public static final int title_activity_my_comments_list=0x7f050013;
         public static final int title_activity_reply_list=0x7f05000a;
