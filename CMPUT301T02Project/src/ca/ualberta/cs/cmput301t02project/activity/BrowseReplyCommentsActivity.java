@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -29,7 +28,6 @@ import ca.ualberta.cs.cmput301t02project.view.CommentListAdapterAbstraction;
 public class BrowseReplyCommentsActivity extends BrowseCommentsActivityAbstraction {
 
 	private ReplyList model;
-	
 	// the name of the author of the selected comment is used by the menu 
 	// to check if it should create a "edit comment" item
 	private String currentCommentAuthor = "";
@@ -44,9 +42,8 @@ public class BrowseReplyCommentsActivity extends BrowseCommentsActivityAbstracti
 		TextView selectedComment = (TextView) findViewById(R.id.selected_comment);
 		
 		final String currentCommentId = getIntent().getStringExtra("CommentId");
-		final CommentController commentController = new CommentController(currentCommentId, this);
-		final CommentModel currentComment = commentController.getComment();
-		
+		CommentController commentController = new CommentController(currentCommentId, this);
+		CommentModel currentComment = commentController.getComment();
 		currentCommentAuthor = currentComment.getUsername();
 		
 		selectedComment.setText(currentComment.getText());
@@ -77,6 +74,8 @@ public class BrowseReplyCommentsActivity extends BrowseCommentsActivityAbstracti
 		favoriteComment.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
+				CommentController commentController = new CommentController(currentCommentId, BrowseReplyCommentsActivity.this);
+				CommentModel currentComment = commentController.getComment();
 				User user = User.getUser();
 				ReplyList repliesToFav = new ReplyList(currentComment.getId(), getApplicationContext());
 				ArrayList<CommentModel> replies = repliesToFav.getList();
