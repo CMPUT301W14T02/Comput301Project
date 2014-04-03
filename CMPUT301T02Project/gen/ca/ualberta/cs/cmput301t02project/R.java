@@ -55,10 +55,10 @@ public final class R {
         public static final int replyListView=0x7f08001d;
         public static final int reply_button=0x7f08001c;
         public static final int search_latitude_box=0x7f080020;
-        public static final int search_latitude_label=0x7f080022;
-        public static final int search_location_label=0x7f080023;
-        public static final int search_longitude_box=0x7f080024;
-        public static final int search_longitude_label=0x7f080021;
+        public static final int search_latitude_label=0x7f080021;
+        public static final int search_location_label=0x7f080024;
+        public static final int search_longitude_box=0x7f080023;
+        public static final int search_longitude_label=0x7f080022;
         public static final int selected_comment=0x7f080019;
         public static final int spinner=0x7f08000f;
         public static final int spinner_intro=0x7f08001e;
@@ -106,6 +106,7 @@ public final class R {
         public static final int longitude=0x7f050018;
         public static final int my_comments=0x7f050011;
         public static final int post=0x7f050007;
+        public static final int sort_button=0x7f050022;
         public static final int spinner_title=0x7f050009;
         public static final int title_activity_browse_favorites=0x7f050015;
         public static final int title_activity_browse_replies_to_favs=0x7f050016;

@@ -2,6 +2,7 @@ package ca.ualberta.cs.cmput301t02project.activity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -111,7 +112,8 @@ public class LoginActivity extends Activity {
 	 * Redirects to the default help page
 	 */
 	public void goToHelpPage(){
-		// redirect to help page for logging in -SB
+		Intent viewIntent = new Intent("android.intent.action.VIEW",Uri.parse("http://www.google.com/"));
+		startActivity(viewIntent);// redirect to help page for logging in -SB
 	}
 
 }
