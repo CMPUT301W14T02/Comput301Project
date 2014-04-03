@@ -56,7 +56,7 @@ public class ActionBarActivity extends Activity {
 		startActivity(goHome);
 	}
 	
-	// This method is overriden by EditComment and MainMenu activities, which use different menus.-SB
+	// This method is overriden by MainMenuActivity, which uses a different menu that does not include home.-SB
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		
