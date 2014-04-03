@@ -36,6 +36,10 @@ public abstract class BrowseCommentsActivityAbstraction extends Activity impleme
 	 */
 	public abstract CommentListAdapterAbstraction initializeAdapter();
 	
+	public void goToHelpPage(){
+		// default help page
+	}
+	
 	/**
 	 * Performs tasks to set up the activity including creating a sorting menu and initializing the adapter.
 	 * <p>
@@ -66,6 +70,9 @@ public abstract class BrowseCommentsActivityAbstraction extends Activity impleme
 	public boolean onOptionsItemSelected(MenuItem item) {
 	    
 	    switch (item.getItemId()) {
+	    	case R.id.help_page:
+	    		goToHelpPage();
+	    		return true;
 	    	case R.id.home:
 	    		returnToHomepage();
 	    		return true;

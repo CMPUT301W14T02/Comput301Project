@@ -107,6 +107,12 @@ public class BrowseReplyCommentsActivity extends BrowseCommentsActivityAbstracti
 		this.adapter = new CommentListAdapter(this, R.layout.list_item, model);
 		return adapter;
 	}
+	
+	@Override
+	public void goToHelpPage(){
+		// go to help page for replying to comments
+	}
+	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		
@@ -120,5 +126,4 @@ public class BrowseReplyCommentsActivity extends BrowseCommentsActivityAbstracti
 		}
 		return true;
 	}
-	
 }

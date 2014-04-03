@@ -32,5 +32,6 @@
 	<string name="edit_menu_item">Edit Comment</string>
 	<string name="home_menu_item">Home</string>
 	<string name="logout_menu_item">Logout</string>
+	<string name="help_page_menu_item">Help</string>
     
 </resources>
