@@ -12,7 +12,7 @@ import ca.ualberta.cs.cmput301t02project.controller.CommentController;
 /**
  * Allows a user to edit the comment they selected.
  */
-public class EditCommentActivity extends Activity {
+public class EditCommentActivity extends ActionBarActivity {
 
 			
 	@Override
@@ -65,12 +65,5 @@ public class EditCommentActivity extends Activity {
 				finish();
 			}
 		});
-	}
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.create_comment, menu);
-		return true;
 	}
 }

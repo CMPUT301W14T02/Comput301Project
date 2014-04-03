@@ -112,6 +112,7 @@ public class BrowseReplyCommentsActivity extends BrowseCommentsActivityAbstracti
 		return adapter;
 	}
 	
+	// override to select a different menu xml than the default -SB
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		

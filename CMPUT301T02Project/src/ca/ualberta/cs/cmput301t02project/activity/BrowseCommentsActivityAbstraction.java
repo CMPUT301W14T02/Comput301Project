@@ -53,7 +53,6 @@ public abstract class BrowseCommentsActivityAbstraction extends ActionBarActivit
 		listView.setAdapter(adapter);
 	}
 
-
 	/**
 	 * Creates a drop-down menu of sorting options.
 	 * <p>

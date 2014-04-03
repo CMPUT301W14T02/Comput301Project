@@ -17,7 +17,6 @@ import ca.ualberta.cs.cmput301t02project.R;
  */
 public class ActionBarActivity extends Activity {
 	
-	
 	/**
 	 * Redirects to the help page for that activity
 	 * <p>
@@ -57,11 +56,18 @@ public class ActionBarActivity extends Activity {
 		startActivity(goHome);
 	}
 	
+	// This method is overriden by EditComment and MainMenu activities, which use different menus.-SB
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.comments_list, menu);
+		/*
+		 *  default_menu is the default menu that contains options to
+		 *  go to a help page
+		 *  return to the home page
+		 *  log out
+		 */
+		getMenuInflater().inflate(R.menu.default_menu, menu);
 		
 		return true;
 	}
