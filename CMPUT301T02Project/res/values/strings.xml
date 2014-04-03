@@ -35,5 +35,7 @@
 	<string name="help_page_menu_item">Help</string>
 	<string name="title_activity_enter_coor">EnterCoordinates</string>
 	<string name="enter_coor_message">Enter the coordinates of the location you would like to search by</string>
+	<string name="sort_button">Sort</string>
+	<string name="cancel_button">Cancel</string>
     
 </resources>

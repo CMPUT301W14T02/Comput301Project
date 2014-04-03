@@ -5,8 +5,8 @@
     android:versionName="1.0" >
 
     <uses-sdk
-        android:minSdkVersion="19"
-        android:targetSdkVersion="19" />
+        android:minSdkVersion="17"
+        android:targetSdkVersion="17" />
     
     <uses-permission android:name="android.permission.ACCESS_GPS" />
 	<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
@@ -64,7 +64,8 @@
         </activity>
           <activity
             android:name="ca.ualberta.cs.cmput301t02project.activity.EnterSearchCoordinatesActivity"
-            android:label="@string/title_activity_enter_coor" >
+            android:label="@string/title_activity_enter_coor" 
+            android:theme="@android:style/Theme.Holo.Dialog" >
             </activity>
     </application>
 
