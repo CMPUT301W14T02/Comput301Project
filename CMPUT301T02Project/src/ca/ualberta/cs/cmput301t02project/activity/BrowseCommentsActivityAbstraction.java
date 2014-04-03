@@ -73,7 +73,7 @@ public abstract class BrowseCommentsActivityAbstraction extends ActionBarActivit
 		sortBy.add("Picture");
 		sortBy.add("My Location");
 		sortBy.add("Other Location");
-		sortBy.add("Ranking");
+		sortBy.add("Faves");
 
 		// Create adapter for spinner
 		ArrayAdapter<String> spinner_adapter = new ArrayAdapter<String>(this, R.layout.list_item, sortBy);
@@ -104,7 +104,7 @@ public abstract class BrowseCommentsActivityAbstraction extends ActionBarActivit
 			
 			//adapter.sortByOtherLocation();
 		} 
-		else if (selected.equals("Ranking")) {
+		else if (selected.equals("Faves")) {
 			adapter.sortByRanking();
 		} 
 		else if (selected.equals("Default")) {
