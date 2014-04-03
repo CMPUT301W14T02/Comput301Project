@@ -26,7 +26,7 @@ public class BrowseRepliesToFavsActivity extends BrowseCommentsActivityAbstracti
 		final CommentController commentController = new CommentController(currentCommentId, this);
 		currentComment = commentController.getComment();
 		
-		RepliesToFavsListModel.setParent(currentComment);
+		model.setParent(currentComment);
 
 		setupPage();
 

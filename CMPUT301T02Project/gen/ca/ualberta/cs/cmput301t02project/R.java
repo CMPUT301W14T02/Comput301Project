@@ -34,7 +34,8 @@ public final class R {
         public static final int fav_button=0x7f08001b;
         public static final int favorites=0x7f080017;
         public static final int follow_button=0x7f08001e;
-        public static final int home=0x7f08001f;
+        public static final int help_page=0x7f08001f;
+        public static final int home=0x7f080020;
         public static final int latitude_box=0x7f080003;
         public static final int latitude_editBox=0x7f08000b;
         public static final int latitude_editLabel=0x7f08000a;
@@ -44,7 +45,7 @@ public final class R {
         public static final int login_button=0x7f080011;
         public static final int login_message=0x7f080013;
         public static final int login_username=0x7f080012;
-        public static final int logout=0x7f080020;
+        public static final int logout=0x7f080021;
         public static final int longitude_box=0x7f080001;
         public static final int longitude_editBox=0x7f08000e;
         public static final int longitude_editLabel=0x7f08000d;
@@ -89,6 +90,7 @@ public final class R {
         public static final int favorites=0x7f050010;
         public static final int follow_button=0x7f05001a;
         public static final int hello_world=0x7f050002;
+        public static final int help_page_menu_item=0x7f05001f;
         public static final int home_menu_item=0x7f05001d;
         public static final int latitude=0x7f050017;
         public static final int login_button=0x7f05000e;
