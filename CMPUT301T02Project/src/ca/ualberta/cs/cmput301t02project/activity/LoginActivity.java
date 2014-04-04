@@ -31,7 +31,7 @@ public class LoginActivity extends Activity {
 	 * Called when login_button on the screen is pressed. 
 	 * Takes a view as a parameter because of conventions for onClick in the the layout.
 	 * <p>
-	 * @param v	The current view. Variable is not used anywhere.
+	 * @param v	The current view. Variable is not used anywhere
 	 */
 	public void submitName(View v) {
 
@@ -39,14 +39,13 @@ public class LoginActivity extends Activity {
 		EditText enteredName = (EditText) findViewById(R.id.login_username);
 
 		// Test if the input is allowed -SB
-
 		login(enteredName.getText().toString());
 	}
 
 	/**
 	 * Sets the current user's username.
 	 * <p>
-	 * Sets the current username in ProjectApplication.getInstance().
+	 * Sets the current username in User.
 	 * The current username is posted along with any comments the user makes. 
 	 * The user's information including old posted comments and favorite comments can be restored after the user is set. 
 	 * If an invalid username was entered, a message is printed to the screen.
@@ -54,15 +53,19 @@ public class LoginActivity extends Activity {
 	 * @param username	The user's username input
 	 */
 	private void login(String username) {
+		
 		// Message on screen -SB
 		TextView message = (TextView) findViewById(R.id.login_message);
+		
 		// If valid username set it -SB
 		if (checkIfValid(username)) {
 
 			// Reset message -SB
 			message.setText("Login Page");
+			
 			// If user doesn't exist, create a user with that name -SB
 			User.login(username, getApplicationContext());
+			
 			// Go to the main menu once user is set -SB
 			startActivity(new Intent(LoginActivity.this, MainMenuActivity.class));
 		}
@@ -112,9 +115,10 @@ public class LoginActivity extends Activity {
 	 * Redirects to the default help page
 	 */
 	public void goToHelpPage(){
+		
+		// redirect to help page for logging in -SB
 		Intent viewIntent = new Intent("android.intent.action.VIEW",Uri.parse(
 				"https://rawgithub.com/CMPUT301W14T02/Comput301Project/master/Help%20Pages/login.html"));
-		startActivity(viewIntent);// redirect to help page for logging in -SB
+		startActivity(viewIntent);
 	}
-
 }
