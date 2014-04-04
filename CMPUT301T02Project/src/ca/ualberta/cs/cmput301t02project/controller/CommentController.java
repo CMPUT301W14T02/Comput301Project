@@ -75,8 +75,14 @@ public class CommentController {
 	 * @param latitude The new latitude
 	 * @param longitude The new longitude
 	 */
-	public void edit(String newText, double latitude, double longitude) {
+	public void edit(String newText, Bitmap picture, double latitude, double longitude) {
 		model.setText(newText);
+		
+		// only update the picture if a new one is taken -SB
+		if(picture != null){
+			model.setPicture(picture);
+		}
+		
 		model.getLocation().setLatitude(latitude);
 		model.getLocation().setLongitude(longitude);
 		User.getUser().getMyComments().put(model.getId(), model);

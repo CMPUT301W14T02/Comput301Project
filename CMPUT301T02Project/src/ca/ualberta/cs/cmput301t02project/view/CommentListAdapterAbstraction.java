@@ -101,10 +101,10 @@ public abstract class CommentListAdapterAbstraction extends ArrayAdapter<Comment
 
 			@Override
 			public int compare(CommentModel left, CommentModel right) {
-				if ((left.getImage() == null) && (right.getImage() != null)){
+				if (!left.hasPicture() && right.hasPicture()){
 					return 1;
 				}
-				else if ((right.getImage() == null) && (left.getImage() != null)){
+				else if (!right.hasPicture() && left.hasPicture()){
 					return -1;
 				}
 				else {
@@ -346,7 +346,7 @@ public abstract class CommentListAdapterAbstraction extends ArrayAdapter<Comment
 		int ratingCount = comment.getRating();
 		
 		String hasPicture = "";
-		if(comment.getImage() != null){
+		if(comment.getPicture() != null){
 			hasPicture = " | image attatched";
 		}
 		String replies = Integer.toString(repliesCount) + ' ';

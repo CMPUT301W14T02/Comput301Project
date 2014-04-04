@@ -59,10 +59,10 @@ public class BrowseReplyCommentsActivity extends BrowseCommentsActivityAbstracti
 		selectedComment.setText(currentComment.getText());
 		
 		// display the image if there is one
-		if(currentComment.getImage() != null){
+		if(currentComment.hasPicture()){
 
 			ImageView image = (ImageView) findViewById(R.id.comment_picture);
-			image.setImageBitmap(currentComment.getImage());
+			image.setImageBitmap(currentComment.getPicture());
 		}
 		
 		

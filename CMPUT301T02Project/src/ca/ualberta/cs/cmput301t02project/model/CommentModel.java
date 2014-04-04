@@ -141,7 +141,7 @@ public class CommentModel {
 	 * Gets the comment picture.
 	 * @return The picture
 	 */
-	public Bitmap getImage() {
+	public Bitmap getPicture() {
 		return this.picture;
 	}
 
@@ -149,8 +149,23 @@ public class CommentModel {
 	 * Sets the comment picture.
 	 * @param image	the picture
 	 */
-	public void setImage(Bitmap image) {
+	public void setPicture(Bitmap image) {
 		this.picture = image;
+	}
+	
+	/**
+	 * Determines whether the comment has a picture or not.
+	 * <p>
+	 * Returns false for no picture attached, 
+	 * returns true for a picture attached.
+	 * <p>
+	 * @return true if the comment has a picture, false if not
+	 */
+	public Boolean hasPicture(){
+		if (picture == null){
+			return false;
+		}
+		return true;
 	}
 
 	/**
