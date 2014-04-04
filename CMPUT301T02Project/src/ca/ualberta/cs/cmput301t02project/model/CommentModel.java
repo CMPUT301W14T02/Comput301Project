@@ -23,7 +23,7 @@ public class CommentModel {
 	private Date date;
 	private Location location;
 	private String text;
-	private String picture; //transient until convertible to Json
+	private transient Bitmap picture; //transient until convertible to Json
 	private int rating;
 	private ArrayList<String> childrenIds;
 	private String username;	
@@ -49,10 +49,10 @@ public class CommentModel {
 	 * @param username	The user that the comment belongs to
 	 */
 	public CommentModel(String text, Bitmap picture, Location location, String username) {
-		
+		/*
 		constructGson();
 		this.picture = GSON.toJson(picture);
-		
+		*/
 		// temporary. just to ensure the picture is there.
 		if (picture != null){
 			this.text = text + " PICTURE ATTATCHED";
@@ -166,8 +166,9 @@ public class CommentModel {
 	 * @return The picture
 	 */
 	public Bitmap getImage() {
-		constructGson();
-		return GSON.fromJson(this.picture, Bitmap.class);
+	//	constructGson();
+		//return GSON.fromJson(this.picture, Bitmap.class);
+		return picture;
 		
 	}
 
@@ -176,8 +177,8 @@ public class CommentModel {
 	 * @param image	the picture
 	 */
 	public void setImage(Bitmap image) {
-		constructGson();
-		this.picture = GSON.toJson(image);
+		//constructGson();
+		this.picture = image;//GSON.toJson(image);
 	}
 
 	/**
