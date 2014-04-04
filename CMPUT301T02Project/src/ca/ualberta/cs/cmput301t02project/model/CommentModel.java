@@ -5,9 +5,6 @@ import io.searchbox.annotations.JestId;
 import java.util.ArrayList;
 import java.util.Date;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-
 import android.graphics.Bitmap;
 import android.location.Location;
 
@@ -23,11 +20,10 @@ public class CommentModel {
 	private Date date;
 	private Location location;
 	private String text;
-	private transient Bitmap picture; //transient until convertible to Json
+	private Bitmap picture;
 	private int rating;
 	private ArrayList<String> childrenIds;
-	private String username;	
-	private transient static Gson GSON = null; 
+	private String username;
 	
 	/**
 	 * Creates a new Comment.
@@ -49,17 +45,8 @@ public class CommentModel {
 	 * @param username	The user that the comment belongs to
 	 */
 	public CommentModel(String text, Bitmap picture, Location location, String username) {
-		/*
-		constructGson();
-		this.picture = GSON.toJson(picture);
-		*/
-		// temporary. just to ensure the picture is there.
-		if (picture != null){
-			this.text = text + " PICTURE ATTATCHED";
-		}
-		else{
-			this.text = text;
-		}
+		this.picture = picture;
+		this.text = text;
 		this.location = location;
 		this.username = username;
 		this.rating = 0;
@@ -67,17 +54,6 @@ public class CommentModel {
 		this.childrenIds = new ArrayList<String>();
 	}
 	
-	/**
-	 * Constructs a Gson with a custom serializer / desserializer registered for Bitmaps.
-	 */
-	private static void constructGson() {
-		GsonBuilder builder = new GsonBuilder();
-		builder.registerTypeAdapter(Bitmap.class, new BitmapJsonConverter());
-		GSON = builder.create();
-		System.out.println("GSON");
-	}
-	
-
 	/**
 	 * Creates a new Comment.
 	 * <p>
@@ -166,10 +142,7 @@ public class CommentModel {
 	 * @return The picture
 	 */
 	public Bitmap getImage() {
-	//	constructGson();
-		//return GSON.fromJson(this.picture, Bitmap.class);
-		return picture;
-		
+		return this.picture;
 	}
 
 	/**
@@ -177,8 +150,7 @@ public class CommentModel {
 	 * @param image	the picture
 	 */
 	public void setImage(Bitmap image) {
-		//constructGson();
-		this.picture = image;//GSON.toJson(image);
+		this.picture = image;
 	}
 
 	/**
@@ -236,22 +208,6 @@ public class CommentModel {
 
 	public void setTopLevelComment(boolean topLevelComment) {
 		this.topLevelComment = topLevelComment;
-	}
-	
-	/**
-	 * Enables comparison for equality between Comments.
-	 * <p>
-	 * The text, the image and the location are used for the comparison.
-	 * <p>
-	 * @return Whether the comments are equal
-	 */
-	@Override
-	public boolean equals(Object commentModel) {
-		CommentModel comment = (CommentModel) commentModel;
-		
-		return comment.getText().equals(this.getText()) && comment.getUsername().equals(this.getUsername())
-				&& ((comment.getImage() == null && this.picture == null) || comment.getImage().equals(this.picture))
-				&& ((comment.getLocation() == null && this.location == null) || comment.getLocation().equals(this.location));
 	}
 
 	public ArrayList<String> getChildrenIds() {

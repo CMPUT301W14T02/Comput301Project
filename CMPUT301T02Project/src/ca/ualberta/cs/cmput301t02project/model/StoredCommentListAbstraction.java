@@ -42,7 +42,7 @@ public abstract class StoredCommentListAbstraction extends Observable implements
 	protected abstract String getPreferencesKey();
 	
 	private Set<Entry<String, CommentModel>> entrySet() {
-		Gson gson = new Gson();
+		Gson gson = CustomGson.getGson();
 		SharedPreferences storage = context.getSharedPreferences(getPreferencesKey(), 0);
 		Map<String, ?> map = storage.getAll();
 		Set<Entry<String, CommentModel>> entrySet = new HashSet<Entry<String, CommentModel>>();
@@ -65,7 +65,7 @@ public abstract class StoredCommentListAbstraction extends Observable implements
 		SharedPreferences storage = context.getSharedPreferences(getPreferencesKey(), 0);
 		String key = (String) id;
 		String comment = storage.getString(key, null);
-		Gson gson = new Gson();
+		Gson gson = CustomGson.getGson();
 		CommentModel result = gson.fromJson(comment, CommentModel.class);
 		return result;
 	}
@@ -77,7 +77,7 @@ public abstract class StoredCommentListAbstraction extends Observable implements
 	 * @return If the id already existed, return the comment that was there, else returns null.
 	 */
 	public CommentModel put(String id, CommentModel value) {
-		Gson gson = new Gson();
+		Gson gson = CustomGson.getGson();
 		String v = gson.toJson(value);
 		SharedPreferences storage = context.getSharedPreferences(getPreferencesKey(), 0);
 		String previousValueJson = storage.getString(id, null);

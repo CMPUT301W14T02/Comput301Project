@@ -12,17 +12,18 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
+import com.google.gson.Gson;
 import com.searchly.jestdroid.DroidClientConfig;
 import com.searchly.jestdroid.JestClientFactory;
 
 public class Server {
 	private static final String serverUri = "http://cmput301.softwareprocess.es:8080/";
 	private JestClient client;
-	Context context;
+	private Context context;
 	
 	public Server(Context context) {
-		//TODO Add custom Gson here to clientConfig.Builder
-		DroidClientConfig clientConfig = new DroidClientConfig.Builder(serverUri).multiThreaded(true).build();
+		Gson gson = CustomGson.getGson();
+		DroidClientConfig clientConfig = new DroidClientConfig.Builder(serverUri).gson(gson).multiThreaded(true).build();
 		JestClientFactory jestClientFactory = new JestClientFactory();
 		jestClientFactory.setDroidClientConfig(clientConfig);
 		client = jestClientFactory.getObject();
