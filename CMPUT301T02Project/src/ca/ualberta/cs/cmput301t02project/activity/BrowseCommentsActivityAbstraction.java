@@ -113,10 +113,13 @@ public abstract class BrowseCommentsActivityAbstraction extends ActionBarActivit
 		adapter.notifyDataSetChanged();
 	}
 
-	@Override
-	public void onNothingSelected(AdapterView<?> arg0) {
-		// TODO Auto-generated method stub		
-	}
+	/**
+	 *  Handles result from EnterSearchCoordinatesActivity 
+	 *  <p>
+	 * Takes the returned intent and extracts the data sent with it,
+	 * namely the latitude and longitude coordinates entered by the user
+	 * then sends them to the adapter as a location to be used for sorting 
+	 */
 	
 	protected void onActivityResult(int requestCode, int resultCode, Intent result) {
 		if (requestCode == GET_COORDINATES) { 
@@ -133,4 +136,8 @@ public abstract class BrowseCommentsActivityAbstraction extends ActionBarActivit
 		}
 	}
 
+	@Override
+	public void onNothingSelected(AdapterView<?> arg0) {
+		// TODO Auto-generated method stub		
+	}
 }

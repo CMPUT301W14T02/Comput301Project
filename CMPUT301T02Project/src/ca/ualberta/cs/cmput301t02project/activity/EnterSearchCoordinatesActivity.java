@@ -8,6 +8,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import ca.ualberta.cs.cmput301t02project.R;
 
+/**
+ * An activity with the sole purpose of providing EditText boxes
+ * for the user to enter the latitude and longitude of the other
+ * location they would like to sort by 
+ */
+
 public class EnterSearchCoordinatesActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +34,7 @@ public class EnterSearchCoordinatesActivity extends Activity {
 				double lat = Double.valueOf(latitude.getText().toString());
 				double lon = Double.valueOf(longitude.getText().toString());
 				
+				//return user's entries to the previous activity
 				Intent intent = new Intent();
 				intent.putExtra("Other Location Lat", lat);
 				intent.putExtra("Other Location Lon", lon);
