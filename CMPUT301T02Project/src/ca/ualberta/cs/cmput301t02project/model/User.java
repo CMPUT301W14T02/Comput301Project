@@ -25,7 +25,7 @@ public class User {
 	//Singleton
 	private static User user;
 
-	private User(String username) {
+	public User(String username) {
 		this.username = username.toLowerCase();
 	}
 	

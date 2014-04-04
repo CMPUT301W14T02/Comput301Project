@@ -52,7 +52,7 @@ public class LoginActivity extends Activity {
 	 * <p>
 	 * @param username	The user's username input
 	 */
-	private void login(String username) {
+	public void login(String username) {
 		
 		// Message on screen -SB
 		TextView message = (TextView) findViewById(R.id.login_message);
@@ -86,7 +86,7 @@ public class LoginActivity extends Activity {
 	 * @param username	The username entered by the user
 	 * @return	Returns false for invalid username, else true
 	 */
-	private boolean checkIfValid(String username) {
+	public boolean checkIfValid(String username) {
 		return !username.equals("");
 	}
 	
