@@ -24,6 +24,7 @@ public abstract class BrowseCommentsActivityAbstraction extends ActionBarActivit
 	// The adapter used by the class that extends BrowseCommentsActivityAbstraction -SB
 	protected CommentListAdapterAbstraction adapter;
 	protected ListView listView;
+	static final int GET_COORDINATES = 0;
 	
 	/**
 	 * Adapter must be initialized in a class that extends BrowseCommentsActvityAbstraction so it can be specialized to the activity.
@@ -102,9 +103,9 @@ public abstract class BrowseCommentsActivityAbstraction extends ActionBarActivit
 		else if (selected.equals("Other Location")) {
 			Intent intent = new Intent(this, EnterSearchCoordinatesActivity.class);
 			
-			startActivityForResult(intent, 0);
+			startActivityForResult(intent, GET_COORDINATES);
 			
-			Intent newIntent = getIntent();
+			/*Intent newIntent = getIntent();
 			
 		    double otherLocLat = newIntent.getDoubleExtra("Other Location Lat", 0);
 		    double otherLocLon = newIntent.getDoubleExtra("Other Location Lon", 0);
@@ -113,7 +114,7 @@ public abstract class BrowseCommentsActivityAbstraction extends ActionBarActivit
 		    otherLocation.setLatitude(otherLocLat);
 		    otherLocation.setLongitude(otherLocLon);
 		    
-			adapter.sortByOtherLocation(otherLocation);
+			adapter.sortByOtherLocation(otherLocation); */
 		} 
 		else if (selected.equals("Faves")) {
 			adapter.sortByRanking();
@@ -130,6 +131,18 @@ public abstract class BrowseCommentsActivityAbstraction extends ActionBarActivit
 	}
 	
 	protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
+		if (requestCode == GET_COORDINATES) { 
+			
+			double otherLocLat = intent.getDoubleExtra("Other Location Lat", 0);
+			double otherLocLon = intent.getDoubleExtra("Other Location Lon", 0);
+		
+			Location otherLocation = new Location("");
+			otherLocation.setLatitude(otherLocLat);
+			otherLocation.setLongitude(otherLocLon);
+		    
+			adapter.sortByOtherLocation(otherLocation);
+		
+		}
 	}
 
 }

@@ -7,8 +7,8 @@ import ca.ualberta.cs.cmput301t02project.controller.CommentController;
 import ca.ualberta.cs.cmput301t02project.model.CommentModel;
 import ca.ualberta.cs.cmput301t02project.model.RepliesToFavsListModel;
 import ca.ualberta.cs.cmput301t02project.model.User;
+import ca.ualberta.cs.cmput301t02project.view.CommentListAdapter;
 import ca.ualberta.cs.cmput301t02project.view.CommentListAdapterAbstraction;
-import ca.ualberta.cs.cmput301t02project.view.RepliesToFavsAdapter;
 
 public class BrowseRepliesToFavsActivity extends BrowseCommentsActivityAbstraction{
 
@@ -40,7 +40,7 @@ public class BrowseRepliesToFavsActivity extends BrowseCommentsActivityAbstracti
 	}
 	
 	public CommentListAdapterAbstraction initializeAdapter(){
-		this.adapter = new RepliesToFavsAdapter(this, R.layout.list_item, model);
+		this.adapter = new CommentListAdapter(this, R.layout.list_item, model);
 		return adapter;
 	}
 	
