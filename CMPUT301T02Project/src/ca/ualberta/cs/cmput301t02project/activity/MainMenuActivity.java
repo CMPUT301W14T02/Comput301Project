@@ -96,5 +96,8 @@ public class MainMenuActivity extends ActionBarActivity {
 	@Override
 	public void goToHelpPage(){
 		// redirect to help page for main menu -SB
+		Intent viewIntent = new Intent("android.intent.action.VIEW",Uri.parse(
+				"https://rawgithub.com/CMPUT301W14T02/Comput301Project/master/Help%20Pages/main_menu.html"));
+		startActivity(viewIntent);
 	}
 }
