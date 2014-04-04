@@ -346,7 +346,7 @@ public abstract class CommentListAdapterAbstraction extends ArrayAdapter<Comment
 		int ratingCount = comment.getRating();
 		
 		String hasPicture = "";
-		if(comment.getPicture() != null){
+		if(comment.hasPicture()){
 			hasPicture = " | image attatched";
 		}
 		String replies = Integer.toString(repliesCount) + ' ';

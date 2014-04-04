@@ -27,9 +27,11 @@ public class EditCommentActivity extends PictureActivity {
 		// display a picture on the image button if one already exists -SB
 		CommentModel currentComment = commentController.getComment();
 		if(currentComment.hasPicture()){
-
+			
+			// set the picture to the one that is there. can be overriden later when new photo is taken -SB
+			picture = currentComment.getPicture();
 			ImageButton imageButton = (ImageButton) findViewById(R.id.takeAPhoto);
-			imageButton.setImageBitmap(currentComment.getPicture());
+			imageButton.setImageBitmap(picture);
 		}
 		
 		EditText inputComment = (EditText) findViewById(R.id.create_text);
@@ -68,7 +70,7 @@ public class EditCommentActivity extends PictureActivity {
 					lon = commentController.getComment().getLocation().getLongitude();
 				}
 				
-				commentController.edit(newText, null, lat, lon);
+				commentController.edit(newText, picture, lat, lon);
 	
 				finish();
 			}

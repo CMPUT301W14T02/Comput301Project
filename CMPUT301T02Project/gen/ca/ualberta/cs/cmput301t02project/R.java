@@ -69,7 +69,7 @@ public final class R {
     }
     public static final class layout {
         public static final int activity_create_comment=0x7f030000;
-        public static final int activity_edit_comment=0x7f030001;
+        public static final int activity_edit_comment_old=0x7f030001;
         public static final int activity_favorites_list=0x7f030002;
         public static final int activity_login=0x7f030003;
         public static final int activity_main=0x7f030004;
