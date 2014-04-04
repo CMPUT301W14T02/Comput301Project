@@ -18,7 +18,7 @@ public class CommentController {
 	private CommentModel model;
 	private Context context;
 	
-	static final int MAX_BITMAP_DIMENSIONS = 50;
+	private static final int MAX_BITMAP_DIMENSIONS = 50;
 	
 	/**
 	 * Scales a picture if it is too big
