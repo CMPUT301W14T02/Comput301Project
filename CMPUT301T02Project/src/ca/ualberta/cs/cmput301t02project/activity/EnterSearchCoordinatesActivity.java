@@ -28,9 +28,10 @@ public class EnterSearchCoordinatesActivity extends Activity {
 				double lat = Double.valueOf(latitude.getText().toString());
 				double lon = Double.valueOf(longitude.getText().toString());
 				
-				Intent intent = new Intent(EnterSearchCoordinatesActivity.this, BrowseCommentsActivityAbstraction.class);
+				Intent intent = new Intent();
 				intent.putExtra("Other Location Lat", lat);
 				intent.putExtra("Other Location Lon", lon);
+				setResult(RESULT_OK,intent);
 				
 				finish();
 			}

@@ -130,11 +130,11 @@ public abstract class BrowseCommentsActivityAbstraction extends ActionBarActivit
 		// TODO Auto-generated method stub		
 	}
 	
-	protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
+	protected void onActivityResult(int requestCode, int resultCode, Intent result) {
 		if (requestCode == GET_COORDINATES) { 
 			
-			double otherLocLat = intent.getDoubleExtra("Other Location Lat", 0);
-			double otherLocLon = intent.getDoubleExtra("Other Location Lon", 0);
+			double otherLocLat = result.getDoubleExtra("Other Location Lat", 0);
+			double otherLocLon = result.getDoubleExtra("Other Location Lon", 0);
 		
 			Location otherLocation = new Location("");
 			otherLocation.setLatitude(otherLocLat);
