@@ -36,5 +36,6 @@
 	<string name="title_activity_enter_coor">EnterCoordinates</string>
 	<string name="enter_coor_message">Enter the Coordinates to Sort By</string>
 	<string name="sort_button">Sort</string>
+	<string name="followed_users">Followed User\'s Comments</string>
     
 </resources>
