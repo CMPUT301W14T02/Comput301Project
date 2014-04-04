@@ -102,7 +102,7 @@ public abstract class BrowseCommentsActivityAbstraction extends ActionBarActivit
 		else if (selected.equals("Other Location")) {
 			Intent intent = new Intent(this, EnterSearchCoordinatesActivity.class);
 			
-			startActivity(intent);
+			startActivityForResult(intent, 0);
 			
 			Intent newIntent = getIntent();
 			
@@ -127,6 +127,9 @@ public abstract class BrowseCommentsActivityAbstraction extends ActionBarActivit
 	@Override
 	public void onNothingSelected(AdapterView<?> arg0) {
 		// TODO Auto-generated method stub		
+	}
+	
+	protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
 	}
 
 }
