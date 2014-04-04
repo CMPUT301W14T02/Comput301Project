@@ -18,6 +18,7 @@ public class TopLevelListController {
 	}
 
 	public void add(String text, Bitmap picture, Location location, User user) {
+		CommentController.scalePicture(picture);
 		CommentModel comment = new CommentModel(text, picture, location, user.getName());
 		comment.setTopLevelComment(true);
 		list.add(comment);

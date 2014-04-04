@@ -16,7 +16,7 @@ import ca.ualberta.cs.cmput301t02project.R;
 public class PictureActivity extends ActionBarActivity {
 
 	// if no picture is taken, picture should remain null -SB
-	Bitmap picture = null;
+	protected Bitmap picture = null;
 	
 	/**
 	 * Takes a photo using the android camera
