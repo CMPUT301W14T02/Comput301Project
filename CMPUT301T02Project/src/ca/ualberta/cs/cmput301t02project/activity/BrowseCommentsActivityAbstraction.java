@@ -100,7 +100,8 @@ public abstract class BrowseCommentsActivityAbstraction extends ActionBarActivit
 			adapter.sortByLocation();
 		} 
 		else if (selected.equals("Other Location")) {
-			Intent intent = new Intent(BrowseCommentsActivityAbstraction.this, EnterSearchCoordinatesActivity.class);
+			Intent intent = new Intent(this, EnterSearchCoordinatesActivity.class);
+			
 			startActivity(intent);
 			
 			Intent newIntent = getIntent();
@@ -112,7 +113,7 @@ public abstract class BrowseCommentsActivityAbstraction extends ActionBarActivit
 		    otherLocation.setLatitude(otherLocLat);
 		    otherLocation.setLongitude(otherLocLon);
 		    
-			//adapter.sortByOtherLocation();
+			adapter.sortByOtherLocation(otherLocation);
 		} 
 		else if (selected.equals("Faves")) {
 			adapter.sortByRanking();

@@ -32,7 +32,9 @@ public abstract class CommentListAdapterAbstraction extends ArrayAdapter<Comment
 	private Comparator<CommentModel> sortByLocation;
 	private Comparator<CommentModel> sortByFaves;
 	private Comparator<CommentModel> sortByPicture;
+	private Comparator<CommentModel> sortByOtherLocation;
 	private Location myLocation = null;
+	private Location otherLocation = null;
 	private ArrayList<CommentModel> list;
 	
 
@@ -85,6 +87,22 @@ public abstract class CommentListAdapterAbstraction extends ArrayAdapter<Comment
 				myLocation = GPSLocation.getInstance().getLocation();
 				Float dist1 = a.getLocation().distanceTo(myLocation);
 				Float dist2 = b.getLocation().distanceTo(myLocation);
+				if (dist1 < dist2) {
+					return -1;
+				} 
+				else if (dist1 > dist2) {
+					return 1;
+				} 
+				else {
+					return 0;
+				}
+			}
+		};
+		
+		sortByOtherLocation = new Comparator<CommentModel>() {
+			public int compare(CommentModel a, CommentModel b) {
+				Float dist1 = a.getLocation().distanceTo(otherLocation);
+				Float dist2 = b.getLocation().distanceTo(otherLocation);
 				if (dist1 < dist2) {
 					return -1;
 				} 
@@ -266,8 +284,9 @@ public abstract class CommentListAdapterAbstraction extends ArrayAdapter<Comment
 	 *  This allows sortList to know that the list should be sorted by Other Location
 	 *  when called.
 	 */
-	public void sortByOtherLocation() {
+	public void sortByOtherLocation(Location otherLoc) {
 		sortMethod = "Other Location";
+		this.setOtherLocation(otherLoc);
 		sortList();
 	}
 	
@@ -312,7 +331,7 @@ public abstract class CommentListAdapterAbstraction extends ArrayAdapter<Comment
 				Collections.sort(list, sortByLocation);
 			} 
 			else if (sortMethod.equals("Other Location")) {
-			
+				Collections.sort(list, sortByOtherLocation);
 			} 
 			else if (sortMethod.equals("Faves")) {
 				Collections.sort(list, sortByFaves);
@@ -359,6 +378,10 @@ public abstract class CommentListAdapterAbstraction extends ArrayAdapter<Comment
 		
 		return convertView;
 
+	}
+
+	public void setOtherLocation(Location otherLocation) {
+		this.otherLocation = otherLocation;
 	}
 	
 }
