@@ -143,7 +143,6 @@ public class CommentModel {
 	 */
 	public Bitmap getImage() {
 		return this.picture;
-		
 	}
 
 	/**

@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="70dp"
+        android:layout_marginTop="35dp"
         android:text="@string/welcome_message"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
@@ -57,5 +57,15 @@
        android:layout_below="@+id/favorites"
        android:layout_marginTop="26dp"
        android:text="@string/my_comments" />
+
+   <Button
+       android:id="@+id/followed_users"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:layout_alignLeft="@+id/my_comments"
+       android:layout_alignParentRight="true"
+       android:layout_below="@+id/my_comments"
+       android:layout_marginTop="26dp"
+       android:text="@string/followed_users" />
 
 </RelativeLayout>
