@@ -102,19 +102,7 @@ public abstract class BrowseCommentsActivityAbstraction extends ActionBarActivit
 		} 
 		else if (selected.equals("Other Location")) {
 			Intent intent = new Intent(this, EnterSearchCoordinatesActivity.class);
-			
 			startActivityForResult(intent, GET_COORDINATES);
-			
-			/*Intent newIntent = getIntent();
-			
-		    double otherLocLat = newIntent.getDoubleExtra("Other Location Lat", 0);
-		    double otherLocLon = newIntent.getDoubleExtra("Other Location Lon", 0);
-
-		    Location otherLocation = new Location("");
-		    otherLocation.setLatitude(otherLocLat);
-		    otherLocation.setLongitude(otherLocLon);
-		    
-			adapter.sortByOtherLocation(otherLocation); */
 		} 
 		else if (selected.equals("Faves")) {
 			adapter.sortByRanking();
