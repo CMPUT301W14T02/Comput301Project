@@ -1,6 +1,7 @@
 package ca.ualberta.cs.cmput301t02project.activity;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -121,4 +122,5 @@ public class LoginActivity extends Activity {
 				"https://rawgithub.com/CMPUT301W14T02/Comput301Project/master/Help%20Pages/login.html"));
 		startActivity(viewIntent);
 	}
+	
 }

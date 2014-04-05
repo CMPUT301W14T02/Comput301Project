@@ -8,7 +8,7 @@ import ca.ualberta.cs.cmput301t02project.R;
 import ca.ualberta.cs.cmput301t02project.model.FollowedUserCommentsListModel;
 import ca.ualberta.cs.cmput301t02project.model.User;
 import ca.ualberta.cs.cmput301t02project.view.CommentListAdapter;
-import ca.ualberta.cs.cmput301t02project.view.CommentListAdapterAbstraction;
+import ca.ualberta.cs.cmput301t02project.view.CommentListAdapter;
 
 /**
  * Displays comments authored by the current user's followed users. 
@@ -43,7 +43,7 @@ public class BrowseFollowedCommentsActivity extends BrowseCommentsActivityAbstra
 	 * @return the adapter used for BrowseFollowedCommentsActivity
 	 */
 	@Override
-	public CommentListAdapterAbstraction initializeAdapter(){
+	public CommentListAdapter initializeAdapter(){
 		this.adapter = new CommentListAdapter(this, R.layout.list_item, model);
 		return adapter;
 	}

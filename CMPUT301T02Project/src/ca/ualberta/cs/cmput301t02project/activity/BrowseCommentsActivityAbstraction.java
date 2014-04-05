@@ -13,7 +13,7 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
 import ca.ualberta.cs.cmput301t02project.R;
-import ca.ualberta.cs.cmput301t02project.view.CommentListAdapterAbstraction;
+import ca.ualberta.cs.cmput301t02project.view.CommentListAdapter;
 
 /**
  * Contains common code inherited by activities that browse and sort comments, including 
@@ -26,7 +26,7 @@ import ca.ualberta.cs.cmput301t02project.view.CommentListAdapterAbstraction;
 public abstract class BrowseCommentsActivityAbstraction extends ActionBarActivity implements OnItemSelectedListener{
 	
 	// The adapter used by the class that extends BrowseCommentsActivityAbstraction -SB
-	protected CommentListAdapterAbstraction adapter;
+	protected CommentListAdapter adapter;
 	protected ListView listView;
 	static final int GET_COORDINATES = 0;
 	
@@ -37,7 +37,7 @@ public abstract class BrowseCommentsActivityAbstraction extends ActionBarActivit
 	 * <p> 
 	 * @return the adapter used by the class
 	 */
-	public abstract CommentListAdapterAbstraction initializeAdapter();
+	public abstract CommentListAdapter initializeAdapter();
 	
 	/**
 	 * Performs tasks to set up the activity including creating a sorting menu and initializing the adapter.

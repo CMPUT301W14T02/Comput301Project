@@ -3,15 +3,19 @@ package ca.ualberta.cs.cmput301t02project.test;
 import java.util.ArrayList;
 
 import android.content.Context;
+import android.content.Intent;
 import android.location.Location;
 import android.test.ActivityInstrumentationTestCase2;
 import ca.ualberta.cs.cmput301t02project.R;
 import ca.ualberta.cs.cmput301t02project.activity.BrowseFavoritesActivity;
+import ca.ualberta.cs.cmput301t02project.activity.LoginActivity;
 import ca.ualberta.cs.cmput301t02project.model.CommentModel;
 import ca.ualberta.cs.cmput301t02project.model.FavoritesListModel;
-import ca.ualberta.cs.cmput301t02project.model.Server;
 import ca.ualberta.cs.cmput301t02project.model.User;
 import ca.ualberta.cs.cmput301t02project.view.CommentListAdapter;
+
+//wrote gibberish here so know that not done this file -KW
+fhdlksjhfdshdsaghfdlkgjhfdkhgfdkj
 
 public class BrowseFavoritesActivityTest extends ActivityInstrumentationTestCase2<BrowseFavoritesActivity> {
 
@@ -29,13 +33,8 @@ public class BrowseFavoritesActivityTest extends ActivityInstrumentationTestCase
 	public CommentModel initializeComment() {
 		String loc = "Location Intialization";
 		Location currentLocation;
-		//Location myLocation;
 		currentLocation = new Location(loc);
-		//myLocation = new Location(loc);
-
-		CommentModel comment = new CommentModel("comment", null,"username");
-
-		//ProjectApplication.getInstance().setCurrentLocation(myLocation);
+		CommentModel comment = new CommentModel("comment", currentLocation,"username");
 
 		return comment;
 	}
@@ -76,14 +75,27 @@ public class BrowseFavoritesActivityTest extends ActivityInstrumentationTestCase
 		CommentModel comment = initializeComment();
 		User user = User.getUser();
 		ArrayList<CommentModel> replies = new ArrayList<CommentModel>();
-		Server server = new Server(context);
-		// Comment must be posted on server before being added to favorites
-		server.post(comment);
+
+		assertNotNull("Favorites list was null", replies);
+		assertNotNull("Comment was null", comment);
+		assertNotNull("User was null", user);
+		
+		Intent intent = new Intent((getActivity().getApplicationContext()), LoginActivity.class);
+		setActivityIntent(intent);
+		
+		Context context = getActivity().getApplicationContext();
+		assertNotNull("Context was null", context);
+		user.login(user.getName(), context);
+		assertNotNull(user.getFavorites());
 		
 		// add fave with no replies -SB
-		user.addFavoriteComment(comment, replies);
+
 		
-		assertEquals("Comments should be the same", comment, user.getFavorites().get(comment.getId()));//user.getFavorites().get(0));
+		//user.addFavoriteComment(comment, replies);
+		//CommentModel newComment = user.getFavorites().get(0);
+		//assertEquals("Comments should be the same",comment, newComment);
+		//reset to BrowseFavoritesActivityIntent
+		setActivityIntent(null);
 	}
 	
 	/*
