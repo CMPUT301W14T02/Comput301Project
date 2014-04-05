@@ -56,9 +56,9 @@ public class BrowseReplyCommentsActivity extends BrowseCommentsActivityAbstracti
 		currentCommentAuthor = currentComment.getUsername();
 		editComment = currentComment;
 		
-		selectedComment.setText(currentComment.getText());
+		selectedComment.setText(currentComment.getText()+"\n(by " + currentComment.getUsername() + ")");
 		
-		// display the image if there is one
+		// display the image if there is one -SB
 		if(currentComment.hasPicture()){
 
 			ImageView image = (ImageView) findViewById(R.id.comment_picture);
@@ -76,9 +76,7 @@ public class BrowseReplyCommentsActivity extends BrowseCommentsActivityAbstracti
 			public void onClick(View v) {
 				Server server = new Server(BrowseReplyCommentsActivity.this);
 				if(!server.isNetworkAvailable()) {
-					int duration = Toast.LENGTH_SHORT;
-					Toast toast = Toast.makeText(BrowseReplyCommentsActivity.this, "You don't have internet connection.", duration);
-					toast.show();
+					showMessage(BrowseReplyCommentsActivity.this, "You don't have internet connection.");
 				}
 				else {
 					Intent intent = new Intent(BrowseReplyCommentsActivity.this, CreateCommentActivity.class);
@@ -92,17 +90,36 @@ public class BrowseReplyCommentsActivity extends BrowseCommentsActivityAbstracti
 		favoriteComment.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
+				
 				CommentController commentController = new CommentController(currentCommentId, BrowseReplyCommentsActivity.this);
 				CommentModel currentComment = commentController.getComment();
 				User user = User.getUser();
+				
 				ReplyList repliesToFav = new ReplyList(currentComment.getId(), getApplicationContext());
 				ArrayList<CommentModel> replies = repliesToFav.getList();
 				user.addFavoriteComment(currentComment, replies);
 				commentController.incrementRating();
-				int duration = Toast.LENGTH_SHORT;
+				
+				// print a popup message -SB
 				favoriteComment.animate();
-				Toast toast = Toast.makeText(BrowseReplyCommentsActivity.this, "Added to favorites!", duration);
-				toast.show();
+				showMessage(BrowseReplyCommentsActivity.this, "Added to favorites!");
+			}
+		});
+		
+		final Button followUser = (Button) findViewById(R.id.follow_button);
+		followUser.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				
+				CommentController commentController = new CommentController(currentCommentId, BrowseReplyCommentsActivity.this);
+				CommentModel currentComment = commentController.getComment();
+				User user = User.getUser();
+				
+				user.addFollowedUser(currentComment);
+				
+				// print a popup message -SB
+				followUser.animate();
+				showMessage(BrowseReplyCommentsActivity.this, "You are now following " + currentComment.getUsername());
 			}
 		});
 
@@ -116,6 +133,7 @@ public class BrowseReplyCommentsActivity extends BrowseCommentsActivityAbstracti
 			}
 		});
 	}
+
 	
 	@Override
 	public void onResume() {

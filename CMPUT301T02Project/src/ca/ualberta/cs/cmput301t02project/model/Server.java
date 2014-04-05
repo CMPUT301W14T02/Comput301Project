@@ -155,6 +155,37 @@ public class Server {
 		return commentList;
 	}
 	
+	public ArrayList<CommentModel> pullFollowedUserComments(final String username) {
+		final Cache cache = Cache.getInstance(context);
+		final ArrayList<CommentModel> commentList = new ArrayList<CommentModel>();
+		Thread thread = new Thread() {
+			@Override
+			public void run() {
+				String query = String.format("{\"size\": 1000, \"query\": {\"term\": {\"username\": \"%s\"}}}", username);
+				Search search = new Search.Builder(query).addIndex("cmput301w14t02").addType("comments").build();
+				try {
+					JestResult result = client.execute(search);
+					commentList.addAll((ArrayList<CommentModel>) result.getSourceAsObjectList(CommentModel.class));
+					for(CommentModel c : commentList) {
+						cache.put(c.getId(), c);
+					}
+				} catch (Exception e) {
+					commentList.addAll(cache.getAllFollowedInCache());
+				}
+			}
+		};
+		thread.start();
+
+		try {
+			thread.join();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		
+		return commentList;
+	}
+	
+	
 	public void postUser(final User user) {
 		Thread thread = new Thread() {
 			@Override

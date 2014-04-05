@@ -1,6 +1,7 @@
 package ca.ualberta.cs.cmput301t02project.activity;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
@@ -81,6 +82,17 @@ public class MainMenuActivity extends ActionBarActivity {
 				startActivity(new Intent(MainMenuActivity.this, BrowseMyCommentsActivity.class));
 			}
 		});
+		
+		
+		// If "My Comments" is clicked -SB
+		Button browseFollowedComments = (Button) findViewById(R.id.followed_users);
+		browseFollowedComments.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				startActivity(new Intent(MainMenuActivity.this, BrowseFollowedCommentsActivity.class));
+			}
+		});
 	}
 	
 	// override to select a different menu xml than the ActionBarActivity default -SB
@@ -96,5 +108,8 @@ public class MainMenuActivity extends ActionBarActivity {
 	@Override
 	public void goToHelpPage(){
 		// redirect to help page for main menu -SB
+		Intent viewIntent = new Intent("android.intent.action.VIEW",Uri.parse(
+				"https://rawgithub.com/CMPUT301W14T02/Comput301Project/master/Help%20Pages/main_menu.html"));
+		startActivity(viewIntent);
 	}
 }

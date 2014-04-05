@@ -21,7 +21,10 @@ public class User {
 	private transient MyCommentsListModel myComments;
 	private transient FavoritesListModel favorites;
 	private transient RepliesToFavsListModel repliesToFavs;
+	private transient FollowedUserListCommentsModel followedUsersComments;
+	private transient ArrayList<String> followedUsernames = new ArrayList<String>();
 	
+
 	//Singleton
 	private static User user;
 
@@ -40,6 +43,7 @@ public class User {
 		user.myComments = MyCommentsListModel.getInstance(context);
 		user.favorites = FavoritesListModel.getInstance(context);
 		user.repliesToFavs = RepliesToFavsListModel.getInstance(context);
+		user.followedUsersComments = FollowedUserListCommentsModel.getInstance(context);
 	}
 	
 	public static User getUser() {
@@ -124,6 +128,18 @@ public class User {
 	}
 	
 	/**
+	 * Adds the comment of a followed user
+	 * @param comment	the comment to be stored in followedUsers
+	 */
+	public void addFollowedUser(CommentModel comment){
+		// followedUsersComments.add(comment);
+		if(!followedUsernames.contains(comment.getUsername())){
+			followedUsernames.add(comment.getUsername());
+		}
+	}
+	
+	
+	/**
 	 * Returns list of comments from phone storage
 	 * <p>
 	 * Retrieves replies of comments favorited by current user from phone storage 
@@ -186,6 +202,20 @@ public class User {
 	
 	public void setMyCommentIds(ArrayList<String> myCommentsIds) {
 		this.myCommentsIds = myCommentsIds;
+	}
+	
+	public FollowedUserListCommentsModel getFollowedUsers() {
+		//return followedUsersComments;
+		if (followedUsernames.size()>0){
+			return followedUsersComments.updated(followedUsernames);
+		}
+		else{
+			return followedUsersComments;
+		}
+	}
+
+	public void setFollowedUsers(FollowedUserListCommentsModel followedUsers) {
+		this.followedUsersComments = followedUsers;
 	}
 	
 }

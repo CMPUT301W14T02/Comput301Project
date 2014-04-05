@@ -12,7 +12,7 @@
         android:layout_alignParentTop="true"
         android:layout_toLeftOf="@+id/follow_button"
         android:text="Current Comment"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+       />
 
     <Spinner
         android:id="@+id/spinner"
@@ -61,6 +61,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/spinner"
+        android:layout_alignParentRight="true"
         android:layout_toRightOf="@+id/fav_button"
         android:text="Follow" />
 

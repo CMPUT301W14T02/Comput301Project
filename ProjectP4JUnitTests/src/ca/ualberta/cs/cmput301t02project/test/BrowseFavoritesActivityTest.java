@@ -6,8 +6,6 @@ import ca.ualberta.cs.cmput301t02project.R;
 import ca.ualberta.cs.cmput301t02project.activity.BrowseFavoritesActivity;
 import ca.ualberta.cs.cmput301t02project.model.CommentListModel;
 import ca.ualberta.cs.cmput301t02project.model.CommentModel;
-import ca.ualberta.cs.cmput301t02project.model.GPSLocation;
-import ca.ualberta.cs.cmput301t02project.model.StoredCommentListAbstraction;
 import ca.ualberta.cs.cmput301t02project.view.CommentListAdapter;
 import android.graphics.Bitmap;
 import android.location.Location;
@@ -22,11 +20,15 @@ public class BrowseFavoritesActivityTest extends ActivityInstrumentationTestCase
 	}
 
 	public CommentModel initializeComment() {
+		String loc = "Location Intialization";
 		Location currentLocation;
-		currentLocation = new Location("");
-		
+		Location myLocation;
+		currentLocation = new Location(loc);
+		myLocation = new Location(loc);
+
 		CommentModel comment = new CommentModel("comment", currentLocation,"username");
-		GPSLocation.getInstance().getLocation().set(currentLocation);
+
+		ProjectApplication.getInstance().setCurrentLocation(myLocation);
 
 		return comment;
 	}
@@ -34,7 +36,7 @@ public class BrowseFavoritesActivityTest extends ActivityInstrumentationTestCase
 	public void testDisplayFavorites() {
 
 		CommentModel comment = initializeComment();
-		StoredCommentListAbstraction favoriteComments = new StoredCommentListAbstraction();
+		CommentListModel favoriteComments = new CommentListModel();
 		favoriteComments = ProjectApplication.getInstance().getUser().getFavorites();
 		favoriteComments.add(comment);
 

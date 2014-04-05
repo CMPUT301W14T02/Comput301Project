@@ -21,11 +21,11 @@ import com.google.gson.Gson;
  * and override the getPreferencesKey method.
  * This class uses the template pattern, in which the classes that inherit from it
  * must specify the PreferencesKey.
- *
+ * <p>
  */
 public abstract class StoredCommentListAbstraction extends Observable implements CommentListModel {
 
-	private Context context;
+	protected Context context;
 	
 	/**
 	 * Constructor
