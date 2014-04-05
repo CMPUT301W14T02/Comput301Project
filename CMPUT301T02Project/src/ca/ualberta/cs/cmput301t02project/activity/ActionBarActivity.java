@@ -64,13 +64,13 @@ public class ActionBarActivity extends Activity {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		
-		// Inflate the menu; this adds items to the action bar if it is present.
 		/*
 		 *  default_menu is the default menu that contains options to
 		 *  go to a help page
 		 *  return to the home page
 		 *  log out
 		 */
+		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.default_menu, menu);
 		
 		return true;
@@ -93,5 +93,4 @@ public class ActionBarActivity extends Activity {
 	            return super.onOptionsItemSelected(item);
 	    }
 	}
-	
 }

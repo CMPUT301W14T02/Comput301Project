@@ -17,7 +17,9 @@ import ca.ualberta.cs.cmput301t02project.view.CommentListAdapterAbstraction;
 
 /**
  * Contains common code inherited by activities that browse and sort comments, including 
- * BrowseMyCommmentsActivity, BrowseReplyCommentsActivity, BrowseFavoritesActivity, BrowseTopLevelCommentsActivtiy.
+ * all the Browse* activities:
+ * BrowseMyCommmentsActivity, BrowseReplyCommentsActivity, BrowseFavoritesActivity, 
+ * BrowseTopLevelCommentsActivtiy, and BrowseFollowedCommentsActivity.
  * Includes methods for 
  * displaying a drop-down menu of sorting options
  */
@@ -31,12 +33,11 @@ public abstract class BrowseCommentsActivityAbstraction extends ActionBarActivit
 	/**
 	 * Adapter must be initialized in a class that extends BrowseCommentsActvityAbstraction so it can be specialized to the activity.
 	 * <p>
-	 * An adapter must be created and set up within any class that inherits BrowseCommentsActvityAbstraction.
+	 * An adapter MUST be created and set up within any class that inherits BrowseCommentsActvityAbstraction.
 	 * <p> 
 	 * @return the adapter used by the class
 	 */
 	public abstract CommentListAdapterAbstraction initializeAdapter();
-	
 	
 	/**
 	 * Performs tasks to set up the activity including creating a sorting menu and initializing the adapter.
@@ -47,12 +48,12 @@ public abstract class BrowseCommentsActivityAbstraction extends ActionBarActivit
 	 * <p>
 	 */
 	public void setupPage(){
+		
 		// Create the menu -SB
 		createSpinner();
 		adapter = initializeAdapter();
 		listView.setAdapter(adapter);
 	}
-	
 	
 	/**
 	 * Prints a pop-up message on the screen.
@@ -81,9 +82,10 @@ public abstract class BrowseCommentsActivityAbstraction extends ActionBarActivit
 	 */
 	public void createSpinner(){
 		
-		// Based on:
-		// //www.androidhive.info/2012/04/android-spinner-dropdown-example/
-		// Accessed February 26, 2014
+		/* Based on:
+		 * www.androidhive.info/2012/04/android-spinner-dropdown-example/
+		 * Accessed February 26, 2014
+		 */
 		// Spinner element
 		Spinner spinner = (Spinner) findViewById(R.id.spinner);
 		
@@ -109,6 +111,14 @@ public abstract class BrowseCommentsActivityAbstraction extends ActionBarActivit
 		spinner.setAdapter(spinner_adapter);		
 	}
 
+	/**
+	 * Deals with choosing actions when spinner elements are selected.
+	 * <p>
+	 * All parameters required from implementing OnItemSelectedListener.
+	 * This method is not called from our code. 
+	 * Instead android does it automatically when a spinner element is clicked.
+	 * <p>
+	 */
 	@Override
 	public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 		
