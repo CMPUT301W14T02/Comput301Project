@@ -121,10 +121,7 @@ public class User {
 	 * @param comment - comment to be stored
 	 */
 	public void addFavoriteComment(CommentModel comment, ArrayList<CommentModel> replies) {
-		favorites.add(comment);
-		if (!replies.isEmpty()) {
-			repliesToFavs.addAll(replies);
-		}
+		favorites.addFavoriteComment(comment, replies, repliesToFavs);
 	}
 	
 	/**

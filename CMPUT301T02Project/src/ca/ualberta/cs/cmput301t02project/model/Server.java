@@ -17,6 +17,7 @@ import com.searchly.jestdroid.DroidClientConfig;
 import com.searchly.jestdroid.JestClientFactory;
 
 public class Server {
+	private UserServer serverProduct = new UserServer();
 	private static final String serverUri = "http://cmput301.softwareprocess.es:8080/";
 	private JestClient client;
 	private Context context;
@@ -187,68 +188,11 @@ public class Server {
 	
 	
 	public void postUser(final User user) {
-		Thread thread = new Thread() {
-			@Override
-			public void run() {
-				
-				try {
-					Index index = new Index.Builder(user).index("cmput301w14t02").type("users").id(user.getId()).build();
-					
-					JestResult result = client.execute(index);
-					String id = result.getJsonObject().get("_id").getAsString();
-					user.setId(id);
-					
-					index = new Index.Builder(user).index("cmput301w14t02").type("users").id(user.getId()).build();
-					result = client.execute(index);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-			
-		};
-		thread.start();
-		try {
-			thread.join();
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
+		serverProduct.postUser(user, client);
 	}
 
 	public void pullUser(final User user) {
-		final String username = user.getName();
-		
-		Thread thread = new Thread() {
-			@Override
-			public void run() {
-				String query = String.format("{\"size\": 1000, \"query\": {\"term\": {\"username\": \"%s\"}}}", username);
-				Search search = new Search.Builder(query).addIndex("cmput301w14t02").addType("users").build();
-				JestResult result = null;
-				try {
-					result = client.execute(search);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-				if(result != null) {
-					User temporaryUser = ((User)result.getSourceAsObject(User.class));
-					if(temporaryUser != null) {
-						user.setId(temporaryUser.getId());
-						user.setMyCommentIds(temporaryUser.getMyCommentIds());
-					}
-					else {
-						user.setId(null);
-					}
-				}
-				else {
-					user.setId(null);
-				}
-			}
-		};
-		thread.start();
-		try {
-			thread.join();
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
+		serverProduct.pullUser(user, client);
 	}
 
 	public void addChildren(String parentId, String childId) {
