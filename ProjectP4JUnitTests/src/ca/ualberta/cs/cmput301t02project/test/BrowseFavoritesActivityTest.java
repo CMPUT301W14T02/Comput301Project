@@ -14,8 +14,6 @@ import ca.ualberta.cs.cmput301t02project.model.FavoritesListModel;
 import ca.ualberta.cs.cmput301t02project.model.User;
 import ca.ualberta.cs.cmput301t02project.view.CommentListAdapter;
 
-//wrote gibberish here so know that not done this file -KW
-fhdlksjhfdshdsaghfdlkgjhfdkhgfdkj
 
 public class BrowseFavoritesActivityTest extends ActivityInstrumentationTestCase2<BrowseFavoritesActivity> {
 

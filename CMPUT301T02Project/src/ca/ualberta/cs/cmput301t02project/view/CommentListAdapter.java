@@ -195,6 +195,7 @@ public class CommentListAdapter extends ArrayAdapter<CommentModel> implements Ob
 	 * adds the sorted list of comments contained in finalList.
 	 */
 	public void sortByDefaultMethod() {
+		GPSLocation.initializeLocation(getContext());
 		myLocation = GPSLocation.getInstance().getLocation();
 		
 		// holds the sorted CommentModels to be passed to sortByLocation

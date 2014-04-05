@@ -58,7 +58,7 @@ public class BrowseTopLevelCommentsActivityTest extends ActivityInstrumentationT
 		assertTrue("username should be displayed", view.getAdapter().getItem(0).toString().contains(comment.getUsername()));
 
 	}
-	
+	 //NEED TO FIX, DONT KNOW HOW TO TEST CACHE -KW
 	/* Test for use case 10 */
 	public void testWritingReadCache() {
 		Location l = new Location("Location Initialization");
@@ -69,16 +69,16 @@ public class BrowseTopLevelCommentsActivityTest extends ActivityInstrumentationT
 		//CommentModel comment2 = storage.getCacheList().get(0);
 		//assertEquals("Comments should be the same",comment,comment2);
 	}
-	
+	 //NEED TO FIX, DONT KNOW HOW TO TEST CACHE -KW
 	/* test for use case 10 */
 	public void testWritingWantToReadCache() {
-		StorageModel storage = new StorageModel();
+	//	StorageModel storage = new StorageModel();
 		Location l = new Location("Location Initialization");
 		CommentModel comment = new CommentModel("post",l,"user");
 		//storage.cacheComment(comment);
 		//CommentModel comment2 = storage.getCacheList().get(0);
 		//assertEquals("Comments should be the same",comment,comment2);
-	}
+	} 
 
 	/* Test for use case 19 */
 	public void testChangeLocation() {
@@ -144,8 +144,8 @@ public class BrowseTopLevelCommentsActivityTest extends ActivityInstrumentationT
 		comment8.setDate(new Date(20000));
 		
 		
-		//ArrayList<CommentModel> outOfOrderComments = new ArrayList<CommentModel>();
-		TopLevelCommentList outOfOrderComments = TopLevelCommentList.getInstance(getActivity().getApplicationContext());
+		ArrayList<CommentModel> outOfOrderComments = new ArrayList<CommentModel>();
+		//TopLevelCommentList outOfOrderComments = TopLevelCommentList.getInstance(getActivity().getApplicationContext());
 		outOfOrderComments.add(comment5);
 		outOfOrderComments.add(comment4);
 		outOfOrderComments.add(comment3);
@@ -154,6 +154,7 @@ public class BrowseTopLevelCommentsActivityTest extends ActivityInstrumentationT
 		outOfOrderComments.add(comment2);
 
 		ArrayList <CommentModel> inOrderComments = new ArrayList<CommentModel>();
+		//TopLevelCommentList inOrderComments = TopLevelCommentList.getInstance(getActivity().getApplicationContext());
 		inOrderComments.add(comment2);
 		inOrderComments.add(comment1);
 		inOrderComments.add(comment4);
@@ -164,12 +165,12 @@ public class BrowseTopLevelCommentsActivityTest extends ActivityInstrumentationT
 		CommentListAdapter adapter1;
 		CommentListAdapter adapter2;
 		
-		adapter1 = new CommentListAdapter(getActivity(), R.layout.list_item, outOfOrderComments.getCommentList());
-		adapter2 = new CommentListAdapter(getActivity(), R.layout.list_item, inOrderComments.getCommentList());
-		outOfOrderComments.setAdapter(adapter1);
-		inOrderComments.setAdapter(adapter2);
-		adapter1.setModel(outOfOrderComments);
-		adapter2.setModel(inOrderComments);
+		adapter1 = new CommentListAdapter(getActivity(), R.layout.list_item, (CommentListModel) outOfOrderComments);
+		adapter2 = new CommentListAdapter(getActivity(), R.layout.list_item, (CommentListModel) inOrderComments);
+		//outOfOrderComments.setAdapter(adapter1);
+		//inOrderComments.setAdapter(adapter2);
+		//adapter1.setModel(outOfOrderComments);
+		//adapter2.setModel(inOrderComments);
 		adapter1.sortByDefault();
 		
 		assertEquals("First items should be in same place", adapter1.getItem(0), adapter2.getItem(0));
@@ -198,7 +199,8 @@ public class BrowseTopLevelCommentsActivityTest extends ActivityInstrumentationT
 		outOfOrderComments.add(comment7);
 		outOfOrderComments.add(comment8);
 		
-		inOrderComments.getCommentList().clear();
+		//inOrderComments.getCommentList().clear();
+		inOrderComments.clear();
 		inOrderComments.add(comment4);
 		inOrderComments.add(comment3);
 		inOrderComments.add(comment2);
