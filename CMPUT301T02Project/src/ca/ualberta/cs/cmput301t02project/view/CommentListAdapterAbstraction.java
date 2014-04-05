@@ -24,7 +24,7 @@ import ca.ualberta.cs.cmput301t02project.model.GPSLocation;
  * and is called on by either an activity, to change sorting method, or by its model,
  * to update the view and/or resort the list due to changes to the model.
  */
-public abstract class CommentListAdapterAbstraction extends ArrayAdapter<CommentModel> implements Observer {
+public class CommentListAdapterAbstraction extends ArrayAdapter<CommentModel> implements Observer {
 
 	private CommentListModel model;
 	private String sortMethod = "Default";

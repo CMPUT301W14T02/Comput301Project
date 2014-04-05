@@ -1,7 +1,7 @@
 package ca.ualberta.cs.cmput301t02project.test;
+import android.test.ActivityInstrumentationTestCase2;
 import ca.ualberta.cs.cmput301t02project.activity.LoginActivity;
 import ca.ualberta.cs.cmput301t02project.model.User;
-import android.test.ActivityInstrumentationTestCase2;
 
 public class LoginActivityTest extends ActivityInstrumentationTestCase2<LoginActivity> {
 	

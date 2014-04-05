@@ -1,25 +1,28 @@
 package ca.ualberta.cs.cmput301t02project.test;
 
 import java.util.ArrayList;
-import java.util.Date;
 
-import ca.ualberta.cs.cmput301t02project.R;
-import ca.ualberta.cs.cmput301t02project.activity.BrowseFavoritesActivity;
-import ca.ualberta.cs.cmput301t02project.model.CommentListModel;
-import ca.ualberta.cs.cmput301t02project.model.CommentModel;
-import ca.ualberta.cs.cmput301t02project.model.FavoritesListModel;
-import ca.ualberta.cs.cmput301t02project.model.User;
-import ca.ualberta.cs.cmput301t02project.view.CommentListAdapter;
-import android.graphics.Bitmap;
+import android.content.Context;
 import android.location.Location;
 import android.test.ActivityInstrumentationTestCase2;
-import android.test.ViewAsserts;
-import android.widget.ListView;
+import ca.ualberta.cs.cmput301t02project.R;
+import ca.ualberta.cs.cmput301t02project.activity.BrowseFavoritesActivity;
+import ca.ualberta.cs.cmput301t02project.model.CommentModel;
+import ca.ualberta.cs.cmput301t02project.model.FavoritesListModel;
+import ca.ualberta.cs.cmput301t02project.model.Server;
+import ca.ualberta.cs.cmput301t02project.model.User;
+import ca.ualberta.cs.cmput301t02project.view.CommentListAdapter;
 
 public class BrowseFavoritesActivityTest extends ActivityInstrumentationTestCase2<BrowseFavoritesActivity> {
 
 	public BrowseFavoritesActivityTest() {
 		super(BrowseFavoritesActivity.class);
+	}
+	private Context context;
+	
+	public void setUp() {
+		context = getInstrumentation().getContext();
+		User.login("desiredusername", context);
 	}
 
 	// not a test, used in test below -SB
@@ -30,7 +33,7 @@ public class BrowseFavoritesActivityTest extends ActivityInstrumentationTestCase
 		currentLocation = new Location(loc);
 		//myLocation = new Location(loc);
 
-		CommentModel comment = new CommentModel("comment", currentLocation,"username");
+		CommentModel comment = new CommentModel("comment", null,"username");
 
 		//ProjectApplication.getInstance().setCurrentLocation(myLocation);
 
@@ -71,12 +74,16 @@ public class BrowseFavoritesActivityTest extends ActivityInstrumentationTestCase
 	/* test for use case 12 */
 	public void testReadFavorites() {
 		CommentModel comment = initializeComment();
-		User user = new User("username");
+		User user = User.getUser();
 		ArrayList<CommentModel> replies = new ArrayList<CommentModel>();
+		Server server = new Server(context);
+		// Comment must be posted on server before being added to favorites
+		server.post(comment);
+		
 		// add fave with no replies -SB
 		user.addFavoriteComment(comment, replies);
 		
-		assertEquals("Comments should be the same",comment, comment);//user.getFavorites().get(0));
+		assertEquals("Comments should be the same", comment, user.getFavorites().get(comment.getId()));//user.getFavorites().get(0));
 	}
 	
 	/*
@@ -87,10 +94,9 @@ public class BrowseFavoritesActivityTest extends ActivityInstrumentationTestCase
 	 */
 	public void testSortByLocation (){
 		
-		BrowseFavoritesActivity activity = new BrowseFavoritesActivity();
 		
-		FavoritesListModel inOrder = new FavoritesListModel(activity.getApplicationContext());
-		FavoritesListModel outOfOrder = new FavoritesListModel(activity.getApplicationContext());
+		FavoritesListModel inOrder = new FavoritesListModel(context);
+		FavoritesListModel outOfOrder = new FavoritesListModel(context);
 		
 		Location currentLocation = new Location("Location Initialization");
 		currentLocation.setLatitude(0);
