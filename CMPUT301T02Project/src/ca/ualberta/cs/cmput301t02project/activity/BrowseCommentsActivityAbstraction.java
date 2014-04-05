@@ -58,11 +58,11 @@ public abstract class BrowseCommentsActivityAbstraction extends ActionBarActivit
 	 * Prints a pop-up message on the screen.
 	 * <p>
 	 * The screen and message are specified in the parameters.
-	 * context determines which activty to display the message. 
+	 * context determines which activity to display the message. 
 	 * An example input of the context parameter is "BrowseReplyCommentsActivity.this".
 	 * message specifies what to print. 
 	 * An example input of the message parameter is "No internet connection :(".
-	 * This method is called from the Browse* activities.
+	 * This method is called from the Browse* activities that extend BrowseCommentsActivityAbstraction.
 	 * <p>
 	 * @param context	the calling activity's context
 	 * @param message	the desired message to print

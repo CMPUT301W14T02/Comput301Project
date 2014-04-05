@@ -20,10 +20,11 @@
     <string name="favorites">Favorites</string>
     <string name="my_comments">My Comments</string>
     <string name="edit_comment">Edit Comment</string>
-    <string name="title_activity_my_comments_list">MyCommentsActivity</string>
-    <string name="title_activity_edit_comment">EditCommentActivity</string>
-    <string name="title_activity_browse_favorites">BrowseFavoritesActivity</string>
-    <string name="title_activity_browse_replies_to_favs">BrowseFavoritesActivity</string>
+    <string name="title_activity_my_comments_list">My Comments</string>
+    <string name="title_activity_edit_comment">Edit Comment</string>
+    <string name="title_activity_browse_favorites">Browse Favorites</string>
+    <string name="title_activity_browse_replies_to_favs">Browse Favorites</string> 
+    <string name="title_activity_browse_followed_comments">Browse Followed User Comments</string>
     <string name="latitude">Latitude: </string>
     <string name="longitude">Longitude: </string>
     <string name="cust_location"> Location</string>

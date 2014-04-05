@@ -63,6 +63,10 @@
             android:name="ca.ualberta.cs.cmput301t02project.activity.BrowseRepliesToFavsActivity"
             android:label="@string/title_activity_browse_replies_to_favs" >
         </activity>
+        <activity
+            android:name="ca.ualberta.cs.cmput301t02project.activity.BrowseFollowedCommentsActivity"
+            android:label="@string/title_activity_browse_followed_comments" >
+        </activity>
           <activity
             android:name="ca.ualberta.cs.cmput301t02project.activity.EnterSearchCoordinatesActivity"
             android:label="@string/title_activity_enter_coor"  >

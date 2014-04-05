@@ -127,7 +127,10 @@ public class User {
 		}
 	}
 	
-	
+	/**
+	 * Adds the comment of a followed user
+	 * @param comment	the comment to be stored in followedUsers
+	 */
 	public void addFollowedUser(CommentModel comment){
 		followedUsers.add(comment);
 	}

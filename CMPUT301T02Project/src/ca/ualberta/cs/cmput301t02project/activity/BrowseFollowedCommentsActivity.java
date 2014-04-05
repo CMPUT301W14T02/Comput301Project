@@ -38,19 +38,19 @@ public class BrowseFollowedCommentsActivity extends BrowseCommentsActivityAbstra
 		listView.setOnItemClickListener(new OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> l, View v, int position, long id) {
-				Server server = new Server(BrowseFollowedCommentsActivity.this);
+				/*Server server = new Server(BrowseFollowedCommentsActivity.this);
 				if(!server.isNetworkAvailable()) {
-					int duration = Toast.LENGTH_SHORT;
-					Toast toast = Toast.makeText(BrowseFollowedCommentsActivity.this, "You don't have internet connection.", duration);
-					toast.show();
+					
+					// print message to the screen -SB
+					showMessage(BrowseFollowedCommentsActivity.this, "You don't have internet connection.");
 				}
 				else {
 					/*CommentModel nestedComment = (CommentModel) adapter.getItem(position);
 					Intent goToEditCommentActivity = new Intent(getApplicationContext(), EditCommentActivity.class);
 					goToEditCommentActivity.putExtra("CommentId", nestedComment.getId());
 					startActivity(goToEditCommentActivity);
-					*/
-				}
+					
+				}*/
 			}
 		});
 	}

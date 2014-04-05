@@ -37,9 +37,9 @@ public class BrowseMyCommentsActivity extends BrowseCommentsActivityAbstraction 
 			public void onItemClick(AdapterView<?> l, View v, int position, long id) {
 				Server server = new Server(BrowseMyCommentsActivity.this);
 				if(!server.isNetworkAvailable()) {
-					int duration = Toast.LENGTH_SHORT;
-					Toast toast = Toast.makeText(BrowseMyCommentsActivity.this, "You don't have internet connection.", duration);
-					toast.show();
+					
+					// print message to the screen -SB
+					showMessage(BrowseMyCommentsActivity.this, "You don't have internet connection.");
 				}
 				else {
 					CommentModel nestedComment = (CommentModel) adapter.getItem(position);
