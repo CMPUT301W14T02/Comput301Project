@@ -144,8 +144,9 @@ public class BrowseTopLevelCommentsActivityTest extends ActivityInstrumentationT
 		comment8.setDate(new Date(20000));
 		
 		
-		ArrayList<CommentModel> outOfOrderComments = new ArrayList<CommentModel>();
+		//ArrayList<CommentModel> outOfOrderComments = new ArrayList<CommentModel>();
 		//TopLevelCommentList outOfOrderComments = TopLevelCommentList.getInstance(getActivity().getApplicationContext());
+		TopLevelCommentList outOfOrderComments = TopLevelCommentList.getInstance(getInstrumentation().getContext());
 		outOfOrderComments.add(comment5);
 		outOfOrderComments.add(comment4);
 		outOfOrderComments.add(comment3);
@@ -153,8 +154,11 @@ public class BrowseTopLevelCommentsActivityTest extends ActivityInstrumentationT
 		outOfOrderComments.add(comment1);
 		outOfOrderComments.add(comment2);
 
-		ArrayList <CommentModel> inOrderComments = new ArrayList<CommentModel>();
+		//ArrayList <CommentModel> inOrderComments = new ArrayList<CommentModel>();
 		//TopLevelCommentList inOrderComments = TopLevelCommentList.getInstance(getActivity().getApplicationContext());
+		TopLevelCommentList inOrderComments = TopLevelCommentList.getInstance(getInstrumentation().getContext());
+		//TopLevelCommentList inOrderComments = new TopLevelCommentList(getInstrumentation().getContext());
+		
 		inOrderComments.add(comment2);
 		inOrderComments.add(comment1);
 		inOrderComments.add(comment4);
@@ -165,13 +169,17 @@ public class BrowseTopLevelCommentsActivityTest extends ActivityInstrumentationT
 		CommentListAdapter adapter1;
 		CommentListAdapter adapter2;
 		
-		adapter1 = new CommentListAdapter(getActivity(), R.layout.list_item, (CommentListModel) outOfOrderComments);
-		adapter2 = new CommentListAdapter(getActivity(), R.layout.list_item, (CommentListModel) inOrderComments);
+		adapter1 = new CommentListAdapter(getActivity(), R.layout.list_item, outOfOrderComments);
+		adapter2 = new CommentListAdapter(getActivity(), R.layout.list_item, inOrderComments);
+		//adapter1 = new CommentListAdapter(getActivity(), R.layout.list_item, (CommentListModel) outOfOrderComments);
+		//adapter2 = new CommentListAdapter(getActivity(), R.layout.list_item, (CommentListModel) inOrderComments);
+		
 		//outOfOrderComments.setAdapter(adapter1);
 		//inOrderComments.setAdapter(adapter2);
 		//adapter1.setModel(outOfOrderComments);
 		//adapter2.setModel(inOrderComments);
 		adapter1.sortByDefault();
+
 		
 		assertEquals("First items should be in same place", adapter1.getItem(0), adapter2.getItem(0));
 		assertEquals("Second items should be in same place", adapter1.getItem(1), adapter2.getItem(1));
@@ -199,8 +207,8 @@ public class BrowseTopLevelCommentsActivityTest extends ActivityInstrumentationT
 		outOfOrderComments.add(comment7);
 		outOfOrderComments.add(comment8);
 		
-		//inOrderComments.getCommentList().clear();
-		inOrderComments.clear();
+		inOrderComments.getList().clear();
+		//inOrderComments.clear();
 		inOrderComments.add(comment4);
 		inOrderComments.add(comment3);
 		inOrderComments.add(comment2);
