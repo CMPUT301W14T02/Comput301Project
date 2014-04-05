@@ -28,15 +28,12 @@ public class FollowedUserListCommentsModel extends StoredCommentListAbstraction{
 		Server server = new Server(context);
 
 		FollowedUserListCommentsModel l = new FollowedUserListCommentsModel(context); 
-		/*
+		
 		for(int i = 0; i < names.size(); i++){
-			server.pullFollowedUserComments(names.get(i));
-		}
-		*/
-		if(names.get(0)!=null){
-			ArrayList<CommentModel> list = server.pullFollowedUserComments(names.get(0));
+			ArrayList<CommentModel> list = server.pullFollowedUserComments(names.get(i));
 			l.addAll(list);
 		}
+		
 		return l;
 	}
 
