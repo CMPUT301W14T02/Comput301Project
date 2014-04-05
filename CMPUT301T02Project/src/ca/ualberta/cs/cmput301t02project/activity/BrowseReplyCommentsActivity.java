@@ -115,10 +115,7 @@ public class BrowseReplyCommentsActivity extends BrowseCommentsActivityAbstracti
 				CommentModel currentComment = commentController.getComment();
 				User user = User.getUser();
 				
-				ReplyList repliesToFav = new ReplyList(currentComment.getId(), getApplicationContext());
-				ArrayList<CommentModel> replies = repliesToFav.getList();
-				user.addFavoriteComment(currentComment, replies);
-				//commentController.incrementRating();
+				user.addFollowedUser(currentComment);
 				
 				// print a popup message -SB
 				followUser.animate();

@@ -1,26 +1,15 @@
 package ca.ualberta.cs.cmput301t02project.activity;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.Toast;
-import android.widget.AdapterView.OnItemClickListener;
 import ca.ualberta.cs.cmput301t02project.R;
-import ca.ualberta.cs.cmput301t02project.model.CommentModel;
 import ca.ualberta.cs.cmput301t02project.model.FollowedUserListModel;
-import ca.ualberta.cs.cmput301t02project.model.MyCommentsListModel;
-import ca.ualberta.cs.cmput301t02project.model.Server;
 import ca.ualberta.cs.cmput301t02project.model.User;
 import ca.ualberta.cs.cmput301t02project.view.CommentListAdapter;
 import ca.ualberta.cs.cmput301t02project.view.CommentListAdapterAbstraction;
 
-
-
 /**
- * Displays comments that the current user authored. 
- * Current user information including a list of their comments is stored in ProjectApplication.getInstance().
+ * Displays comments authored by the current user's followed users. 
  */
 public class BrowseFollowedCommentsActivity extends BrowseCommentsActivityAbstraction {
 
@@ -32,27 +21,9 @@ public class BrowseFollowedCommentsActivity extends BrowseCommentsActivityAbstra
 		setContentView(R.layout.activity_my_comments_list);
 		listView = (ListView) findViewById(R.id.commentListView);
 		model = User.getUser().getFollowedUsers();
+		
 		// Create the sortBy menu and set up the adapter, inherited from BrowseCommentsActivity -SB
 		setupPage();
-		
-		listView.setOnItemClickListener(new OnItemClickListener() {
-			@Override
-			public void onItemClick(AdapterView<?> l, View v, int position, long id) {
-				/*Server server = new Server(BrowseFollowedCommentsActivity.this);
-				if(!server.isNetworkAvailable()) {
-					
-					// print message to the screen -SB
-					showMessage(BrowseFollowedCommentsActivity.this, "You don't have internet connection.");
-				}
-				else {
-					/*CommentModel nestedComment = (CommentModel) adapter.getItem(position);
-					Intent goToEditCommentActivity = new Intent(getApplicationContext(), EditCommentActivity.class);
-					goToEditCommentActivity.putExtra("CommentId", nestedComment.getId());
-					startActivity(goToEditCommentActivity);
-					
-				}*/
-			}
-		});
 	}
 	
 	@Override
@@ -63,12 +34,11 @@ public class BrowseFollowedCommentsActivity extends BrowseCommentsActivityAbstra
 	}
 	
 	/**
-	 * Creates an adapter for displaying the list of the current user's comments on the screen.
+	 * Creates an adapter for displaying the list of the followed user's comments on the screen.
 	 * <p>
 	 * Called from onCreate().
-	 * Comments from the current user are able to be edited when the user clicks on one. 
 	 * <p>
-	 * @return the adapter used for BrowseMyCommentsActivity
+	 * @return the adapter used for BrowseFollowedCommentsActivity
 	 */
 	@Override
 	public CommentListAdapterAbstraction initializeAdapter(){
