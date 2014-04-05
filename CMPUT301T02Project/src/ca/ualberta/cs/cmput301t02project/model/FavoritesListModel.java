@@ -6,7 +6,7 @@ public class FavoritesListModel extends StoredCommentListAbstraction {
 
 	private static FavoritesListModel instance;
 	
-	private FavoritesListModel(Context context) {
+	public FavoritesListModel(Context context) {
 		super(context);
 	}
 	
