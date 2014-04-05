@@ -2,6 +2,7 @@ package ca.ualberta.cs.cmput301t02project.activity;
 
 import java.util.ArrayList;
 
+import android.content.Context;
 import android.content.Intent;
 import android.location.Location;
 import android.view.View;
@@ -10,6 +11,7 @@ import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.Toast;
 import ca.ualberta.cs.cmput301t02project.R;
 import ca.ualberta.cs.cmput301t02project.view.CommentListAdapterAbstraction;
 
@@ -49,6 +51,26 @@ public abstract class BrowseCommentsActivityAbstraction extends ActionBarActivit
 		createSpinner();
 		adapter = initializeAdapter();
 		listView.setAdapter(adapter);
+	}
+	
+	
+	/**
+	 * Prints a pop-up message on the screen.
+	 * <p>
+	 * The screen and message are specified in the parameters.
+	 * context determines which activty to display the message. 
+	 * An example input of the context parameter is "BrowseReplyCommentsActivity.this".
+	 * message specifies what to print. 
+	 * An example input of the message parameter is "No internet connection :(".
+	 * This method is called from the Browse* activities.
+	 * <p>
+	 * @param context	the calling activity's context
+	 * @param message	the desired message to print
+	 */
+	public void showMessage(Context context, String message){
+		int duration = Toast.LENGTH_SHORT;
+		Toast toast = Toast.makeText(context, message, duration);
+		toast.show();
 	}
 
 	/**

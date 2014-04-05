@@ -82,6 +82,17 @@ public class MainMenuActivity extends ActionBarActivity {
 				startActivity(new Intent(MainMenuActivity.this, BrowseMyCommentsActivity.class));
 			}
 		});
+		
+		
+		// If "My Comments" is clicked -SB
+		Button browseFollowedComments = (Button) findViewById(R.id.followed_users);
+		browseFollowedComments.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				startActivity(new Intent(MainMenuActivity.this, BrowseFollowedCommentsActivity.class));
+			}
+		});
 	}
 	
 	// override to select a different menu xml than the ActionBarActivity default -SB

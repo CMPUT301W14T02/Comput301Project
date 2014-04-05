@@ -21,7 +21,10 @@ public class User {
 	private transient MyCommentsListModel myComments;
 	private transient FavoritesListModel favorites;
 	private transient RepliesToFavsListModel repliesToFavs;
+	private transient FollowedUserListModel followedUsers;
 	
+
+
 	//Singleton
 	private static User user;
 
@@ -40,6 +43,7 @@ public class User {
 		user.myComments = MyCommentsListModel.getInstance(context);
 		user.favorites = FavoritesListModel.getInstance(context);
 		user.repliesToFavs = RepliesToFavsListModel.getInstance(context);
+		user.followedUsers = FollowedUserListModel.getInstance(context);
 	}
 	
 	public static User getUser() {
@@ -123,6 +127,11 @@ public class User {
 		}
 	}
 	
+	
+	public void addFollowedUser(CommentModel comment){
+		followedUsers.add(comment);
+	}
+	
 	/**
 	 * Returns list of comments from phone storage
 	 * <p>
@@ -186,6 +195,14 @@ public class User {
 	
 	public void setMyCommentIds(ArrayList<String> myCommentsIds) {
 		this.myCommentsIds = myCommentsIds;
+	}
+	
+	public FollowedUserListModel getFollowedUsers() {
+		return followedUsers;
+	}
+
+	public void setFollowedUsers(FollowedUserListModel followedUsers) {
+		this.followedUsers = followedUsers;
 	}
 	
 }
