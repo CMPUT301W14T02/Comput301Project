@@ -170,7 +170,7 @@ public class Server {
 						cache.put(c.getId(), c);
 					}
 				} catch (Exception e) {
-					commentList.addAll(cache.getAllTopLevelPresent());
+					commentList.addAll(cache.getAllFollowedInCache());
 				}
 			}
 		};

@@ -25,7 +25,7 @@ import com.google.gson.Gson;
  */
 public abstract class StoredCommentListAbstraction extends Observable implements CommentListModel {
 
-	private Context context;
+	protected Context context;
 	
 	/**
 	 * Constructor

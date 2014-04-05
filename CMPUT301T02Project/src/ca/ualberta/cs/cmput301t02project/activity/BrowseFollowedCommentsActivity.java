@@ -3,7 +3,7 @@ package ca.ualberta.cs.cmput301t02project.activity;
 import android.os.Bundle;
 import android.widget.ListView;
 import ca.ualberta.cs.cmput301t02project.R;
-import ca.ualberta.cs.cmput301t02project.model.FollowedUserListModel;
+import ca.ualberta.cs.cmput301t02project.model.FollowedUserListCommentsModel;
 import ca.ualberta.cs.cmput301t02project.model.User;
 import ca.ualberta.cs.cmput301t02project.view.CommentListAdapter;
 import ca.ualberta.cs.cmput301t02project.view.CommentListAdapterAbstraction;
@@ -13,7 +13,7 @@ import ca.ualberta.cs.cmput301t02project.view.CommentListAdapterAbstraction;
  */
 public class BrowseFollowedCommentsActivity extends BrowseCommentsActivityAbstraction {
 
-	private FollowedUserListModel model;
+	private FollowedUserListCommentsModel model;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

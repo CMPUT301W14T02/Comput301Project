@@ -77,5 +77,24 @@ public class Cache {
 		}
 		return list;
 	}
+	
+	
+	/**
+	 * Returns a list of all comments present on the cache
+	 * @return The list of comments
+	 */
+	public ArrayList<CommentModel> getAllFollowedInCache() {
+		Gson gson = new Gson();
+		SharedPreferences cache = context.getSharedPreferences(
+				FollowedUserListCommentsModel.getInstance(context).getPreferencesKey(), 0);
+		Map<String, ?> map = cache.getAll();
+		ArrayList<CommentModel> list = new ArrayList<CommentModel>();
+		for(Entry<String, ?> entry : map.entrySet()) {
+			String value = (String) entry.getValue();
+			CommentModel comment = gson.fromJson(value, CommentModel.class);
+			list.add(comment);
+		}
+		return list;
+	}
 
 }
