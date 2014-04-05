@@ -206,7 +206,12 @@ public class User {
 	
 	public FollowedUserListCommentsModel getFollowedUsers() {
 		//return followedUsersComments;
-		return followedUsersComments.updated(followedUsernames);
+		if (followedUsernames.size()>0){
+			return followedUsersComments.updated(followedUsernames);
+		}
+		else{
+			return followedUsersComments;
+		}
 	}
 
 	public void setFollowedUsers(FollowedUserListCommentsModel followedUsers) {
