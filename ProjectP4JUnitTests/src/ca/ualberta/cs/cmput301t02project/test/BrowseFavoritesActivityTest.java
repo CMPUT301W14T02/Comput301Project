@@ -19,6 +19,9 @@ import android.test.ActivityInstrumentationTestCase2;
 import android.test.ViewAsserts;
 import android.widget.ListView;
 
+//wrote gibberish here so know that not done this file -KW
+fhdlksjhfdshdsaghfdlkgjhfdkhgfdkj
+
 public class BrowseFavoritesActivityTest extends ActivityInstrumentationTestCase2<BrowseFavoritesActivity> {
 
 	public BrowseFavoritesActivityTest() {
