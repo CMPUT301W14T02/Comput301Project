@@ -6,6 +6,7 @@ import ca.ualberta.cs.cmput301t02project.R;
 import ca.ualberta.cs.cmput301t02project.activity.BrowseFavoritesActivity;
 import ca.ualberta.cs.cmput301t02project.model.CommentListModel;
 import ca.ualberta.cs.cmput301t02project.model.CommentModel;
+import ca.ualberta.cs.cmput301t02project.model.FavoritesListModel;
 import ca.ualberta.cs.cmput301t02project.model.GPSLocation;
 import ca.ualberta.cs.cmput301t02project.model.StoredCommentListAbstraction;
 import ca.ualberta.cs.cmput301t02project.view.CommentListAdapter;
@@ -34,8 +35,7 @@ public class BrowseFavoritesActivityTest extends ActivityInstrumentationTestCase
 	public void testDisplayFavorites() {
 
 		CommentModel comment = initializeComment();
-		StoredCommentListAbstraction favoriteComments = new StoredCommentListAbstraction();
-		favoriteComments = ProjectApplication.getInstance().getUser().getFavorites();
+		FavoritesListModel favoriteComments = new FavoritesListModel();
 		favoriteComments.add(comment);
 
 		ListView view = (ListView) getActivity().findViewById(R.id.commentListView);

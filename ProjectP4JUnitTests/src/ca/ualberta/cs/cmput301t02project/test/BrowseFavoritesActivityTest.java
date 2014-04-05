@@ -5,11 +5,14 @@ import java.util.Date;
 
 import ca.ualberta.cs.cmput301t02project.R;
 import ca.ualberta.cs.cmput301t02project.activity.BrowseFavoritesActivity;
+import ca.ualberta.cs.cmput301t02project.activity.LoginActivity;
 import ca.ualberta.cs.cmput301t02project.model.CommentListModel;
 import ca.ualberta.cs.cmput301t02project.model.CommentModel;
 import ca.ualberta.cs.cmput301t02project.model.FavoritesListModel;
 import ca.ualberta.cs.cmput301t02project.model.User;
 import ca.ualberta.cs.cmput301t02project.view.CommentListAdapter;
+import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.location.Location;
 import android.test.ActivityInstrumentationTestCase2;
@@ -26,13 +29,8 @@ public class BrowseFavoritesActivityTest extends ActivityInstrumentationTestCase
 	public CommentModel initializeComment() {
 		String loc = "Location Intialization";
 		Location currentLocation;
-		//Location myLocation;
 		currentLocation = new Location(loc);
-		//myLocation = new Location(loc);
-
 		CommentModel comment = new CommentModel("comment", currentLocation,"username");
-
-		//ProjectApplication.getInstance().setCurrentLocation(myLocation);
 
 		return comment;
 	}
@@ -73,10 +71,26 @@ public class BrowseFavoritesActivityTest extends ActivityInstrumentationTestCase
 		CommentModel comment = initializeComment();
 		User user = new User("username");
 		ArrayList<CommentModel> replies = new ArrayList<CommentModel>();
-		// add fave with no replies -SB
-		user.addFavoriteComment(comment, replies);
+		assertNotNull("Favorites list was null", replies);
+		assertNotNull("Comment was null", comment);
+		assertNotNull("User was null", user);
 		
-		assertEquals("Comments should be the same",comment, comment);//user.getFavorites().get(0));
+		Intent intent = new Intent((getActivity().getApplicationContext()), LoginActivity.class);
+		setActivityIntent(intent);
+		
+		Context context = getActivity().getApplicationContext();
+		assertNotNull("Context was null", context);
+		user.login(user.getName(), context);
+		assertNotNull(user.getFavorites());
+		
+		// add fave with no replies -SB
+		
+		
+		//user.addFavoriteComment(comment, replies);
+		//CommentModel newComment = user.getFavorites().get(0);
+		//assertEquals("Comments should be the same",comment, newComment);
+		//reset to BrowseFavoritesActivityIntent
+		setActivityIntent(null);
 	}
 	
 	/*
