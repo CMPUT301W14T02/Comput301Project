@@ -144,7 +144,8 @@ public class BrowseTopLevelCommentsActivityTest extends ActivityInstrumentationT
 		comment8.setDate(new Date(20000));
 		
 		
-		ArrayList<CommentModel> outOfOrderComments = new ArrayList<CommentModel>();
+		//ArrayList<CommentModel> outOfOrderComments = new ArrayList<CommentModel>();
+		TopLevelCommentList outOfOrderComments = TopLevelCommentList.getInstance(getActivity().getApplicationContext());
 		outOfOrderComments.add(comment5);
 		outOfOrderComments.add(comment4);
 		outOfOrderComments.add(comment3);
