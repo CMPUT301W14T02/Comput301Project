@@ -21,7 +21,7 @@ public class User {
 	private transient MyCommentsListModel myComments;
 	private transient FavoritesListModel favorites;
 	private transient RepliesToFavsListModel repliesToFavs;
-	private transient FollowedUserListCommentsModel followedUsersComments;
+	private transient FollowedUserCommentsListModel followedUsersComments;
 	private transient ArrayList<String> followedUsernames = new ArrayList<String>();
 	
 
@@ -43,7 +43,7 @@ public class User {
 		user.myComments = MyCommentsListModel.getInstance(context);
 		user.favorites = FavoritesListModel.getInstance(context);
 		user.repliesToFavs = RepliesToFavsListModel.getInstance(context);
-		user.followedUsersComments = FollowedUserListCommentsModel.getInstance(context);
+		user.followedUsersComments = FollowedUserCommentsListModel.getInstance(context);
 	}
 	
 	public static User getUser() {
@@ -204,7 +204,7 @@ public class User {
 		this.myCommentsIds = myCommentsIds;
 	}
 	
-	public FollowedUserListCommentsModel getFollowedUsers() {
+	public FollowedUserCommentsListModel getFollowedUsers() {
 		//return followedUsersComments;
 		if (followedUsernames.size()>0){
 			return followedUsersComments.updated(followedUsernames);
@@ -214,7 +214,7 @@ public class User {
 		}
 	}
 
-	public void setFollowedUsers(FollowedUserListCommentsModel followedUsers) {
+	public void setFollowedUsers(FollowedUserCommentsListModel followedUsers) {
 		this.followedUsersComments = followedUsers;
 	}
 	

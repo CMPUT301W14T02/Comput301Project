@@ -86,7 +86,7 @@ public class Cache {
 	public ArrayList<CommentModel> getAllFollowedInCache() {
 		Gson gson = new Gson();
 		SharedPreferences cache = context.getSharedPreferences(
-				FollowedUserListCommentsModel.getInstance(context).getPreferencesKey(), 0);
+				FollowedUserCommentsListModel.getInstance(context).getPreferencesKey(), 0);
 		Map<String, ?> map = cache.getAll();
 		ArrayList<CommentModel> list = new ArrayList<CommentModel>();
 		for(Entry<String, ?> entry : map.entrySet()) {
