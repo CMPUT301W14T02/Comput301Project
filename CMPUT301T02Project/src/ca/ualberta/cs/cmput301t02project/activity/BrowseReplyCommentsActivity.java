@@ -56,7 +56,7 @@ public class BrowseReplyCommentsActivity extends BrowseCommentsActivityAbstracti
 		currentCommentAuthor = currentComment.getUsername();
 		editComment = currentComment;
 		
-		selectedComment.setText(currentComment.getText());
+		selectedComment.setText(currentComment.getText()+"\n(by " + currentComment.getUsername() + ")");
 		
 		// display the image if there is one -SB
 		if(currentComment.hasPicture()){
