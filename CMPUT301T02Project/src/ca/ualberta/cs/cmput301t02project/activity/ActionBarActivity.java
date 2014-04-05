@@ -2,6 +2,7 @@ package ca.ualberta.cs.cmput301t02project.activity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.view.Menu;
 import android.view.MenuItem;
 import ca.ualberta.cs.cmput301t02project.R;
@@ -27,6 +28,9 @@ public class ActionBarActivity extends Activity {
 	 */
 	public void goToHelpPage(){
 		// default help page -SB
+		Intent viewIntent = new Intent("android.intent.action.VIEW",Uri.parse(
+				"https://rawgithub.com/CMPUT301W14T02/Comput301Project/master/Help%20Pages/help.html"));
+		startActivity(viewIntent);
 	}
 	
 	/**

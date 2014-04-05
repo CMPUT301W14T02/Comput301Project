@@ -1,6 +1,8 @@
 package ca.ualberta.cs.cmput301t02project.activity;
 
+import android.content.Intent;
 import android.location.Location;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -75,10 +77,12 @@ public class CreateCommentActivity extends PictureActivity {
 
 	}
 
-
 	@Override
 	public void goToHelpPage(){
 		// redirect to help page for creating comments -SB
+		Intent viewIntent = new Intent("android.intent.action.VIEW",Uri.parse(
+				"https://rawgithub.com/CMPUT301W14T02/Comput301Project/master/Help%20Pages/create_comment.html"));
+		startActivity(viewIntent);
 	}
 
 }
