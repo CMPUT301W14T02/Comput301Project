@@ -14,7 +14,7 @@ import ca.ualberta.cs.cmput301t02project.model.MyCommentsListModel;
 import ca.ualberta.cs.cmput301t02project.model.Server;
 import ca.ualberta.cs.cmput301t02project.model.User;
 import ca.ualberta.cs.cmput301t02project.view.CommentListAdapter;
-import ca.ualberta.cs.cmput301t02project.view.CommentListAdapterAbstraction;
+import ca.ualberta.cs.cmput301t02project.view.CommentListAdapter;
 
 /**
  * Displays comments that the current user authored. 
@@ -68,7 +68,7 @@ public class BrowseMyCommentsActivity extends BrowseCommentsActivityAbstraction 
 	 * @return the adapter used for BrowseMyCommentsActivity
 	 */
 	@Override
-	public CommentListAdapterAbstraction initializeAdapter(){
+	public CommentListAdapter initializeAdapter(){
 		this.adapter = new CommentListAdapter(this, R.layout.list_item, model);
 		return adapter;
 	}

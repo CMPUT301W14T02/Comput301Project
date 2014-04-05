@@ -12,7 +12,7 @@ import ca.ualberta.cs.cmput301t02project.model.CommentModel;
 import ca.ualberta.cs.cmput301t02project.model.FavoritesListModel;
 import ca.ualberta.cs.cmput301t02project.model.User;
 import ca.ualberta.cs.cmput301t02project.view.CommentListAdapter;
-import ca.ualberta.cs.cmput301t02project.view.CommentListAdapterAbstraction;
+import ca.ualberta.cs.cmput301t02project.view.CommentListAdapter;
 
 /**
  * Displays the favorited comments of the current user.
@@ -50,7 +50,7 @@ public class BrowseFavoritesActivity extends BrowseCommentsActivityAbstraction {
 		adapter.notifyDataSetChanged();
 	}
 	
-	public CommentListAdapterAbstraction initializeAdapter(){
+	public CommentListAdapter initializeAdapter(){
 		this.adapter = new CommentListAdapter(this, R.layout.list_item, model);
 		return adapter;
 	}

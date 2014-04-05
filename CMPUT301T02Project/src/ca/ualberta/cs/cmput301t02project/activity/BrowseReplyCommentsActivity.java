@@ -22,7 +22,7 @@ import ca.ualberta.cs.cmput301t02project.model.ReplyList;
 import ca.ualberta.cs.cmput301t02project.model.Server;
 import ca.ualberta.cs.cmput301t02project.model.User;
 import ca.ualberta.cs.cmput301t02project.view.CommentListAdapter;
-import ca.ualberta.cs.cmput301t02project.view.CommentListAdapterAbstraction;
+import ca.ualberta.cs.cmput301t02project.view.CommentListAdapter;
 
 /**
  * Displays comments replies to the current selected comment.
@@ -143,7 +143,7 @@ public class BrowseReplyCommentsActivity extends BrowseCommentsActivityAbstracti
 	}
 	
 	@Override
-	public CommentListAdapterAbstraction initializeAdapter() {
+	public CommentListAdapter initializeAdapter() {
 		this.adapter = new CommentListAdapter(this, R.layout.list_item, model);
 		return adapter;
 	}
