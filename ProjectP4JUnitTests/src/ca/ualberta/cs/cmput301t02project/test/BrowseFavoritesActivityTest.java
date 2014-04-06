@@ -6,11 +6,15 @@ import android.content.Context;
 import android.content.Intent;
 import android.location.Location;
 import android.test.ActivityInstrumentationTestCase2;
+import android.test.ViewAsserts;
+import android.widget.ListView;
 import ca.ualberta.cs.cmput301t02project.R;
 import ca.ualberta.cs.cmput301t02project.activity.BrowseFavoritesActivity;
 import ca.ualberta.cs.cmput301t02project.activity.LoginActivity;
 import ca.ualberta.cs.cmput301t02project.model.CommentModel;
+import ca.ualberta.cs.cmput301t02project.model.CommentServer;
 import ca.ualberta.cs.cmput301t02project.model.FavoritesListModel;
+import ca.ualberta.cs.cmput301t02project.model.Server;
 import ca.ualberta.cs.cmput301t02project.model.User;
 import ca.ualberta.cs.cmput301t02project.view.CommentListAdapter;
 
@@ -22,6 +26,7 @@ public class BrowseFavoritesActivityTest extends ActivityInstrumentationTestCase
 	}
 	private Context context;
 	
+	@Override
 	public void setUp() {
 		context = getInstrumentation().getContext();
 		User.login("desiredusername", context);
@@ -32,8 +37,10 @@ public class BrowseFavoritesActivityTest extends ActivityInstrumentationTestCase
 		String loc = "Location Intialization";
 		Location currentLocation;
 		currentLocation = new Location(loc);
-		CommentModel comment = new CommentModel("comment", currentLocation,"username");
-
+		CommentModel comment = new CommentModel("sasha", currentLocation,"username");
+		
+		comment.setId("test");
+	
 		return comment;
 	}
 /*
@@ -52,9 +59,7 @@ public class BrowseFavoritesActivityTest extends ActivityInstrumentationTestCase
 	public void testVisibleListView() {
 
 		// Throwing an error, not failure -KW
-		BrowseFavoritesActivity activity = getActivity();
-		ListView view = (ListView) activity.findViewById(R.id.commentListView);
-		ViewAsserts.assertOnScreen(activity.getWindow().getDecorView(), view);
+		
 	}
 */
 	/* Test for use case 21 */
@@ -67,6 +72,39 @@ public class BrowseFavoritesActivityTest extends ActivityInstrumentationTestCase
 
 	}
 
+*/
+	/* Test for Use Case 11 */
+	public void testVisibleListView(){
+		
+		// Check if the ListView shows up on the BrowseFavoritesActivity page
+		BrowseFavoritesActivity activity = getActivity();
+		ListView view = (ListView) activity.findViewById(R.id.commentListView);
+		ViewAsserts.assertOnScreen(activity.getWindow().getDecorView(), view);
+	}
+	
+	/* Test for Use Case 11 */
+	public void testAddFavorite(){
+		
+		// Add favorite comment with no replies
+		CommentModel comment = initializeComment();
+		//ArrayList<CommentModel> replies = null;
+		//User.getUser().addMyComment(comment, context);
+		
+		ArrayList<CommentModel> replies = new ArrayList<CommentModel>();
+		replies.add(comment);
+		User.getUser().addFavoriteComment(comment, replies);
+		comment.setId("test 2");
+		User.getUser().addFavoriteComment(comment, replies);
+		User.getUser().getFavorites().add(comment);
+		//assertNotNull(comment.getId());
+		//User.getUser().addFavoriteComment(comment, replies);
+		
+		//ListView view = (ListView) getActivity().findViewById(R.id.commentListView);
+		assertEquals("user should have a fav", 1, User.getUser().getFavoritesCommentIds().size());
+		//assertEquals("a new comment should be displayed", view.getAdapter().getCount(), 1);
+		//assertEquals("text should be displayed", "aksdjf", view.getAdapter().getItem(0).toString());
+		
+	}
 
 	/* test for use case 12 */
 	public void testReadFavorites() {
@@ -83,8 +121,11 @@ public class BrowseFavoritesActivityTest extends ActivityInstrumentationTestCase
 		
 		Context context = getActivity().getApplicationContext();
 		assertNotNull("Context was null", context);
-		user.login(user.getName(), context);
 		assertNotNull(user.getFavorites());
+		
+		ListView list = (ListView) getActivity().findViewById(R.id.commentListView);
+		
+		ViewAsserts.assertOnScreen(getActivity().getWindow().getDecorView(), list);
 		
 		// add fave with no replies -SB
 
@@ -102,7 +143,7 @@ public class BrowseFavoritesActivityTest extends ActivityInstrumentationTestCase
 	/*
 	 * Use Case 1
 	 */
-	public void testSortByLocation (){
+/*	public void testSortByLocation (){
 		
 		
 		FavoritesListModel inOrder = new FavoritesListModel(context);
