@@ -385,4 +385,5 @@ public class CommentListAdapter extends ArrayAdapter<CommentModel> implements Ob
 		this.otherLocation = otherLocation;
 	}
 	
+	
 }
