@@ -27,7 +27,7 @@ public class BrowseTopLevelCommentsActivityTest extends ActivityInstrumentationT
 		Location currentLocation;
 		currentLocation = new Location(loc);
 		CommentModel comment = new CommentModel("comment", currentLocation,"username");
-
+		
 		return comment;
 	}
 

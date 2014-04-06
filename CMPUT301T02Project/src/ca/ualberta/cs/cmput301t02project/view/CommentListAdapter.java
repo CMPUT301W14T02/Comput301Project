@@ -386,5 +386,7 @@ public class CommentListAdapter extends ArrayAdapter<CommentModel> implements Ob
 	
 	public void setOtherLocation(Location otherLocation) {
 		this.otherLocation = otherLocation;
-	}	
+	}
+	
+	
 }
