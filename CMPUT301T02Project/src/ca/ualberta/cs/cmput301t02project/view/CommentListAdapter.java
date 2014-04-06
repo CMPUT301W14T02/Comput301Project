@@ -297,8 +297,8 @@ public class CommentListAdapter extends ArrayAdapter<CommentModel> implements Ob
 	 *  This allows sortList to know that the list should be sorted by Ranking
 	 *  when called.
 	 */
-	public void sortByRanking() {
-		sortMethod = "Ranking";
+	public void sortByFaves() {
+		sortMethod = "Faves";
 		sortList();
 	}
 	
