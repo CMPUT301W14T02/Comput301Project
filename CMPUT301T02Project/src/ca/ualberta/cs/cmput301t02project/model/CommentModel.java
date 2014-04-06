@@ -35,12 +35,12 @@ public class CommentModel {
 	}
 
 	/**
-	 * Creates a new Comment.
+	 * Creates a new Comment with a picture.
 	 * <p>
-	 * One of the parameters is the picture.
+	 * Includes a parameter for a picture.
 	 * <p>
-	 * @param text	The comment body
-	 * @param picture	The picture of the comment
+	 * @param text		The comment body
+	 * @param picture	The picture attached to the comment
 	 * @param location	The location of the comment
 	 * @param username	The user that the comment belongs to
 	 */
@@ -55,11 +55,11 @@ public class CommentModel {
 	}
 	
 	/**
-	 * Creates a new Comment.
+	 * Creates a new Comment with no picture.
 	 * <p>
-	 * The picture is set to null
+	 * The picture is set to null.
 	 * <p>
-	 * @param text	The comment body
+	 * @param text		The comment body
 	 * @param location	The location of the comment
 	 * @param username	The user that the comment belongs to
 	 */
@@ -74,16 +74,16 @@ public class CommentModel {
 	}
 	
 	/**
-	 * Gets the comment id
-	 * @return The id
+	 * Gets the comment id.
+	 * @return The comment id
 	 */
 	public String getId() {
 		return id;
 	}
 
 	/**
-	 * Sets the comment id
-	 * @param id The id
+	 * Sets the comment id.
+	 * @param id The comment id
 	 */
 	public void setId(String id) {
 		this.id = id;
@@ -201,14 +201,14 @@ public class CommentModel {
 	}
 
 	/**
+	 * POSSIBLE DEAD CODE.
 	 * Returns a string that represents the comment.
-	 * @return The string
+	 * @return The string representing a comment
 	 */
 	@Override
 	public String toString() {
 
-		// If statement to fix grammar issue of a singular reply vs replies
-		// plural -SB
+		// If statement to fix grammar issue of a singular reply vs replies plural -SB
 		if (childrenIds.size() == 1) {
 			return text + " (by " + username + ", 1 reply)";
 		} 
@@ -217,6 +217,10 @@ public class CommentModel {
 		}
 	}
 
+	/**
+	 * Determines whether a comment is a top level comment or a reply.
+	 * @return	true if it is top level, else false
+	 */
 	public boolean isTopLevelComment() {
 		return topLevelComment;
 	}
@@ -264,10 +268,5 @@ public class CommentModel {
 		} else if (!username.equals(other.username))
 			return false;
 		return true;
-	}
-
-	
-	
-	
-	
+	}	
 }
