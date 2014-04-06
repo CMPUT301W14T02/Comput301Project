@@ -18,6 +18,7 @@ public class CreateCommentActivityTest extends ActivityInstrumentationTestCase2<
 
 	protected void setUp() throws Exception {
 		super.setUp();
+		GPSLocation.initializeLocation(getInstrumentation().getContext());
 		activity = getActivity();
 	}
 
@@ -50,6 +51,7 @@ public class CreateCommentActivityTest extends ActivityInstrumentationTestCase2<
 				String text = "the comment";
 				String username = "default";
 				GPSLocation.initializeLocation(getInstrumentation().getContext());
+				
 				User.login(username, getInstrumentation().getContext());
 				edit.setText(text);
 				button.performClick();
