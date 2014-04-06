@@ -34,7 +34,7 @@ public class BrowseTopLevelCommentsActivityTest extends ActivityInstrumentationT
 	/* Test for use case 4 */
 	public void testDisplayTopLevelComments() {
 		CommentModel comment = initializeComment();
-		ArrayList<CommentModel> comments = new ArrayList<CommentModel>();
+		TopLevelCommentList comments = TopLevelCommentList.getInstance(getInstrumentation().getContext());
 		comments.add(comment);
 
 		ListView view = (ListView) getActivity().findViewById(R.id.commentListView);
@@ -53,7 +53,9 @@ public class BrowseTopLevelCommentsActivityTest extends ActivityInstrumentationT
 	/* Test for use case 21 */
 	public void testDisplayUsername() {
 		CommentModel comment = initializeComment();
-
+		TopLevelCommentList comments = TopLevelCommentList.getInstance(getInstrumentation().getContext());
+		comments.add(comment);
+		
 		ListView view = (ListView) getActivity().findViewById(R.id.commentListView);
 		assertTrue("username should be displayed", view.getAdapter().getItem(0).toString().contains(comment.getUsername()));
 
