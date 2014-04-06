@@ -10,7 +10,7 @@ import ca.ualberta.cs.cmput301t02project.R;
 
 /**
  * Performs tasks to do with taking and storing images.
- * Inherited by CreateCommentActivity and EditCommentActivity when the user tries to take a photo.
+ * Inherited by CreateCommentActivity and EditCommentActivity and used when the user tries to take a photo.
  * Extends ActionBarActivity because all activities that inherit it should have a menu bar.
  */
 public class PictureActivity extends ActionBarActivity {
@@ -40,7 +40,6 @@ public class PictureActivity extends ActionBarActivity {
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		
-		//String path = data.getStringExtra(MediaStore.EXTRA_OUTPUT);
 		ImageButton imageButton = (ImageButton) findViewById(R.id.takeAPhoto);
 		
 		if(requestCode == 0) {
@@ -60,5 +59,4 @@ public class PictureActivity extends ActionBarActivity {
 			}
 		}
 	}	
-
 }

@@ -54,25 +54,6 @@ public abstract class BrowseCommentsActivityAbstraction extends ActionBarActivit
 		adapter = initializeAdapter();
 		listView.setAdapter(adapter);
 	}
-	
-	/**
-	 * Prints a pop-up message on the screen.
-	 * <p>
-	 * The screen and message are specified in the parameters.
-	 * context determines which activity to display the message. 
-	 * An example input of the context parameter is "BrowseReplyCommentsActivity.this".
-	 * message specifies what to print. 
-	 * An example input of the message parameter is "No internet connection :(".
-	 * This method is called from the Browse* activities that extend BrowseCommentsActivityAbstraction.
-	 * <p>
-	 * @param context	the calling activity's context
-	 * @param message	the desired message to print
-	 */
-	public void showMessage(Context context, String message){
-		int duration = Toast.LENGTH_SHORT;
-		Toast toast = Toast.makeText(context, message, duration);
-		toast.show();
-	}
 
 	/**
 	 * Creates a drop-down menu of sorting options.
@@ -137,7 +118,7 @@ public abstract class BrowseCommentsActivityAbstraction extends ActionBarActivit
 			startActivityForResult(intent, GET_COORDINATES);
 		} 
 		else if (selected.equals("Faves")) {
-			adapter.sortByRanking();
+			adapter.sortByFaves();
 		} 
 		else if (selected.equals("Default")) {
 			adapter.sortByDefault();

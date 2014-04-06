@@ -4,6 +4,10 @@ import java.util.ArrayList;
 
 import android.content.Context;
 
+/**
+ * Contains comments whose authors were selected to be followed by a User. 
+ * Includes a method for updating the comments to reflect any changes.
+ */
 public class FollowedUserCommentsListModel extends StoredCommentListAbstraction{
 
 	private static FollowedUserCommentsListModel instance;
@@ -24,18 +28,26 @@ public class FollowedUserCommentsListModel extends StoredCommentListAbstraction{
 		return "FOLLOWED_LIST_KEY" + User.getUser().getName();
 	}
 	
+	/**
+	 * Retrieves an updated list of comments written by specified usernames.
+	 * <p>
+	 * Pulls all the comments from the users in case new comments were composed by them. 
+	 * Returns a new list of followed user's comments.
+	 * <p>
+	 * @param names	the author's whose comments to pull from the server
+	 * @return		an updated FollowedUserCommentsListModel containing any new comments by followed authors
+	 */
 	public FollowedUserCommentsListModel updated(ArrayList<String> names){
-		Server server = new Server(context);
-
-		FollowedUserCommentsListModel l = new FollowedUserCommentsListModel(context); 
 		
+		Server server = new Server(context);
+		FollowedUserCommentsListModel list = new FollowedUserCommentsListModel(context); 
+		
+		// pull comments from each followed user and add them to the list -SB
 		for(int i = 0; i < names.size(); i++){
-			ArrayList<CommentModel> list = server.pullFollowedUserComments(names.get(i));
-			l.addAll(list);
+			ArrayList<CommentModel> serverList = server.pullFollowedUserComments(names.get(i));
+			list.addAll(serverList);
 		}
 		
-		return l;
+		return list;
 	}
-
-
 }

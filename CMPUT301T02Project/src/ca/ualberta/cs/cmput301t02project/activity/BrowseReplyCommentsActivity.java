@@ -30,7 +30,7 @@ import ca.ualberta.cs.cmput301t02project.view.CommentListAdapter;
  * Called when the user selects a comment from BrowseTopLevelCommentsActivity or BrowseReplyCommentsActivity.
  * When the user selects a comment they are able to view its replies. 
  * Additionally, the action bar contains an option for editing the current comment if its author is the current User.
- * Current comment information including the current comment and a list of its replies is stored in User.
+ * Current comment information including the current comment and a list of its replies is stored on the server.
  */
 public class BrowseReplyCommentsActivity extends BrowseCommentsActivityAbstraction {
 

@@ -16,14 +16,12 @@ import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
 
 /**
- * Retrieved from eclass on April 3 2014.
+ * * Retrieved from eclass on April 3 2014. *
  * Provides custom base64 serialization / deserialization for Bitmaps.
  * Algorithm taken from: http://stackoverflow.com/questions/9224056/android-bitmap-to-base64-string
  * @author zjullion
  */
-public class BitmapJsonConverter implements JsonDeserializer<Bitmap>,
-		JsonSerializer<Bitmap> {
-
+public class BitmapJsonConverter implements JsonDeserializer<Bitmap>, JsonSerializer<Bitmap> {
 	
 	@Override
 	public JsonElement serialize(Bitmap src, Type typeOfSrc, JsonSerializationContext context) {
@@ -33,7 +31,6 @@ public class BitmapJsonConverter implements JsonDeserializer<Bitmap>,
 		String base64Encoded = Base64.encodeToString(stream.toByteArray(), Base64.NO_WRAP);
 		return new JsonPrimitive(base64Encoded);
 	}
-
 	
 	@Override
 	public Bitmap deserialize(JsonElement src, Type typeOfSrc, JsonDeserializationContext context) 

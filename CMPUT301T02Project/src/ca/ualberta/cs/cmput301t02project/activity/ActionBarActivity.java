@@ -1,10 +1,12 @@
 package ca.ualberta.cs.cmput301t02project.activity;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 import ca.ualberta.cs.cmput301t02project.R;
 
 /**
@@ -14,9 +16,29 @@ import ca.ualberta.cs.cmput301t02project.R;
  * setting up an action-bar menu and 
  * dealing with menu items being clicked.
  * Extended by all the Browse* activities, CreateComment, EditComment, and MainMenu activities.
+ * Also contains a method for displaying a popup message on the screen so that all activities can use it. 
  * Each Class that inherits ActionBarActivity should implement its own help page using the goToHelpPage method.
  */
 public class ActionBarActivity extends Activity {
+
+	/**
+	 * Prints a pop-up message on the screen.
+	 * <p>
+	 * The screen and message are specified in the parameters.
+	 * context determines which activity to display the message. 
+	 * An example input of the context parameter is "BrowseReplyCommentsActivity.this".
+	 * message specifies what to print. 
+	 * An example input of the message parameter is "No internet connection :(".
+	 * This method is called from the Browse* activities that extend BrowseCommentsActivityAbstraction.
+	 * <p>
+	 * @param context	the calling activity's context
+	 * @param message	the desired message to print
+	 */
+	public void showMessage(Context context, String message){
+		int duration = Toast.LENGTH_SHORT;
+		Toast toast = Toast.makeText(context, message, duration);
+		toast.show();
+	}
 	
 	/**
 	 * Redirects to the help page for that activity

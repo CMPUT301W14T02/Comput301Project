@@ -15,13 +15,11 @@ import com.google.gson.Gson;
 
 /**
  * Abstracts a CommentList that's stored on the disk.
- * <p>
  * With this, you can abstract the storage details and treat it like a Map.
  * All the CommentLists that are stored on the phone should inherit from this
  * and override the getPreferencesKey method.
  * This class uses the template pattern, in which the classes that inherit from it
  * must specify the PreferencesKey.
- * <p>
  */
 public abstract class StoredCommentListAbstraction extends Observable implements CommentListModel {
 
@@ -41,11 +39,16 @@ public abstract class StoredCommentListAbstraction extends Observable implements
 	 */
 	protected abstract String getPreferencesKey();
 	
+	/**
+	 * Gets a set of all (id, comment) pairs.
+	 * @return The set.
+	 */
 	private Set<Entry<String, CommentModel>> entrySet() {
 		Gson gson = CustomGson.getGson();
 		SharedPreferences storage = context.getSharedPreferences(getPreferencesKey(), 0);
 		Map<String, ?> map = storage.getAll();
 		Set<Entry<String, CommentModel>> entrySet = new HashSet<Entry<String, CommentModel>>();
+		
 		for(Entry<String, ?> entry : map.entrySet()) {
 			String key = entry.getKey();
 			String value = (String) entry.getValue();
@@ -58,7 +61,7 @@ public abstract class StoredCommentListAbstraction extends Observable implements
 
 	/**
 	 * Gets a CommentModel with the specified id, if it doesn't exists.
-	 * @param id The id.
+	 * @param id The id of a comment.
 	 * @return If the id is present, the comment, else, null.
 	 */
 	public CommentModel get(String id) {
@@ -72,7 +75,7 @@ public abstract class StoredCommentListAbstraction extends Observable implements
 
 	/**
 	 * Puts a CommentModel with the specified id as it's index.
-	 * @param id The id.
+	 * @param id The id of the CommentModel value.
 	 * @param value The CommentModel.
 	 * @return If the id already existed, return the comment that was there, else returns null.
 	 */
@@ -110,8 +113,8 @@ public abstract class StoredCommentListAbstraction extends Observable implements
 	}
 	
 	/**
-	 * Returns the list of comment
-	 * @return The list
+	 * Returns the list of comments
+	 * @return The list of comments
 	 */
 	public ArrayList<CommentModel> getList() {
 		ArrayList<CommentModel> list = new ArrayList<CommentModel>();
@@ -134,7 +137,7 @@ public abstract class StoredCommentListAbstraction extends Observable implements
 	}
 	
 	/**
-	 * Updates the stored list with whatever is newer on the Server
+	 * Updates the stored list with whatever is newer on the Server.
 	 */
 	public void refresh() {
 		ArrayList<String> ids = this.getIdList();

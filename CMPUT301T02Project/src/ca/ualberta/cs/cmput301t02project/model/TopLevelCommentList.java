@@ -5,6 +5,10 @@ import java.util.Observable;
 
 import android.content.Context;
 
+/**
+ * Contains all the top level comments.
+ * Includes a method for adding a new top level comment and retrieving an updated list of top level comments.
+ */
 public class TopLevelCommentList extends Observable implements CommentListModel{
 	
 	private Context context;
