@@ -14,6 +14,7 @@ import android.app.Activity;
 import android.location.Location;
 import android.test.ActivityInstrumentationTestCase2;
 import android.test.ViewAsserts;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 
 public class BrowseTopLevelCommentsActivityTest extends ActivityInstrumentationTestCase2<BrowseTopLevelCommentsActivity> {
@@ -38,9 +39,16 @@ public class BrowseTopLevelCommentsActivityTest extends ActivityInstrumentationT
 		CommentModel comment = initializeComment();
 		TopLevelCommentList comments = TopLevelCommentList.getInstance(activity.getApplicationContext());
 		comments.add(comment);
-		int size = comments.getList().size();
+		
 		ListView view = (ListView) getActivity().findViewById(R.id.commentListView);
-		assertEquals("text should be displayed", size, view.getAdapter().getCount());
+		ListAdapter adapter = view.getAdapter();
+		Boolean hasComment = false;
+		for (int i=0; i<adapter.getCount(); i++){
+			if (adapter.getItem(i).toString().contains(comment.getText())){
+				hasComment = true;
+			}	
+		}
+		assertTrue(hasComment);
 
 	}
 
@@ -59,7 +67,14 @@ public class BrowseTopLevelCommentsActivityTest extends ActivityInstrumentationT
 		comments.add(comment);
 		
 		ListView view = (ListView) getActivity().findViewById(R.id.commentListView);
-		assertTrue("username should be displayed", view.getAdapter().getItem(0).toString().contains(comment.getUsername()));
+		ListAdapter adapter = view.getAdapter();
+		Boolean hasUsername = false;
+		for (int i=0; i<adapter.getCount(); i++){
+			if (adapter.getItem(i).toString().contains(comment.getUsername())){
+				hasUsername = true;
+			}	
+		}
+		assertTrue(hasUsername);
 
 	}
 	 //NEED TO FIX, DONT KNOW HOW TO TEST CACHE -KW
