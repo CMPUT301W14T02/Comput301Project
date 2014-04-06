@@ -90,7 +90,6 @@ public class CommentModel {
 
 
 	/**
-	 * POSSIBLE DEAD CODE.
 	 * Returns a string that represents the comment.
 	 * @return The string representing a comment
 	 */
@@ -182,114 +181,58 @@ public class CommentModel {
 	 * GETTERS AND SETTERS LISTED BELOW
 	 */
 	
-	/**
-	 * Gets the comment id.
-	 * @return The comment id
-	 */
 	public String getId() {
 		return id;
 	}
 
-	/**
-	 * Sets the comment id.
-	 * @param id The comment id
-	 */
 	public void setId(String id) {
 		this.id = id;
 	}
 
-	/**
-	 * Gets the comment date.
-	 * @return The date
-	 */
 	public Date getDate() {
 		return date;
 	}
 	
-	/**
-	 * Sets the comment date.
-	 * @param date	The date
-	 */
 	public void setDate(Date date) {
 		this.date = date;
 	}
 
-	/**
-	 * Gets the comment location.
-	 * @return The location
-	 */
 	public Location getLocation() {
 		return location;
 	}
 	
-	/**
-	 * Sets the comment location.
-	 * @param location	The location
-	 */
 	public void setLocation(Location location) {
 		this.location = location;
 	}
 
-	/**
-	 * Gets the comment body text.
-	 * @return The text
-	 */
 	public String getText() {
 		return text;
 	}
 
-	/**
-	 * Sets the comment body text.
-	 * @param text	The text
-	 */
 	public void setText(String text) {
 		this.text = text;
 	}
 
-	/**
-	 * Gets the comment picture.
-	 * @return The picture
-	 */
 	public Bitmap getPicture() {
 		return this.picture;
 	}
 
-	/**
-	 * Sets the comment picture.
-	 * @param image	the picture
-	 */
 	public void setPicture(Bitmap image) {
 		this.picture = image;
 	}
 
-	/**
-	 * Gets the comment rating.
-	 * @return The rating
-	 */
 	public int getRating() {
 		return rating;
 	}
 
-	/**
-	 * Sets the comment rating.
-	 * @param rating	The rating
-	 */
 	public void setRating(int rating) {
-
+		this.rating = rating;
 	}
 
-	/**
-	 * Gets the comment author's username.
-	 * @return The username
-	 */
 	public String getUsername() {
 		return username;
 	}
 
-	/**
-	 * Sets the comment author's username.
-	 * @param username	The username
-	 */
 	public void setUsername(String username) {
 		this.username = username;
 	}
