@@ -76,46 +76,6 @@ public class User {
 		}
 		return user;
 	}
-
-	/**
-	 * Updates the username for a User.
-	 * <p>
-	 * Setter that is not used in this app.
-	 * <p>
-	 * @param username	The username for the User
-	 */
-	public void setName(String username) {
-		this.username = username.toLowerCase();
-	}
-	
-	/**
-	 * Returns the username of a User.
-	 * <p>
-	 * Username is used to identify a User. 
-	 * Username can be checked against a list of all users (UserList) to see if the user already exists. 
-	 * If the username already exists, the user's previous data can be retrieved.
-	 * Username is displayed next to a user's comment in all of the Browse __ Activities. 
-	 * Example of a username: the string "Bob".
-	 * <p>
-	 * @return Username of the User
-	 */
-	public String getName() {
-		return username;
-	}
-	
-	/**
-	 * Returns a list of comments composed by a User. 
-	 * <p>
-	 * The user's comments (CommentModels) are stored in a MyCommentListModel.
-	 * The user's comments are retrieved in the 
-	 * EditCommentActivity (in order to be edited) and BrowseMyCommentsActivity (in order to be displayed).
-	 * <p>
-	 * @return	List of comments that the User posted
-	 * @see MyCommentListModel	Example of a MyCommentListModel
-	 */
-	public MyCommentsListModel getMyComments() {
-		return myComments;
-	}
 	
 	/**
 	 * Adds a comment to the user's list of their own comments and stores the updated user information on the server.
@@ -165,22 +125,6 @@ public class User {
 	/*
 	 * GETTERS AND SETTERS BELOW
 	 */
-	public FavoritesListModel getFavorites(){
-		return favorites;
-	}
-	
-	public RepliesToFavsListModel getRepliesToFavs() {
-		return repliesToFavs;
-	}
-	
-	public ArrayList<String> getMyCommentIds() {
-		return myCommentsIds;
-	}
-	
-	public ArrayList<String> getFavoritesCommentIds() {
-		return favorites.getIdList();
-	}
-	
 	public void setId(String id) {
 		this.id = id;
 	}
@@ -189,9 +133,53 @@ public class User {
 		return id;
 	}
 	
+	public void setName(String username) {
+		this.username = username.toLowerCase();
+	}
+	
+	public String getName() {
+		return username;
+	}
+	
 	public void setMyCommentIds(ArrayList<String> myCommentsIds) {
 		this.myCommentsIds = myCommentsIds;
 	}
+	
+	public ArrayList<String> getMyCommentIds() {
+		return myCommentsIds;
+	}
+	
+	public void setMyComments(MyCommentsListModel myComments) {
+		this.myComments = myComments;
+	}
+	
+	public MyCommentsListModel getMyComments() {
+		return myComments;
+	}
+	
+	public void setFavorites(FavoritesListModel favorites){
+		this.favorites = favorites;
+	}
+	
+	public FavoritesListModel getFavorites(){
+		return favorites;
+	}
+	
+	public void setRepliesToFavs(RepliesToFavsListModel repliesToFavs){
+		this.repliesToFavs = repliesToFavs;
+	}
+	
+	public RepliesToFavsListModel getRepliesToFavs() {
+		return repliesToFavs;
+	}
+	
+	public ArrayList<String> getFavoritesCommentIds() {
+		return favorites.getIdList();
+	}
+
+
+	
+
 	
 	/**
 	 * Pull and return new comments from followed users on the server.
