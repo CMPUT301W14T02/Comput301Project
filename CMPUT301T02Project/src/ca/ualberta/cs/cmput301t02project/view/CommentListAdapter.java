@@ -3,9 +3,6 @@ package ca.ualberta.cs.cmput301t02project.view;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.Locale;
-import java.util.Observable;
-import java.util.Observer;
 
 import android.content.Context;
 import android.location.Location;
@@ -24,9 +21,8 @@ import ca.ualberta.cs.cmput301t02project.model.GPSLocation;
  * and is called on by either an activity, to change sorting method, or by its model,
  * to update the view and/or resort the list due to changes to the model.
  */
-public class CommentListAdapter extends ArrayAdapter<CommentModel> implements Observer {
+public class CommentListAdapter extends ArrayAdapter<CommentModel> implements SView<CommentListModel> {
 
-	private CommentListModel model;
 	private String sortMethod = "Default";
 	private Comparator<CommentModel> sortByDate;
 	private Comparator<CommentModel> sortByLocation;
@@ -51,7 +47,6 @@ public class CommentListAdapter extends ArrayAdapter<CommentModel> implements Ob
 	 */
 	public CommentListAdapter(Context context, int resource, CommentListModel model) {
 		super(context, resource, model.getList());
-		this.model = model;
 		this.list = model.getList();
 		sortByDate = new Comparator<CommentModel>() {
 			public int compare(CommentModel a, CommentModel b) {
@@ -133,14 +128,10 @@ public class CommentListAdapter extends ArrayAdapter<CommentModel> implements Ob
 	}
 	
 	@Override
-	public void notifyDataSetChanged() {
+	public void update(CommentListModel model) {
 		this.list = model.getList();
 		this.sortList();
-	}
-	
-	@Override
-	public void update(Observable o, Object data) {
-		this.notifyDataSetChanged();
+		super.notifyDataSetChanged();
 	}
 	
 	/**
@@ -149,26 +140,6 @@ public class CommentListAdapter extends ArrayAdapter<CommentModel> implements Ob
 	 */
 	public String getMethod() {
 		return sortMethod;
-	}
-	
-	/**
-	 * Sets the model that this adapter is displaying.
-	 * <p>
-	 * This allows the current list within the model to be accessed by the 
-	 * adapter for sorting purposes.
-	 * <p>
-	 * @param model Sets model for adapter instance
-	 */
-	public void setModel(CommentListModel model) {
-		this.model = model;
-	}
-	
-	/**
-	 * Returns the current model that the adapter is displaying.
-	 * @return Model set for adapter instance
-	 */
-	public CommentListModel getModel() {
-		return model;
 	}
 	
 	/**
@@ -323,7 +294,6 @@ public class CommentListAdapter extends ArrayAdapter<CommentModel> implements Ob
 			} 
 			else if (sortMethod.equals("Picture")) {
 				Collections.sort(list, sortByPicture);
-
 			} 
 			else if (sortMethod.equals("Location")) {
 				Collections.sort(list, sortByLocation);
@@ -359,8 +329,7 @@ public class CommentListAdapter extends ArrayAdapter<CommentModel> implements Ob
 		
 		CommentModel comment = this.getItem(position);
 		
-		String location = String.format(Locale.getDefault(), "%.4f,%.4f",
-				comment.getLocation().getLatitude(), comment.getLocation().getLongitude());
+		//String location = String.format(Locale.getDefault(), "%.4f,%.4f",	comment.getLocation().getLatitude(), comment.getLocation().getLongitude());
 		
 		String date = comment.getDate().toString();
 		
@@ -387,6 +356,5 @@ public class CommentListAdapter extends ArrayAdapter<CommentModel> implements Ob
 	public void setOtherLocation(Location otherLocation) {
 		this.otherLocation = otherLocation;
 	}
-	
 	
 }

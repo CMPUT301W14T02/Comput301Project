@@ -10,7 +10,6 @@ import android.widget.ListView;
 import ca.ualberta.cs.cmput301t02project.R;
 import ca.ualberta.cs.cmput301t02project.model.CommentModel;
 import ca.ualberta.cs.cmput301t02project.model.TopLevelCommentList;
-import ca.ualberta.cs.cmput301t02project.view.CommentListAdapter;
 
 /**
  * Displays comments top level comments (aka. comments with no parents, comments that are not replies to anything). 
@@ -31,13 +30,10 @@ public class BrowseTopLevelCommentsActivity extends BrowseCommentsActivityAbstra
 		
 		// set up the screen display -SB
 		setContentView(R.layout.activity_top_level_list);
-		model = TopLevelCommentList.getInstance(getApplicationContext());
+		createSpinner();
 		listView = (ListView) findViewById(R.id.commentListView);
-		
-		// create the sortBy menu and set up the adapter, inherited from BrowseCommentsActivity -SB
-		setupPage();
-		
-		model.addObserver(adapter);
+		model = TopLevelCommentList.getInstance(getApplicationContext());
+		super.initializeView(model);
 		
 		// actions to take when a comment is selected -SB 
 		listView.setOnItemClickListener(new OnItemClickListener() {
@@ -56,19 +52,9 @@ public class BrowseTopLevelCommentsActivity extends BrowseCommentsActivityAbstra
 	}
 	
 	@Override
-	public void onResume() {
-		super.onResume();
-		
-		// update the view if the model has changed -SB
-		adapter.notifyDataSetChanged();
-	}
-	
-	@Override
-	public CommentListAdapter initializeAdapter(){
-		
-		// return the adapter for this class -SB
-		this.adapter = new CommentListAdapter(this, R.layout.list_item, model);
-		return adapter;
+	protected void onResume() {
+	    super.onResume();
+	    model.refresh();
 	}
 
 	@Override

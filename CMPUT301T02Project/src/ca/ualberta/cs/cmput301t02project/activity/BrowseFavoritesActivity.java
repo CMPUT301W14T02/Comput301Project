@@ -11,7 +11,6 @@ import ca.ualberta.cs.cmput301t02project.R;
 import ca.ualberta.cs.cmput301t02project.model.CommentModel;
 import ca.ualberta.cs.cmput301t02project.model.FavoritesListModel;
 import ca.ualberta.cs.cmput301t02project.model.User;
-import ca.ualberta.cs.cmput301t02project.view.CommentListAdapter;
 
 /**
  * Displays the favorited comments of the current user.
@@ -29,11 +28,10 @@ public class BrowseFavoritesActivity extends BrowseCommentsActivityAbstraction {
 		
 		// set up the screen display -SB
 		setContentView(R.layout.activity_favorites_list);
+		createSpinner();
 		listView = (ListView) findViewById(R.id.commentListView);
 		model = User.getUser().getFavorites();
-
-		// create the sortBy menu and set up the adapter, inherited from BrowseCommentsActivity -SB
-		setupPage();
+		super.initializeView(model);
 		
 		// when a comment is selected show its replies -SB
 		listView.setOnItemClickListener(new OnItemClickListener() {
@@ -50,22 +48,11 @@ public class BrowseFavoritesActivity extends BrowseCommentsActivityAbstraction {
 			}
 		});
 	}
-
+	
 	@Override
 	public void onResume() {
 		super.onResume();
-		
-		// update the view if the model has changed -SB
 		model.refresh();
-		adapter.notifyDataSetChanged();
-	}
-	
-	@Override
-	public CommentListAdapter initializeAdapter(){
-		
-		// return the adapter for this class -SB
-		this.adapter = new CommentListAdapter(this, R.layout.list_item, model);
-		return adapter;
 	}
 	
 	@Override
