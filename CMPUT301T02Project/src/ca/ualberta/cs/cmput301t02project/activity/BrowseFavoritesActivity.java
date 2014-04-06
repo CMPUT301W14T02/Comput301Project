@@ -12,11 +12,10 @@ import ca.ualberta.cs.cmput301t02project.model.CommentModel;
 import ca.ualberta.cs.cmput301t02project.model.FavoritesListModel;
 import ca.ualberta.cs.cmput301t02project.model.User;
 import ca.ualberta.cs.cmput301t02project.view.CommentListAdapter;
-import ca.ualberta.cs.cmput301t02project.view.CommentListAdapter;
 
 /**
  * Displays the favorited comments of the current user.
- * Called when the user clicks the "Favorites" button on the main menu.
+ * Called when the user selects the "Favorites" button on the main menu.
  * When the user selects a comment its replies are shown.
  * Current user information including their favorites list is stored in User.
  */
@@ -28,11 +27,12 @@ public class BrowseFavoritesActivity extends BrowseCommentsActivityAbstraction {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
-		// set up the sreen display -SB
+		// set up the screen display -SB
 		setContentView(R.layout.activity_favorites_list);
 		listView = (ListView) findViewById(R.id.commentListView);
 		model = User.getUser().getFavorites();
 
+		// create the sortBy menu and set up the adapter, inherited from BrowseCommentsActivity -SB
 		setupPage();
 		
 		// when a comment is selected show its replies -SB
