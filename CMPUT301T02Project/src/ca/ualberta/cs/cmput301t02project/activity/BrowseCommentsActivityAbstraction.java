@@ -118,7 +118,7 @@ public abstract class BrowseCommentsActivityAbstraction extends ActionBarActivit
 			startActivityForResult(intent, GET_COORDINATES);
 		} 
 		else if (selected.equals("Faves")) {
-			adapter.sortByRanking();
+			adapter.sortByFaves();
 		} 
 		else if (selected.equals("Default")) {
 			adapter.sortByDefault();

@@ -264,7 +264,7 @@ public class CommentListAdapterAbstractionTest extends ActivityInstrumentationTe
 		inOrderComments.setAdapter(adapter2);
 		adapter1.setModel(outOfOrderComments);
 		adapter2.setModel(inOrderComments);
-		adapter1.sortByRanking();
+		adapter1.sortByFaves();
 		
 		
 		assertEquals("First items should be in same place", adapter1.getItem(0), adapter2.getItem(0));
