@@ -5,6 +5,10 @@ import java.util.Observable;
 
 import android.content.Context;
 
+/**
+ * Contains the replies to a comment.
+ * Includes a method for adding a new reply and retrieving an updated list of replies.
+ */
 public class ReplyList extends Observable implements CommentListModel {
 
 	private Context context;

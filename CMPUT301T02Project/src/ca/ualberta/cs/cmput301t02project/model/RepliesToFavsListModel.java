@@ -4,6 +4,10 @@ import java.util.ArrayList;
 
 import android.content.Context;
 
+/**
+ * Contains the replies to the favorited comments of a User.
+ * Includes a method for retrieving an ArrayList of replies.
+ */
 public class RepliesToFavsListModel extends StoredCommentListAbstraction {
 
 	private static RepliesToFavsListModel instance;
@@ -28,9 +32,12 @@ public class RepliesToFavsListModel extends StoredCommentListAbstraction {
 	@Override
 	public ArrayList<CommentModel> getList() {
 		ArrayList<CommentModel> list = new ArrayList<CommentModel>();
+		
 		for(String id: parent.getChildrenIds()) {
-			for (CommentModel comment: super.getList()){
-				if (comment.getId().contentEquals(id)){
+			
+			for (CommentModel comment: super.getList()) {
+				
+				if (comment.getId().contentEquals(id)) {
 					list.add(comment);
 				}
 			}

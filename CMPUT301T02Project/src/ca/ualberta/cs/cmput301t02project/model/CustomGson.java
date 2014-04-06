@@ -8,8 +8,8 @@ import com.google.gson.GsonBuilder;
 /**
  * Provides a Gson object with a custom serializer / desserializer for Bitmaps
  * Adapted from:
- * https://github.com/zjullion/PicPosterComplete/blob/master/src/ca/ualberta/cs/picposter/network/ElasticSearchOperations.java
- * April 3 2014
+ * * https://github.com/zjullion/PicPosterComplete/blob/master/src/ca/ualberta/cs/picposter/network/ElasticSearchOperations.java
+ * April 3 2014 *
  */
 public class CustomGson {
 
@@ -34,5 +34,4 @@ public class CustomGson {
 		}
 		return gson;
 	}
-	
 }

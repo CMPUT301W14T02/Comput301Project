@@ -2,6 +2,9 @@ package ca.ualberta.cs.cmput301t02project.model;
 
 import android.content.Context;
 
+/**
+ * Contains comments written by a specific user.
+ */
 public class MyCommentsListModel extends StoredCommentListAbstraction {
 
 	private static MyCommentsListModel instance;

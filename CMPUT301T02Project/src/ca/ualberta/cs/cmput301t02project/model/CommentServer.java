@@ -13,6 +13,13 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import ca.ualberta.cs.cmput301t02project.model.Server.ObjectWrapper;
 
+/**
+ * Used to deal with storing comments on the server.
+ * Includes methods for:
+ * pulling specific comments from the server, 
+ * posting specific comments to the server, 
+ * and checking if the internet is connected.
+ */
 public class CommentServer {
 
 	private JestClient client;
