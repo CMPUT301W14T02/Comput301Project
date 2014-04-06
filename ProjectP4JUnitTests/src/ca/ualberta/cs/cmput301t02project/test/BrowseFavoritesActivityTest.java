@@ -2,6 +2,7 @@ package ca.ualberta.cs.cmput301t02project.test;
 
 import java.util.ArrayList;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.location.Location;
@@ -10,11 +11,14 @@ import android.test.ViewAsserts;
 import android.widget.ListView;
 import ca.ualberta.cs.cmput301t02project.R;
 import ca.ualberta.cs.cmput301t02project.activity.BrowseFavoritesActivity;
+import ca.ualberta.cs.cmput301t02project.activity.CreateCommentActivity;
 import ca.ualberta.cs.cmput301t02project.activity.LoginActivity;
+import ca.ualberta.cs.cmput301t02project.controller.TopLevelListController;
 import ca.ualberta.cs.cmput301t02project.model.CommentModel;
 import ca.ualberta.cs.cmput301t02project.model.CommentServer;
 import ca.ualberta.cs.cmput301t02project.model.FavoritesListModel;
 import ca.ualberta.cs.cmput301t02project.model.Server;
+import ca.ualberta.cs.cmput301t02project.model.TopLevelCommentList;
 import ca.ualberta.cs.cmput301t02project.model.User;
 import ca.ualberta.cs.cmput301t02project.view.CommentListAdapter;
 
@@ -38,41 +42,11 @@ public class BrowseFavoritesActivityTest extends ActivityInstrumentationTestCase
 		Location currentLocation;
 		currentLocation = new Location(loc);
 		CommentModel comment = new CommentModel("sasha", currentLocation,"username");
+		comment.setId("for testing, no need to push to server");
 		
-		comment.setId("test");
-	
 		return comment;
 	}
-/*
-	public void testDisplayFavorites() {
 
-		CommentModel comment = initializeComment();
-		CommentListModel favoriteComments = new CommentListModel();
-		favoriteComments = ProjectApplication.getInstance().getUser().getFavorites();
-		favoriteComments.add(comment);
-
-		ListView view = (ListView) getActivity().findViewById(R.id.commentListView);
-		assertEquals("text should be displayed", comment.toString(), view.getAdapter().getItem(0).toString());
-
-	}
-
-	public void testVisibleListView() {
-
-		// Throwing an error, not failure -KW
-		
-	}
-*/
-	/* Test for use case 21 */
-	/*public void testDisplayUsername() {
-		User temp = new User("username");
-		//temp.login(temp.getName(), getActivity().getApplicationContext());
-		CommentModel comment = initializeComment();
-		ListView view = (ListView) getActivity().findViewById(R.id.commentListView);
-		assertTrue("username should be displayed", view.getAdapter().getItem(0).toString().contains(comment.getUsername()));
-
-	}
-
-*/
 	/* Test for Use Case 11 */
 	public void testVisibleListView(){
 		
@@ -85,57 +59,18 @@ public class BrowseFavoritesActivityTest extends ActivityInstrumentationTestCase
 	/* Test for Use Case 11 */
 	public void testAddFavorite(){
 		
-		// Add favorite comment with no replies
+		BrowseFavoritesActivity activity = getActivity();
 		CommentModel comment = initializeComment();
-		//ArrayList<CommentModel> replies = null;
-		//User.getUser().addMyComment(comment, context);
 		
-		ArrayList<CommentModel> replies = new ArrayList<CommentModel>();
-		replies.add(comment);
-		User.getUser().addFavoriteComment(comment, replies);
-		comment.setId("test 2");
-		User.getUser().addFavoriteComment(comment, replies);
-		User.getUser().getFavorites().add(comment);
-		//assertNotNull(comment.getId());
-		//User.getUser().addFavoriteComment(comment, replies);
+		// manually create FavoritesListModel and add one comment -SB
+		FavoritesListModel favorites = new FavoritesListModel(activity);
+		favorites.add(comment);
+		User.getUser().setFavorites(favorites);
 		
-		//ListView view = (ListView) getActivity().findViewById(R.id.commentListView);
-		assertEquals("user should have a fav", 1, User.getUser().getFavoritesCommentIds().size());
-		//assertEquals("a new comment should be displayed", view.getAdapter().getCount(), 1);
-		//assertEquals("text should be displayed", "aksdjf", view.getAdapter().getItem(0).toString());
-		
+		ListView view = (ListView) activity.findViewById(R.id.commentListView);
+		assertEquals("fave should be added", User.getUser().getFavorites().getList().size(), 1);
 	}
 
-	/* test for use case 12 */
-	public void testReadFavorites() {
-		CommentModel comment = initializeComment();
-		User user = User.getUser();
-		ArrayList<CommentModel> replies = new ArrayList<CommentModel>();
-
-		assertNotNull("Favorites list was null", replies);
-		assertNotNull("Comment was null", comment);
-		assertNotNull("User was null", user);
-		
-		Intent intent = new Intent((getActivity().getApplicationContext()), LoginActivity.class);
-		setActivityIntent(intent);
-		
-		Context context = getActivity().getApplicationContext();
-		assertNotNull("Context was null", context);
-		assertNotNull(user.getFavorites());
-		
-		ListView list = (ListView) getActivity().findViewById(R.id.commentListView);
-		
-		ViewAsserts.assertOnScreen(getActivity().getWindow().getDecorView(), list);
-		
-		// add fave with no replies -SB
-
-		
-		//user.addFavoriteComment(comment, replies);
-		//CommentModel newComment = user.getFavorites().get(0);
-		//assertEquals("Comments should be the same",comment, newComment);
-		//reset to BrowseFavoritesActivityIntent
-		setActivityIntent(null);
-	}
 	
 	/*
 	 * TESTS FOR SORTING
