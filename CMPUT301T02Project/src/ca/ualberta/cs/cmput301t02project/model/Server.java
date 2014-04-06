@@ -102,7 +102,7 @@ public class Server {
 	 * @return Whether there is connection available.
 	 */
 	public boolean isNetworkAvailable() {
-		    return commentServer.isNetworkAvailable();
+		return commentServer.isNetworkAvailable();
 	}
 	
 	/**
