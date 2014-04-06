@@ -74,6 +74,109 @@ public class CommentModel {
 	}
 	
 	/**
+	 * Determines whether the comment has a picture or not.
+	 * <p>
+	 * Returns false for no picture attached, 
+	 * returns true for a picture attached.
+	 * <p>
+	 * @return true if the comment has a picture, false if not
+	 */
+	public Boolean hasPicture(){
+		if (picture == null){
+			return false;
+		}
+		return true;
+	}
+
+
+	/**
+	 * POSSIBLE DEAD CODE.
+	 * Returns a string that represents the comment.
+	 * @return The string representing a comment
+	 */
+	@Override
+	public String toString() {
+
+		// If statement to fix grammar issue of a singular reply vs replies plural -SB
+		if (childrenIds.size() == 1) {
+			return text + " (by " + username + ", 1 reply)";
+		} 
+		else {
+			return text + " (by " + username + ", " + childrenIds.size() + " replies)";
+		}
+	}
+
+	/**
+	 * Determines whether a comment is a top level comment or a reply.
+	 * @return	true if it is top level, else false
+	 */
+	public boolean isTopLevelComment() {
+		return topLevelComment;
+	}
+
+	
+	/**
+	 * Add a commentId to the array list of childrenIds. 
+	 * <p>
+	 * Called when adding a reply to a comment. 
+	 * <p>
+	 * @param id	id string to add
+	 */
+	public void addChildId(String id) {
+		if(id == null) {
+			throw new IllegalArgumentException("A comment can't have a children whose id is null");
+		}
+		this.childrenIds.add(id);
+	}
+	
+	/**
+	 * Increases the rating of a comment by one.
+	 * <p>
+	 * Called when a comment is added to a user's favorites.
+	 * <p>
+	 */
+	public void incrementRating() {
+		this.rating++;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}	
+		if (obj == null) {
+			return false;
+		}	
+		if (getClass() != obj.getClass()){
+			return false;
+		}
+			
+		CommentModel other = (CommentModel) obj;
+		
+		if (text == null) {
+			if (other.text != null){
+				return false;
+			}	
+		} 
+		else if (!text.equals(other.text)) {
+			return false;
+		}	
+		if (username == null) {
+			if (other.username != null) {
+				return false;
+			}	
+		} 
+		else if (!username.equals(other.username)) {
+			return false;
+		}
+		return true;
+	}	
+	
+	/* 
+	 * GETTERS AND SETTERS LISTED BELOW
+	 */
+	
+	/**
 	 * Gets the comment id.
 	 * @return The comment id
 	 */
@@ -152,21 +255,6 @@ public class CommentModel {
 	public void setPicture(Bitmap image) {
 		this.picture = image;
 	}
-	
-	/**
-	 * Determines whether the comment has a picture or not.
-	 * <p>
-	 * Returns false for no picture attached, 
-	 * returns true for a picture attached.
-	 * <p>
-	 * @return true if the comment has a picture, false if not
-	 */
-	public Boolean hasPicture(){
-		if (picture == null){
-			return false;
-		}
-		return true;
-	}
 
 	/**
 	 * Gets the comment rating.
@@ -199,32 +287,7 @@ public class CommentModel {
 	public void setUsername(String username) {
 		this.username = username;
 	}
-
-	/**
-	 * POSSIBLE DEAD CODE.
-	 * Returns a string that represents the comment.
-	 * @return The string representing a comment
-	 */
-	@Override
-	public String toString() {
-
-		// If statement to fix grammar issue of a singular reply vs replies plural -SB
-		if (childrenIds.size() == 1) {
-			return text + " (by " + username + ", 1 reply)";
-		} 
-		else {
-			return text + " (by " + username + ", " + childrenIds.size() + " replies)";
-		}
-	}
-
-	/**
-	 * Determines whether a comment is a top level comment or a reply.
-	 * @return	true if it is top level, else false
-	 */
-	public boolean isTopLevelComment() {
-		return topLevelComment;
-	}
-
+	
 	public void setTopLevelComment(boolean topLevelComment) {
 		this.topLevelComment = topLevelComment;
 	}
@@ -236,37 +299,7 @@ public class CommentModel {
 	public void setChildrenIds(ArrayList<String> childrenIds) {
 		this.childrenIds = childrenIds;
 	}
-	
-	public void addChildId(String id) {
-		if(id == null) {
-			throw new IllegalArgumentException("A comment can't have a children whose id is null");
-		}
-		this.childrenIds.add(id);
-	}
-	
-	public void incrementRating() {
-		this.rating++;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		CommentModel other = (CommentModel) obj;
-		if (text == null) {
-			if (other.text != null)
-				return false;
-		} else if (!text.equals(other.text))
-			return false;
-		if (username == null) {
-			if (other.username != null)
-				return false;
-		} else if (!username.equals(other.username))
-			return false;
-		return true;
-	}	
 }
+
+
+
