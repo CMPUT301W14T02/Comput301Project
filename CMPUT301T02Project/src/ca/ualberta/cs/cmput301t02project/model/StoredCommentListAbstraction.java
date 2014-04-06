@@ -39,6 +39,10 @@ public abstract class StoredCommentListAbstraction extends Observable implements
 	 */
 	protected abstract String getPreferencesKey();
 	
+	/**
+	 * Gets a set of all (id, comment) pairs.
+	 * @return The set.
+	 */
 	private Set<Entry<String, CommentModel>> entrySet() {
 		Gson gson = CustomGson.getGson();
 		SharedPreferences storage = context.getSharedPreferences(getPreferencesKey(), 0);

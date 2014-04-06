@@ -139,6 +139,12 @@ public class CommentModel {
 		this.rating++;
 	}
 
+	/**
+	 * Tests two comments for equality.
+	 * <p>
+	 * Only the username and and the text are used for comparison.
+	 * @param obj The CommentModel to be compared to.
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {
