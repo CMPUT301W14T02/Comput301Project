@@ -13,7 +13,6 @@ import ca.ualberta.cs.cmput301t02project.model.MyCommentsListModel;
 import ca.ualberta.cs.cmput301t02project.model.Server;
 import ca.ualberta.cs.cmput301t02project.model.User;
 import ca.ualberta.cs.cmput301t02project.view.CommentListAdapter;
-import ca.ualberta.cs.cmput301t02project.view.CommentListAdapter;
 
 /**
  * Displays comments that the current user authored. 
