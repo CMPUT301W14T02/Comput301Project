@@ -8,10 +8,21 @@ import com.google.gson.Gson;
 import com.searchly.jestdroid.DroidClientConfig;
 import com.searchly.jestdroid.JestClientFactory;
 
+/**
+ * Used to deal with storing objects (comments or users)
+ * on the server by delegating to CommentServer or
+ * UserServer
+ * Includes methods for:
+ * pulling specific comments or users from the server, 
+ * posting specific comments or users to the server, 
+ * and checking if the internet is connected.
+ */
+
 public class Server {
 	private CommentServer commentServer = new CommentServer();
 	private UserServer userServer = new UserServer();
 	private static final String serverUri = "http://cmput301.softwareprocess.es:8080/";
+	
 	public Server(Context context) {
 		Gson gson = CustomGson.getGson();
 		DroidClientConfig clientConfig = new DroidClientConfig.Builder(serverUri).gson(gson).multiThreaded(true).build();
