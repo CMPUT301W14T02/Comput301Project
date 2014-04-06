@@ -1,7 +1,6 @@
 package ca.ualberta.cs.cmput301t02project.activity;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -17,12 +16,15 @@ import ca.ualberta.cs.cmput301t02project.model.User;
  * Allows a user to log in to the app with a selected username.
  * If their username already exists, the previous data associated with that user is restored.
  * If their username does not already exist, it is created.
+ * Called when the app starts or when "Logout" is selected from any class that extends ActionBarActivity.
  */
 public class LoginActivity extends Activity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		
+		// set up the screen display -SB		
 		setContentView(R.layout.activity_login);
 	}
 
@@ -48,7 +50,8 @@ public class LoginActivity extends Activity {
 	 * <p>
 	 * Sets the current username in User.
 	 * The current username is posted along with any comments the user makes. 
-	 * The user's information including old posted comments and favorite comments can be restored after the user is set. 
+	 * The user's information including 
+	 * old posted comments, favorite comments, and followed users can be restored after the user is set. 
 	 * If an invalid username was entered, a message is printed to the screen.
 	 * <p>
 	 * @param username	The user's username input
@@ -91,7 +94,6 @@ public class LoginActivity extends Activity {
 		return !username.equals("");
 	}
 	
-	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		
@@ -113,7 +115,10 @@ public class LoginActivity extends Activity {
 	}
 	
 	/**
-	 * Redirects to the default help page
+	 * Redirects to the login help page.
+	 * <p>
+	 * Called when the "Help" menu item from the action bar is pressed.
+	 * <p>
 	 */
 	public void goToHelpPage(){
 		
@@ -122,5 +127,4 @@ public class LoginActivity extends Activity {
 				"https://rawgithub.com/CMPUT301W14T02/Comput301Project/master/Help%20Pages/login.html"));
 		startActivity(viewIntent);
 	}
-	
 }
