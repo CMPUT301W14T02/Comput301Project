@@ -362,6 +362,8 @@ public class CommentListAdapter extends ArrayAdapter<CommentModel> implements Ob
 		String location = String.format(Locale.getDefault(), "%.4f,%.4f",
 				comment.getLocation().getLatitude(), comment.getLocation().getLongitude());
 		
+		String date = comment.getDate().toString();
+		
 		int repliesCount = comment.getChildrenIds().size();
 		int ratingCount = comment.getRating();
 		
@@ -373,7 +375,7 @@ public class CommentListAdapter extends ArrayAdapter<CommentModel> implements Ob
 		String rating = Integer.toString(ratingCount) + " Faves";
 		replies += (repliesCount == 1) ? "reply" : "replies";
 		String text = comment.getText() + "\n(by " 
-				+ comment.getUsername() + " | " + location + " | " + replies + " | " + rating + hasPicture +')';
+				+ comment.getUsername() + " | " + date + " | " + replies + " | " + rating + hasPicture +')';
 		
 		((TextView)convertView).setText(text);
 		
