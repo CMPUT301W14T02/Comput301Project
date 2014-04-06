@@ -46,36 +46,7 @@ public class BrowseFavoritesActivityTest extends ActivityInstrumentationTestCase
 		
 		return comment;
 	}
-/*
-	public void testDisplayFavorites() {
 
-		CommentModel comment = initializeComment();
-		CommentListModel favoriteComments = new CommentListModel();
-		favoriteComments = ProjectApplication.getInstance().getUser().getFavorites();
-		favoriteComments.add(comment);
-
-		ListView view = (ListView) getActivity().findViewById(R.id.commentListView);
-		assertEquals("text should be displayed", comment.toString(), view.getAdapter().getItem(0).toString());
-
-	}
-
-	public void testVisibleListView() {
-
-		// Throwing an error, not failure -KW
-		
-	}
-*/
-	/* Test for use case 21 */
-	/*public void testDisplayUsername() {
-		User temp = new User("username");
-		//temp.login(temp.getName(), getActivity().getApplicationContext());
-		CommentModel comment = initializeComment();
-		ListView view = (ListView) getActivity().findViewById(R.id.commentListView);
-		assertTrue("username should be displayed", view.getAdapter().getItem(0).toString().contains(comment.getUsername()));
-
-	}
-
-*/
 	/* Test for Use Case 11 */
 	public void testVisibleListView(){
 		
@@ -98,39 +69,8 @@ public class BrowseFavoritesActivityTest extends ActivityInstrumentationTestCase
 		
 		ListView view = (ListView) activity.findViewById(R.id.commentListView);
 		assertEquals("fave should be added", User.getUser().getFavorites().getList().size(), 1);
-		//assertEquals("text should be displayed", 1, view.getAdapter().getCount());
 	}
 
-	/* test for use case 12 */
-	public void testReadFavorites() {
-		CommentModel comment = initializeComment();
-		User user = User.getUser();
-		ArrayList<CommentModel> replies = new ArrayList<CommentModel>();
-
-		assertNotNull("Favorites list was null", replies);
-		assertNotNull("Comment was null", comment);
-		assertNotNull("User was null", user);
-		
-		Intent intent = new Intent((getActivity().getApplicationContext()), LoginActivity.class);
-		setActivityIntent(intent);
-		
-		Context context = getActivity().getApplicationContext();
-		assertNotNull("Context was null", context);
-		assertNotNull(user.getFavorites());
-		
-		ListView list = (ListView) getActivity().findViewById(R.id.commentListView);
-		
-		ViewAsserts.assertOnScreen(getActivity().getWindow().getDecorView(), list);
-		
-		// add fave with no replies -SB
-
-		
-		//user.addFavoriteComment(comment, replies);
-		//CommentModel newComment = user.getFavorites().get(0);
-		//assertEquals("Comments should be the same",comment, newComment);
-		//reset to BrowseFavoritesActivityIntent
-		setActivityIntent(null);
-	}
 	
 	/*
 	 * TESTS FOR SORTING
