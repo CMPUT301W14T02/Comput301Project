@@ -82,9 +82,11 @@ public class BrowseTopLevelCommentsActivityTest extends ActivityInstrumentationT
 
 	/* Test for use case 19 */
 	public void testChangeLocation() {
-	    Location initial_loc = new Location("Location Initialization");
+	    Location initial_loc = new Location("");
 	    // Tester should disconnect from internet and move locations, then reconnect to internet
-	    Location final_loc = new Location("Location Initialization");
+	    Location final_loc = new Location("");
+	    final_loc.setLatitude(10);
+	    final_loc.setLongitude(10);
 	    boolean latEquals = false;
 	    boolean longEquals = false;
 	    if (initial_loc.getLatitude() == final_loc.getLatitude())
