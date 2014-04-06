@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import ca.ualberta.cs.cmput301t02project.R;
+import ca.ualberta.cs.cmput301t02project.model.GPSLocation;
 
 /**
  * An activity with the sole purpose of providing EditText boxes
@@ -34,9 +35,18 @@ public class EnterSearchCoordinatesActivity extends ActionBarActivity {
 			public void onClick(View v) {
 
 				// record the user's submission -SB
-				double lat = Double.valueOf(latitude.getText().toString());
-				double lon = Double.valueOf(longitude.getText().toString());
 				
+				double lat = 0;
+				double lon = 0;
+				
+				try {
+					lat = Double.valueOf(latitude.getText().toString());
+					lon = Double.valueOf(longitude.getText().toString());
+				} catch (NumberFormatException ex) {
+					// If the user doesn't enter anything, default to current location
+					lat = GPSLocation.getInstance().getLocation().getLatitude();
+					lon = GPSLocation.getInstance().getLocation().getLongitude();
+				}
 				// return user's entries to the previous activity
 				Intent intent = new Intent();
 				intent.putExtra("Other Location Lat", lat);
