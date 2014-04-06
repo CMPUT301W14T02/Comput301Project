@@ -10,6 +10,7 @@ import ca.ualberta.cs.cmput301t02project.model.CommentModel;
 import ca.ualberta.cs.cmput301t02project.model.GPSLocation;
 import ca.ualberta.cs.cmput301t02project.model.TopLevelCommentList;
 import ca.ualberta.cs.cmput301t02project.view.CommentListAdapter;
+import android.app.Activity;
 import android.location.Location;
 import android.test.ActivityInstrumentationTestCase2;
 import android.test.ViewAsserts;
@@ -33,12 +34,13 @@ public class BrowseTopLevelCommentsActivityTest extends ActivityInstrumentationT
 
 	/* Test for use case 4 */
 	public void testDisplayTopLevelComments() {
+		Activity activity = getActivity();
 		CommentModel comment = initializeComment();
-		TopLevelCommentList comments = TopLevelCommentList.getInstance(getInstrumentation().getContext());
+		TopLevelCommentList comments = TopLevelCommentList.getInstance(activity.getApplicationContext());
 		comments.add(comment);
-
+		int size = comments.getList().size();
 		ListView view = (ListView) getActivity().findViewById(R.id.commentListView);
-		assertEquals("text should be displayed", comment.toString(), view.getAdapter().getItem(0).toString());
+		assertEquals("text should be displayed", size, view.getAdapter().getCount());
 
 	}
 
@@ -53,7 +55,7 @@ public class BrowseTopLevelCommentsActivityTest extends ActivityInstrumentationT
 	/* Test for use case 21 */
 	public void testDisplayUsername() {
 		CommentModel comment = initializeComment();
-		TopLevelCommentList comments = TopLevelCommentList.getInstance(getInstrumentation().getContext());
+		TopLevelCommentList comments = TopLevelCommentList.getInstance(getActivity().getApplicationContext());
 		comments.add(comment);
 		
 		ListView view = (ListView) getActivity().findViewById(R.id.commentListView);
