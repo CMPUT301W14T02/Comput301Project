@@ -20,7 +20,6 @@ import ca.ualberta.cs.cmput301t02project.model.CommentModel;
 import ca.ualberta.cs.cmput301t02project.model.ReplyList;
 import ca.ualberta.cs.cmput301t02project.model.Server;
 import ca.ualberta.cs.cmput301t02project.model.User;
-import ca.ualberta.cs.cmput301t02project.view.CommentListAdapter;
 
 /**
  * Displays the current comment,
@@ -53,6 +52,7 @@ public class BrowseReplyCommentsActivity extends BrowseCommentsActivityAbstracti
 		
 		// set up the screen display -SB
 		setContentView(R.layout.activity_reply_list);
+		createSpinner();
 		listView = (ListView) findViewById(R.id.replyListView);
 		TextView selectedComment = (TextView) findViewById(R.id.selected_comment);
 		
@@ -75,11 +75,7 @@ public class BrowseReplyCommentsActivity extends BrowseCommentsActivityAbstracti
 		}
 		
 		model = new ReplyList(currentCommentId, this);
-		
-		// create the sortBy menu and set up the adapter, inherited from BrowseCommentsActivity -SB
-		setupPage();
-		
-		model.addObserver(adapter);
+		super.initializeView(model);
 		
 		// actions to take when the "Reply" button is pressed -SB
 		Button replyComment = (Button) findViewById(R.id.reply_button);
@@ -174,19 +170,8 @@ public class BrowseReplyCommentsActivity extends BrowseCommentsActivityAbstracti
 	@Override
 	public void onResume() {
 		super.onResume();
-		
-		// update the view if the model has changed -SB
-		adapter.notifyDataSetChanged();
+		model.refresh();
 	}
-	
-	@Override
-	public CommentListAdapter initializeAdapter() {
-		
-		// return the adapter for this class -SB
-		this.adapter = new CommentListAdapter(this, R.layout.list_item, model);
-		return adapter;
-	}
-	
 	
 	// override to select a different menu xml than the default to facilitate edit comment feature -SB
 	@Override
@@ -237,6 +222,8 @@ public class BrowseReplyCommentsActivity extends BrowseCommentsActivityAbstracti
 			startActivity(goToEditCommentActivity);
 		}
 	}
+	
+	
 
 	@Override
 	public void goToHelpPage(){

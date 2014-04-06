@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.Observable;
 import java.util.Set;
 
 import android.content.Context;
@@ -21,7 +20,7 @@ import com.google.gson.Gson;
  * This class uses the template pattern, in which the classes that inherit from it
  * must specify the PreferencesKey.
  */
-public abstract class StoredCommentListAbstraction extends Observable implements CommentListModel {
+public abstract class StoredCommentListAbstraction extends CommentListModel {
 
 	protected Context context;
 	
@@ -86,7 +85,7 @@ public abstract class StoredCommentListAbstraction extends Observable implements
 		String previousValueJson = storage.getString(id, null);
 		CommentModel previousValue = gson.fromJson(previousValueJson, CommentModel.class);
 		storage.edit().putString(id, v).commit();
-		notifyObservers();
+		notifyViews();
 		return previousValue;
 	}
 	
@@ -99,7 +98,7 @@ public abstract class StoredCommentListAbstraction extends Observable implements
 			throw  new IllegalArgumentException("Can't store a comment with null id");
 		}
 		this.put(comment.getId(), comment);
-		notifyObservers();
+		notifyViews();
 	}
 	
 	/**
@@ -109,7 +108,7 @@ public abstract class StoredCommentListAbstraction extends Observable implements
 	public void addAll(ArrayList<CommentModel> list) {
 		for(CommentModel comment:list)
 			this.put(comment.getId(), comment);
-		notifyObservers();
+		notifyViews();
 	}
 	
 	/**

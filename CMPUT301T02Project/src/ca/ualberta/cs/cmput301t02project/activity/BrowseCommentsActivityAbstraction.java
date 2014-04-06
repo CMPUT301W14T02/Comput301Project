@@ -2,7 +2,6 @@ package ca.ualberta.cs.cmput301t02project.activity;
 
 import java.util.ArrayList;
 
-import android.content.Context;
 import android.content.Intent;
 import android.location.Location;
 import android.view.View;
@@ -11,8 +10,8 @@ import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Spinner;
-import android.widget.Toast;
 import ca.ualberta.cs.cmput301t02project.R;
+import ca.ualberta.cs.cmput301t02project.model.CommentListModel;
 import ca.ualberta.cs.cmput301t02project.view.CommentListAdapter;
 
 /**
@@ -23,36 +22,17 @@ import ca.ualberta.cs.cmput301t02project.view.CommentListAdapter;
  * Includes methods for 
  * displaying a drop-down menu of sorting options
  */
-public abstract class BrowseCommentsActivityAbstraction extends ActionBarActivity implements OnItemSelectedListener{
+public abstract class BrowseCommentsActivityAbstraction extends ActionBarActivity implements OnItemSelectedListener {
 	
 	// The adapter used by the class that extends BrowseCommentsActivityAbstraction -SB
 	protected CommentListAdapter adapter;
 	protected ListView listView;
-	static final int GET_COORDINATES = 0;
+	private static final int GET_COORDINATES = 0;
 	
-	/**
-	 * Adapter must be initialized in a class that extends BrowseCommentsActvityAbstraction so it can be specialized to the activity.
-	 * <p>
-	 * An adapter MUST be created and set up within any class that inherits BrowseCommentsActvityAbstraction.
-	 * <p> 
-	 * @return the adapter used by the class
-	 */
-	public abstract CommentListAdapter initializeAdapter();
-	
-	/**
-	 * Performs tasks to set up the activity including creating a sorting menu and initializing the adapter.
-	 * <p>
-	 * Sets up and displays a menu on the screen.
-	 * Initializes the adapter for the class that extends BrowseCommentsActivityAbstraction. 
-	 * Sets the adapter locally so actions can be performed if a menu item is selected
-	 * <p>
-	 */
-	public void setupPage(){
-		
-		// Create the menu -SB
-		createSpinner();
-		adapter = initializeAdapter();
+	protected void initializeView(CommentListModel model) {
+		this.adapter = new CommentListAdapter(this, R.layout.list_item, model);
 		listView.setAdapter(adapter);
+		model.addView(adapter);
 	}
 
 	/**
@@ -61,7 +41,7 @@ public abstract class BrowseCommentsActivityAbstraction extends ActionBarActivit
 	 * Called from onCreate().
 	 * <p>
 	 */
-	public void createSpinner(){
+	protected void createSpinner(){
 		
 		/* Based on:
 		 * www.androidhive.info/2012/04/android-spinner-dropdown-example/
@@ -69,7 +49,6 @@ public abstract class BrowseCommentsActivityAbstraction extends ActionBarActivit
 		 */
 		// Spinner element
 		Spinner spinner = (Spinner) findViewById(R.id.spinner);
-		
 		// Spinner click listener
 		spinner.setOnItemSelectedListener(this);
 

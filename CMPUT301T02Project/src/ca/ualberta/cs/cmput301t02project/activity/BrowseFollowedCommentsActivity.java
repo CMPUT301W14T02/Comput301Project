@@ -7,7 +7,6 @@ import android.widget.ListView;
 import ca.ualberta.cs.cmput301t02project.R;
 import ca.ualberta.cs.cmput301t02project.model.FollowedUserCommentsListModel;
 import ca.ualberta.cs.cmput301t02project.model.User;
-import ca.ualberta.cs.cmput301t02project.view.CommentListAdapter;
 
 /**
  * Displays all comments authored by the current user's followed users. 
@@ -24,28 +23,16 @@ public class BrowseFollowedCommentsActivity extends BrowseCommentsActivityAbstra
 		
 		// set up the screen display. uses the same layout as BrowseMyCommentsActivity -SB
 		setContentView(R.layout.activity_my_comments_list);
+		createSpinner();
 		listView = (ListView) findViewById(R.id.commentListView);
 		model = User.getUser().getFollowedUsers();
-		
-		// create the sortBy menu and set up the adapter, inherited from BrowseCommentsActivity -SB
-		setupPage();
+		super.initializeView(model);
 	}
 	
 	@Override
 	public void onResume() {
 		super.onResume();
-		
-		// update the view if the model has changed -SB
 		model.refresh();
-		adapter.notifyDataSetChanged();
-	}
-	
-	@Override
-	public CommentListAdapter initializeAdapter(){
-		
-		// return the adapter for this class -SB
-		this.adapter = new CommentListAdapter(this, R.layout.list_item, model);
-		return adapter;
 	}
 	
 	@Override
