@@ -28,7 +28,7 @@ public class BrowseTopLevelCommentsActivityTest extends ActivityInstrumentationT
 		String loc = "Location Intialization";
 		Location currentLocation;
 		currentLocation = new Location(loc);
-		CommentModel comment = new CommentModel("commentForTopLevelTest", currentLocation,"username");
+		CommentModel comment = new CommentModel("commentForTopLevelTest", currentLocation, "username");
 		
 		return comment;
 	}
