@@ -43,6 +43,7 @@ public class BrowseFavoritesActivityTest extends ActivityInstrumentationTestCase
 	@Override
 	public void setUp() {
 		context = getInstrumentation().getTargetContext();
+		
 		// unique username
 		User.login(new Random(date.getSeconds()).toString(), context);
 	}
@@ -59,7 +60,7 @@ public class BrowseFavoritesActivityTest extends ActivityInstrumentationTestCase
 		
 		return comment;
 	}
-
+	
 	/* Test for Use Case 11 */
 	public void testVisibleListView(){
 		
@@ -85,7 +86,11 @@ public class BrowseFavoritesActivityTest extends ActivityInstrumentationTestCase
 		assertEquals("displayed fave should match the saved fave", view.getAdapter().getItem(0).toString(), User.getUser().getFavorites().getList().get(0).toString());
 
 	}
-
+	
+	/*
+	 * TESTS FOR SORTING
+	 */
+	/* Test for Use Case 9 */
 	@UiThreadTest
 	public void testSortByDate(){
 	
@@ -126,7 +131,6 @@ public class BrowseFavoritesActivityTest extends ActivityInstrumentationTestCase
 		assertEquals("First item's dates should be equal", adapter1.getItem(0).getDate(), adapter2.getItem(0).getDate());
 		assertEquals("Second item's dates should be equal", adapter1.getItem(1).getDate(), adapter2.getItem(1).getDate());
 		assertEquals("Third item's dates should be equal", adapter1.getItem(2).getDate(), adapter2.getItem(2).getDate());
-		
 	}
 	
 	/*
@@ -187,19 +191,11 @@ public class BrowseFavoritesActivityTest extends ActivityInstrumentationTestCase
 		assertFalse("Forth item should not have a picture", adapter1.getItem(3).hasPicture());
 		assertEquals("Forth items should not have pictures", adapter1.getItem(3).hasPicture(), adapter2.getItem(3).hasPicture());
 	}
-}
 	
-	/*
-	 * TESTS FOR SORTING
-	 */
 	/*
 	 * Use Case 1
 	 */
-/*	public void testSortByLocation (){
-		
-		
-		FavoritesListModel inOrder = new FavoritesListModel(context);
-		FavoritesListModel outOfOrder = new FavoritesListModel(context);
+	public void testSortByLocation (){
 		
 		Location currentLocation = new Location("Location Initialization");
 		currentLocation.setLatitude(0);
@@ -217,20 +213,22 @@ public class BrowseFavoritesActivityTest extends ActivityInstrumentationTestCase
 		l3.setLatitude(300);
 		l3.setLongitude(300);
 		
-		//ProjectApplication projectApplication = ProjectApplication.getInstance().getInstance();
-		//ProjectApplication.getInstance().setCurrentLocation(currentLocation);
-		
 		CommentModel comment1 = new  CommentModel("post 1", l1, "schmoop");
+		comment1.setId("1");
 		
 		CommentModel comment2 = new  CommentModel("post 2", l2, "schmoop");
-
-		CommentModel comment3 = new  CommentModel("post 3", l3, "schmoop");
+		comment2.setId("2");
 		
+		CommentModel comment3 = new  CommentModel("post 3", l3, "schmoop");
+		comment3.setId("3");
+		
+
+		FavoritesListModel inOrder = new FavoritesListModel(context);
 		inOrder.add(comment3);
 		inOrder.add(comment2);
 		inOrder.add(comment1);
 		
-	
+		FavoritesListModel outOfOrder = new FavoritesListModel(context);
 		outOfOrder.add(comment1);
 		outOfOrder.add(comment2);
 		outOfOrder.add(comment3);
@@ -238,25 +236,27 @@ public class BrowseFavoritesActivityTest extends ActivityInstrumentationTestCase
 		CommentListAdapter adapter1;
 		CommentListAdapter adapter2;
 		
-		adapter1 = new CommentListAdapter(getActivity(), R.layout.list_item, inOrder);
-		adapter2 = new CommentListAdapter(getActivity(), R.layout.list_item, outOfOrder);
+		adapter1 = new CommentListAdapter(context, R.layout.list_item, inOrder);
+		adapter2 = new CommentListAdapter(context, R.layout.list_item, outOfOrder);
 		
-		//outOfOrder.setAdapter(adapter1);
-		//inOrderComments.setAdapter(adapter2);
-		
-		adapter1.setModel(inOrder);
-		adapter2.setModel(outOfOrder);
-		
+		adapter1.sortByLocation();
 		adapter2.sortByLocation();
 		
 		assertEquals("First items should be in same place", adapter1.getItem(0), adapter2.getItem(0));
 		assertEquals("Second items should be in same place", adapter1.getItem(1), adapter2.getItem(1));
 		assertEquals("Third items should be in same place", adapter1.getItem(2), adapter2.getItem(2));
 
-		assertEquals("First item's locations should be equal", adapter1.getItem(0).getLocation(), adapter2.getItem(0).getLocation());
-		assertEquals("Second item's locations should be equal", adapter1.getItem(1).getLocation(), adapter2.getItem(1).getLocation());
-		assertEquals("Third item's locations should be equal", adapter1.getItem(2).getLocation(), adapter2.getItem(2).getLocation());
+		assertEquals("First item's locations should be equal", adapter1.getItem(0).getLocation().toString(), adapter2.getItem(0).getLocation().toString());
+		assertEquals("Second item's locations should be equal", adapter1.getItem(1).getLocation().toString(), adapter2.getItem(1).getLocation().toString());
+		assertEquals("Third item's locations should be equal", adapter1.getItem(2).getLocation().toString(), adapter2.getItem(2).getLocation().toString());
 	}
+}
+	
+
+
+/*
+ * TESTS FOR SORTING
+ */
 	
 	/*
 	 * Use Case 2
