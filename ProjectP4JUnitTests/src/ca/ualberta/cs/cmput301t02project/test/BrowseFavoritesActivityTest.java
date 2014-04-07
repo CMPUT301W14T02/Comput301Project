@@ -7,6 +7,7 @@ import java.util.Random;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.location.Location;
 import android.test.ActivityInstrumentationTestCase2;
 import android.test.UiThreadTest;
@@ -129,6 +130,63 @@ public class BrowseFavoritesActivityTest extends ActivityInstrumentationTestCase
 	}
 	
 	/*
+	 * Use Case 8
+	 */
+	@UiThreadTest
+	public void testSortByPicture (){
+		
+		Bitmap pic = new Bitmap();
+		
+		// Has picture -SB
+		CommentModel comment1 = new  CommentModel("post 1", pic, null, "schmoop");
+		comment1.setId("1");
+		
+		// Does not have picture -SB
+		CommentModel comment2 = new  CommentModel("post 2", null, "schmoop");
+		comment2.setId("2");
+		
+		// Has picture -SB
+		CommentModel comment3 = new  CommentModel("post 3", pic, null, "schmoop");
+		comment3.setId("3");
+		
+		//  Does not have picture -SB
+		CommentModel comment4 = new  CommentModel("post 4", null, "schmoop");
+		comment4.setId("4");
+		
+		FavoritesListModel outOfOrderComments = new FavoritesListModel(context);
+		outOfOrderComments.add(comment1);
+		outOfOrderComments.add(comment2);
+		outOfOrderComments.add(comment3);
+		outOfOrderComments.add(comment4);
+	
+		FavoritesListModel inOrderComments = new FavoritesListModel(context);
+		inOrderComments.add(comment1);
+		inOrderComments.add(comment3);
+		inOrderComments.add(comment2);
+		inOrderComments.add(comment4);
+	
+		CommentListAdapter adapter1;
+		CommentListAdapter adapter2;
+	
+		adapter1 = new CommentListAdapter(context, 0, outOfOrderComments);
+		adapter2 = new CommentListAdapter(context, 0, inOrderComments);
+		
+		adapter1.sortByPicture();
+		adapter2.sortByPicture();
+		
+		// 2 comments with pictures, 2 without. top 2 should have pictures, bottom two should not. 
+		assertTrue("First item should have a picture", adapter1.getItem(0).hasPicture());
+		assertEquals("First items should have pictures", adapter1.getItem(0).hasPicture(), adapter2.getItem(0).hasPicture());
+		assertTrue("Second item should have a picture", adapter1.getItem(1).hasPicture());
+		assertEquals("Second items should have pictures", adapter1.getItem(1).hasPicture(), adapter2.getItem(1).hasPicture());
+		assertFalse("Third item should not have a picture", adapter1.getItem(2).hasPicture());
+		assertEquals("Third items should not have pictures", adapter1.getItem(2).hasPicture(), adapter2.getItem(2).hasPicture());
+		assertFalse("Forth item should not have a picture", adapter1.getItem(3).hasPicture());
+		assertEquals("Forth items should not have pictures", adapter1.getItem(3).hasPicture(), adapter2.getItem(3).hasPicture());
+	}
+}
+	
+	/*
 	 * TESTS FOR SORTING
 	 */
 	/*
@@ -200,108 +258,9 @@ public class BrowseFavoritesActivityTest extends ActivityInstrumentationTestCase
 	/*
 	 * Use Case 2
 	 */
-	/*public void testSortByCustomLocation (){
-
-		Location currentLocation = new Location("Location Initialization");
-		currentLocation.setLatitude(0);
-		currentLocation.setLongitude(0);
-	
-		Location l1 = new Location("Location Initialization");
-		l1.setLatitude(1);
-		l1.setLongitude(1);
-
-		Location l2 = new Location("Location Initialization");
-		l2.setLatitude(20);
-		l2.setLongitude(20);
-
-		Location l3 = new Location("Location Initialization");
-		l3.setLatitude(300);
-		l3.setLongitude(300);
-		
-		ProjectApplication projectApplication = ProjectApplication.getInstance().getInstance();
-		ProjectApplication.getInstance().setCurrentLocation(currentLocation);
-		
-		CommentModel comment1 = new  CommentModel("post 1", l1, "schmoop");
-		
-		CommentModel comment2 = new  CommentModel("post 2", l2, "schmoop");
-
-		CommentModel comment3 = new  CommentModel("post 3", l3, "schmoop");
-		
-		
-		CommentListModel outOfOrderComments = new CommentListModel();
-		outOfOrderComments.add(comment3);
-		outOfOrderComments.add(comment2);
-		outOfOrderComments.add(comment1);
-		
-		CommentListModel inOrderComments = new CommentListModel();
-		inOrderComments.add(comment1);
-		inOrderComments.add(comment2);
-		inOrderComments.add(comment3);
-	
-		CommentListAdapter adapter1;
-		CommentListAdapter adapter2;
-		
-		adapter1 = new CommentListAdapter(getActivity(), R.layout.list_item, outOfOrderComments.getList());
-		adapter2 = new CommentListAdapter(getActivity(), R.layout.list_item, inOrderComments.getList());
-		outOfOrderComments.setAdapter(adapter1);
-		inOrderComments.setAdapter(adapter2);
-		adapter1.setModel(outOfOrderComments);
-		adapter2.setModel(inOrderComments);
-		adapter1.sortByOtherLocation();
-		
-		assertEquals("First items should be in same place", adapter1.getItem(0), adapter2.getItem(0));
-		assertEquals("Second items should be in same place", adapter1.getItem(1), adapter2.getItem(1));
-		assertEquals("Third items should be in same place", adapter1.getItem(2), adapter2.getItem(2));
-	}
-
 	/*
-	 * Use Case 8
-	 */
-	/*public void testSortByPicture (){
-		
-		Bitmap pic = null;
-		
-		// Has picture -SB
-		CommentModel comment1 = new  CommentModel("post 1", pic, null, "schmoop");
-		
-		// Does not have picture -SB
-		CommentModel comment2 = new  CommentModel("post 2", null, "schmoop");
 
-		// Has picture -SB
-		CommentModel comment3 = new  CommentModel("post 3", pic, null, "schmoop");
-		
-		//  Does not have picture -SB
-		CommentModel comment4 = new  CommentModel("post 4", null, "schmoop");
-		
-		CommentListModel outOfOrderComments = new CommentListModel();
-		outOfOrderComments.add(comment1);
-		outOfOrderComments.add(comment2);
-		outOfOrderComments.add(comment3);
-		outOfOrderComments.add(comment4);
 	
-		CommentListModel inOrderComments = new CommentListModel();
-		inOrderComments.add(comment1);
-		inOrderComments.add(comment3);
-		inOrderComments.add(comment2);
-		inOrderComments.add(comment4);
-	
-		CommentListAdapter adapter1;
-		CommentListAdapter adapter2;
-		
-		adapter1 = new CommentListAdapter(getActivity(), R.layout.list_item, outOfOrderComments.getList());
-		adapter2 = new CommentListAdapter(getActivity(), R.layout.list_item, inOrderComments.getList());
-		outOfOrderComments.setAdapter(adapter1);
-		inOrderComments.setAdapter(adapter2);
-		adapter1.setModel(outOfOrderComments);
-		adapter2.setModel(inOrderComments);
-		
-		adapter1.sortByPicture();
-		
-		assertEquals("First items should be in same place", adapter1.getItem(0), adapter2.getItem(0));
-		assertEquals("Second items should be in same place", adapter1.getItem(1), adapter2.getItem(1));
-		assertEquals("Third items should be in same place", adapter1.getItem(2), adapter2.getItem(2));
-		assertEquals("Forth items should be in same place", adapter1.getItem(3), adapter2.getItem(3));
-	}
 	
 	/*
 	 * Use Case 9
@@ -508,4 +467,3 @@ public class BrowseFavoritesActivityTest extends ActivityInstrumentationTestCase
 		assertEquals("Eighth items' locations should be equal", adapter1.getItem(7).getLocation(), adapter2.getItem(7).getLocation());
 		assertEquals("Ninth items' locations should be equal", adapter1.getItem(8).getLocation(), adapter2.getItem(8).getLocation());
 	}*/
-}
