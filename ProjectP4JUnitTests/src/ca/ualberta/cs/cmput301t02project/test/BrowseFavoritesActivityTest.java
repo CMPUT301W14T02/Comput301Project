@@ -38,8 +38,8 @@ public class BrowseFavoritesActivityTest extends ActivityInstrumentationTestCase
 	
 	@Override
 	public void setUp() {
-		context = getInstrumentation().getContext();
-		User.login("desiredusername", context);
+		context = getInstrumentation().getTargetContext();
+		User.login("username2", context);
 	}
 
 	// not a test, used in test below -SB
@@ -47,8 +47,8 @@ public class BrowseFavoritesActivityTest extends ActivityInstrumentationTestCase
 		String loc = "Location Intialization";
 		Location currentLocation;
 		currentLocation = new Location(loc);
-		CommentModel comment = new CommentModel("sasha", currentLocation,"username");
-		comment.setId("for testing, no need to push to server");
+		CommentModel comment = new CommentModel("sasha", currentLocation,"username2");
+		comment.setId("for testing, no need to push");
 		
 		return comment;
 	}
@@ -68,24 +68,20 @@ public class BrowseFavoritesActivityTest extends ActivityInstrumentationTestCase
 		
 		BrowseFavoritesActivity activity = getActivity();
 		CommentModel comment = initializeComment();
-		
-		// manually create FavoritesListModel and add one comment -SB
-		FavoritesListModel favorites = new FavoritesListModel(activity);
-		favorites.add(comment);
-		User.getUser().setFavorites(favorites);
-		
+
+		User.getUser().getFavorites().add(comment);
+
 		ListView view = (ListView) activity.findViewById(R.id.commentListView);
-		CommentListAdapter adapter = (CommentListAdapter) view.getAdapter();
-		adapter.add(comment);
-		
-		assertEquals("1 fave should be added", favorites.getList().size(), User.getUser().getFavorites().getList().size());
-		assertEquals("faves should be the same as what they were added as", User.getUser().getFavorites(), favorites);
-		assertEquals("fave should be displayed on listview", favorites.getList().size(), adapter.getCount());
+
+		assertEquals("should be one comment in faves", User.getUser().getFavorites().getList().size(), 1);
+		assertEquals("one fave should be displayed on the listview", view.getAdapter().getCount(), 1);
+		assertEquals("displayed fave should match the saved fave", view.getAdapter().getItem(0).toString(), User.getUser().getFavorites().getList().get(0).toString());
+
 	}
-	
+
 	@UiThreadTest
 	public void testSortByDate(){
-	/*	
+	
 		CommentModel comment1 = new  CommentModel("post 1", null, "schmoop");
 		comment1.setDate(new Date(1));
 		comment1.setId("1");
@@ -113,12 +109,12 @@ public class BrowseFavoritesActivityTest extends ActivityInstrumentationTestCase
 		adapter1 = new CommentListAdapter(context, 0, outOfOrderComments);
 		adapter2 = new CommentListAdapter(context, 0, inOrderComments);
 /*
-		outOfOrderComments.setAdapter(adapter1);
+		outOfOrderComments.
 		inOrderComments.setAdapter(adapter2);
 		adapter1.setModel(outOfOrderComments);
 		adapter2.setModel(inOrderComments);
 		adapter1.sortByDate(); */
-		/*
+		
 		adapter1.sortByDate();
 		adapter2.sortByDate();
 		
@@ -129,7 +125,7 @@ public class BrowseFavoritesActivityTest extends ActivityInstrumentationTestCase
 		assertEquals("First item's dates should be equal", adapter1.getItem(0).getDate(), adapter2.getItem(0).getDate());
 		assertEquals("Second item's dates should be equal", adapter1.getItem(1).getDate(), adapter2.getItem(1).getDate());
 		assertEquals("Third item's dates should be equal", adapter1.getItem(2).getDate(), adapter2.getItem(2).getDate());
-		*/
+		
 	}
 	
 	/*
