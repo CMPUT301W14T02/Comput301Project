@@ -124,14 +124,14 @@ public class BrowseFavoritesActivityTest extends ActivityInstrumentationTestCase
 		
 
 		FavoritesListModel inOrder = new FavoritesListModel(context);
-		inOrder.add(comment3);
-		inOrder.add(comment2);
 		inOrder.add(comment1);
+		inOrder.add(comment2);
+		inOrder.add(comment3);
 		
 		FavoritesListModel outOfOrder = new FavoritesListModel(context);
-		outOfOrder.add(comment1);
-		outOfOrder.add(comment2);
 		outOfOrder.add(comment3);
+		outOfOrder.add(comment2);
+		outOfOrder.add(comment1);
 	
 		CommentListAdapter adapter1;
 		CommentListAdapter adapter2;
@@ -181,14 +181,14 @@ public class BrowseFavoritesActivityTest extends ActivityInstrumentationTestCase
 		
 
 		FavoritesListModel inOrder = new FavoritesListModel(context);
-		inOrder.add(comment1);
-		inOrder.add(comment2);
 		inOrder.add(comment3);
+		inOrder.add(comment2);
+		inOrder.add(comment1);
 		
 		FavoritesListModel outOfOrder = new FavoritesListModel(context);
-		outOfOrder.add(comment3);
-		outOfOrder.add(comment2);
 		outOfOrder.add(comment1);
+		outOfOrder.add(comment2);
+		outOfOrder.add(comment3);
 		
 		CommentListAdapter adapter1;
 		CommentListAdapter adapter2;
