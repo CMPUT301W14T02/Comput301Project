@@ -95,18 +95,34 @@ public class CreateCommentActivityTest extends ActivityInstrumentationTestCase2<
 	}
 
 	/* Test for use case 3 */
-	public void testCreateTopLevelComment() throws Throwable {
+	public void testCreateTopLevelComment() throws Exception {
 		initializeComment();
+		Thread.sleep(2000);
 		ArrayList<CommentModel> list = User.getUser().getMyComments().getList();
-		int len = list.size();
-		assertEquals("list comment should have same text", list.get(len - 1).getText(), text);
-		assertEquals("list comment should have same username", list.get(len-1).getUsername(), username);
-		assertTrue("comment should be marked as top level", list.get(len-1).isTopLevelComment());
+		boolean hasText = false;
+		boolean hasUsername = false;
+		boolean isTopLevel = false;
+		for (int i=0; i<list.size(); i++){
+			if (list.get(i).toString().contains(text)) {
+				if (list.get(i).toString().contains(username)) {
+					if (list.get(i).isTopLevelComment()) {
+						hasText = true;
+						hasUsername = true;
+						isTopLevel = true;
+					}
+				}
+			}	
+		}
+		
+		assertTrue("list comment should have same text", hasText);
+		assertTrue("list comment should have same username", hasUsername);
+		assertTrue("comment should be marked as top level", isTopLevel);
 	}
 	
 	/* Test for use case 17 */
-	public void testGeoLocationOfComment() {
+	public void testGeoLocationOfComment() throws Exception {
 		initializeComment();
+		Thread.sleep(2000);
 		ArrayList<CommentModel> list = User.getUser().getMyComments().getList();
 		int len = list.size();
 		assertEquals("comment lat should be equal to gps lat", GPSLocation.getInstance().getLocation().getLatitude(), list.get(len-1).getLocation().getLatitude());
@@ -115,28 +131,47 @@ public class CreateCommentActivityTest extends ActivityInstrumentationTestCase2<
 	}
 	
 	/* Test for use case 14 */
-	public void testShareComment () {
+	public void testShareComment () throws Exception {
 		int size1 = TopLevelCommentList.getInstance(activity.getApplicationContext()).getList().size();
 		initializeComment();
+		Thread.sleep(2000);
 		int size2 = TopLevelCommentList.getInstance(activity.getApplicationContext()).getList().size();
 		size1++;
         assertEquals("Size of top level comment list should be increased by 1 when new comment is added", size1, size2);
     }
 	
-	public void testCreateCustomLocationComment() {
+	public void testCreateCustomLocationComment() throws Exception {
 		int latInt = 57;
 		int longInt = 113;
 		initializeCustomLocationComment(latInt, longInt);
+		Thread.sleep(2000);
 		ArrayList<CommentModel> list = User.getUser().getMyComments().getList();
-		int len = list.size();
-		assertEquals("comment lat should be equal to custom lat", latInt, list.get(len - 1).getLocation().getLatitude());
-		assertEquals("comment long should be equal to custom long", longInt, list.get(len - 1).getLocation().getLongitude());
+		boolean hasText = false;
+		boolean sameLong = false;
+		boolean sameLat = false;
+		for (int i=0; i<list.size(); i++){
+			if (list.get(i).toString().contains("customLocationTest")) {
+				int comLat = (int) list.get(i).getLocation().getLatitude();
+				int comLong = (int) list.get(i).getLocation().getLongitude();
+				if (comLat == latInt) {
+					if (comLong == longInt) {
+						hasText = true;
+						sameLong = true;
+						sameLat = true;
+					}
+				}
+			}	
+		}
+		assertTrue("list comment should have same text", hasText);
+		assertTrue("list comment should have custom lat", sameLat);
+		assertTrue("list comment should have custom long", sameLong);
 	}
 	
 	/* test to see if user is being pushed to server after update */
-	public void testPushUser() {
+	public void testPushUser() throws Exception {
 		int size1 = User.getUser().getMyCommentIds().size();
 		initializeComment();
+		Thread.sleep(2000);
 		User.login(username, activity.getApplicationContext());
 		int size2 = User.getUser().getMyCommentIds().size();
 		size1++;
