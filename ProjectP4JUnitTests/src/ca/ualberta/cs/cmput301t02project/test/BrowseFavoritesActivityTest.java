@@ -1,6 +1,7 @@
 package ca.ualberta.cs.cmput301t02project.test;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 import android.app.Activity;
 import android.content.Context;
@@ -17,6 +18,7 @@ import ca.ualberta.cs.cmput301t02project.activity.CreateCommentActivity;
 import ca.ualberta.cs.cmput301t02project.activity.LoginActivity;
 import ca.ualberta.cs.cmput301t02project.activity.MainMenuActivity;
 import ca.ualberta.cs.cmput301t02project.controller.TopLevelListController;
+import ca.ualberta.cs.cmput301t02project.model.CommentListModel;
 import ca.ualberta.cs.cmput301t02project.model.CommentModel;
 import ca.ualberta.cs.cmput301t02project.model.CommentServer;
 import ca.ualberta.cs.cmput301t02project.model.FavoritesListModel;
@@ -80,9 +82,54 @@ public class BrowseFavoritesActivityTest extends ActivityInstrumentationTestCase
 		assertEquals("faves should be the same as what they were added as", User.getUser().getFavorites(), favorites);
 		assertEquals("fave should be displayed on listview", favorites.getList().size(), adapter.getCount());
 	}
-
+	
+	@UiThreadTest
 	public void testSortByDate(){
+	/*	
+		CommentModel comment1 = new  CommentModel("post 1", null, "schmoop");
+		comment1.setDate(new Date(1));
+		comment1.setId("1");
 		
+		CommentModel comment2 = new  CommentModel("post 2", null, "schmoop");
+		comment2.setDate(new Date(20000));
+		comment2.setId("2");
+		
+		CommentModel comment3 = new  CommentModel("post 3", null, "schmoop");
+		comment3.setDate(new Date(300000000));
+		comment3.setId("3");
+		
+		FavoritesListModel outOfOrderComments = new FavoritesListModel(context);
+		outOfOrderComments.add(comment1);
+		outOfOrderComments.add(comment2);
+		outOfOrderComments.add(comment3);
+
+		FavoritesListModel inOrderComments = new FavoritesListModel(context);
+		inOrderComments.add(comment3);
+		inOrderComments.add(comment2);
+		inOrderComments.add(comment1);
+	
+		CommentListAdapter adapter1;
+		CommentListAdapter adapter2;
+		adapter1 = new CommentListAdapter(context, 0, outOfOrderComments);
+		adapter2 = new CommentListAdapter(context, 0, inOrderComments);
+/*
+		outOfOrderComments.setAdapter(adapter1);
+		inOrderComments.setAdapter(adapter2);
+		adapter1.setModel(outOfOrderComments);
+		adapter2.setModel(inOrderComments);
+		adapter1.sortByDate(); */
+		/*
+		adapter1.sortByDate();
+		adapter2.sortByDate();
+		
+		assertEquals("First items should be in same place", adapter1.getItem(0), adapter2.getItem(0));
+		assertEquals("Second items should be in same place", adapter1.getItem(1), adapter2.getItem(1));
+		assertEquals("Third items should be in same place", adapter1.getItem(2), adapter2.getItem(2));
+
+		assertEquals("First item's dates should be equal", adapter1.getItem(0).getDate(), adapter2.getItem(0).getDate());
+		assertEquals("Second item's dates should be equal", adapter1.getItem(1).getDate(), adapter2.getItem(1).getDate());
+		assertEquals("Third item's dates should be equal", adapter1.getItem(2).getDate(), adapter2.getItem(2).getDate());
+		*/
 	}
 	
 	/*
