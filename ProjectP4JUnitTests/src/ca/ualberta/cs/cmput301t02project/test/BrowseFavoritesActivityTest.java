@@ -300,6 +300,60 @@ public class BrowseFavoritesActivityTest extends ActivityInstrumentationTestCase
 	/* Test for Use Case 16 */
 	public void testSortByDefault (){
 		
+		
+		Location currentLocation = new Location("Location Initialization");
+		currentLocation.setLatitude(0);
+		currentLocation.setLongitude(0);
+	
+		Location l1 = new Location("Location Initialization");
+		l1.setLatitude(1);
+		l1.setLongitude(1);
+
+		Location l2 = new Location("Location Initialization");
+		l2.setLatitude(20);
+		l2.setLongitude(20);
+
+		Location l3 = new Location("Location Initialization");
+		l3.setLatitude(300);
+		l3.setLongitude(300);
+		
+		CommentModel comment1 = new  CommentModel("post 1", l3, "schmoop");
+		comment1.setDate(new Date(1));
+		comment1.setId("1");
+		
+		CommentModel comment2 = new  CommentModel("post 2", l2, "schmoop");
+		comment2.setDate(new Date(20000));
+		comment2.setId("2");
+		
+		CommentModel comment3 = new  CommentModel("post 3", l1, "schmoop");
+		comment3.setDate(new Date(300000000));
+		comment3.setId("3");
+		
+		FavoritesListModel outOfOrderComments = new FavoritesListModel(context);
+		outOfOrderComments.add(comment3);
+		outOfOrderComments.add(comment2);
+		outOfOrderComments.add(comment1);
+		
+		
+		FavoritesListModel inOrderComments = new FavoritesListModel(context);
+		inOrderComments.add(comment1);
+		inOrderComments.add(comment2);
+		inOrderComments.add(comment3);
+	
+		CommentListAdapter adapter1;
+		CommentListAdapter adapter2;
+		
+		adapter1 = new CommentListAdapter(context, R.layout.list_item, outOfOrderComments);
+		adapter2 = new CommentListAdapter(context, R.layout.list_item, inOrderComments);
+		
+		adapter1.sortByDefault();
+		adapter2.sortByDefault();
+		
+		assertEquals("First items should be in same place", adapter2.getItem(0), adapter1.getItem(0));
+		assertEquals("Second items should be in same place", adapter2.getItem(1), adapter1.getItem(1));
+		assertEquals("Third items should be in same place", adapter2.getItem(2), adapter1.getItem(2));
+		
+		/*
 		Location currentLocation = new Location("Location Initialization");
 		currentLocation.setLatitude(0);
 		currentLocation.setLongitude(0);
@@ -375,7 +429,7 @@ public class BrowseFavoritesActivityTest extends ActivityInstrumentationTestCase
 		outOfOrderComments.add(comment2);
 		outOfOrderComments.add(comment7);*/
 
-		
+	/*	
 		FavoritesListModel inOrderComments = new FavoritesListModel(context);
 		
 		
@@ -406,7 +460,7 @@ public class BrowseFavoritesActivityTest extends ActivityInstrumentationTestCase
 		
 		 */
 		
-		
+	/*	
 	
 		CommentListAdapter adapter1;
 		CommentListAdapter adapter2;
