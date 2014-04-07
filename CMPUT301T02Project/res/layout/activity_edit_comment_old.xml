@@ -1,0 +1,74 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <EditText
+        android:id="@+id/edit_text"
+        android:layout_width="316dp"
+        android:layout_height="97dp"
+        android:ems="10"
+        android:inputType="text" >
+
+        <requestFocus />
+    </EditText>
+
+    <Button
+        android:id="@+id/edit_post"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/latitude_editLabel"
+        android:layout_below="@+id/latitude_editBox"
+        android:layout_marginTop="56dp"
+        android:text="@string/edit_comment" />
+
+    <TextView
+        android:id="@+id/latitude_editLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/latitude_editBox"
+        android:layout_alignBottom="@+id/latitude_editBox"
+        android:layout_alignLeft="@+id/location_editLabel"
+        android:text="@string/latitude"
+        android:textSize="14sp" />
+
+    <EditText
+        android:id="@+id/latitude_editBox"
+        android:layout_width="80dp"
+        android:layout_height="40dp"
+        android:layout_alignRight="@+id/edit_post"
+        android:layout_below="@+id/location_editLabel"
+        android:layout_marginTop="22dp"
+        android:ems="10" />
+
+    <TextView
+        android:id="@+id/longitude_editLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/latitude_editBox"
+        android:layout_alignBottom="@+id/latitude_editBox"
+        android:layout_toRightOf="@+id/latitude_editBox"
+        android:text="@string/longitude"
+        android:textSize="14sp" />
+
+    <EditText
+        android:id="@+id/longitude_editBox"
+        android:layout_width="80dp"
+        android:layout_height="40dp"
+        android:layout_alignBaseline="@+id/longitude_editLabel"
+        android:layout_alignBottom="@+id/longitude_editLabel"
+        android:layout_toRightOf="@+id/longitude_editLabel"
+        android:ems="10" />
+
+    <TextView
+        android:id="@+id/location_editLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/edit_text"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="25dp"
+        android:text="@string/cust_location"
+        android:textSize="20sp" />
+
+</RelativeLayout>

@@ -2,111 +2,166 @@ package ca.ualberta.cs.cmput301t02project.activity;
 
 import java.util.ArrayList;
 
-import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.AdapterView.OnItemSelectedListener;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.Spinner;
 import android.widget.TextView;
-import ca.ualberta.cs.cmput301t02project.ProjectApplication;
 import ca.ualberta.cs.cmput301t02project.R;
-import ca.ualberta.cs.cmput301t02project.model.CommentListModel;
+import ca.ualberta.cs.cmput301t02project.controller.CommentController;
 import ca.ualberta.cs.cmput301t02project.model.CommentModel;
-import ca.ualberta.cs.cmput301t02project.view.CommentListAdapter;
+import ca.ualberta.cs.cmput301t02project.model.ReplyList;
+import ca.ualberta.cs.cmput301t02project.model.Server;
+import ca.ualberta.cs.cmput301t02project.model.User;
 
-public class BrowseReplyCommentsActivity extends Activity implements
-		OnItemSelectedListener {
+/**
+ * Displays the current comment,
+ * its replies, 
+ * a photo if one is attached to the comment, 
+ * and buttons for creating a reply to the comment, favoriting the comment, or following the author.
+ * Called when the user selects a comment from BrowseTopLevelCommentsActivity or BrowseReplyCommentsActivity.
+ * When the user selects a comment they are able to view its replies. 
+ * Additionally, the action bar contains an option for editing the current comment if its author is the current User.
+ * Current comment information including the current comment and a list of its replies is stored on the server.
+ */
+public class BrowseReplyCommentsActivity extends BrowseCommentsActivityAbstraction {
 
-	// TODO: Refactor using new classes
-
-	private ListView replyCommentListView;
-	private TextView selectedComment;
-	private CommentListAdapter adapter;
-	private CommentListModel replyCommentList;
+	private ReplyList model;
+	
+	/* the name of the author of the selected comment is used by the menu 
+	 * to check if it should create a "edit comment" item -SB
+	 */
+	private String currentCommentAuthor = "";
+	
+	// the comment to be edited when "edit comment" menu option is selected -SB
+	private CommentModel editComment = null;
+	
+	// for the edit comment menu item when it is created dynamically -SB
+	private final int MENU_EDIT = Menu.FIRST;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		
+		// set up the screen display -SB
 		setContentView(R.layout.activity_reply_list);
-		replyCommentListView = (ListView) findViewById(R.id.replyListView);
-		selectedComment = (TextView) findViewById(R.id.selected_comment);
-
-		// Display selected comment
-		selectedComment.setText(ProjectApplication.getCurrentComment()
-				.getText());
-
-		// Based on:
-		// //www.androidhive.info/2012/04/android-spinner-dropdown-example/
-		// Spinner element
-		Spinner spinner = (Spinner) findViewById(R.id.spinner);
-
-		// Spinner click listener
-		spinner.setOnItemSelectedListener(this);
-
-		// Spinner Drop down elements
-		ArrayList<String> sortBy = new ArrayList<String>();
-		sortBy.add("Default");
-		sortBy.add("Date");
-		sortBy.add("Picture");
-		sortBy.add("My Location");
-		sortBy.add("Other Location");
-		sortBy.add("Ranking");
-
-		// Create adapter for spinner
-		ArrayAdapter<String> spinner_adapter = new ArrayAdapter<String>(this,
-				R.layout.list_item, sortBy);
-
-		// Drop down layout style - list view with radio button
-		spinner_adapter
-				.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
-		// attach adapter to spinner
-		spinner.setAdapter(spinner_adapter);
-
-		// Get the comment list of replies to selected comment
-		replyCommentList = ProjectApplication.getCurrentCommentList();
-
-		// Add comments to adapter
-		adapter = new CommentListAdapter(this, R.layout.list_item,
-				replyCommentList.getCommentList());
-		replyCommentList.setAdapter(adapter);
-		adapter.setModel(replyCommentList);
-
-		// Display comments in adapter
-		replyCommentListView.setAdapter(adapter);
-
-		// If replying to comment -SB
+		createSpinner();
+		listView = (ListView) findViewById(R.id.replyListView);
+		TextView selectedComment = (TextView) findViewById(R.id.selected_comment);
+		
+		// retrieve the id of the parent and set the currentComment -SB
+		final String currentCommentId = getIntent().getStringExtra("CommentId");
+		CommentController commentController = new CommentController(currentCommentId, this);
+		CommentModel currentComment = commentController.getComment();
+		
+		// get the current comment author and set the comment to edit -SB
+		currentCommentAuthor = currentComment.getUsername();
+		editComment = currentComment;
+		
+		// display the currently selected comment and its author on the screen -SB
+		selectedComment.setText(currentComment.getText()+"\n(by " + currentComment.getUsername() + ")");
+		
+		// display the comment's picture if there is one -SB
+		if(currentComment.hasPicture()){
+			ImageView image = (ImageView) findViewById(R.id.comment_picture);
+			image.setImageBitmap(currentComment.getPicture());
+		}
+		
+		model = new ReplyList(currentCommentId, this);
+		super.initializeView(model);
+		
+		// actions to take when the "Reply" button is pressed -SB
 		Button replyComment = (Button) findViewById(R.id.reply_button);
 		replyComment.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				startActivity(new Intent(BrowseReplyCommentsActivity.this,
-						CreateCommentActivity.class));
+				
+				// try to retrieve comments saved on the server -SB
+				Server server = new Server(BrowseReplyCommentsActivity.this);
+				if(!server.isNetworkAvailable()) {
+					
+					// print error message to the screen -SB
+					showMessage(BrowseReplyCommentsActivity.this, "You don't have internet connection.");
+				}
+				else {
+					
+					// go to the CreateCommentActivity to allow the user to create a reply to the current comment -SB
+					Intent intent = new Intent(BrowseReplyCommentsActivity.this, CreateCommentActivity.class);
+					intent.putExtra("CommentId", currentCommentId);
+					startActivity(intent);
+				}
 			}
 		});
-
-		// To view the replies of a reply -SB
-		replyCommentListView.setOnItemClickListener(new OnItemClickListener() {
+		
+		// actions to take when the "Add to Favorites" button is pressed -SB
+		final Button favoriteComment = (Button) findViewById(R.id.fav_button);
+		favoriteComment.setOnClickListener(new View.OnClickListener() {
 			@Override
-			public void onItemClick(AdapterView<?> l, View v, int position,
-					long id) {
-				// Refactor into MVC?
-				CommentModel nestedComment = (CommentModel) adapter
-						.getItem(position);
-				ProjectApplication.setCurrentComment(nestedComment);
-				CommentListModel nestedCommentList = nestedComment
-						.getReplies();
-				ProjectApplication.setCurrentCommentList(nestedCommentList);
-
-				Intent goToReplyListActivity = new Intent(
-						getApplicationContext(),
-						BrowseReplyCommentsActivity.class);
+			public void onClick(View v) {
+				
+				// retrieve the current comment -SB
+				CommentController commentController = new CommentController(currentCommentId, BrowseReplyCommentsActivity.this);
+				CommentModel currentComment = commentController.getComment();
+				
+				// retrieve the current user -SB
+				User user = User.getUser();
+				
+				// retrieve the replies to the current comment -SB
+				ReplyList repliesToFav = new ReplyList(currentComment.getId(), getApplicationContext());
+				ArrayList<CommentModel> replies = repliesToFav.getList();
+				
+				// add the current comment and its replies to the current user's favorites -SB
+				user.addFavoriteComment(currentComment, replies);
+				
+				// increase the rating of the current comment -SB
+				commentController.incrementRating();
+				
+				// print a popup message -SB
+				favoriteComment.animate();
+				showMessage(BrowseReplyCommentsActivity.this, "Added to favorites!");
+			}
+		});
+		
+		// actions to take when the "Follow" button is pressed -SB
+		final Button followUser = (Button) findViewById(R.id.follow_button);
+		followUser.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				
+				// retrieve the current comment -SB
+				CommentController commentController = new CommentController(currentCommentId, BrowseReplyCommentsActivity.this);
+				CommentModel currentComment = commentController.getComment();
+				
+				// retrieve the current user -SB
+				User user = User.getUser();
+				
+				// add the current comment to the current user's followedUser list (which is converted to username in User) -SB
+				user.addFollowedUser(currentComment);
+				
+				// print a popup message -SB
+				followUser.animate();
+				showMessage(BrowseReplyCommentsActivity.this, "You are now following " + currentComment.getUsername());
+			}
+		});
+		
+		// actions to take when a reply comment is selected -SB
+		listView.setOnItemClickListener(new OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> l, View v, int position, long id) {
+				
+				// get the selected comment -SB
+				CommentModel nestedComment = (CommentModel) adapter.getItem(position);
+				
+				// go to BrowseReplyCommentsActivity to see replies of the selected comment -SB
+				Intent goToReplyListActivity = new Intent(getApplicationContext(), BrowseReplyCommentsActivity.class);
+				goToReplyListActivity.putExtra("CommentId", nestedComment.getId());
 				startActivity(goToReplyListActivity);
 			}
 		});
@@ -115,37 +170,67 @@ public class BrowseReplyCommentsActivity extends Activity implements
 	@Override
 	public void onResume() {
 		super.onResume();
-		// Get the comment list of replies to selected comment
-		// ArrayList<CommentModel> replyCommentList = ProjectApplication
-		// .getCurrentCommentList();
-
-		// Add comments to adapter
-		ProjectApplication.setCurrentCommentList(replyCommentList);
-
+		model.refresh();
 	}
-
+	
+	// override to select a different menu xml than the default to facilitate edit comment feature -SB
 	@Override
-	public void onItemSelected(AdapterView<?> parent, View view, int position,
-			long id) {
-		String selected = parent.getItemAtPosition(position).toString();
-		if (selected.equals("Date")) {
-			adapter.sortByDate();
-		} else if (selected.equals("Picture")) {
-			adapter.sortByPicture();
-		} else if (selected.equals("My Location")) {
-			adapter.sortByLocation();
-		} else if (selected.equals("Other Location")) {
-			adapter.sortByOtherLocation();
-		} else if (selected.equals("Ranking")) {
-			adapter.sortByRanking();
-		} else if (selected.equals("Default")) {
-			adapter.sortByDefault();
-		}
+	public boolean onCreateOptionsMenu(Menu menu) {
 		
+		// do all the default menu setup tasks -SB
+		super.onCreateOptionsMenu(menu);
+		
+		// the current user who is logged in -SB
+		String currentUser = User.getUser().getName();
+		
+		// if the current user is also the comment author, show "edit comment" as a menu option -SB
+		if(currentUser.equals(currentCommentAuthor)){
+			menu.add(0, MENU_EDIT, Menu.NONE, R.string.edit_menu_item);
+		}
+		return true;
 	}
+	
+	// override to deal with new edit menu item
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item){
+		super.onOptionsItemSelected(item);
+		
+		 switch (item.getItemId()) {
+	    	case MENU_EDIT:
+	    		editComment();
+	    		return true;
+	        default:
+	            return super.onOptionsItemSelected(item);
+		 }
+	}
+	
+	/**
+	 * Allows the user to edit a selected comment.
+	 * <p>
+	 * Redirects to the EditCommentActivity when it is called if editComment is set in onCreate.
+	 * Called when the "edit comment" menu item is selected.
+	 * <p>
+	 */
+	private void editComment(){
+		
+		// make sure editComment was set in onCreate -SB
+		if(editComment != null){
+			
+			// go to the edit comment activity & send comment to edit -SB
+			Intent goToEditCommentActivity = new Intent(getApplicationContext(), EditCommentActivity.class);
+			goToEditCommentActivity.putExtra("CommentId", editComment.getId());
+			startActivity(goToEditCommentActivity);
+		}
+	}
+	
+	
 
 	@Override
-	public void onNothingSelected(AdapterView<?> arg0) {
-		// TODO Auto-generated method stub
+	public void goToHelpPage(){
+		
+		// go to help page for replying to comments -SB
+		Intent viewIntent = new Intent("android.intent.action.VIEW",Uri.parse(
+				"https://rawgithub.com/CMPUT301W14T02/Comput301Project/master/Help%20Pages/browse_reply_comments.html"));
+		startActivity(viewIntent);
 	}
 }

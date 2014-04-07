@@ -13,12 +13,73 @@
         <requestFocus />
     </EditText>
 
-    <Button
-        android:id="@+id/create_post"
+    <EditText
+        android:id="@+id/longitude_box"
+        android:layout_width="80dp"
+        android:layout_height="40dp"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/location_label"
+        android:layout_marginTop="26dp"
+        android:ems="10"
+        android:inputType="numberDecimal|numberSigned" />
+
+    <EditText
+        android:id="@+id/latitude_box"
+        android:layout_width="80dp"
+        android:layout_height="40dp"
+        android:layout_alignTop="@+id/longitude_label"
+        android:layout_marginRight="14dp"
+        android:layout_toLeftOf="@+id/longitude_label"
+        android:ems="10"
+        android:inputType="numberDecimal|numberSigned" />
+
+    <TextView
+        android:id="@+id/latitude_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/location_label"
+        android:layout_alignTop="@+id/latitude_box"
+        android:text="@string/latitude"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/location_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/create_text"
+        android:layout_marginLeft="18dp"
+        android:layout_marginTop="20dp"
+        android:text="@string/cust_location"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/longitude_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/longitude_box"
+        android:layout_marginRight="15dp"
+        android:layout_toLeftOf="@+id/longitude_box"
+        android:text="@string/longitude"
+        android:textSize="14sp" />
+
+    <ImageButton
+        android:id="@+id/takeAPhoto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/longitude_box"
+        android:layout_marginTop="47dp"
+        android:layout_toRightOf="@+id/longitude_label"
+        android:onClick="takePhoto"
+        android:src="@android:drawable/ic_menu_camera" />
+
+    <Button
+        android:id="@+id/create_post"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/latitude_label"
+        android:layout_below="@+id/takeAPhoto"
+        android:layout_marginTop="19dp"
         android:text="@string/post" />
 
 </RelativeLayout>

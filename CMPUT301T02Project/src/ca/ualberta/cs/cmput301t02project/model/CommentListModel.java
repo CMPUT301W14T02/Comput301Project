@@ -2,47 +2,32 @@ package ca.ualberta.cs.cmput301t02project.model;
 
 import java.util.ArrayList;
 
-import ca.ualberta.cs.cmput301t02project.view.CommentListAdapterAbstraction;
+import ca.ualberta.cs.cmput301t02project.view.SView;
 
-public class CommentListModel {
+/**
+ * Interface for classes that act like a CommentListModel including:
+ * FavoritesListModel, 
+ * MyCommentsListModel, 
+ * RepliesToFavesListModel, 
+ * TopLevelCommentListModel, 
+ * and FollowedUserCommentsListModel.
+ * Contains a method for adding a CommentModel to a CommentListModel
+ * and retrieving a list of CommentModels stored in the CommentListModel
+ */
+public abstract class CommentListModel extends SModel<SView<CommentListModel>> {
+
+	/**
+	 * Adds a CommentModel to the CommentListModel.
+	 * @param comment	the comment to add	
+	 */
+	public abstract void add(CommentModel comment);
 	
-	private StorageModel store = new StorageModel();
-	private CommentListAdapterAbstraction adapter = null;
-	private ArrayList<CommentModel> commentList;
-	//private CommentListAdapter adapter;
-
-	public CommentListModel() {
-		commentList = new ArrayList<CommentModel>();
-	}
-
-	public ArrayList<CommentModel> getCommentList() {
-		return commentList;
-	}
-
-	public void setCommentList(ArrayList<CommentModel> commentList) {
-		this.commentList = commentList;
-		if (adapter != null) {
-			adapter.sortList();
-			adapter.notifyDataSetChanged();
-		}
-	}
-
-	public void add(CommentModel comment) {		
-		commentList.add(comment);
-		if (adapter != null) {
-			adapter.sortList();
-			adapter.notifyDataSetChanged();
-		}
-		// TODO push comment to server
-
-	}
+	/**
+	 * Retrieves the ArrayList of CommentModels stored in CommentListModel.
+	 * @return	the list of CommentModels contained in the CommentListModel
+	 */
+	public abstract ArrayList<CommentModel> getList();
 	
-	public void setAdapter(CommentListAdapterAbstraction adapter) {
-		this.adapter = adapter;
-	}
+	public abstract void refresh();
 	
-	public CommentListAdapterAbstraction getAdapter() {
-		return adapter;
-	}
-
 }

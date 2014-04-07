@@ -5,6 +5,7 @@ import android.test.ActivityInstrumentationTestCase2;
 import android.widget.Button;
 import android.widget.EditText;
 import ca.ualberta.cs.cmput301t02project.ProjectApplication;
+import ca.ualberta.cs.cmput301t02project.User;
 import ca.ualberta.cs.cmput301t02project.activity.EditCommentActivity;
 import ca.ualberta.cs.cmput301t02project.model.CommentModel;
 
@@ -19,7 +20,7 @@ public class EditCommentActivityTest extends ActivityInstrumentationTestCase2<Ed
 
 	protected void setUp() throws Exception {
 		super.setUp();
-		ProjectApplication.setCurrentComment(new CommentModel("the original comment", null, username));
+		ProjectApplication.getInstance().setCurrentComment(new CommentModel("the original comment", null, username), activity.getApplicationContext());
 		activity = getActivity();
 	}
 
@@ -36,10 +37,19 @@ public class EditCommentActivityTest extends ActivityInstrumentationTestCase2<Ed
 				edit.setText(text);
 				button.performClick();
 				CommentModel expectedComment = new CommentModel(text, null, username);
-				assertTrue("The comment should be equal to the edited one",
-						ProjectApplication.getCurrentComment().equals(expectedComment));
+				assertEquals("The comment should be equal to the edited one",
+						ProjectApplication.getInstance().getCurrentComment(), expectedComment);
 			}
 		});
 
+	}
+	
+	/* test to see if user is being pushed to server after update */
+	public void testPushUser() {
+		User user = new User("user");
+		ProjectApplication pa = ProjectApplication.getInstance().getInstance();
+		//pa.pushUser(user);
+		//User user2 = pa.getPushedUser("user");
+		//assertEquals("Users should be the same",user,user2);
 	}
 }

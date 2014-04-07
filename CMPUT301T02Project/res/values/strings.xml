@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">CMPUT301T02Project</string>
+    <string name="app_name">SKRAT CHAT</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
-    <string name="title_activity_top_level_list">TopLevelListActivity</string>
+    <string name="title_activity_top_level_list">Top Level Comments</string>
     <string name="create">Create</string>
     <string name="browse">Browse</string>
-    <string name="title_activity_create_comment">CreateCommentActivity</string>
+    <string name="title_activity_create_comment">Create Comment</string>
     <string name="post">Post</string>
     <string name="write_comment">Write your comment here</string>
     <string name="spinner_title">Select Category</string>
-    <string name="title_activity_reply_list">ReplyListActivity</string>
-    <string name="title_activity_login">LoginActivity</string>
+    <string name="title_activity_reply_list">Replies</string>
+    <string name="title_activity_login">Login</string>
     <string name="login_message">Login Page</string>
     <string name="login_hint">Enter Username</string>
     <string name="login_button">Login</string>
@@ -20,8 +20,23 @@
     <string name="favorites">Favorites</string>
     <string name="my_comments">My Comments</string>
     <string name="edit_comment">Edit Comment</string>
-    <string name="title_activity_my_comments_list">MyCommentsActivity</string>
-    <string name="title_activity_edit_comment">EditCommentActivity</string>
-     
-
+    <string name="title_activity_my_comments_list">My Comments</string>
+    <string name="title_activity_edit_comment">Edit Comment</string>
+    <string name="title_activity_browse_favorites">Browse Favorites</string>
+    <string name="title_activity_browse_replies_to_favs">Browse Favorites</string> 
+    <string name="title_activity_browse_followed_comments">Browse Followed User Comments</string>
+    <string name="latitude">Latitude: </string>
+    <string name="longitude">Longitude: </string>
+    <string name="cust_location"> Location</string>
+    <string name="follow_button">Follow User</string>
+	<string name="anonymous_button">Anonymous Mode</string>
+	<string name="edit_menu_item">Edit Comment</string>
+	<string name="home_menu_item">Home</string>
+	<string name="logout_menu_item">Logout</string>
+	<string name="help_page_menu_item">Help</string>
+	<string name="title_activity_enter_coor">Enter Coordinates</string>
+	<string name="enter_coor_message">Enter the Coordinates to Sort By</string>
+	<string name="sort_button">Sort</string>
+	<string name="followed_users">Followed User\'s Comments</string>
+    
 </resources>

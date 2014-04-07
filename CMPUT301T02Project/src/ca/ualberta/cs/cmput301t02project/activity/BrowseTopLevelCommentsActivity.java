@@ -1,154 +1,68 @@
 package ca.ualberta.cs.cmput301t02project.activity;
 
-import java.util.ArrayList;
-
-import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
-import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.AdapterView.OnItemSelectedListener;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Spinner;
-import ca.ualberta.cs.cmput301t02project.ProjectApplication;
 import ca.ualberta.cs.cmput301t02project.R;
-import ca.ualberta.cs.cmput301t02project.model.CommentListModel;
 import ca.ualberta.cs.cmput301t02project.model.CommentModel;
-import ca.ualberta.cs.cmput301t02project.view.CommentListAdapter;
+import ca.ualberta.cs.cmput301t02project.model.TopLevelCommentList;
 
-public class BrowseTopLevelCommentsActivity extends Activity implements OnItemSelectedListener {
-	// TODO: Refactor code to use new classes
+/**
+ * Displays comments top level comments (aka. comments with no parents, comments that are not replies to anything). 
+ * Called when the user selects the "Browse" button on the main menu. 
+ * When the user selects a comment BrowseReplyActivity is called where the user is able to 
+ * view the comment's replies, view the comment's picture (if there is one attached), 
+ * reply to the comment, add the comment to their favorites, follow the comment author, 
+ * or edit the comment (if it is their own comment).
+ * A list of all top level comments is retrieved from the server in the Server class.
+ */
+public class BrowseTopLevelCommentsActivity extends BrowseCommentsActivityAbstraction{
 	
-	private CommentListModel topLevelCommentList;
-	private ListView topLevelCommentListView;
-	private CommentListAdapter adapter;
-
-	/**
-	 * Sets up the on click listener for the listview
-	 */
+	private TopLevelCommentList model;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-
 		super.onCreate(savedInstanceState);
+		
+		// set up the screen display -SB
 		setContentView(R.layout.activity_top_level_list);
-		topLevelCommentListView = (ListView) findViewById(R.id.commentListView);
-
-		// Create the sortby menu -SB
 		createSpinner();
+		listView = (ListView) findViewById(R.id.commentListView);
+		model = TopLevelCommentList.getInstance(getApplicationContext());
+		super.initializeView(model);
 		
-		// Populate the listview & set adapter -SB
-		initializeAdapter();
-		
-		topLevelCommentListView.setOnItemClickListener(new OnItemClickListener() {
+		// actions to take when a comment is selected -SB 
+		listView.setOnItemClickListener(new OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> l, View v, int position, long id) {
-				// Refactor into MVC?	
+				
+				// get the selected comment -SB
 				CommentModel nestedComment = (CommentModel) adapter.getItem(position);
-				ProjectApplication.setCurrentComment(nestedComment);
-				CommentListModel nestedCommentList = nestedComment.getReplies();
 				
-				ProjectApplication.setCurrentCommentList(nestedCommentList);
-				
+				// go to the BrowseReplyCommentsActivity to view the selected comment's replies etc -SB
 				Intent goToReplyListActivity = new Intent(getApplicationContext(),BrowseReplyCommentsActivity.class);
+				goToReplyListActivity.putExtra("CommentId", nestedComment.getId());
 				startActivity(goToReplyListActivity);
 			}
 		});
 	}
-
-	/**
-	 * Updates the displayed list in case top level comments have changed
-	 */
-	@Override
-	public void onResume() {
-		super.onResume();
-		
-		// Update in case comments are edited created -SB
-		ProjectApplication.setCurrentCommentList(ProjectApplication.getCommentList());
-	}
 	
-	/**
-	 * Retrieves comments to display and set the adapter
-	 */
-	private void initializeAdapter(){
+	@Override
+	protected void onResume() {
+	    super.onResume();
+	    model.refresh();
+	}
+
+	@Override
+	public void goToHelpPage(){
 		
-		// Retrieve the current comments list -SB
-		topLevelCommentList = ProjectApplication.getCommentList();
-
-		// Add comments to adapter
-		adapter = new CommentListAdapter(this, R.layout.list_item, topLevelCommentList.getCommentList());
-		topLevelCommentList.setAdapter(adapter);
-		adapter.setModel(topLevelCommentList);
-
-		// Display comments in adapter
-		topLevelCommentListView.setAdapter(adapter);
+		// go to help page for top level comments
+		Intent viewIntent = new Intent("android.intent.action.VIEW",Uri.parse(
+				"https://rawgithub.com/CMPUT301W14T02/Comput301Project/master/Help%20Pages/browse_top_level_comments.html"));
+		startActivity(viewIntent);
 	}
-	
-	/**
-	 * Creates the sortBy menu and displays it on the screen
-	 */
-	private void createSpinner(){
-		// Based on:
-		// //www.androidhive.info/2012/04/android-spinner-dropdown-example/
-		// Spinner element
-		Spinner spinner = (Spinner) findViewById(R.id.spinner);
-		
-		// Spinner click listener
-		spinner.setOnItemSelectedListener(this);
-
-		// Spinner Drop down elements
-		ArrayList<String> sortBy = new ArrayList<String>();
-		sortBy.add("Default");
-		sortBy.add("Date");
-		sortBy.add("Picture");
-		sortBy.add("My Location");
-		sortBy.add("Other Location");
-		sortBy.add("Ranking");
-
-		// Create adapter for spinner
-		ArrayAdapter<String> spinner_adapter = new ArrayAdapter<String>(this, R.layout.list_item, sortBy);
-
-		// Drop down layout style - list view with radio button
-		spinner_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
-		// attach adapter to spinner
-		spinner.setAdapter(spinner_adapter);		
-	}
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.top_level_list, menu);
-		return true;
-	}
-
-	@Override
-	public void onItemSelected(AdapterView<?> parent, View view, int position,
-			long id) {
-		String selected = parent.getItemAtPosition(position).toString();
-		if (selected.equals("Date")) {
-			adapter.sortByDate();
-		} else if (selected.equals("Picture")) {
-			adapter.sortByPicture();
-		} else if (selected.equals("My Location")) {
-			adapter.sortByLocation();
-		} else if (selected.equals("Other Location")) {
-			adapter.sortByOtherLocation();
-		} else if (selected.equals("Ranking")) {
-			adapter.sortByRanking();
-		} else if (selected.equals("Default")) {
-			adapter.sortByDefault();
-		}
-
-	}
-
-	@Override
-	public void onNothingSelected(AdapterView<?> arg0) {
-		// TODO Auto-generated method stub
-
-	}
-
 }

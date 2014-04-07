@@ -1,11 +1,12 @@
 package ca.ualberta.cs.cmput301t02project.test;
-import ca.ualberta.cs.cmput301t02project.ProjectApplication;
 import ca.ualberta.cs.cmput301t02project.activity.LoginActivity;
-import ca.ualberta.cs.cmput301t02project.User;
+import ca.ualberta.cs.cmput301t02project.model.User;
 import android.test.ActivityInstrumentationTestCase2;
 
 public class LoginActivityTest extends ActivityInstrumentationTestCase2<LoginActivity> {
 
+	LoginActivity loginActivity = getActivity();
+	
 	public LoginActivityTest() {
 		super(LoginActivity.class);
 	}
@@ -22,19 +23,26 @@ public class LoginActivityTest extends ActivityInstrumentationTestCase2<LoginAct
 	public void testSetUsername() {
 		
 		User user = new User("desiredName");
-		ProjectApplication.setName(user.getName());
+		User.getUser().setName(user.getName());
 		
-		assertEquals("CurrentUser name should match current user's username", ProjectApplication.getName(), user.getName());
+		assertEquals("CurrentUser name should match current user's username", User.getUser().getName(), user.getName());
 	}
 	
 	// Use Case 20 - part 3 -SB
 	public void testInvalidUsername() {
 
-		// start the loginActivity and input blank name
-		LoginActivity login = new LoginActivity();
-		
 		// blank username is invalid based on our use case -SB
-		assertFalse("Empty usernames should not be set", login.checkIfValid(""));
-		assertTrue("Non-empty username should be set", login.checkIfValid("u"));
+		assertFalse("Empty usernames should not be set", getActivity().checkIfValid(""));
+		assertTrue("Non-empty username should be set", getActivity().checkIfValid("u"));
+	}
+	
+	/* test to see if user is being pushed to server after update */
+	public void testPushUser() {
+		User user = new User("user");
+		loginActivity.login(user.getName());
+		//ProjectApplication pa = ProjectApplication.getInstance().getInstance();
+		//pa.pushUser(user);
+		//User user2 = pa.getPushedUser("user");
+		//assertEquals("Users should be the same",user,user2);
 	}
 }

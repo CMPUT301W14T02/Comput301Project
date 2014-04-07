@@ -3,14 +3,19 @@
     package="ca.ualberta.cs.cmput301t02project"
     android:versionCode="1"
     android:versionName="1.0" >
-
+	
     <uses-sdk
-        android:minSdkVersion="15"
+        android:minSdkVersion="17"
         android:targetSdkVersion="17" />
+
+
     
     <uses-permission android:name="android.permission.ACCESS_GPS" />
 	<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
 	<uses-permission android:name="android.permission.INTERNET"/>
+	<uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 
     
     <application
@@ -51,6 +56,22 @@
             android:name="ca.ualberta.cs.cmput301t02project.activity.EditCommentActivity"
             android:label="@string/title_activity_edit_comment" >
         </activity>
+        <activity
+            android:name="ca.ualberta.cs.cmput301t02project.activity.BrowseFavoritesActivity"
+            android:label="@string/title_activity_browse_favorites" >
+        </activity>
+        <activity
+            android:name="ca.ualberta.cs.cmput301t02project.activity.BrowseRepliesToFavsActivity"
+            android:label="@string/title_activity_browse_replies_to_favs" >
+        </activity>
+        <activity
+            android:name="ca.ualberta.cs.cmput301t02project.activity.BrowseFollowedCommentsActivity"
+            android:label="@string/title_activity_browse_followed_comments" >
+        </activity>
+          <activity
+            android:name="ca.ualberta.cs.cmput301t02project.activity.EnterSearchCoordinatesActivity"
+            android:label="@string/title_activity_enter_coor"  >
+            </activity>
     </application>
 
 </manifest>
