@@ -7,17 +7,21 @@ import android.content.Context;
 import android.content.Intent;
 import android.location.Location;
 import android.test.ActivityInstrumentationTestCase2;
+import android.test.UiThreadTest;
 import android.test.ViewAsserts;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import ca.ualberta.cs.cmput301t02project.R;
 import ca.ualberta.cs.cmput301t02project.activity.BrowseFavoritesActivity;
 import ca.ualberta.cs.cmput301t02project.activity.CreateCommentActivity;
 import ca.ualberta.cs.cmput301t02project.activity.LoginActivity;
+import ca.ualberta.cs.cmput301t02project.activity.MainMenuActivity;
 import ca.ualberta.cs.cmput301t02project.controller.TopLevelListController;
 import ca.ualberta.cs.cmput301t02project.model.CommentModel;
 import ca.ualberta.cs.cmput301t02project.model.CommentServer;
 import ca.ualberta.cs.cmput301t02project.model.FavoritesListModel;
 import ca.ualberta.cs.cmput301t02project.model.Server;
+import ca.ualberta.cs.cmput301t02project.model.StoredCommentListAbstraction;
 import ca.ualberta.cs.cmput301t02project.model.TopLevelCommentList;
 import ca.ualberta.cs.cmput301t02project.model.User;
 import ca.ualberta.cs.cmput301t02project.view.CommentListAdapter;
@@ -57,6 +61,7 @@ public class BrowseFavoritesActivityTest extends ActivityInstrumentationTestCase
 	}
 	
 	/* Test for Use Case 11 */
+	@UiThreadTest
 	public void testAddFavorite(){
 		
 		BrowseFavoritesActivity activity = getActivity();
@@ -68,9 +73,17 @@ public class BrowseFavoritesActivityTest extends ActivityInstrumentationTestCase
 		User.getUser().setFavorites(favorites);
 		
 		ListView view = (ListView) activity.findViewById(R.id.commentListView);
-		assertEquals("fave should be added", User.getUser().getFavorites().getList().size(), 1);
+		CommentListAdapter adapter = (CommentListAdapter) view.getAdapter();
+		adapter.add(comment);
+		
+		assertEquals("1 fave should be added", favorites.getList().size(), User.getUser().getFavorites().getList().size());
+		assertEquals("faves should be the same as what they were added as", User.getUser().getFavorites(), favorites);
+		assertEquals("fave should be displayed on listview", favorites.getList().size(), adapter.getCount());
 	}
 
+	public void testSortByDate(){
+		
+	}
 	
 	/*
 	 * TESTS FOR SORTING
