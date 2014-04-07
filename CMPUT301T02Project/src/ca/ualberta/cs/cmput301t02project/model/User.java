@@ -28,6 +28,7 @@ public class User {
 	private transient FollowedUserCommentsListModel followedUsersComments;
 	private transient ArrayList<String> followedUsernames = new ArrayList<String>();
 
+
 	//Singleton
 	private static User user;
 
@@ -176,10 +177,6 @@ public class User {
 	public ArrayList<String> getFavoritesCommentIds() {
 		return favorites.getIdList();
 	}
-
-
-	
-
 	
 	/**
 	 * Pull and return new comments from followed users on the server.
@@ -198,4 +195,13 @@ public class User {
 	public void setFollowedUsers(FollowedUserCommentsListModel followedUsers) {
 		this.followedUsersComments = followedUsers;
 	}
+
+	public ArrayList<String> getFollowedUsernames() {
+		return followedUsernames;
+	}
+
+	public void setFollowedUsernames(ArrayList<String> followedUsernames) {
+		this.followedUsernames = followedUsernames;
+	}
+
 }

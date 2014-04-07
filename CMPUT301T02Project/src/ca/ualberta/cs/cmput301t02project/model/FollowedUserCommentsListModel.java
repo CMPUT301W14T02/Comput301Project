@@ -12,7 +12,7 @@ public class FollowedUserCommentsListModel extends StoredCommentListAbstraction{
 
 	private static FollowedUserCommentsListModel instance;
 	
-	private FollowedUserCommentsListModel(Context context) {
+	public FollowedUserCommentsListModel(Context context) {
 		super(context);
 	}
 	
