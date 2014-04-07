@@ -24,6 +24,7 @@ import ca.ualberta.cs.cmput301t02project.model.CommentListModel;
 import ca.ualberta.cs.cmput301t02project.model.CommentModel;
 import ca.ualberta.cs.cmput301t02project.model.CommentServer;
 import ca.ualberta.cs.cmput301t02project.model.FavoritesListModel;
+import ca.ualberta.cs.cmput301t02project.model.GPSLocation;
 import ca.ualberta.cs.cmput301t02project.model.Server;
 import ca.ualberta.cs.cmput301t02project.model.StoredCommentListAbstraction;
 import ca.ualberta.cs.cmput301t02project.model.TopLevelCommentList;
@@ -151,6 +152,62 @@ public class BrowseFavoritesActivityTest extends ActivityInstrumentationTestCase
 	}
 	
 	/* Test for Use Case 2 */
+	public void testSortByOtherLocation(){
+	
+		Location currentLocation = new Location("Location Initialization");
+		currentLocation.setLatitude(0);
+		currentLocation.setLongitude(0);
+	
+		Location l1 = new Location("Location Initialization");
+		l1.setLatitude(1);
+		l1.setLongitude(1);
+
+		Location l2 = new Location("Location Initialization");
+		l2.setLatitude(20);
+		l2.setLongitude(20);
+
+		Location l3 = new Location("Location Initialization");
+		l3.setLatitude(300);
+		l3.setLongitude(300);
+		
+		CommentModel comment1 = new  CommentModel("post 1", l1, "schmoop");
+		comment1.setId("1");
+		
+		CommentModel comment2 = new  CommentModel("post 2", l2, "schmoop");
+		comment2.setId("2");
+		
+		CommentModel comment3 = new  CommentModel("post 3", l3, "schmoop");
+		comment3.setId("3");
+		
+
+		FavoritesListModel inOrder = new FavoritesListModel(context);
+		inOrder.add(comment1);
+		inOrder.add(comment2);
+		inOrder.add(comment3);
+		
+		FavoritesListModel outOfOrder = new FavoritesListModel(context);
+		outOfOrder.add(comment3);
+		outOfOrder.add(comment2);
+		outOfOrder.add(comment1);
+		
+		CommentListAdapter adapter1;
+		CommentListAdapter adapter2;
+		
+		adapter1 = new CommentListAdapter(context, R.layout.list_item, inOrder);
+		adapter2 = new CommentListAdapter(context, R.layout.list_item, outOfOrder);
+		
+		adapter1.sortByOtherLocation(l3);
+		adapter2.sortByOtherLocation(l3);
+		
+		assertEquals("First items should be in same place", adapter1.getItem(0), adapter2.getItem(0));
+		assertEquals("Second items should be in same place", adapter1.getItem(1), adapter2.getItem(1));
+		assertEquals("Third items should be in same place", adapter1.getItem(2), adapter2.getItem(2));
+
+		assertEquals("First item's locations should be equal", adapter1.getItem(0).getLocation().toString(), adapter2.getItem(0).getLocation().toString());
+		assertEquals("Second item's locations should be equal", adapter1.getItem(1).getLocation().toString(), adapter2.getItem(1).getLocation().toString());
+		assertEquals("Third item's locations should be equal", adapter1.getItem(2).getLocation().toString(), adapter2.getItem(2).getLocation().toString());
+	}
+	
 	
 	/* Test for Use Case 8 */
 	public void testSortByPicture (){
@@ -353,22 +410,23 @@ public class BrowseFavoritesActivityTest extends ActivityInstrumentationTestCase
 		assertEquals("Second items should be in same place", adapter2.getItem(1), adapter1.getItem(1));
 		assertEquals("Third items should be in same place", adapter2.getItem(2), adapter1.getItem(2));
 		
-		/*
-		Location currentLocation = new Location("Location Initialization");
+		
+	/*	GPSLocation.initializeLocation(context);
+		/*Location currentLocation = new Location("Location Initialization");
 		currentLocation.setLatitude(0);
-		currentLocation.setLongitude(0);
-	
+		currentLocation.setLongitude(0);*/
+	/*
 		Location l1 = new Location("Location Initialization");
-		l1.setLatitude(0.01);
-		l1.setLongitude(0);
+		l1.setLatitude(1);
+		l1.setLongitude(1);
 
 		Location l2 = new Location("Location Initialization");
-		l2.setLatitude(10);
-		l2.setLongitude(10);
+		l2.setLatitude(20);
+		l2.setLongitude(20);
 
 		Location l3 = new Location("Location Initialization");
-		l3.setLatitude(120);
-		l3.setLongitude(120);
+		l3.setLatitude(300);
+		l3.setLongitude(300);
 		
 		CommentModel comment1 = new  CommentModel("post 1", l1, "schmoop");
 		comment1.setDate(new Date(1));
@@ -428,8 +486,8 @@ public class BrowseFavoritesActivityTest extends ActivityInstrumentationTestCase
 		outOfOrderComments.add(comment1);
 		outOfOrderComments.add(comment2);
 		outOfOrderComments.add(comment7);*/
-
-	/*	
+/*
+	
 		FavoritesListModel inOrderComments = new FavoritesListModel(context);
 		
 		
@@ -458,9 +516,9 @@ public class BrowseFavoritesActivityTest extends ActivityInstrumentationTestCase
 		inOrderComments.add(comment7);
 		
 		
-		 */
-		
+		 
 	/*	
+	
 	
 		CommentListAdapter adapter1;
 		CommentListAdapter adapter2;
@@ -469,11 +527,16 @@ public class BrowseFavoritesActivityTest extends ActivityInstrumentationTestCase
 		adapter1 = new CommentListAdapter(context, R.layout.list_item, inOrderComments);
 		adapter2 = new CommentListAdapter(context, R.layout.list_item, inOrderComments);
 		
+		adapter1.sortByDate();
+		adapter2.sortByDate();
+		
+		adapter1.sortByDefaultMethod();
+		adapter2.sortByDefaultMethod();
 		
 		assertEquals("First items should be in same place", adapter1.getItem(0), adapter2.getItem(0));
 		assertEquals("Second items should be in same place", adapter1.getItem(1), adapter2.getItem(1));
 		assertEquals("Third items should be in same place", adapter1.getItem(2), adapter2.getItem(2));
-		/*
+		
 		assertEquals("First items should be in same place", adapter1.getItem(0), adapter2.getItem(0));
 		assertEquals("Second items should be in same place", adapter1.getItem(1), adapter2.getItem(1));
 		assertEquals("Third items should be in same place", adapter1.getItem(2), adapter2.getItem(2));
