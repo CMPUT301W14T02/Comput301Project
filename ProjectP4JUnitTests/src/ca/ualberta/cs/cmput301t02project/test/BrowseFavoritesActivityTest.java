@@ -2,6 +2,7 @@ package ca.ualberta.cs.cmput301t02project.test;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Random;
 
 import android.app.Activity;
 import android.content.Context;
@@ -35,11 +36,14 @@ public class BrowseFavoritesActivityTest extends ActivityInstrumentationTestCase
 		super(BrowseFavoritesActivity.class);
 	}
 	private Context context;
+	// for unique username
+	Date date = new Date();
 	
 	@Override
 	public void setUp() {
 		context = getInstrumentation().getTargetContext();
-		User.login("username2", context);
+		// unique username
+		User.login(new Random(date.getSeconds()).toString(), context);
 	}
 
 	// not a test, used in test below -SB
@@ -47,7 +51,9 @@ public class BrowseFavoritesActivityTest extends ActivityInstrumentationTestCase
 		String loc = "Location Intialization";
 		Location currentLocation;
 		currentLocation = new Location(loc);
-		CommentModel comment = new CommentModel("sasha", currentLocation,"username2");
+		
+		//unique username
+		CommentModel comment = new CommentModel("sasha", currentLocation, new Random(date.getSeconds()).toString());
 		comment.setId("for testing, no need to push");
 		
 		return comment;
@@ -108,12 +114,6 @@ public class BrowseFavoritesActivityTest extends ActivityInstrumentationTestCase
 		CommentListAdapter adapter2;
 		adapter1 = new CommentListAdapter(context, 0, outOfOrderComments);
 		adapter2 = new CommentListAdapter(context, 0, inOrderComments);
-/*
-		outOfOrderComments.
-		inOrderComments.setAdapter(adapter2);
-		adapter1.setModel(outOfOrderComments);
-		adapter2.setModel(inOrderComments);
-		adapter1.sortByDate(); */
 		
 		adapter1.sortByDate();
 		adapter2.sortByDate();
