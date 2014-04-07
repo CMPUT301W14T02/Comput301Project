@@ -36,10 +36,15 @@ public class BrowseTopLevelCommentsActivityTest extends ActivityInstrumentationT
 	/* Test for use case 4 */
 	public void testDisplayTopLevelComments() {
 		Activity activity = getActivity();
-		CommentModel comment = initializeComment();
-		TopLevelCommentList comments = TopLevelCommentList.getInstance(activity.getApplicationContext());
-		comments.add(comment);
-		
+		final CommentModel comment = initializeComment();
+		comment.setTopLevelComment(true);
+		final TopLevelCommentList comments = TopLevelCommentList.getInstance(activity.getApplicationContext());
+		activity.runOnUiThread(new Runnable() {
+			@Override
+			public void run() {
+				comments.add(comment);
+			}
+		});
 		ListView view = (ListView) getActivity().findViewById(R.id.commentListView);
 		ListAdapter adapter = view.getAdapter();
 		Boolean hasComment = false;

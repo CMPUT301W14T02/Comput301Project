@@ -24,7 +24,7 @@ public class CreateCommentActivityTest extends ActivityInstrumentationTestCase2<
 
 	protected void setUp() throws Exception {
 		super.setUp();
-		User.login(username, getInstrumentation().getContext());
+		User.login(username, getInstrumentation().getTargetContext());
 		activity = getActivity();
 	}
 
@@ -55,18 +55,20 @@ public class CreateCommentActivityTest extends ActivityInstrumentationTestCase2<
 		getInstrumentation().waitForIdleSync();
 	}
 	
+
 	public CreateCommentActivityTest() {
 		super(MainMenuActivity.class);
 		// TODO Auto-generated constructor stub
 	}
 
-	
+	/* Test for use case 3 */
 	public void testCreateTopLevelComment() throws Throwable {
 		initializeComment();
-		ArrayList<CommentModel> list = TopLevelCommentList.getInstance(activity.getApplicationContext()).getList();
+		ArrayList<CommentModel> list = User.getUser().getMyComments().getList();
 		int len = list.size();
 		assertTrue("list comment should have same text", list.get(len - 1).getText().equals(text));
 		assertTrue("list comment should have same username", list.get(len-1).getUsername().equals(username));
+		assertTrue("comment should be marked as top level", list.get(len-1).isTopLevelComment());
 	}
 	
 	/* Test for use case 14 */
