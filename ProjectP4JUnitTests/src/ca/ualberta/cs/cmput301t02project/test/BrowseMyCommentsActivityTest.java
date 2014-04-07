@@ -9,6 +9,7 @@ import ca.ualberta.cs.cmput301t02project.activity.BrowseMyCommentsActivity;
 import ca.ualberta.cs.cmput301t02project.activity.BrowseFollowedCommentsActivity;
 import ca.ualberta.cs.cmput301t02project.activity.BrowseMyCommentsActivity;
 import ca.ualberta.cs.cmput301t02project.activity.CreateCommentActivity;
+import ca.ualberta.cs.cmput301t02project.activity.EditCommentActivity;
 import ca.ualberta.cs.cmput301t02project.activity.MainMenuActivity;
 import ca.ualberta.cs.cmput301t02project.model.CommentListModel;
 import ca.ualberta.cs.cmput301t02project.model.CommentModel;
@@ -17,6 +18,7 @@ import ca.ualberta.cs.cmput301t02project.model.TopLevelCommentList;
 import ca.ualberta.cs.cmput301t02project.model.User;
 import ca.ualberta.cs.cmput301t02project.view.CommentListAdapter;
 import android.app.Activity;
+import android.app.Instrumentation;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -24,7 +26,9 @@ import android.location.Location;
 import android.test.ActivityInstrumentationTestCase2;
 import android.test.UiThreadTest;
 import android.test.ViewAsserts;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 
 public class BrowseMyCommentsActivityTest extends ActivityInstrumentationTestCase2<BrowseMyCommentsActivity> {
@@ -91,6 +95,41 @@ public class BrowseMyCommentsActivityTest extends ActivityInstrumentationTestCas
 		assertTrue("username in the listview should be the current user's username",view.getAdapter().getItem(0).toString().contains(username));
 	}
 	
+	public void testEditComment() {
+		BrowseMyCommentsActivity activity = getActivity();
+		final CommentModel comment = initializeComment();
+		activity.runOnUiThread(new Runnable() {
+			@Override
+			public void run() {
+				User.getUser().getMyComments().add(comment);
+			}
+		});
+		Instrumentation.ActivityMonitor activityMonitor = getInstrumentation().addMonitor(EditCommentActivity.class.getName(), null , false);
+		final ListView view = (ListView) activity.findViewById(R.id.commentListView);
+		activity.runOnUiThread(new Runnable () {
+			@Override
+			public void run() {
+				view.performItemClick(view.getAdapter().getView(0, null, null), 0, 0);
+			}
+		});
+		getInstrumentation().waitForIdleSync();
+		EditCommentActivity childActivity = (EditCommentActivity) getInstrumentation().waitForMonitorWithTimeout(activityMonitor, 5);
+		final EditText edit = (EditText) childActivity.findViewById(ca.ualberta.cs.cmput301t02project.R.id.create_text);
+		final Button button = (Button) childActivity.findViewById(ca.ualberta.cs.cmput301t02project.R.id.create_post);
+		assertNotNull(edit);
+		assertNotNull(button);
+		childActivity.runOnUiThread(new Runnable() {
+			@Override
+			public void run() {
+				edit.setText("editComment");
+				button.performClick();
+			}
+		});
+		getInstrumentation().waitForIdleSync();
+		
+		assertEquals("comment now has edited string", view.getAdapter().getItem(0).toString(), User.getUser().getMyComments().getList().get(0).toString());
+	}
+
 	/*
 	 * TESTS FOR SORTING
 	 */

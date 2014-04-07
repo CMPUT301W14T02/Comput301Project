@@ -33,7 +33,7 @@ public class BrowseTopLevelCommentsActivityTest extends ActivityInstrumentationT
 		return comment;
 	}
 
-	/* Test for use case 4 */
+	/* Test for use case 4 and case 14*/
 	public void testDisplayTopLevelComments() {
 		Activity activity = getActivity();
 		final CommentModel comment = initializeComment();

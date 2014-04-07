@@ -2,14 +2,18 @@ package ca.ualberta.cs.cmput301t02project.test;
 
 import ca.ualberta.cs.cmput301t02project.R;
 import ca.ualberta.cs.cmput301t02project.activity.BrowseReplyCommentsActivity;
+import ca.ualberta.cs.cmput301t02project.activity.CreateCommentActivity;
 import ca.ualberta.cs.cmput301t02project.model.CommentModel;
 import ca.ualberta.cs.cmput301t02project.model.ReplyList;
 import ca.ualberta.cs.cmput301t02project.model.TopLevelCommentList;
 import ca.ualberta.cs.cmput301t02project.model.User;
 import android.app.Activity;
+import android.app.Instrumentation;
 import android.content.Intent;
 import android.location.Location;
 import android.test.ActivityInstrumentationTestCase2;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 
@@ -64,5 +68,42 @@ public class BrowseReplyCommentsActivityTest extends ActivityInstrumentationTest
 		}
 		assertTrue(hasComment);
 
+	}
+	
+	/* Test for use case 6 */
+	public void testReplyToComment() {
+		Instrumentation.ActivityMonitor activityMonitor = getInstrumentation().addMonitor(CreateCommentActivity.class.getName(), null , false);
+		activity.runOnUiThread(new Runnable() {
+			@Override
+			public void run() {
+				Button button1 = (Button) activity.findViewById(ca.ualberta.cs.cmput301t02project.R.id.reply_button);
+				assertNotNull(button1);
+				button1.performClick();
+			}
+		});
+		getInstrumentation().waitForIdleSync();
+		CreateCommentActivity childActivity = (CreateCommentActivity) getInstrumentation().waitForMonitorWithTimeout(activityMonitor, 5);
+		final EditText edit = (EditText) childActivity.findViewById(ca.ualberta.cs.cmput301t02project.R.id.create_text);
+		final Button button = (Button) childActivity.findViewById(ca.ualberta.cs.cmput301t02project.R.id.create_post);
+		assertNotNull(edit);
+		assertNotNull(button);
+		childActivity.runOnUiThread(new Runnable() {
+			@Override
+			public void run() {
+				edit.setText("newReplytoComment");
+				button.performClick();
+			}
+		});
+		getInstrumentation().waitForIdleSync();
+		
+		ListView view = (ListView) getActivity().findViewById(R.id.replyListView);
+		ListAdapter adapter = view.getAdapter();
+		Boolean hasComment = false;
+		for (int i=0; i<adapter.getCount(); i++){
+			if (adapter.getItem(i).toString().contains("newReplytoComment")){
+				hasComment = true;
+			}	
+		}
+		assertTrue(hasComment);
 	}
 }

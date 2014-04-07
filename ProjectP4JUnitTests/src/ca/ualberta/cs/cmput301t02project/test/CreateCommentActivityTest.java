@@ -55,6 +55,39 @@ public class CreateCommentActivityTest extends ActivityInstrumentationTestCase2<
 		getInstrumentation().waitForIdleSync();
 	}
 	
+	public void initializeCustomLocationComment(final int latInt, final int longInt) {
+		Instrumentation.ActivityMonitor activityMonitor = getInstrumentation().addMonitor(CreateCommentActivity.class.getName(), null , false);
+		activity.runOnUiThread(new Runnable() {
+			@Override
+			public void run() {
+				Button button1 = (Button) activity.findViewById(ca.ualberta.cs.cmput301t02project.R.id.create);
+				assertNotNull(button1);
+				button1.performClick();
+			}
+		});
+		
+		getInstrumentation().waitForIdleSync();
+		CreateCommentActivity childActivity = (CreateCommentActivity) getInstrumentation().waitForMonitorWithTimeout(activityMonitor, 5);
+		final EditText latitude = (EditText) childActivity.findViewById(ca.ualberta.cs.cmput301t02project.R.id.latitude_box);
+		final EditText longitude = (EditText) childActivity.findViewById(ca.ualberta.cs.cmput301t02project.R.id.longitude_box);
+		final EditText edit = (EditText) childActivity.findViewById(ca.ualberta.cs.cmput301t02project.R.id.create_text);
+		final Button button = (Button) childActivity.findViewById(ca.ualberta.cs.cmput301t02project.R.id.create_post);
+		assertNotNull(edit);
+		assertNotNull(button);
+		assertNotNull(latitude);
+		assertNotNull(longitude);
+		childActivity.runOnUiThread(new Runnable() {
+			@Override
+			public void run() {
+				latitude.setText(latInt+"");
+				longitude.setText(longInt+"");
+				edit.setText("customLocationTest");
+				button.performClick();
+			}
+		});
+		getInstrumentation().waitForIdleSync();
+	}
+	
 
 	public CreateCommentActivityTest() {
 		super(MainMenuActivity.class);
@@ -66,9 +99,19 @@ public class CreateCommentActivityTest extends ActivityInstrumentationTestCase2<
 		initializeComment();
 		ArrayList<CommentModel> list = User.getUser().getMyComments().getList();
 		int len = list.size();
-		assertTrue("list comment should have same text", list.get(len - 1).getText().equals(text));
-		assertTrue("list comment should have same username", list.get(len-1).getUsername().equals(username));
+		assertEquals("list comment should have same text", list.get(len - 1).getText(), text);
+		assertEquals("list comment should have same username", list.get(len-1).getUsername(), username);
 		assertTrue("comment should be marked as top level", list.get(len-1).isTopLevelComment());
+	}
+	
+	/* Test for use case 17 */
+	public void testGeoLocationOfComment() {
+		initializeComment();
+		ArrayList<CommentModel> list = User.getUser().getMyComments().getList();
+		int len = list.size();
+		assertEquals("comment lat should be equal to gps lat", GPSLocation.getInstance().getLocation().getLatitude(), list.get(len-1).getLocation().getLatitude());
+		assertEquals("comment long should be equal to gps long", GPSLocation.getInstance().getLocation().getLongitude(), list.get(len-1).getLocation().getLongitude());
+		
 	}
 	
 	/* Test for use case 14 */
@@ -79,6 +122,16 @@ public class CreateCommentActivityTest extends ActivityInstrumentationTestCase2<
 		size1++;
         assertEquals("Size of top level comment list should be increased by 1 when new comment is added", size1, size2);
     }
+	
+	public void testCreateCustomLocationComment() {
+		int latInt = 57;
+		int longInt = 113;
+		initializeCustomLocationComment(latInt, longInt);
+		ArrayList<CommentModel> list = User.getUser().getMyComments().getList();
+		int len = list.size();
+		assertEquals("comment lat should be equal to custom lat", latInt, list.get(len - 1).getLocation().getLatitude());
+		assertEquals("comment long should be equal to custom long", longInt, list.get(len - 1).getLocation().getLongitude());
+	}
 	
 	/* test to see if user is being pushed to server after update */
 	public void testPushUser() {
