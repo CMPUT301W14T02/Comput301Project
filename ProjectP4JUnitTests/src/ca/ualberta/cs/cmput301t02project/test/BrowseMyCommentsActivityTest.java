@@ -4,6 +4,18 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Random;
 
+import ca.ualberta.cs.cmput301t02project.R;
+import ca.ualberta.cs.cmput301t02project.activity.BrowseMyCommentsActivity;
+import ca.ualberta.cs.cmput301t02project.activity.BrowseFollowedCommentsActivity;
+import ca.ualberta.cs.cmput301t02project.activity.BrowseMyCommentsActivity;
+import ca.ualberta.cs.cmput301t02project.activity.CreateCommentActivity;
+import ca.ualberta.cs.cmput301t02project.activity.MainMenuActivity;
+import ca.ualberta.cs.cmput301t02project.model.CommentListModel;
+import ca.ualberta.cs.cmput301t02project.model.CommentModel;
+import ca.ualberta.cs.cmput301t02project.model.MyCommentsListModel;
+import ca.ualberta.cs.cmput301t02project.model.TopLevelCommentList;
+import ca.ualberta.cs.cmput301t02project.model.User;
+import ca.ualberta.cs.cmput301t02project.view.CommentListAdapter;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -12,41 +24,29 @@ import android.location.Location;
 import android.test.ActivityInstrumentationTestCase2;
 import android.test.UiThreadTest;
 import android.test.ViewAsserts;
-import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ListView;
-import ca.ualberta.cs.cmput301t02project.R;
-import ca.ualberta.cs.cmput301t02project.activity.BrowseFavoritesActivity;
-import ca.ualberta.cs.cmput301t02project.activity.CreateCommentActivity;
-import ca.ualberta.cs.cmput301t02project.activity.LoginActivity;
-import ca.ualberta.cs.cmput301t02project.activity.MainMenuActivity;
-import ca.ualberta.cs.cmput301t02project.controller.TopLevelListController;
-import ca.ualberta.cs.cmput301t02project.model.CommentListModel;
-import ca.ualberta.cs.cmput301t02project.model.CommentModel;
-import ca.ualberta.cs.cmput301t02project.model.CommentServer;
-import ca.ualberta.cs.cmput301t02project.model.FavoritesListModel;
-import ca.ualberta.cs.cmput301t02project.model.GPSLocation;
-import ca.ualberta.cs.cmput301t02project.model.Server;
-import ca.ualberta.cs.cmput301t02project.model.StoredCommentListAbstraction;
-import ca.ualberta.cs.cmput301t02project.model.TopLevelCommentList;
-import ca.ualberta.cs.cmput301t02project.model.User;
-import ca.ualberta.cs.cmput301t02project.view.CommentListAdapter;
 
+public class BrowseMyCommentsActivityTest extends ActivityInstrumentationTestCase2<BrowseMyCommentsActivity> {
 
-public class BrowseFavoritesActivityTest extends ActivityInstrumentationTestCase2<BrowseFavoritesActivity> {
-
-	public BrowseFavoritesActivityTest() {
-		super(BrowseFavoritesActivity.class);
+	public BrowseMyCommentsActivityTest() {
+		super(BrowseMyCommentsActivity.class);
 	}
+	
 	private Context context;
+	
 	// for unique username
 	Date date = new Date();
+	String username;
 	
+	@SuppressWarnings("deprecation")
 	@Override
 	public void setUp() {
 		context = getInstrumentation().getTargetContext();
 		
 		// unique username
-		User.login(new Random(date.getSeconds()).toString(), context);
+		username =  new Random(date.getSeconds()).toString();
+		User.login(username, context);
 	}
 
 	// not a test, used in test below -SB
@@ -56,55 +56,44 @@ public class BrowseFavoritesActivityTest extends ActivityInstrumentationTestCase
 		currentLocation = new Location(loc);
 		
 		//unique username
-		CommentModel comment = new CommentModel("sasha", currentLocation, new Random(date.getSeconds()).toString());
+		CommentModel comment = new CommentModel("sasha", currentLocation, username);
 		comment.setId("for testing, no need to push");
 		
 		return comment;
 	}
 	
-	/* Test for Use Case 11 */
+	/* Test for for MyCommentsActivity */
 	public void testVisibleListView(){
 		
-		// Check if the ListView shows up on the BrowseFavoritesActivity page
-		BrowseFavoritesActivity activity = getActivity();
+		// Check if the ListView shows up on the BrowseMyCommentsActivity page
+		BrowseMyCommentsActivity activity = getActivity();
 		ListView view = (ListView) activity.findViewById(R.id.commentListView);
 		ViewAsserts.assertOnScreen(activity.getWindow().getDecorView(), view);
 	}
 	
-	/* Test for Use Case 11 */
+	/* Test for Use Case 21 and MyCommentsActivity */
 	@UiThreadTest
-	public void testAddFavorite(){
+	public void testAddMyComment(){
 		
-		BrowseFavoritesActivity activity = getActivity();
+		BrowseMyCommentsActivity activity = getActivity();
 		CommentModel comment = initializeComment();
 
-		User.getUser().getFavorites().add(comment);
+		User.getUser().getMyComments().add(comment);
 
 		ListView view = (ListView) activity.findViewById(R.id.commentListView);
 
-		assertEquals("should be one comment in faves", User.getUser().getFavorites().getList().size(), 1);
-		assertEquals("one fave should be displayed on the listview", view.getAdapter().getCount(), 1);
-		assertEquals("displayed fave should match the saved fave", view.getAdapter().getItem(0).toString(), User.getUser().getFavorites().getList().get(0).toString());
-	}
-	
-	/* Test for Use Case 21 */
-	@UiThreadTest
-	public void testViewUsername() {
-		BrowseFavoritesActivity activity = getActivity();
-		CommentModel comment = initializeComment();
-
-		User.getUser().getFavorites().add(comment);
-
-		ListView view = (ListView) activity.findViewById(R.id.commentListView);
+		assertEquals("should be one comment in user's my comments", User.getUser().getMyComments().getList().size(), 1);
+		assertEquals("one comment should be displayed on the listview", view.getAdapter().getCount(), 1);
+		assertEquals("displayed comment should match the saved comment", view.getAdapter().getItem(0).toString(), User.getUser().getMyComments().getList().get(0).toString());
+		
+		// Use case 21
 		assertTrue("username of the comment author should be displayed in the listview",view.getAdapter().getItem(0).toString().contains(comment.getUsername()));
-
+		assertTrue("username in the listview should be the current user's username",view.getAdapter().getItem(0).toString().contains(username));
 	}
-	
 	
 	/*
 	 * TESTS FOR SORTING
 	 */
-
 	/* Test for Use Case 1 */
 	public void testSortByLocation (){
 		
@@ -134,12 +123,12 @@ public class BrowseFavoritesActivityTest extends ActivityInstrumentationTestCase
 		comment3.setId("3");
 		
 
-		FavoritesListModel inOrder = new FavoritesListModel(context);
+		MyCommentsListModel inOrder = new MyCommentsListModel(context);
 		inOrder.add(comment1);
 		inOrder.add(comment2);
 		inOrder.add(comment3);
 		
-		FavoritesListModel outOfOrder = new FavoritesListModel(context);
+		MyCommentsListModel outOfOrder = new MyCommentsListModel(context);
 		outOfOrder.add(comment3);
 		outOfOrder.add(comment2);
 		outOfOrder.add(comment1);
@@ -191,12 +180,12 @@ public class BrowseFavoritesActivityTest extends ActivityInstrumentationTestCase
 		comment3.setId("3");
 		
 
-		FavoritesListModel inOrder = new FavoritesListModel(context);
+		MyCommentsListModel inOrder = new MyCommentsListModel(context);
 		inOrder.add(comment3);
 		inOrder.add(comment2);
 		inOrder.add(comment1);
 		
-		FavoritesListModel outOfOrder = new FavoritesListModel(context);
+		MyCommentsListModel outOfOrder = new MyCommentsListModel(context);
 		outOfOrder.add(comment1);
 		outOfOrder.add(comment2);
 		outOfOrder.add(comment3);
@@ -244,13 +233,13 @@ public class BrowseFavoritesActivityTest extends ActivityInstrumentationTestCase
 		CommentModel comment4 = new  CommentModel("post 4", null, "schmoop");
 		comment4.setId("4");
 		
-		FavoritesListModel outOfOrderComments = new FavoritesListModel(context);
+		MyCommentsListModel outOfOrderComments = new MyCommentsListModel(context);
 		outOfOrderComments.add(comment1);
 		outOfOrderComments.add(comment2);
 		outOfOrderComments.add(comment3);
 		outOfOrderComments.add(comment4);
 	
-		FavoritesListModel inOrderComments = new FavoritesListModel(context);
+		MyCommentsListModel inOrderComments = new MyCommentsListModel(context);
 		inOrderComments.add(comment1);
 		inOrderComments.add(comment3);
 		inOrderComments.add(comment2);
@@ -292,12 +281,12 @@ public class BrowseFavoritesActivityTest extends ActivityInstrumentationTestCase
 		comment3.setDate(new Date(300000000));
 		comment3.setId("3");
 		
-		FavoritesListModel outOfOrderComments = new FavoritesListModel(context);
+		MyCommentsListModel outOfOrderComments = new MyCommentsListModel(context);
 		outOfOrderComments.add(comment1);
 		outOfOrderComments.add(comment2);
 		outOfOrderComments.add(comment3);
 
-		FavoritesListModel inOrderComments = new FavoritesListModel(context);
+		MyCommentsListModel inOrderComments = new MyCommentsListModel(context);
 		inOrderComments.add(comment3);
 		inOrderComments.add(comment2);
 		inOrderComments.add(comment1);
@@ -334,13 +323,13 @@ public class BrowseFavoritesActivityTest extends ActivityInstrumentationTestCase
 		comment3.setRating(6);
 		comment3.setId("3");
 		
-		FavoritesListModel outOfOrderComments = new FavoritesListModel(context);
+		MyCommentsListModel outOfOrderComments = new MyCommentsListModel(context);
 		outOfOrderComments.add(comment3);
 		outOfOrderComments.add(comment2);
 		outOfOrderComments.add(comment1);
 
 		
-		FavoritesListModel inOrderComments = new FavoritesListModel(context);
+		MyCommentsListModel inOrderComments = new MyCommentsListModel(context);
 		inOrderComments.add(comment1);
 		inOrderComments.add(comment2);
 		inOrderComments.add(comment3);
@@ -395,13 +384,13 @@ public class BrowseFavoritesActivityTest extends ActivityInstrumentationTestCase
 		comment3.setDate(new Date(300000000));
 		comment3.setId("3");
 		
-		FavoritesListModel outOfOrderComments = new FavoritesListModel(context);
+		MyCommentsListModel outOfOrderComments = new MyCommentsListModel(context);
 		outOfOrderComments.add(comment3);
 		outOfOrderComments.add(comment2);
 		outOfOrderComments.add(comment1);
 		
 		
-		FavoritesListModel inOrderComments = new FavoritesListModel(context);
+		MyCommentsListModel inOrderComments = new MyCommentsListModel(context);
 		inOrderComments.add(comment1);
 		inOrderComments.add(comment2);
 		inOrderComments.add(comment3);
@@ -418,164 +407,6 @@ public class BrowseFavoritesActivityTest extends ActivityInstrumentationTestCase
 		assertEquals("First items should be in same place", adapter2.getItem(0), adapter1.getItem(0));
 		assertEquals("Second items should be in same place", adapter2.getItem(1), adapter1.getItem(1));
 		assertEquals("Third items should be in same place", adapter2.getItem(2), adapter1.getItem(2));
-		
-		
-	/*	GPSLocation.initializeLocation(context);
-		/*Location currentLocation = new Location("Location Initialization");
-		currentLocation.setLatitude(0);
-		currentLocation.setLongitude(0);*/
-	/*
-		Location l1 = new Location("Location Initialization");
-		l1.setLatitude(1);
-		l1.setLongitude(1);
-
-		Location l2 = new Location("Location Initialization");
-		l2.setLatitude(20);
-		l2.setLongitude(20);
-
-		Location l3 = new Location("Location Initialization");
-		l3.setLatitude(300);
-		l3.setLongitude(300);
-		
-		CommentModel comment1 = new  CommentModel("post 1", l1, "schmoop");
-		comment1.setDate(new Date(1));
-		comment1.setId("1");
-		
-		CommentModel comment2 = new  CommentModel("post 2", l1, "schmoop");
-		comment2.setDate(new Date(20000));
-		comment2.setId("2");
-		
-		CommentModel comment3 = new  CommentModel("post 3", l1, "schmoop");
-		comment3.setDate(new Date(300000000));
-		comment3.setId("3");
-		
-		CommentModel comment4 = new  CommentModel("post 4", l2, "schmoop");
-		comment4.setDate(new Date(1));
-		comment4.setId("4");
-		
-		CommentModel comment5 = new  CommentModel("post 5", l2, "schmoop");
-		comment5.setDate(new Date(20000));
-		comment5.setId("5");
-		
-		CommentModel comment6 = new  CommentModel("post 6", l2, "schmoop");
-		comment6.setDate(new Date(300000000));
-		comment6.setId("6");
-		
-		CommentModel comment7 = new  CommentModel("post 7", l3, "schmoop");
-		comment7.setDate(new Date(1));
-		comment7.setId("7");
-		
-		CommentModel comment8 = new  CommentModel("post 8", l3, "schmoop");
-		comment8.setDate(new Date(20000));
-		comment8.setId("8");
-		
-		CommentModel comment9 = new  CommentModel("post 9", l3, "schmoop");
-		comment9.setDate(new Date(300000000));
-		comment9.setId("9");
-		
-		FavoritesListModel outOfOrderComments = new FavoritesListModel(context);
-
-		outOfOrderComments.add(comment1);
-		outOfOrderComments.add(comment2);
-		outOfOrderComments.add(comment3);
-		
-		outOfOrderComments.add(comment4);
-		outOfOrderComments.add(comment5);
-		outOfOrderComments.add(comment6);
-		
-		outOfOrderComments.add(comment7);
-		outOfOrderComments.add(comment8);
-		outOfOrderComments.add(comment9);
-		/*outOfOrderComments.add(comment9);
-		outOfOrderComments.add(comment5);
-		outOfOrderComments.add(comment4);
-		outOfOrderComments.add(comment3);
-		outOfOrderComments.add(comment8);
-		outOfOrderComments.add(comment6);
-		outOfOrderComments.add(comment1);
-		outOfOrderComments.add(comment2);
-		outOfOrderComments.add(comment7);*/
-/*
 	
-		FavoritesListModel inOrderComments = new FavoritesListModel(context);
-		
-		
-		inOrderComments.add(comment1);
-		inOrderComments.add(comment2);
-		inOrderComments.add(comment3);
-		
-		inOrderComments.add(comment4);
-		inOrderComments.add(comment5);
-		inOrderComments.add(comment6);
-		
-		inOrderComments.add(comment7);
-		inOrderComments.add(comment8);
-		inOrderComments.add(comment9);
-		
-		/*
-		 *
-		 * inOrderComments.add(comment3);
-		inOrderComments.add(comment2);
-		inOrderComments.add(comment1);
-		inOrderComments.add(comment6);
-		inOrderComments.add(comment5);
-		inOrderComments.add(comment4);
-		inOrderComments.add(comment9);
-		inOrderComments.add(comment8);
-		inOrderComments.add(comment7);
-		
-		
-		 
-	/*	
-	
-	
-		CommentListAdapter adapter1;
-		CommentListAdapter adapter2;
-		
-		// this isn't even working!!!
-		adapter1 = new CommentListAdapter(context, R.layout.list_item, inOrderComments);
-		adapter2 = new CommentListAdapter(context, R.layout.list_item, inOrderComments);
-		
-		adapter1.sortByDate();
-		adapter2.sortByDate();
-		
-		adapter1.sortByDefaultMethod();
-		adapter2.sortByDefaultMethod();
-		
-		assertEquals("First items should be in same place", adapter1.getItem(0), adapter2.getItem(0));
-		assertEquals("Second items should be in same place", adapter1.getItem(1), adapter2.getItem(1));
-		assertEquals("Third items should be in same place", adapter1.getItem(2), adapter2.getItem(2));
-		
-		assertEquals("First items should be in same place", adapter1.getItem(0), adapter2.getItem(0));
-		assertEquals("Second items should be in same place", adapter1.getItem(1), adapter2.getItem(1));
-		assertEquals("Third items should be in same place", adapter1.getItem(2), adapter2.getItem(2));
-		assertEquals("Fourth items should be in same place", adapter1.getItem(3), adapter2.getItem(3));
-		assertEquals("Fifth items should be in same place", adapter1.getItem(4), adapter2.getItem(4));
-		assertEquals("Sixth items should be in same place", adapter1.getItem(5), adapter2.getItem(5));
-		assertEquals("Seventh items should be in same place", adapter1.getItem(6), adapter2.getItem(6));
-		assertEquals("Eighth items should be in same place", adapter1.getItem(7), adapter2.getItem(7));
-		assertEquals("Ninth items should be in same place", adapter1.getItem(8), adapter2.getItem(8));
-
-		assertEquals("First items' dates should be equal", adapter1.getItem(0).getDate(), adapter2.getItem(0).getDate());
-		assertEquals("Second items' dates should be equal", adapter1.getItem(1).getDate(), adapter2.getItem(1).getDate());
-		assertEquals("Third items' dates should be equal", adapter1.getItem(2).getDate(), adapter2.getItem(2).getDate());
-		assertEquals("Fourth items' dates should be equal", adapter1.getItem(3).getDate(), adapter2.getItem(3).getDate());
-		assertEquals("Fifth items' dates should be equal", adapter1.getItem(4).getDate(), adapter2.getItem(4).getDate());
-		assertEquals("Sixth items' dates should be equal", adapter1.getItem(5).getDate(), adapter2.getItem(5).getDate());
-		assertEquals("Seventh items' dates should be equal", adapter1.getItem(6).getDate(), adapter2.getItem(6).getDate());
-		assertEquals("Eighth items' dates should be equal", adapter1.getItem(7).getDate(), adapter2.getItem(7).getDate());
-		assertEquals("Ninth items' dates should be equal", adapter1.getItem(8).getDate(), adapter2.getItem(8).getDate());
-		
-		assertEquals("First items' locations should be equal", adapter1.getItem(0).getLocation(), adapter2.getItem(0).getLocation());
-		assertEquals("Second items' locations should be equal", adapter1.getItem(1).getLocation(), adapter2.getItem(1).getLocation());
-		assertEquals("Third items' locations should be equal", adapter1.getItem(2).getLocation(), adapter2.getItem(2).getLocation());
-		assertEquals("Fourth items' locations should be equal", adapter1.getItem(3).getLocation(), adapter2.getItem(3).getLocation());
-		assertEquals("Fifth items' locations should be equal", adapter1.getItem(4).getLocation(), adapter2.getItem(4).getLocation());
-		assertEquals("Sixth items' locations should be equal", adapter1.getItem(5).getLocation(), adapter2.getItem(5).getLocation());
-		assertEquals("Seventh items' locations should be equal", adapter1.getItem(6).getLocation(), adapter2.getItem(6).getLocation());
-		assertEquals("Eighth items' locations should be equal", adapter1.getItem(7).getLocation(), adapter2.getItem(7).getLocation());
-		assertEquals("Ninth items' locations should be equal", adapter1.getItem(8).getLocation(), adapter2.getItem(8).getLocation());
-		*/
-	}
+	}	
 }
-	

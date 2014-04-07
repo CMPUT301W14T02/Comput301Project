@@ -9,7 +9,7 @@ public class MyCommentsListModel extends StoredCommentListAbstraction {
 
 	private static MyCommentsListModel instance;
 	
-	private MyCommentsListModel(Context context) {
+	public MyCommentsListModel(Context context) {
 		super(context);
 	}
 	
