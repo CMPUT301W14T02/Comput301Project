@@ -1,46 +1,56 @@
 package ca.ualberta.cs.cmput301t02project.test;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Random;
 
+import ca.ualberta.cs.cmput301t02project.R;
+import ca.ualberta.cs.cmput301t02project.activity.BrowseMyCommentsActivity;
+import ca.ualberta.cs.cmput301t02project.activity.BrowseFollowedCommentsActivity;
+import ca.ualberta.cs.cmput301t02project.activity.BrowseMyCommentsActivity;
+import ca.ualberta.cs.cmput301t02project.activity.CreateCommentActivity;
+import ca.ualberta.cs.cmput301t02project.activity.EditCommentActivity;
+import ca.ualberta.cs.cmput301t02project.activity.MainMenuActivity;
+import ca.ualberta.cs.cmput301t02project.model.CommentListModel;
+import ca.ualberta.cs.cmput301t02project.model.CommentModel;
+import ca.ualberta.cs.cmput301t02project.model.MyCommentsListModel;
+import ca.ualberta.cs.cmput301t02project.model.TopLevelCommentList;
+import ca.ualberta.cs.cmput301t02project.model.User;
+import ca.ualberta.cs.cmput301t02project.view.CommentListAdapter;
+import android.app.Activity;
+import android.app.Instrumentation;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.location.Location;
 import android.test.ActivityInstrumentationTestCase2;
 import android.test.UiThreadTest;
 import android.test.ViewAsserts;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ListAdapter;
 import android.widget.ListView;
-import ca.ualberta.cs.cmput301t02project.R;
-import ca.ualberta.cs.cmput301t02project.activity.BrowseFollowedCommentsActivity;
-import ca.ualberta.cs.cmput301t02project.activity.BrowseFollowedCommentsActivity;
-import ca.ualberta.cs.cmput301t02project.activity.LoginActivity;
-import ca.ualberta.cs.cmput301t02project.model.CommentModel;
-import ca.ualberta.cs.cmput301t02project.model.CommentServer;
-import ca.ualberta.cs.cmput301t02project.model.FollowedUserCommentsListModel;
-import ca.ualberta.cs.cmput301t02project.model.FollowedUserCommentsListModel;
-import ca.ualberta.cs.cmput301t02project.model.Server;
-import ca.ualberta.cs.cmput301t02project.model.User;
-import ca.ualberta.cs.cmput301t02project.view.CommentListAdapter;
 
-public class BrowseFollowedCommentsActivityTest extends ActivityInstrumentationTestCase2<BrowseFollowedCommentsActivity> {
+public class BrowseMyCommentsActivityTest extends ActivityInstrumentationTestCase2<BrowseMyCommentsActivity> {
 
-	public BrowseFollowedCommentsActivityTest() {
-		super(BrowseFollowedCommentsActivity.class);
+	public BrowseMyCommentsActivityTest() {
+		super(BrowseMyCommentsActivity.class);
 	}
 	
 	private Context context;
 	
 	// for unique username
 	Date date = new Date();
+	String username;
 	
-	String commentAuthor;
-	
+	@SuppressWarnings("deprecation")
 	@Override
 	public void setUp() {
 		context = getInstrumentation().getTargetContext();
 		
 		// unique username
-		User.login(new Random(date.getSeconds()).toString(), context);
+		username =  new Random(date.getSeconds()).toString();
+		User.login(username, context);
 	}
 
 	// not a test, used in test below -SB
@@ -50,61 +60,79 @@ public class BrowseFollowedCommentsActivityTest extends ActivityInstrumentationT
 		currentLocation = new Location(loc);
 		
 		//unique username
-		commentAuthor = new Random(date.getSeconds()).toString();
-		CommentModel comment = new CommentModel("sasha", currentLocation, commentAuthor);
+		CommentModel comment = new CommentModel("sasha", currentLocation, username);
 		comment.setId("for testing, no need to push");
 		
 		return comment;
 	}
 	
-	/* Test for BrowseFollowedCommentsActivity */
+	/* Test for for MyCommentsActivity */
 	public void testVisibleListView(){
 		
-		// Check if the ListView shows up on the BrowseFollowedCommentsActivity page
-		BrowseFollowedCommentsActivity activity = getActivity();
+		// Check if the ListView shows up on the BrowseMyCommentsActivity page
+		BrowseMyCommentsActivity activity = getActivity();
 		ListView view = (ListView) activity.findViewById(R.id.commentListView);
 		ViewAsserts.assertOnScreen(activity.getWindow().getDecorView(), view);
 	}
 	
-	/* Test for BrowseFollowedCommentsActivity */
+	/* Test for Use Case 21 and MyCommentsActivity */
 	@UiThreadTest
-	public void testAddFollowedUser(){
+	public void testAddMyComment(){
 		
-		BrowseFollowedCommentsActivity activity = getActivity();
+		BrowseMyCommentsActivity activity = getActivity();
 		CommentModel comment = initializeComment();
 
-		User.getUser().addFollowedUser(comment);
+		User.getUser().getMyComments().add(comment);
 
 		ListView view = (ListView) activity.findViewById(R.id.commentListView);
 
-		assertEquals("should be one user in followed users", User.getUser().getFollowedUsernames().size(), 1);
-		
-		// must post and pull from the server for these to work
+		assertEquals("should be one comment in user's my comments", User.getUser().getMyComments().getList().size(), 1);
 		assertEquals("one comment should be displayed on the listview", view.getAdapter().getCount(), 1);
-		assertEquals("displayed comment should match the saved comment", view.getAdapter().getItem(0).toString(), User.getUser().getFollowedUsers().getList().get(0).toString());
-	}
-	
-	/* Test for Use Case 21 */
-	@UiThreadTest
-	public void testViewUsername() {
-		BrowseFollowedCommentsActivity activity = getActivity();
-		CommentModel comment = initializeComment();
-
-		User.getUser().getFavorites().add(comment);
-
-		ListView view = (ListView) activity.findViewById(R.id.commentListView);
+		assertEquals("displayed comment should match the saved comment", view.getAdapter().getItem(0).toString(), User.getUser().getMyComments().getList().get(0).toString());
 		
-		// must post and pull from the server for these to work
-		assertNotSame("", view.getAdapter().getCount(), 0);
+		// Use case 21
 		assertTrue("username of the comment author should be displayed in the listview",view.getAdapter().getItem(0).toString().contains(comment.getUsername()));
-
+		assertTrue("username in the listview should be the current user's username",view.getAdapter().getItem(0).toString().contains(username));
 	}
 	
-	
+	public void testEditComment() {
+		BrowseMyCommentsActivity activity = getActivity();
+		final CommentModel comment = initializeComment();
+		activity.runOnUiThread(new Runnable() {
+			@Override
+			public void run() {
+				User.getUser().getMyComments().add(comment);
+			}
+		});
+		Instrumentation.ActivityMonitor activityMonitor = getInstrumentation().addMonitor(EditCommentActivity.class.getName(), null , false);
+		final ListView view = (ListView) activity.findViewById(R.id.commentListView);
+		activity.runOnUiThread(new Runnable () {
+			@Override
+			public void run() {
+				view.performItemClick(view.getAdapter().getView(0, null, null), 0, 0);
+			}
+		});
+		getInstrumentation().waitForIdleSync();
+		EditCommentActivity childActivity = (EditCommentActivity) getInstrumentation().waitForMonitorWithTimeout(activityMonitor, 5);
+		final EditText edit = (EditText) childActivity.findViewById(ca.ualberta.cs.cmput301t02project.R.id.create_text);
+		final Button button = (Button) childActivity.findViewById(ca.ualberta.cs.cmput301t02project.R.id.create_post);
+		assertNotNull(edit);
+		assertNotNull(button);
+		childActivity.runOnUiThread(new Runnable() {
+			@Override
+			public void run() {
+				edit.setText("editComment");
+				button.performClick();
+			}
+		});
+		getInstrumentation().waitForIdleSync();
+		
+		assertEquals("comment now has edited string", view.getAdapter().getItem(0).toString(), User.getUser().getMyComments().getList().get(0).toString());
+	}
+
 	/*
 	 * TESTS FOR SORTING
 	 */
-
 	/* Test for Use Case 1 */
 	public void testSortByLocation (){
 		
@@ -134,12 +162,12 @@ public class BrowseFollowedCommentsActivityTest extends ActivityInstrumentationT
 		comment3.setId("3");
 		
 
-		FollowedUserCommentsListModel inOrder = new FollowedUserCommentsListModel(context);
+		MyCommentsListModel inOrder = new MyCommentsListModel(context);
 		inOrder.add(comment1);
 		inOrder.add(comment2);
 		inOrder.add(comment3);
 		
-		FollowedUserCommentsListModel outOfOrder = new FollowedUserCommentsListModel(context);
+		MyCommentsListModel outOfOrder = new MyCommentsListModel(context);
 		outOfOrder.add(comment3);
 		outOfOrder.add(comment2);
 		outOfOrder.add(comment1);
@@ -191,12 +219,12 @@ public class BrowseFollowedCommentsActivityTest extends ActivityInstrumentationT
 		comment3.setId("3");
 		
 
-		FollowedUserCommentsListModel inOrder = new FollowedUserCommentsListModel(context);
+		MyCommentsListModel inOrder = new MyCommentsListModel(context);
 		inOrder.add(comment3);
 		inOrder.add(comment2);
 		inOrder.add(comment1);
 		
-		FollowedUserCommentsListModel outOfOrder = new FollowedUserCommentsListModel(context);
+		MyCommentsListModel outOfOrder = new MyCommentsListModel(context);
 		outOfOrder.add(comment1);
 		outOfOrder.add(comment2);
 		outOfOrder.add(comment3);
@@ -244,13 +272,13 @@ public class BrowseFollowedCommentsActivityTest extends ActivityInstrumentationT
 		CommentModel comment4 = new  CommentModel("post 4", null, "schmoop");
 		comment4.setId("4");
 		
-		FollowedUserCommentsListModel outOfOrderComments = new FollowedUserCommentsListModel(context);
+		MyCommentsListModel outOfOrderComments = new MyCommentsListModel(context);
 		outOfOrderComments.add(comment1);
 		outOfOrderComments.add(comment2);
 		outOfOrderComments.add(comment3);
 		outOfOrderComments.add(comment4);
 	
-		FollowedUserCommentsListModel inOrderComments = new FollowedUserCommentsListModel(context);
+		MyCommentsListModel inOrderComments = new MyCommentsListModel(context);
 		inOrderComments.add(comment1);
 		inOrderComments.add(comment3);
 		inOrderComments.add(comment2);
@@ -292,12 +320,12 @@ public class BrowseFollowedCommentsActivityTest extends ActivityInstrumentationT
 		comment3.setDate(new Date(300000000));
 		comment3.setId("3");
 		
-		FollowedUserCommentsListModel outOfOrderComments = new FollowedUserCommentsListModel(context);
+		MyCommentsListModel outOfOrderComments = new MyCommentsListModel(context);
 		outOfOrderComments.add(comment1);
 		outOfOrderComments.add(comment2);
 		outOfOrderComments.add(comment3);
 
-		FollowedUserCommentsListModel inOrderComments = new FollowedUserCommentsListModel(context);
+		MyCommentsListModel inOrderComments = new MyCommentsListModel(context);
 		inOrderComments.add(comment3);
 		inOrderComments.add(comment2);
 		inOrderComments.add(comment1);
@@ -334,13 +362,13 @@ public class BrowseFollowedCommentsActivityTest extends ActivityInstrumentationT
 		comment3.setRating(6);
 		comment3.setId("3");
 		
-		FollowedUserCommentsListModel outOfOrderComments = new FollowedUserCommentsListModel(context);
+		MyCommentsListModel outOfOrderComments = new MyCommentsListModel(context);
 		outOfOrderComments.add(comment3);
 		outOfOrderComments.add(comment2);
 		outOfOrderComments.add(comment1);
 
 		
-		FollowedUserCommentsListModel inOrderComments = new FollowedUserCommentsListModel(context);
+		MyCommentsListModel inOrderComments = new MyCommentsListModel(context);
 		inOrderComments.add(comment1);
 		inOrderComments.add(comment2);
 		inOrderComments.add(comment3);
@@ -395,13 +423,13 @@ public class BrowseFollowedCommentsActivityTest extends ActivityInstrumentationT
 		comment3.setDate(new Date(300000000));
 		comment3.setId("3");
 		
-		FollowedUserCommentsListModel outOfOrderComments = new FollowedUserCommentsListModel(context);
+		MyCommentsListModel outOfOrderComments = new MyCommentsListModel(context);
 		outOfOrderComments.add(comment3);
 		outOfOrderComments.add(comment2);
 		outOfOrderComments.add(comment1);
 		
 		
-		FollowedUserCommentsListModel inOrderComments = new FollowedUserCommentsListModel(context);
+		MyCommentsListModel inOrderComments = new MyCommentsListModel(context);
 		inOrderComments.add(comment1);
 		inOrderComments.add(comment2);
 		inOrderComments.add(comment3);
@@ -418,5 +446,6 @@ public class BrowseFollowedCommentsActivityTest extends ActivityInstrumentationT
 		assertEquals("First items should be in same place", adapter2.getItem(0), adapter1.getItem(0));
 		assertEquals("Second items should be in same place", adapter2.getItem(1), adapter1.getItem(1));
 		assertEquals("Third items should be in same place", adapter2.getItem(2), adapter1.getItem(2));
-	}
+	
+	}	
 }

@@ -28,18 +28,23 @@ public class BrowseTopLevelCommentsActivityTest extends ActivityInstrumentationT
 		String loc = "Location Intialization";
 		Location currentLocation;
 		currentLocation = new Location(loc);
-		CommentModel comment = new CommentModel("commentForTopLevelTest", currentLocation,"username");
+		CommentModel comment = new CommentModel("commentForTopLevelTest", currentLocation, "username");
 		
 		return comment;
 	}
 
-	/* Test for use case 4 */
+	/* Test for use case 4 and case 14*/
 	public void testDisplayTopLevelComments() {
 		Activity activity = getActivity();
-		CommentModel comment = initializeComment();
-		TopLevelCommentList comments = TopLevelCommentList.getInstance(activity.getApplicationContext());
-		comments.add(comment);
-		
+		final CommentModel comment = initializeComment();
+		comment.setTopLevelComment(true);
+		final TopLevelCommentList comments = TopLevelCommentList.getInstance(activity.getApplicationContext());
+		activity.runOnUiThread(new Runnable() {
+			@Override
+			public void run() {
+				comments.add(comment);
+			}
+		});
 		ListView view = (ListView) getActivity().findViewById(R.id.commentListView);
 		ListAdapter adapter = view.getAdapter();
 		Boolean hasComment = false;

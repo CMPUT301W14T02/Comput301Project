@@ -3,6 +3,7 @@ package ca.ualberta.cs.cmput301t02project.test;
 import java.util.Date;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.location.Location;
 import android.test.ActivityInstrumentationTestCase2;
@@ -27,7 +28,9 @@ public class BrowseReplyCommentsActivityTest extends ActivityInstrumentationTest
 	}
 	
 	public void setUp() {
-		activity = getActivity();
+		Intent goToReplyListActivity = new Intent(getApplicationContext(),BrowseReplyCommentsActivity.class);
+		goToReplyListActivity.putExtra("CommentId", nestedComment.getId());
+		startActivity(goToReplyListActivity);
 	}
 
 	public CommentModel initializeComment() {
