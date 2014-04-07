@@ -135,7 +135,10 @@ public class BrowseFavoritesActivityTest extends ActivityInstrumentationTestCase
 	@UiThreadTest
 	public void testSortByPicture (){
 		
-		Bitmap pic = new Bitmap();
+		// From http://stackoverflow.com/questions/5663671/creating-an-empty-bitmap-and-drawing-though-canvas-in-android
+		// retrived April 6th 2014.
+		Bitmap.Config conf = Bitmap.Config.ARGB_4444; 
+		Bitmap pic = Bitmap.createBitmap(10, 10, conf);
 		
 		// Has picture -SB
 		CommentModel comment1 = new  CommentModel("post 1", pic, null, "schmoop");
@@ -174,7 +177,7 @@ public class BrowseFavoritesActivityTest extends ActivityInstrumentationTestCase
 		adapter1.sortByPicture();
 		adapter2.sortByPicture();
 		
-		// 2 comments with pictures, 2 without. top 2 should have pictures, bottom two should not. 
+		// 2 comments with pictures, 2 without. top 2 should have pictures, bottom two should not. Don't have to be exactly the same order.
 		assertTrue("First item should have a picture", adapter1.getItem(0).hasPicture());
 		assertEquals("First items should have pictures", adapter1.getItem(0).hasPicture(), adapter2.getItem(0).hasPicture());
 		assertTrue("Second item should have a picture", adapter1.getItem(1).hasPicture());
